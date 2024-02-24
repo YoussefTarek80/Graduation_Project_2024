@@ -1,0 +1,50 @@
+header {
+    color: white;
+    background: url("../../../assets/Logo/head-bg.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "Kufam", sans-serif;
+}
+li {
+    position: relative;
+    cursor: pointer;
+}
+.dropdown {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    color: black;
+    top: 80%;
+    left: 10%;
+    box-shadow: 4px 4px 10px #ec74d7;
+    border-radius: 10px;
+    z-index: 11;
+    display: none;
+    transition: opacity 0.5s ease; 
+    opacity: 0; 
+}
+.dropdown li {
+    padding: 10px;
+    transition: 0.3s ease;
+    text-align: center;
+    border: 1px solid rgb(215, 215, 215);
+}
+.dropdown li:nth-child(1) {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+li:hover .dropdown {
+    display: block;
+    opacity: 1;
+}
+
+.dropdown li:hover {
+    background-color: #5C2C7E;
+    color: white;
+}
+li:hover .fa-chevron-down {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+}

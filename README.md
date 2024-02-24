@@ -1,2 +1,7 @@
-# Graduation_Project_2024
-  Darb System is an advanced administration management platform tailored specifically for educational institutions, aimed at streamlining and enhancing various administrative processes within school learning environments. As a comprehensive system, Darb System offers a wide range of functionalities and features designed to facilitate efficient management across different aspects of educational administration.  At its core, Darb System empowers administrators, educators, and staff members with tools to effectively oversee and manage various administrative tasks within educational institutions. From student enrollment and attendance tracking to grade management and resource allocation, Darb System provides a centralized platform for handling diverse administrative operations seamlessly.
+# Vue 3 + Vite
+
+This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+
+## Recommended IDE Setup
+
+- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
