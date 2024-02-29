@@ -11,13 +11,13 @@
                 class="relative user_Info flex flex-row-reverse items-center justify-center sm:space-x-4 space-x-2"
             >
                 <div
-                    class="sm:w-12 w-10 cursor-pointer"
+                    class="sm:w-20 w-10 cursor-pointer "
                     @click="userLogout = !userLogout"
                 >
-                    <img src="../../../assets/Logo/Profile.png" alt="" />
+                    <img :src="GetUser.image" alt="" class=" rounded-full border-2 border-white p-1" />
                 </div>
                 <div class="flex flex-col text-center sm:text-xl text-xs">
-                    <span> {{ getUser.name }}</span>
+                    <span>{{GetUser.name }}</span>
                     <span class="text-customYellow">ادمن</span>
                 </div>
                 <div class="relative">
@@ -29,22 +29,29 @@
                         class="fa-solid fa-circle text-customYellow absolute right-0 sm:text-xl text-sm sm:bottom-6 bottom-4"
                     ></i>
                 </div>
-                <div
-                    class="bg-white w-52 z-40 text-black text-center absolute top-16 rounded-xl -left-7"
-                    v-if="userLogout"
-                >
-                    <ul>
-                        <li class="hover:bg-slate-200 px-10 py-2 rounded-xl">
-                            الملف الشخصي
-                        </li>
-                        <li
-                            class="hover:bg-slate-200 px-10 py-2 rounded-xl"
-                            @click="logout"
-                        >
-                            تسجيل خروج
-                        </li>
-                    </ul>
-                </div>
+                <transition name="bounce">
+                    <div
+                        class="bg-white w-52 z-40 text-black text-center absolute top-20 rounded-xl shadow-lg"
+                        v-if="userLogout"
+                    >
+                        <ul>
+                            <li
+                                class="hover:bg-slate-200 px-10 py-2 rounded-xl"
+                            >
+                                <router-link to="/Admin/profile">
+                                    الملف الشخصي
+                                </router-link>
+                            </li>
+                            <li
+                                class="hover:bg-slate-200 px-10 py-2 rounded-xl"
+                                @click="logoutUser"
+                            >
+                                <span v-if="!loading">تسجيل خروج</span>
+                                <loading :show="loading"></loading>
+                            </li>
+                        </ul>
+                    </div>
+                </transition>
             </div>
         </div>
         <nav>
@@ -130,34 +137,29 @@
 </template>
 <script>
 import axios from "axios";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
     data() {
         return {
             userLogout: false,
+            loading: false,
         };
     },
     computed: {
-        ...mapGetters(["getUser"]),
+        ...mapGetters(["GetUser"]),
+    },
+    mounted(){
+        this.FetchUser();
     },
     methods: {
-        async logout() {
-            try {
-                const token = localStorage.getItem("token");
-                await axios.post(
-                    "http://127.0.0.1:8000/api/logout",
-                    {},
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
-                localStorage.removeItem("token");
+        ...mapActions(["logout","FetchUser"]),
+        async logoutUser() {
+            await this.logout();
+            this.loading = true;
+            setTimeout(() => {
+                this.loading = true;
                 this.$router.push("/login");
-            } catch (error) {
-                console.error("Logout failed:", error);
-            }
+            }, 3000);
         },
     },
 };

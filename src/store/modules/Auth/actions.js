@@ -1,7 +1,6 @@
 import axios from "axios";
-
 export const actions = {
-    async login({ commit }, { email, password }) {
+    async login({ commit, dispatch  }, { email, password }) {
         try {
             const response = await axios.post(
                 "http://127.0.0.1:8000/api/login",
@@ -9,14 +8,46 @@ export const actions = {
             );
             const data = response.data.data;
             localStorage.setItem("token", data.token);
-            const user={
-                name:data.name,
-                email:data.email
-            }
-            localStorage.setItem("user", JSON.stringify(user));
-            commit("SET_USER", user);
+            await dispatch("FetchUser");
         } catch (error) {
             throw error;
+        }
+    },
+    async logout({ commit }) {
+        try {
+            const token = localStorage.getItem("token");
+            await axios.post(
+                "http://127.0.0.1:8000/api/logout",
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            localStorage.removeItem("token");
+            localStorage.removeItem("User");
+            commit("LOGOUT");
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
+    },
+    async FetchUser({ commit }) {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await axios.get(
+                "http://127.0.0.1:8000/api/showProfile",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            const user = response.data.data;
+            localStorage.setItem("User", JSON.stringify(user));
+            commit("Set_User", user);
+        } catch (error) {
+            console.error("Error fetching profile info:", error);
         }
     },
 };

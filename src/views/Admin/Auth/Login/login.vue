@@ -68,7 +68,7 @@
 </template>
 <script>
 import { mapActions } from "vuex";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
     inject: ["array"],
     data() {
@@ -134,28 +134,6 @@ export default {
             }
             this.clear();
         },
-        // async Login() {
-        //     this.loading_Fun();
-        //     await axios
-        //         .post("http://127.0.0.1:8000/api/login", {
-        //             email: this.email,
-        //             password: this.password,
-        //         })
-        //         .then((response) => {
-        //             console.log("Successful login");
-        //             const data = response.data.data;
-        //             console.log(data.name)
-        //             localStorage.setItem("token", data.token);
-        //             // localStorage.setItem("name", data.name);
-        //             // localStorage.setItem("email", data.email);
-        //             this.$router.push("/Admin/Home");
-        //         })
-        //         .catch((error) => {
-        //             console.error("Login error:", error);
-        //             this.Handle_Error();
-        //         });
-        //         this.clear();
-        // },
     },
 };
 </script>

@@ -9,7 +9,8 @@
             <th class="sm:py-5 sm:px-4">الحالة</th>
             <th class="sm:py-5 sm:px-4 rounded-tl-2xl">الاجراء</th>
         </thead>
-        <tbody class="text-center">
+        <tbody class="text-center relative">
+            
             <tr v-for="(item, index) in items" :key="index">
                 <td class="py-2 px-4">{{ index + 1 }}</td>
                 <td class="py-2 px-4">{{ item.schoolName }}</td>

@@ -34,6 +34,15 @@ const router = createRouter({
             },
         },
         {
+            path: "/Admin/profile",
+            component: () => import("./views/Admin/Profile/profile.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+            },
+        },
+        {
             path: "/Admin/Schools",
             component: () =>
                 import("./views/Admin/Services/Schools/schools.vue"),

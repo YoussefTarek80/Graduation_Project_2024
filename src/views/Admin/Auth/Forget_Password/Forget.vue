@@ -36,7 +36,7 @@
                 </button>
             </form>
             <button
-                class="p-5 text-lime-50 rounded-full flex gap-4 absolute bottom-3 left-6"
+                class="p-5 text-lime-50 rounded-full flex justify-around absolute bottom-3 left-6 w-40"
                 @click="this.$router.push('/Login')"
                 :class="{ disabledBtn: security }"
                 :disabled="security"
@@ -138,18 +138,6 @@ export default {
                     this.Handle_Error();
                 });
                 this.clear();
-            // const foundUser = this.array.find(
-            //     (user) => user.email === this.email
-            // );
-            // if (foundUser) {
-            //     setTimeout(() => {
-            //         this.$router.push("/Login");
-            //     }, 3000);
-            // } else {
-            //     this.Handle_Error();
-            // }
-            // this.loading_Fun();
-            // this.clear();
         },
     },
 };

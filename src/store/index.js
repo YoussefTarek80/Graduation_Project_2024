@@ -7,5 +7,4 @@ const store = createStore({
         auth: authModule,
     },
 });
-
 export default store;

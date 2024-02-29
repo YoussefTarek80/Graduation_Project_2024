@@ -148,11 +148,6 @@
     </div>
 </template>
 <script>
-import Navbar_Component from "../../../../../components/Admin/Navbar/Navbar.vue";
-import Footer_Component from "../../../../../components/Admin/Footer/footer.vue";
-export default {
-    components: { Navbar_Component, Footer_Component },
-};
 </script>
 <style scoped>
 @import url("./addSchool.css");

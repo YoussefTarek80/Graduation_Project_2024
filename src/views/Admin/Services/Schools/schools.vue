@@ -24,23 +24,38 @@
                     type="text"
                     placeholder="بحث"
                     class="p-3 w-full rounded-2xl"
+                    v-model="search_words"
                 />
                 <i
+                    v-if="!search_status"
                     class="fa-thin fa-magnifying-glass absolute left-5 top-4"
                 ></i>
+                <laoding_Search
+                    :show="search_status"
+                    class="absolute left-5 top-0"
+                ></laoding_Search>
             </div>
-            <div class="relative sm:w-3/12 w-10/12">
-                <select name="" id="" class="p-3 w-full rounded-2xl">
-                    <option value="" disabled selected>ترتيب</option>
-                    <option value="">1</option>
-                    <option value="">1</option>
-                    <option value="">1</option>
+            <div class="custom-select relative sm:w-3/12 w-10/12">
+                <select
+                    v-model="selectedSortOption"
+                    @change="handleSort"
+                    class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple"
+                >
+                    <option  disabled selected >ترتيب</option>
+                    <option value="ascending">تصاعديا</option>
+                    <option value="descending">تنازليا</option>
                 </select>
+                <div
+                    class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none"
+                >
+                    <i class="fa-regular fa-angle-down"></i>
+                </div>
             </div>
         </div>
-        <div>
+
+        <div class="relative">
             <table_Component
-                :items="items"
+                :items="filtered_Array"
                 :editRoute="'/Admin/Schools/updateSchool'"
                 :infoRoute="'/Admin/Schools/InfoSchool'"
             ></table_Component>
@@ -53,10 +68,59 @@ import table_Component from "../../../../UI/Table.vue";
 export default {
     components: { table_Component },
     inject: ["items"],
+
     data() {
         return {
             showInfo: false,
+            filtered_Array: [],
+            search_words: "",
+            search_status: false,
+            selectedSortOption:'ترتيب',
         };
+    },
+    created() {
+        this.filtered_Array = this.items;
+    },
+    watch: {
+        search_words() {
+            this.search_status = true;
+            setTimeout(() => {
+                this.search_status = false;
+            }, 1500);
+            setTimeout(() => {
+                if (this.search_words) {
+                    this.filtered_Array = this.items.filter((item) => {
+                        return (
+                            item.schoolName &&
+                            item.schoolName
+                                .toLowerCase()
+                                .includes(this.search_words.toLowerCase())
+                        );
+                    });
+                } else {
+                    this.filtered_Array = this.items;
+                }
+            }, 1500);
+        },
+    },
+    methods: {
+        handleSort() {
+            if (this.selectedSortOption === "ascending") {
+                this.Sort_ascending();
+            } else if (this.selectedSortOption === "descending") {
+                this.Sort_descending();
+            }
+        },
+        Sort_ascending() {
+            this.filtered_Array.sort((a, b) => {
+                return a.schoolName.localeCompare(b.schoolName);
+            });
+        },
+        Sort_descending() {
+            this.filtered_Array.sort((a, b) => {
+                return b.schoolName.localeCompare(a.schoolName);
+            });
+        },
     },
 };
 </script>
