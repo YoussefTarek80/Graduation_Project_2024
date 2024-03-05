@@ -1,0 +1,17 @@
+button {
+    background: linear-gradient(to left, #e546e8, #4d394d);
+    border-width: 2px;
+    border-style: solid;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 9999px;
+    color: white;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    transition: .5s ease-in-out;
+}
+.disabledBtn {
+    opacity: 0.5;
+}

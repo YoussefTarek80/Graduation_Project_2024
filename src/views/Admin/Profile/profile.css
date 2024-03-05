@@ -1,0 +1,62 @@
+.profileImage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -10%);
+    animation: animate 3s linear infinite;
+}
+@keyframes animate {
+    0% {
+        top: 60px;
+    }
+    50% {
+        top: 100px;
+    }
+    100% {
+        top: 60px;
+    }
+}
+
+.profileImage img {
+    max-width: 100%;
+    height: auto;
+    width: 300px;
+    height: 300px;
+    border-radius: 9999px;
+    object-fit: cover;
+    border: 5px solid white;
+    padding: 10px;
+    transition: .5s ease;
+    cursor: pointer;
+}
+.profileImage img:hover{
+    background-color: white;
+}
+section {
+    font-family: "Kufam", sans-serif;
+}
+.item-data {
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    border: 1px solid rgb(183, 183, 183);
+}
+input[disabled] {
+    background: linear-gradient(to left, #d9d9d9, #f3f3f3);
+}
+@media (max-width: 1000px) {
+    .profileImage {
+        width: 100px;
+        top: 50%;
+        left: 50%;
+        transform: translate(10%, -10%); 
+    }
+
+    .profileImage img {
+        width: 200%; 
+        height: auto; 
+        max-width: 200px; 
+        max-height: 200px; 
+        border-radius: 50%; 
+    }
+}
