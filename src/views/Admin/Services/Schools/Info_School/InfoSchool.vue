@@ -32,7 +32,7 @@
                     <label for="in2"
                         >الدولة <span class="text-red-600">*</span></label
                     >
-                    <span class="item-data">{{ item.phone }}</span>
+                    <span class="item-data">مصر</span>
                 </div>
                 <div class="flex flex-col">
                     <label for="in3"
@@ -51,12 +51,14 @@
                         >رقم هاتف المدرسة
                         <span class="text-red-600">*</span></label
                     >
+                    <span class="item-data">{{ item.phone }}</span>
                 </div>
                 <div class="flex flex-col">
                     <label for="in6"
                         >عنوان المدرسة
                         <span class="text-red-600">*</span></label
                     >
+                    <span class="item-data">{{ item.address }}</span>
                 </div>
                 <div class="flex flex-col">
                     <label for="in7"
@@ -83,21 +85,28 @@
                     <label for="in1"
                         >اسم المدير <span class="text-red-600">*</span></label
                     >
-                    <span class="item-data">{{ item.status }}</span>
+                    <span class="item-data">{{ item.manager_name }}</span>
                 </div>
                 <div class="flex flex-col">
                     <label for="in2"
                         >رقم هاتف المدير
                         <span class="text-red-600">*</span></label
                     >
-                    <span class="item-data">{{ item.status }}</span>
+                    <span class="item-data">{{ item.manager_phone }}</span>
                 </div>
                 <div class="flex flex-col">
                     <label for="in2"
                         >البريد الالكتروني للمدير
                         <span class="text-red-600">*</span></label
                     >
-                    <span class="item-data">{{ item.status }}</span>
+                    <span class="item-data">{{ item.manager_email }}</span>
+                </div>
+                <div class="flex flex-col">
+                    <label for="in2"
+                        >عنوان المدير
+                        <span class="text-red-600">*</span></label
+                    >
+                    <span class="item-data">{{ item.manager_address }}</span>
                 </div>
             </div>
             <div class="m-5 flex items-center justify-end sm:gap-5">
@@ -120,6 +129,7 @@ export default {
     },
     created() {
         this.fetchData();
+        console.log(this.schools)
     },
     methods: {
         ...mapActions(["fetchSchools"]),

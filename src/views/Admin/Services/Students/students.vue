@@ -6,58 +6,80 @@
             <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink"></i>
         </div>
         <div
-            class="bg-customSearch shadow-2xl flex items-center justify-around p-5 mt-6 rounded-xl flex-wrap sm:space-y-0 space-y-6"
+            class="bg-customSearch shadow-2xl flex flex-col items-center justify-around p-5 mt-6 rounded-xl"
         >
-            <div class="custom-select relative sm:w-3/12 w-10/12">
-                <select
-                    v-model="selectedSchool"
-                    @change="handleSort"
-                    class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple"
-                >
-                    <option disabled selected>اختار المدرسة</option>
-                    <option value="ascending">تصاعديا</option>
-                    <option value="descending">تنازليا</option>
-                </select>
-                <div
-                    class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none"
-                >
-                    <i class="fa-regular fa-angle-down"></i>
-                </div>
+            <div class="relative w-full mb-6">
+                <input
+                    type="text"
+                    placeholder="بحث بالرقم القومي"
+                    class="p-3 w-full rounded-2xl"
+                    v-model="search_words"
+                />
+                <i
+                    v-if="!search_status"
+                    class="fa-thin fa-magnifying-glass absolute left-5 top-4"
+                ></i>
+                <laoding_Search
+                    :show="search_status"
+                    class="absolute left-5 top-0"
+                ></laoding_Search>
             </div>
-            <div class="custom-select relative sm:w-3/12 w-10/12">
-                <select
-                    v-model="selectedSortOption"
-                    @change="handleSort"
-                    class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple"
-                >
-                    <option disabled selected>ترتيب</option>
-                    <option value="ascending">تصاعديا</option>
-                    <option value="descending">تنازليا</option>
-                </select>
-                <div
-                    class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none"
-                >
-                    <i class="fa-duotone fa-sort mx-4"></i>
+            <div class="grid sm:grid-cols-2 grid-cols-1 w-full gap-6">
+                <div class="custom-select relative">
+                    <select
+                        v-model="selectedSchool"
+                        @change="selectSchool"
+                        class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple"
+                    >
+                        <option disabled selected>اختيار مدرسة</option>
+                        <option value="ascending">السعيدية</option>
+                        <option value="descending">احمد زويل</option>
+                    </select>
+                    <div
+                        class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none"
+                    >
+                    <i class="fa-light fa-school mx-4"></i>
+                    </div>
+                </div>
+                <div class="custom-select relative">
+                    <select
+                        v-model="selectedSortOption"
+                        @change="handleSort"
+                        class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple"
+                    >
+                        <option disabled selected>ترتيب</option>
+                        <option value="ascending">تصاعديا</option>
+                        <option value="descending">تنازليا</option>
+                    </select>
+                    <div
+                        class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none"
+                    >
+                        <i class="fa-duotone fa-sort mx-4"></i>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="relative">
             <table_Component
-                :items="Students"
+                :items="filtered_Array"
                 :infoRoute="'/Admin/Students/InfoStudent'"
             ></table_Component>
         </div>
     </section>
+
     <Footer_Component></Footer_Component>
 </template>
 <script>
 import table_Component from "../../../../UI/Tables/StudentTable/Table.vue";
+
 export default {
     components: { table_Component },
     data() {
         return {
             selectedSortOption: "ترتيب",
-            selectedSchool: "اختار المدرسة",
+            selectedSchool: "اختيار مدرسة",
+            search_words: "",
+            search_status: false,
             Students: [
                 {
                     id: 1,
@@ -71,12 +93,63 @@ export default {
                     schoolname: "الهرم",
                     schoolAdminstration: "الجيزة",
                     name: " كريم طارق",
-                    nationalID: "024144657498798354",
+                    nationalID: "1",
                 },
             ],
+            schools: [
+                {
+                    id: 1,
+                    schoolname: "السعيدية",
+                    schoolAdminstration: "الجيزة",
+                    nationalID: "024144657498798354",
+                },
+                {
+                    id: 2,
+                    schoolname: "الهرم",
+                    schoolAdminstration: "الجيزة",
+                    nationalID: "1",
+                },
+            ],
+            options: [
+                {
+                    option: "تصاعدي",
+                },
+                {
+                    option: "تنازلي",
+                },
+            ],
+            filtered_Array: [],
         };
     },
+    watch: {
+        search_words() {
+            this.search_status = true;
+            setTimeout(() => {
+                this.search_status = false;
+            }, 1500);
+            setTimeout(() => {
+                if (this.search_words) {
+                    this.filtered_Array = this.Students.filter((item) => {
+                        return (
+                            item.nationalID &&
+                            item.nationalID
+                                .toLowerCase()
+                                .includes(this.search_words.toLowerCase())
+                        );
+                    });
+                } else {
+                    this.filtered_Array = this.Students;
+                }
+            }, 1500);
+        },
+    },
+    created() {
+        this.filtered_Array = this.Students;
+    },
     methods: {
+        selectSchool(){
+
+        },
         handleSort() {
             if (this.selectedSortOption === "ascending") {
                 this.Sort_ascending();
@@ -85,12 +158,12 @@ export default {
             }
         },
         Sort_ascending() {
-            this.filtered_Array.sort((a, b) => {
+            this.Students.sort((a, b) => {
                 return a.name.localeCompare(b.name);
             });
         },
         Sort_descending() {
-            this.filtered_Array.sort((a, b) => {
+            this.Students.sort((a, b) => {
                 return b.name.localeCompare(a.name);
             });
         },

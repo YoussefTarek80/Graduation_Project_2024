@@ -9,6 +9,7 @@
                 ></i>
             </div>
         </BaseTeleport>
+
         <section
             class="m-6 sm:m-16"
             data-aos="fade-up"
@@ -183,8 +184,15 @@
                             >
                         </label>
                         <div v-if="file">
-                            <i class="fa-thin fa-circle-xmark  text-red-700 text-2xl p-4 cursor-pointer" @click="DeleteFile"></i>
-                            <img :src="imageURL" alt="error" class="w-96  m-3 rounded-full"/>
+                            <i
+                                class="fa-thin fa-circle-xmark text-red-700 text-2xl p-4 cursor-pointer"
+                                @click="DeleteFile"
+                            ></i>
+                            <img
+                                :src="imageURL"
+                                alt="error"
+                                class="w-96 m-3 rounded-full"
+                            />
                         </div>
                         <input type="text" class="file" readonly v-if="!file" />
                     </div>
@@ -234,20 +242,21 @@
                             @input="validInputs"
                         />
                     </div>
+
                     <div class="flex flex-col">
-                        <label for="in13">
-                            الباسورد للمدير
+                        <label for="in14">
+                            عنوان المدير
                             <span class="text-red-600">*</span></label
                         >
                         <input
                             type="text"
-                            id="in13"
-                            v-model="Manger_Password"
+                            id="in14"
+                            v-model="Manger_Address"
                             @input="validInputs"
                         />
                     </div>
                 </div>
-                <div class="m-5 flex items-center justify-end sm:gap-5">
+                <div class="m-5 mt-10 flex items-center justify-end sm:gap-5">
                     <button
                         class="w-60"
                         @click="add_New_School"
@@ -286,9 +295,11 @@ export default {
             Manger_Name: "",
             Manger_Phone: "",
             Manger_Email: "",
-            Manger_Password: "",
+            Manger_Address: "",
             close: true,
             success: false,
+            falied: false,
+            messagesError: [],
             countries: [],
         };
     },
@@ -324,9 +335,9 @@ export default {
             }
             console.log(this.file);
         },
-        DeleteFile(){
-            this.imageURL=null;
-            this.file=null
+        DeleteFile() {
+            this.imageURL = null;
+            this.file = null;
         },
         clear() {
             this.name = "";
@@ -339,7 +350,7 @@ export default {
             this.Manger_Name = "";
             this.Manger_Phone = "";
             this.Manger_Email = "";
-            this.Manger_Password = "";
+            this.Manger_Address = "";
         },
         validInputs() {
             if (
@@ -353,7 +364,7 @@ export default {
                 this.Manger_Name.trim() === "" ||
                 this.Manger_Phone.trim() === "" ||
                 this.Manger_Email.trim() === "" ||
-                this.Manger_Password.trim() === ""
+                this.Manger_Address.trim() === ""
             ) {
                 this.close = true;
             } else {
@@ -366,6 +377,10 @@ export default {
                     name: this.name,
                     phone: this.phone,
                     address: this.address,
+                    manager_name: this.Manger_Name,
+                    manager_address: this.Manger_Address,
+                    manager_phone: this.Manger_Phone,
+                    manager_email: this.Manger_Email,
                 });
                 this.success = true;
                 setTimeout(() => {
@@ -373,7 +388,15 @@ export default {
                     this.clear();
                 }, 2000);
             } catch (err) {
-                console.error(err);
+                this.falied = true;
+                setTimeout(() => {
+                    this.falied = false;
+                }, 2000);
+                console.log(err.response.data.data);
+                this.messagesError = Object.values(
+                    err.response.data.data
+                ).flatMap((errorArray) => errorArray);
+                console.log(this.messagesError);
             }
         },
     },

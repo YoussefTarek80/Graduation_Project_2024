@@ -1,10 +1,10 @@
 import axios from "axios";
 export const actions = {
-    async addNewSchool({ commit }, { name, phone, address }) {
+    async addNewSchool({ commit }, { name, phone, address,manager_name,manager_address,manager_phone,manager_email }) {
         commit("SET_ADD_SCHOOL_STATUS", "loading");
         try {
             const token = localStorage.getItem("token");
-            const data = { name, phone, address };
+            const data = { name, phone, address,manager_name,manager_address,manager_phone,manager_email };
             await axios.post("http://192.168.1.18:8000/api/addSchool", data, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -15,6 +15,7 @@ export const actions = {
         } catch (err) {
             commit("SET_ADD_SCHOOL_STATUS", "error");
             console.error(err);
+            throw err
         }
     },
     async fetchSchools({ commit }) {
@@ -34,6 +35,7 @@ export const actions = {
         } catch (error) {
             commit("SET_FETCH_SCHOOLS_STATUS", "error");
             console.error("Error fetching schools:", error);
+            
         }
     },
     async RemoveSchool({ commit }, id) {
@@ -53,7 +55,7 @@ export const actions = {
             console.log(err);
         }
     },
-    async updateSchool({ commit }, { id, name, phone, address, file }) {
+    async updateSchool({ commit }, { id, name, phone, address, file,manager_name,manager_address,manager_phone,manager_email}) {
         try {
             const token = localStorage.getItem("token");
             const formData = new FormData();
@@ -61,6 +63,10 @@ export const actions = {
             formData.append("phone", phone);
             formData.append("address", address);
             formData.append("image", file);
+            formData.append("manager_name", manager_name);
+            formData.append("manager_address", manager_address);
+            formData.append("manager_phone", manager_phone);
+            formData.append("manager_email", manager_email);
             await axios.post(
                 `http://192.168.1.18:8000/api/updateSchool/${id}`,
                 formData,

@@ -17,38 +17,40 @@
             </button>
         </div>
         <div
-            class="bg-customSearch shadow-2xl  flex items-center justify-around p-5 mt-6 rounded-xl flex-wrap sm:space-y-0 space-y-6"
+            class="bg-customSearch shadow-2xl flex items-center justify-around p-5 mt-6 rounded-xl flex-wrap sm:space-y-0 space-y-6"
         >
-            <div class="relative sm:w-3/12 w-10/12">
-                <input
-                    type="text"
-                    placeholder="بحث"
-                    class="p-3 w-full rounded-2xl"
-                    v-model="search_words"
-                />
-                <i
-                    v-if="!search_status"
-                    class="fa-thin fa-magnifying-glass absolute left-5 top-4"
-                ></i>
-                <laoding_Search
-                    :show="search_status"
-                    class="absolute left-5 top-0"
-                ></laoding_Search>
-            </div>
-            <div class="custom-select relative sm:w-3/12 w-10/12">
-                <select
-                    v-model="selectedSortOption"
-                    @change="handleSort"
-                    class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple"
-                >
-                    <option disabled selected>ترتيب</option>
-                    <option value="ascending">تصاعديا</option>
-                    <option value="descending">تنازليا</option>
-                </select>
-                <div
-                    class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none"
-                >
-                <i class="fa-duotone fa-sort mx-4"></i>
+            <div class="grid sm:grid-cols-2 grid-cols-1 w-full gap-6">
+                <div class="relative">
+                    <input
+                        type="text"
+                        placeholder="بحث"
+                        class="p-3 w-full rounded-2xl"
+                        v-model="search_words"
+                    />
+                    <i
+                        v-if="!search_status"
+                        class="fa-thin fa-magnifying-glass absolute left-5 top-4"
+                    ></i>
+                    <laoding_Search
+                        :show="search_status"
+                        class="absolute left-5 top-0"
+                    ></laoding_Search>
+                </div>
+                <div class="custom-select relative">
+                    <select
+                        v-model="selectedSortOption"
+                        @change="handleSort"
+                        class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple"
+                    >
+                        <option disabled selected>ترتيب</option>
+                        <option value="ascending">تصاعديا</option>
+                        <option value="descending">تنازليا</option>
+                    </select>
+                    <div
+                        class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none"
+                    >
+                        <i class="fa-duotone fa-sort mx-4"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -106,21 +108,22 @@ export default {
     },
     created() {
         this.fetchData();
+        console.log(this.schools)
     },
     methods: {
-        ...mapActions(["fetchSchools","RemoveSchool"]),
+        ...mapActions(["fetchSchools", "RemoveSchool"]),
         async fetchData() {
             try {
                 await this.fetchSchools();
                 this.filtered_Array = this.schools;
-                console.log(this.filtered_Array)
+                console.log(this.filtered_Array);
             } catch (err) {
                 console.error(err);
             }
         },
         async deleteSchool(id) {
             try {
-                this.RemoveSchool(id)
+                this.RemoveSchool(id);
                 this.fetchData();
                 console.log("Delete Done");
             } catch (err) {
@@ -151,4 +154,5 @@ export default {
 <style scoped>
 @import url("./schools.css");
 @import url("../../../../UI/CustomsCss/Custombutton.css");
-</style>../../../../UI/Tabels/SchoolTable/Table.vue
+</style>
+../../../../UI/Tabels/SchoolTable/Table.vue

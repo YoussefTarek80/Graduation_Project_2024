@@ -152,9 +152,8 @@
                                 class="w-full appearance-none bg-white border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-customDarkPurple"
                             >
                                 <option value="" selected></option>
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
+                                <option>0</option>
+                                <option>1</option>
                             </select>
                             <div
                                 class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none"
@@ -166,7 +165,11 @@
                 </div>
                 <div class="flex flex-col w-full sm:w-auto mb-4 sm:mb-0 mt-3">
                     <label for="in8">شعار المدرسة</label>
-                    <div class="relative" @drop="handleFileDrop" @dragover.prevent>
+                    <div
+                        class="relative"
+                        @drop="handleFileDrop"
+                        @dragover.prevent
+                    >
                         <input
                             type="file"
                             id="in8"
@@ -185,8 +188,15 @@
                             >
                         </label>
                         <div v-if="file">
-                            <i class="fa-thin fa-circle-xmark  text-red-700 text-2xl p-4 cursor-pointer" @click="DeleteFile"></i>
-                            <img :src="imageURL" alt="error" class="w-96  m-3 rounded-full"/>
+                            <i
+                                class="fa-thin fa-circle-xmark text-red-700 text-2xl p-4 cursor-pointer"
+                                @click="DeleteFile"
+                            ></i>
+                            <img
+                                :src="imageURL"
+                                alt="error"
+                                class="w-96 m-3 rounded-full"
+                            />
                         </div>
                         <input type="text" class="file" readonly v-if="!file" />
                     </div>
@@ -238,13 +248,13 @@
                     </div>
                     <div class="flex flex-col">
                         <label for="in13">
-                            الباسورد للمدير
+                            عنوان المدير
                             <span class="text-red-600">*</span></label
                         >
                         <input
                             type="text"
                             id="in13"
-                            v-model="Manger_Password"
+                            v-model="Manger_Address"
                             @input="validInputs"
                         />
                     </div>
@@ -281,6 +291,10 @@ export default {
             phone: "",
             address: "",
             imageURL: "",
+            Manger_Name: "",
+            Manger_Phone: "",
+            Manger_Email: "",
+            Manger_Address: "",
             file: null,
             success: false,
             failed: false,
@@ -293,7 +307,7 @@ export default {
         this.fetchData();
     },
     methods: {
-        ...mapActions(["fetchSchools","updateSchool"]),
+        ...mapActions(["fetchSchools", "updateSchool"]),
         handleFile(event) {
             this.file = event.target.files[0];
             this.imageURL = URL.createObjectURL(this.file);
@@ -305,11 +319,11 @@ export default {
                 this.file = files[0];
                 this.imageURL = URL.createObjectURL(this.file);
             }
-            console.log(this.file)
+            console.log(this.file);
         },
-        DeleteFile(){
-            this.imageURL=null;
-            this.file=null
+        DeleteFile() {
+            this.imageURL = null;
+            this.file = null;
         },
         async fetchData() {
             try {
@@ -336,6 +350,10 @@ export default {
             this.name = this.item.name;
             this.phone = this.item.phone;
             this.address = this.item.address;
+            this.Manger_Name = this.item.manager_name;
+            this.Manger_Phone = this.item.manager_phone;
+            this.Manger_Email = this.item.manager_email ;
+            this.Manger_Address = this.item.manager_address;
         },
         async handleUpdateSchool() {
             try {
@@ -345,6 +363,10 @@ export default {
                     phone: this.phone,
                     address: this.address,
                     file: this.file,
+                    manager_name: this.Manger_Name,
+                    manager_phone: this.Manger_Phone,
+                    manager_email: this.Manger_Email,
+                    manager_address: this.Manger_Address,
                 });
                 this.success = true;
                 setTimeout(() => {

@@ -111,6 +111,7 @@ const router = createRouter({
                 props: true,
             },
         },
+        
     ],
     scrollBehavior(to, from, savedPosition) {
         return { top: 0 };
