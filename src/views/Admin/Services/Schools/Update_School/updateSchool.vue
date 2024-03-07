@@ -3,17 +3,9 @@
         <Navbar_Component></Navbar_Component>
         <BaseTeleport :show="success">
             <div class="flex flex-col">
-                <span class="text-green-700 text-4xl"> تم التعديل بنجاح </span>
+                <span class="text-green-700 text-4xl"> تم الاضافة بنجاح </span>
                 <i
                     class="fa-sharp fa-solid fa-badge-check text-green-700 text-7xl m-3"
-                ></i>
-            </div>
-        </BaseTeleport>
-        <BaseTeleport :show="failed">
-            <div class="flex flex-col">
-                <span class="text-red-700 text-4xl"> فشل التعديل</span>
-                <i
-                    class="fa-sharp fa-solid fa-badge-check text-red-700 text-7xl m-3"
                 ></i>
             </div>
         </BaseTeleport>
@@ -60,9 +52,9 @@
                                 class="w-full appearance-none bg-white border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-customDarkPurple"
                             >
                                 <option value="" selected></option>
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
+                                <option v-for="con in countries" :key="con">
+                                    {{ con }}
+                                </option>
                             </select>
                             <div
                                 class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none"
@@ -80,12 +72,13 @@
                             <select
                                 @change="validInputs"
                                 v-model="certificate_type"
+                                id="in3"
                                 class="w-full appearance-none bg-white border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-customDarkPurple"
                             >
                                 <option value="" selected></option>
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
+                                <option>ابتدائية</option>
+                                <option>اعدادية</option>
+                                <option>ثانوية</option>
                             </select>
                             <div
                                 class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none"
@@ -102,6 +95,7 @@
                         <div class="custom-select relative">
                             <select
                                 @change="validInputs"
+                                id="in4"
                                 v-model="education_type"
                                 class="w-full appearance-none bg-white border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-customDarkPurple"
                             >
@@ -148,12 +142,13 @@
                         <div class="custom-select relative">
                             <select
                                 v-model="status"
+                                id="in7"
                                 @change="validInputs"
                                 class="w-full appearance-none bg-white border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-customDarkPurple"
                             >
                                 <option value="" selected></option>
-                                <option>0</option>
-                                <option>1</option>
+                                <option>مفعل</option>
+                                <option>غير مفعل</option>
                             </select>
                             <div
                                 class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none"
@@ -232,6 +227,7 @@
                             id="in11"
                             v-model="Manger_Phone"
                             @input="validInputs"
+                            :class="{ 'error': checkPhone }"
                         />
                     </div>
                     <div class="flex flex-col">
@@ -240,33 +236,35 @@
                             <span class="text-red-600">*</span></label
                         >
                         <input
-                            type="text"
+                            type="email"
                             id="in12"
                             v-model="Manger_Email"
                             @input="validInputs"
+                            :class="{ 'error': checkEmail }"
                         />
                     </div>
+
                     <div class="flex flex-col">
-                        <label for="in13">
+                        <label for="in14">
                             عنوان المدير
                             <span class="text-red-600">*</span></label
                         >
                         <input
                             type="text"
-                            id="in13"
+                            id="in14"
                             v-model="Manger_Address"
                             @input="validInputs"
                         />
                     </div>
                 </div>
-                <div class="m-5 flex items-center justify-end sm:gap-5">
+                <div class="m-5 mt-10 flex items-center justify-end sm:gap-5">
                     <button
                         class="w-60"
                         @click="handleUpdateSchool"
                         :class="{ disabledBtn: close }"
                         :disabled="close"
                     >
-                        حفظ
+                        تعديل
                     </button>
                     <button
                         class="w-48"
@@ -286,18 +284,25 @@ import { mapActions, mapGetters } from "vuex";
 export default {
     data() {
         return {
-            item: null,
+            file: null,
+            imageURL: null,
             name: "",
+            country: "",
+            certificate_type: "",
+            education_type: "",
             phone: "",
             address: "",
-            imageURL: "",
+            status: "",
             Manger_Name: "",
             Manger_Phone: "",
             Manger_Email: "",
             Manger_Address: "",
-            file: null,
+            close: true,
             success: false,
-            failed: false,
+            messagesError: [],
+            countries: [],
+            checkPhone: false,
+            checkEmail: false,
         };
     },
     computed: {
@@ -305,9 +310,22 @@ export default {
     },
     created() {
         this.fetchData();
+        this.loadCountries();
     },
     methods: {
         ...mapActions(["fetchSchools", "updateSchool"]),
+        async loadCountries() {
+            try {
+                const response = await axios.get(
+                    "https://restcountries.com/v3.1/all"
+                );
+                this.countries = response.data.map(
+                    (country) => country.name.common
+                );
+            } catch (error) {
+                console.error("Error loading countries:", error);
+            }
+        },
         handleFile(event) {
             this.file = event.target.files[0];
             this.imageURL = URL.createObjectURL(this.file);
@@ -377,6 +395,50 @@ export default {
                 setTimeout(() => {
                     this.failed = false;
                 }, 1000);
+            }
+        },
+        EmailRegex() {
+            if (
+                this.Manger_Email.trim() !== "" &&
+                !/^\S+@\S+\.\S+$/.test(this.Manger_Email)
+            ) {
+                this.checkEmail = true;
+            } else {
+                this.checkEmail = false;
+            }
+        },
+        PhoneRegex() {
+            if (
+                this.Manger_Phone.trim() !== "" &&
+                this.Manger_Phone.length !== 11
+            ) {
+                this.checkPhone = true;
+            } else {
+                this.checkPhone = false;
+                
+            }
+        },
+        validInputs() {
+            this.EmailRegex();
+            this.PhoneRegex();
+            if (
+                this.name.trim() === "" ||
+                this.country === "" ||
+                this.certificate_type === "" ||
+                this.education_type === "" ||
+                this.phone.trim() === "" ||
+                this.address.trim() === "" ||
+                this.status === "" ||
+                this.Manger_Name.trim() === "" ||
+                this.Manger_Phone.trim() === "" ||
+                this.Manger_Email.trim() === "" ||
+                this.Manger_Address.trim() === ""||
+                this.checkPhone ===true ||
+                this.checkEmail ===true 
+            ) {
+                this.close = true;
+            } else {
+                this.close = false;
             }
         },
     },

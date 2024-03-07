@@ -1,10 +1,22 @@
 <template>
     <div class="body flex flex-col justify-center items-center h-screen">
         <div
-            class="box shadow-2xl sm:w-5/12 w-11/12 m-6 sm:h-5/6 h-4/6 flex flex-col items-center justify-center rounded-3xl text-sm"
+            data-aos="fade-right"
+            data-aos-duration="1000"
+            class="relative box shadow-2xl sm:w-5/12 w-11/12 m-6 sm:h-5/6 h-4/6 flex flex-col items-center justify-center rounded-3xl text-sm"
         >
             <div class="sm:w-7/12 w-8/12">
                 <img src="../../../../assets/Logo/Logo.png" alt="" />
+            </div>
+            <div class="absolute top-0 left-0" v-if="admin">
+                <i
+                    class="fa-solid fa-user-tie sm:text-6xl text-4xl p-10 rounded-full text-customPurple"
+                ></i>
+            </div>
+            <div class="absolute top-0 left-0" v-if="!admin">
+                <i
+                    class="fa-sharp fa-light fa-school sm:text-6xl text-4xl p-10 rounded-full text-customPurple"
+                ></i>
             </div>
             <form
                 action=""
@@ -78,6 +90,7 @@ export default {
             invalid: false,
             login_Failed: false,
             loading: false,
+            admin: false,
         };
     },
     computed: {
@@ -91,9 +104,18 @@ export default {
     },
     mounted() {
         this.Invalid_Data();
+        this.getRole();
     },
     methods: {
         ...mapActions(["login"]),
+        getRole() {
+            const role = localStorage.getItem("role");
+            if (role === "admin") {
+                this.admin = true;
+            } else {
+                this.admin = false;
+            }
+        },
         Invalid_Data() {
             if (this.email.trim() === "" || this.password.trim() === "") {
                 this.invalid = true;
