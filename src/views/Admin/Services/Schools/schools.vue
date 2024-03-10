@@ -16,47 +16,16 @@
                 <i class="fa-solid fa-plus"></i>
             </button>
         </div>
-        <div
-            class="bg-customSearch shadow-2xl flex items-center justify-around p-5 mt-6 rounded-xl flex-wrap sm:space-y-0 space-y-6"
-        >
-            <div class="grid sm:grid-cols-2 grid-cols-1 w-full gap-6">
-                <div class="relative">
-                    <input
-                        type="text"
-                        placeholder="بحث"
-                        class="p-3 w-full rounded-2xl"
-                        v-model="search_words"
-                    />
-                    <i
-                        v-if="!search_status"
-                        class="fa-thin fa-magnifying-glass absolute left-5 top-4"
-                    ></i>
-                    <laoding_Search
-                        :show="search_status"
-                        class="absolute left-5 top-0"
-                    ></laoding_Search>
-                </div>
-                <div class="custom-select relative">
-                    <select
-                        v-model="selectedSortOption"
-                        @change="handleSort"
-                        class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple"
-                    >
-                        <option disabled selected>ترتيب</option>
-                        <option value="ascending">تصاعديا</option>
-                        <option value="descending">تنازليا</option>
-                    </select>
-                    <div
-                        class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none"
-                    >
-                        <i class="fa-duotone fa-sort mx-4"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <FilterComponent
+            :filteredArray="filtered_Array"
+            @filter="handleFilter"
+            :MainArray="schools"
+            :nationalIDS="false"
+            :Search="true"
+        ></FilterComponent>
         <div class="relative">
             <table_Component
-                :items="filtered_Array"
+                :items="schools" 
                 :editRoute="'/Admin/Schools/updateSchool'"
                 :infoRoute="'/Admin/Schools/InfoSchool'"
                 :fetching="fetchSchoolsStatus"
@@ -68,10 +37,11 @@
 </template>
 <script>
 import table_Component from "../../../../UI/Tables/SchoolTable/Table.vue";
+import FilterComponent from "../../../../components/Admin/Filtration/Filter.vue";
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
 export default {
-    components: { table_Component },
+    components: { table_Component, FilterComponent },
     data() {
         return {
             showInfo: false,
@@ -79,44 +49,24 @@ export default {
             search_words: "",
             search_status: false,
             selectedSortOption: "ترتيب",
+            // filtered_Array : this.schools
         };
-    },
-    watch: {
-        search_words() {
-            this.search_status = true;
-            setTimeout(() => {
-                this.search_status = false;
-            }, 1500);
-            setTimeout(() => {
-                if (this.search_words) {
-                    this.filtered_Array = this.schools.filter((item) => {
-                        return (
-                            item.name &&
-                            item.name
-                                .toLowerCase()
-                                .includes(this.search_words.toLowerCase())
-                        );
-                    });
-                } else {
-                    this.filtered_Array = this.schools;
-                }
-            }, 1500);
-        },
     },
     computed: {
         ...mapGetters(["schools", "fetchSchoolsStatus"]),
     },
     created() {
         this.fetchData();
-        console.log(this.schools)
+        // console.log(this.schools);
     },
     methods: {
         ...mapActions(["fetchSchools", "RemoveSchool"]),
         async fetchData() {
+            
             try {
                 await this.fetchSchools();
                 this.filtered_Array = this.schools;
-                console.log(this.filtered_Array);
+                console.log(this.schools);
             } catch (err) {
                 console.error(err);
             }
@@ -130,22 +80,8 @@ export default {
                 console.error(err);
             }
         },
-        handleSort() {
-            if (this.selectedSortOption === "ascending") {
-                this.Sort_ascending();
-            } else if (this.selectedSortOption === "descending") {
-                this.Sort_descending();
-            }
-        },
-        Sort_ascending() {
-            this.filtered_Array.sort((a, b) => {
-                return a.name.localeCompare(b.name);
-            });
-        },
-        Sort_descending() {
-            this.filtered_Array.sort((a, b) => {
-                return b.name.localeCompare(a.name);
-            });
+        handleFilter(filteredArray) {
+            this.filtered_Array = filteredArray;
         },
     },
 };

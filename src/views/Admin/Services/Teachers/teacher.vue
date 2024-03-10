@@ -7,7 +7,7 @@
             data-aos-duration="1000"
         >
             <div class="flex flex-col">
-                <span class="sm:text-3xl text-2xl">قائمة الطلاب</span>
+                <span class="sm:text-3xl text-2xl">قائمة المدرسين</span>
                 <i
                     class="fa-regular fa-horizontal-rule fa-2xl text-customPink"
                 ></i>
@@ -16,11 +16,12 @@
                 :filteredArray="filtered_Array"
                 @filter="handleFilter"
                 :MainArray="Students"
+                :Schools="schools"
                 :nationalIDS="true"
             ></FilterComponent>
             <div class="relative">
                 <table_Component
-                    :items="filtered_Array"
+                    :items="teachers"
                     :infoRoute="'/Admin/Students/InfoStudent'"
                 ></table_Component>
             </div>
@@ -28,73 +29,58 @@
         <Footer_Component></Footer_Component>
     </div>
 </template>
-
 <script>
-import table_Component from "../../../../UI/Tables/StudentTable/Table.vue";
+import table_Component from "../../../../UI/Tables/TeacherTable/Table.vue";
 import FilterComponent from "../../../../components/Admin/Filtration/Filter.vue";
-
 export default {
-    components: {
-        table_Component,
-        FilterComponent,
-    },
+    components: { table_Component,FilterComponent },
     data() {
         return {
-            filtered_Array: [],
-            Students: [
+            teachers: [
                 {
                     id: 1,
                     schoolname: "السعيدية",
                     schoolAdminstration: "الجيزة",
-                    name: "احمد حسام",
-                    nationalID: "024144657498798354",
+                    Teachername: "احمد حسام",
+                    TeachernationalID: "024144657498798354",
                 },
                 {
                     id: 2,
-                    schoolname: "الهرم",
+                    schoolname: "السعيدية",
                     schoolAdminstration: "الجيزة",
-                    name: " كريم طارق",
-                    nationalID: "1",
+                    Teachername: "احمد حسام",
+                    TeachernationalID: "024144657498798354",
                 },
                 {
-                    id: 2,
-                    schoolname: "الهرم",
+                    id: 3,
+                    schoolname: "السعيدية",
                     schoolAdminstration: "الجيزة",
-                    name: " كريم طارق",
-                    nationalID: "1",
+                    Teachername: "احمد حسام",
+                    TeachernationalID: "024144657498798354",
                 },
                 {
-                    id: 2,
-                    schoolname: "الهرم",
+                    id: 4,
+                    schoolname: "السعيدية",
                     schoolAdminstration: "الجيزة",
-                    name: " كريم طارق",
-                    nationalID: "1",
+                    Teachername: "احمد حسام",
+                    TeachernationalID: "024144657498798354",
                 },
                 {
-                    id: 2,
-                    schoolname: "الهرم",
+                    id: 5,
+                    schoolname: "السعيدية",
                     schoolAdminstration: "الجيزة",
-                    name: " كريم طارق",
-                    nationalID: "1",
+                    Teachername: "احمد حسام",
+                    TeachernationalID: "024144657498798354",
                 },
-                                {
-                    id: 2,
-                    schoolname: "الهرم",
+                {
+                    id: 6,
+                    schoolname: "السعيدية",
                     schoolAdminstration: "الجيزة",
-                    name: " كريم طارق",
-                    nationalID: "1",
+                    Teachername: "احمد حسام",
+                    TeachernationalID: "024144657498798354",
                 },
             ],
-            
         };
-    },
-    created() {
-        this.filtered_Array = this.Students;
-    },
-    methods: {
-        handleFilter(filteredArray) {
-            this.filtered_Array = filteredArray;
-        },
     },
 };
 </script>

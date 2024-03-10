@@ -26,9 +26,6 @@ label {
 select option {
     font-size: 14px; 
 }
-select:focus {
-    
-}
 .error{
     border:1px solid red
 }

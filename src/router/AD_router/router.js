@@ -107,6 +107,39 @@ const router = createRouter({
                 props: true,
             },
         },
+        {
+            path: "/Admin/Teacher",
+            component: () => 
+            import("../../views/Admin/Services/Teachers/teacher.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
+        {
+            path: "/Admin/Request",
+            component: () => 
+            import("../../views/Admin/Services/Requests/request.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
+        {
+            path: "/Admin/Event",
+            component: () => 
+            import("../../views/Admin/Services/Events/event.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
         
     ],
     scrollBehavior(to, from, savedPosition) {

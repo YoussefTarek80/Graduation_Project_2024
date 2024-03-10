@@ -8,14 +8,17 @@
             <div class="sm:w-7/12 w-8/12">
                 <img src="../../../../assets/Logo/Logo.png" alt="" />
             </div>
-            <div class="absolute top-0 left-0" v-if="admin">
+            <div class="absolute top-0 left-0 cursor-pointer " v-if="admin"
+
+            @click="this.$router.push('/SelectRole')">
                 <i
-                    class="fa-solid fa-user-tie sm:text-6xl text-4xl p-10 rounded-full text-customPurple"
+                    class="fa-solid fa-user-tie sm:text-6xl text-4xl p-10 rounded-full text-customPurple hover:transform hover:scale-110 transition-all"
                 ></i>
             </div>
-            <div class="absolute top-0 left-0" v-if="!admin">
+            <div class="absolute top-0 left-0 cursor-pointer" v-if="!admin"
+            @click="this.$router.push('/SelectRole')">
                 <i
-                    class="fa-sharp fa-light fa-school sm:text-6xl text-4xl p-10 rounded-full text-customPurple"
+                    class="fa-sharp fa-light fa-school sm:text-6xl text-4xl p-10 rounded-full text-customPurple hover:transform hover:scale-110 transition-all"
                 ></i>
             </div>
             <form

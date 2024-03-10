@@ -7,7 +7,7 @@
                 </th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">اسم المدرسة</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">اسم الادارة</th>
-                <th class="sm:py-5 sm:px-4 px-7 py-3">اسم الطالب</th>
+                <th class="sm:py-5 sm:px-4 px-7 py-3">اسم المدرس</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">الرقم القومي</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tl-2xl">
                     الاجراء
@@ -29,7 +29,11 @@
                         {{ item.nationalID }}
                     </td>
                     <td class="py-2 px-4 relative">
-                        <router-link :to="infoRoute(index)"  class="bg-[#4d394d] text-white px-5 py-3 rounded-md font-bold">التفاصيل</router-link>
+                        <router-link
+                            :to="infoRoute(index)"
+                            class="bg-[#4d394d] text-white px-5 py-3 rounded-md font-bold"
+                            >التفاصيل</router-link
+                        >
                     </td>
                 </tr>
             </tbody>
@@ -61,7 +65,7 @@ export default {
             return Math.ceil(this.items.length / this.pageSize);
         },
         paginatedItems() {
-            const startIndex = (this.currentPage - 1) * this.pageSize;
+       const startIndex = (this.currentPage - 1) * this.pageSize;
             const endIndex = startIndex + this.pageSize;
             return this.items.slice(startIndex, endIndex);
         },

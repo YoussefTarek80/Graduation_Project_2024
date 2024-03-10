@@ -1,23 +1,23 @@
 <template>
-    <div class="sm:overflow-hidden overflow-auto" >
-        <table
-            class="sm:w-full sm:my-20   mt-9  sm:text-lg text-sm "
-        >
+    <div class="sm:overflow-hidden overflow-auto">
+        <table class="sm:w-full sm:my-20 mt-9 sm:text-lg text-sm">
             <thead class="text-white">
-                <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tr-2xl">التسلسل</th>
+                <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tr-2xl">
+                    التسلسل
+                </th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">اسم المدرسة</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">شعار المدرسة</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">رقم الهاتف</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">الحالة</th>
-                <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tl-2xl">الاجراء</th>
+                <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tl-2xl">
+                    الاجراء
+                </th>
             </thead>
             <tbody class="text-center relative" ref="tableBody">
                 <tr
-                
                     v-for="(item, index) in paginatedItems"
                     :key="index"
-                    class="h-20 odd:bg-white even:bg-gray-100 "
-                    
+                    class="h-20 odd:bg-white even:bg-gray-100"
                 >
                     <td class="py-2 px-4">
                         {{ (currentPage - 1) * pageSize + index + 1 }}
@@ -40,7 +40,7 @@
                             alt=""
                             @click="toggleShowInfo(index)"
                         />
-                        <div class="bg-white " v-if="showInfo === index">
+                        <div class="bg-white" v-if="showInfo === index">
                             <ul
                                 class="absolute rounded-xl text-customDarkPurple sm:flex sm:flex-col sm:top-10 sm:left-32 left-10 z-50 bg-white"
                             >
@@ -94,25 +94,12 @@
             </tbody>
         </table>
     </div>
-    <div class="flex justify-center items-center mt-4">
-        <button
-            @click="nextPage"
-            :disabled="currentPage === totalPages"
-            class="hover:text-customPink cursor-pointer transition-all w-10 h-10 flex items-center justify-center"
-        >
-            <i class="fa-duotone fa-forward sm:text-lg text-sm"></i>
-        </button>
-        <span class="mx-4 sm:text-xl"
-            >{{ currentPage }} من {{ totalPages }}</span
-        >
-        <button
-            @click="prevPage"
-            :disabled="currentPage === 1"
-            class="hover:text-customPink cursor-pointer transition-all w-10 h-10 flex items-center justify-center"
-        >
-            <i class="fa-duotone fa-backward sm:text-lg text-sm"></i>
-        </button>
-    </div>
+    <Pagination
+        :currentPage="currentPage"
+        :totalPages="totalPages"
+        :nextPage="nextPage"
+        :prevPage="prevPage"
+    />
 </template>
 <script>
 import axios from "axios";
