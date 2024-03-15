@@ -20,7 +20,7 @@
                     <span>{{GetUser.name }}</span>
                     <span class="text-customYellow">ادمن</span>
                 </div>
-                <div class="relative">
+                <div class="relative" >
                     <i
                         class="fa-thin fa-bell sm:text-4xl text-2xl"
                         style="color: #ffffff"
@@ -126,7 +126,6 @@
     </header>
 </template>
 <script>
-import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
 export default {
     data() {

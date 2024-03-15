@@ -90,20 +90,19 @@
                             class="item-data"
                         />
                     </div>
-                    <div class="flex flex-col">
-                        <label for="in5">رقم الهاتف </label>
-                        <input
-                            v-model="phone"
-                            id="email"
-                            placeholder=" رقم الهاتف "
-                            type="text"
-                            class="item-data"
-                        />
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="in5"> الدور الوظيفي</label>
-                        <input value="" type="text" class="item-data" />
-                    </div>
+                  <div class="flex flex-col">
+                    <label for="in5">رقم الهاتف </label>
+                    <input
+                        id="email"
+                        v-model="phone"
+                        class="item-data"
+                        placeholder=" رقم الهاتف "
+                        type="text"
+                    />
+
+                    <label for="in5"> الدور الوظيفي</label>
+                    <input value="" type="text" class="item-data"/>
+                  </div>
                 </div>
                 <div class="m-5 flex items-center justify-end">
                     <button class="w-60">حفظ</button>

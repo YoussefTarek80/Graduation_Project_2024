@@ -17,6 +17,7 @@
                 @filter="handleFilter"
                 :MainArray="Students"
                 :nationalIDS="true"
+                :select_school="true"
             ></FilterComponent>
             <div class="relative">
                 <table_Component

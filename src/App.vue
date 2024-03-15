@@ -15,7 +15,6 @@ export default {
                     password: "000",
                 },
             ],
-
         };
     },
     provide() {

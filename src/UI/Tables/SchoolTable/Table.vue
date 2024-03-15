@@ -65,30 +65,30 @@
                                     حذف
                                 </li>
                             </ul>
-                        </div>
-                        <BaseTeleport :show="confirm">
-                            <div class="flex flex-col">
-                                <span class="text-red-700 text-4xl">
-                                    تاكيد الحذف
-                                </span>
-                                <div
-                                    class="flex items-center justify-around mt-10"
-                                >
-                                    <button
-                                        class="w-96"
-                                        @click="handleDeleteSchool(item.id)"
+                            <BaseTeleport :show="confirm">
+                                <div class="flex flex-col">
+                                    <span class="text-red-700 text-4xl">
+                                        تاكيد الحذف
+                                    </span>
+                                    <div
+                                        class="flex items-center justify-around mt-10"
                                     >
-                                        تاكيد
-                                    </button>
-                                    <button
-                                        class="w-52"
-                                        @click="confirm = false"
-                                    >
-                                        الغاء
-                                    </button>
+                                        <button
+                                            class="w-96"
+                                            @click="handleDeleteSchool(item.id)"
+                                        >
+                                            تاكيد
+                                        </button>
+                                        <button
+                                            class="w-52"
+                                            @click="confirm = false"
+                                        >
+                                            الغاء
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </BaseTeleport>
+                            </BaseTeleport>
+                        </div>
                     </td>
                 </tr>
             </tbody>

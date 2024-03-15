@@ -140,7 +140,28 @@ const router = createRouter({
                 props: true,
             },
         },
-        
+        {
+            path: "/Admin/Event/AddEvent",
+            component: () => 
+            import("../../views/Admin/Services/Events/Add_Event/add_event.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
+        {
+            path: "/Admin/Event/InfoEvent/:index",
+            component: () =>
+                import("../../views/Admin/Services/Events/Info_Event/infoEvent.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
     ],
     scrollBehavior(to, from, savedPosition) {
         return { top: 0 };

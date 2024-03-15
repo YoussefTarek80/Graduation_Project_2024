@@ -10,7 +10,7 @@
             </div>
         </BaseTeleport>
         <section
-            class="m-6 sm:m-16"
+            class="m-6 sm:m-16 z-50"
             data-aos="fade-up"
             data-aos-duration="1000"
         >
@@ -21,7 +21,7 @@
                 ></i>
             </div>
             <div
-                class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full mx-auto"
+                class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full mx-auto school "
             >
                 <div class="my-5">
                     <span class="text-2xl">بيانات المدرسة</span>
@@ -227,7 +227,7 @@
                             id="in11"
                             v-model="Manger_Phone"
                             @input="validInputs"
-                            :class="{ 'error': checkPhone }"
+                            :class="{ error: checkPhone }"
                         />
                     </div>
                     <div class="flex flex-col">
@@ -240,7 +240,7 @@
                             id="in12"
                             v-model="Manger_Email"
                             @input="validInputs"
-                            :class="{ 'error': checkEmail }"
+                            :class="{ error: checkEmail }"
                         />
                     </div>
 
@@ -372,7 +372,6 @@ export default {
                 this.checkPhone = true;
             } else {
                 this.checkPhone = false;
-                
             }
         },
         validInputs() {
@@ -389,9 +388,9 @@ export default {
                 this.Manger_Name.trim() === "" ||
                 this.Manger_Phone.trim() === "" ||
                 this.Manger_Email.trim() === "" ||
-                this.Manger_Address.trim() === ""||
-                this.checkPhone ===true ||
-                this.checkEmail ===true 
+                this.Manger_Address.trim() === "" ||
+                this.checkPhone === true ||
+                this.checkEmail === true
             ) {
                 this.close = true;
             } else {
@@ -412,7 +411,8 @@ export default {
                 this.success = true;
                 setTimeout(() => {
                     this.success = false;
-                    this.clear();
+                    // this.clear();
+                    this.close = true;
                 }, 2000);
             } catch (err) {
                 console.log(err.response.data.data);
