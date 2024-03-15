@@ -1,6 +1,5 @@
 import { createStore } from "vuex";
-import authModule from "./modules/Auth/index.js";
-
+import authModule from "./admin_store/modules/AD_Schools/index.js";
 const store = createStore({
     namespace: true,
     modules: {

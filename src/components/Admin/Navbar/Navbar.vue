@@ -31,7 +31,7 @@
                 </div>
                 <transition name="bounce">
                     <div
-                        class="bg-white w-52 z-40 text-black text-center absolute top-20 rounded-xl shadow-lg"
+                        class="bg-white w-52 z-40 text-black text-center absolute top-20 rounded-tr-2xl  rounded-bl-2xl rounded-br-2xl    shadow-lg"
                         v-if="userLogout"
                     >
                         <ul>
@@ -66,13 +66,13 @@
                     <i class="fa-sharp fa-solid fa-chevron-down m-3"></i>
 
                     <ul class="dropdown">
-                        <li key="school1">
+                        <li key="schools">
                             <router-link to="/Admin/Schools"
                                 >قائمة المدارس</router-link
                             >
                         </li>
-                        <li key="school2">
-                            <router-link to="/schools/school2"
+                        <li key="students">
+                            <router-link to="/Admin/Students"
                                 >قائمة الطلاب</router-link
                             >
                         </li>

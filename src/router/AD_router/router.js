@@ -2,31 +2,31 @@ import { createRouter, createWebHistory } from "vue-router";
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        {
-            path: "/",
-            redirect: "/Login",
-        },
+        // {
+        //     path: "/",
+        //     redirect: "/Login",
+        // },
         {
             path: "/Login",
-            component: () => import("./views/Admin/Auth/Login/login.vue"),
+            component: () => import("../../views/Admin/Auth/Login/login.vue"),
             meta: { title: "Login" },
         },
         {
             path: "/Login/ForgetPass",
             component: () =>
-                import("./views/Admin/Auth/Forget_Password/Forget.vue"),
+                import("../../views/Admin/Auth/Forget_Password/Forget.vue"),
             meta: { title: "Forget" },
         },
         {
             path: "/resetPassword/:token",
             component: () =>
-                import("./views/Admin/Auth/Reset_Password/reset.vue"),
+                import("../../views/Admin/Auth/Reset_Password/reset.vue"),
             meta: { title: "reset" },
-            props:true
+            props: true,
         },
         {
             path: "/Admin/Home",
-            component: () => import("./views/Admin/Services/Home/home.vue"),
+            component: () => import("../../views/Admin/Services/Home/home.vue"),
             meta: {
                 title: "AdminDashboard",
                 requiresAuth: true,
@@ -35,7 +35,7 @@ const router = createRouter({
         },
         {
             path: "/Admin/profile",
-            component: () => import("./views/Admin/Profile/profile.vue"),
+            component: () => import("../../views/Admin/Profile/profile.vue"),
             meta: {
                 title: "AdminDashboard",
                 requiresAuth: true,
@@ -45,7 +45,7 @@ const router = createRouter({
         {
             path: "/Admin/Schools",
             component: () =>
-                import("./views/Admin/Services/Schools/schools.vue"),
+                import("../../views/Admin/Services/Schools/schools.vue"),
             meta: {
                 title: "AdminDashboard",
                 requiresAuth: true,
@@ -56,7 +56,7 @@ const router = createRouter({
             path: "/Admin/Schools/addSchool",
             component: () =>
                 import(
-                    "./views/Admin/Services/Schools/Add_School/addSchool.vue"
+                    "../../views/Admin/Services/Schools/Add_School/addSchool.vue"
                 ),
             meta: {
                 title: "AdminDashboard",
@@ -68,38 +68,54 @@ const router = createRouter({
             path: "/Admin/Schools/updateSchool/:index",
             component: () =>
                 import(
-                    "./views/Admin/Services/Schools/Update_School/updateSchool.vue"
+                    "../../views/Admin/Services/Schools/Update_School/updateSchool.vue"
                 ),
             meta: {
                 title: "AdminDashboard",
                 requiresAuth: true,
                 roles: ["admin"],
-                props:true
+                props: true,
             },
         },
         {
             path: "/Admin/Schools/InfoSchool/:index",
             component: () =>
                 import(
-                    "./views/Admin/Services/Schools/Info_School/InfoSchool.vue"
+                    "../../views/Admin/Services/Schools/Info_School/InfoSchool.vue"
                 ),
             meta: {
                 title: "AdminDashboard",
                 requiresAuth: true,
                 roles: ["admin"],
-                props:true
+                props: true,
             },
         },
         {
-            path: "/SchoolDashboard",
-            component: () => import("./views/School/Dashboard/dashboard.vue"),
+            path: "/Admin/Students",
+            component: () =>
+                import("../../views/Admin/Services/Students/students.vue"),
             meta: {
-                title: "SchoolDashboard",
+                title: "AdminDashboard",
                 requiresAuth: true,
-                roles: ["school"],
+                roles: ["admin"],
             },
         },
+        {
+            path: "/Admin/Students/InfoStudent/:index",
+            component: () =>
+                import("../../views/Admin/Services/Students/Info_Student/InfoStudent.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
+
     ],
+    scrollBehavior(to, from, savedPosition) {
+        return { top: 0 };
+    },
 });
 router.beforeEach((to, from, next) => {
     document.title = to.meta.title || "Your Default Title";

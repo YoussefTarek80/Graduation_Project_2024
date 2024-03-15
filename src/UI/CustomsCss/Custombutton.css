@@ -7,8 +7,11 @@ button {
     padding-top: 1rem;
     padding-bottom: 1rem;
     border-radius: 9999px;
-    --tw-text-opacity: 1;
-    color: rgb(247 254 231 / var(--tw-text-opacity));
+    color: white;
     font-size: 1.25rem;
     line-height: 1.75rem;
+    transition: .5s ease-in-out;
+}
+.disabledBtn {
+    opacity: 0.5;
 }

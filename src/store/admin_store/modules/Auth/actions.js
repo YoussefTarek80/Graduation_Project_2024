@@ -1,6 +1,6 @@
 import axios from "axios";
 export const actions = {
-    async login({ commit, dispatch  }, { email, password }) {
+    async login({ commit, dispatch }, { email, password }) {
         try {
             const response = await axios.post(
                 "http://127.0.0.1:8000/api/login",

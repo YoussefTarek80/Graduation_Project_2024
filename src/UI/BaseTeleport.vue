@@ -30,7 +30,7 @@ export default {
     left: 0;
     height: 100vh;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.329);
     z-index: 10;
     font-family: "Kufam", sans-serif;
 }
