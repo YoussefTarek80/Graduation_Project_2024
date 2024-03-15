@@ -9,7 +9,7 @@
             class="sm:col-span-1 col-span-2 bg-customBGCards rounded-2xl shadow-2xl p-3"
         >
             <div
-                class="p-4 flex flex-row-reverse items-center justify-center space-x-6 rounded-2xl py-5"
+                class="p-4 flex flex-row-reverse items-center justify-center rounded-2xl py-5"
             >
                 <div>
                     <img
@@ -42,9 +42,7 @@
                     <div class="flex flex-col items-center justify-center">
                         <span class="text-3xl">{{ item.title }}</span>
 
-                        <span
-                            class="text-customDarkPurple text-3xl"
-
+                        <span class="text-customDarkPurple text-3xl"
                             >{{ item.numbers }}
                         </span>
                     </div>
@@ -53,14 +51,18 @@
         </div>
     </div>
     <div
-        class="sm:w-full flex justify-between items-center mt-10 flex-wrap sm:space-y-0 space-y-12"
+        class="sm:w-full flex justify-around items-center sm:mt-10 flex-wrap"
         data-aos="fade-up"
-        data-aos-duration="2000"
+        data-aos-duration="1000"
     >
-        <div class="sm:w-5/12 w-full">
+        <div
+            class="sm:w-5/12 w-full bg-customBGCards rounded-2xl shadow-2xl p-3"
+        >
             <chart />
         </div>
-        <div class="sm:w-5/12 w-full">
+        <div
+            class="sm:w-5/12 w-full bg-customBGCards rounded-2xl shadow-2xl p-3"
+        >
             <pie />
         </div>
     </div>
@@ -79,7 +81,8 @@ export default {
                 {
                     title: "المدارس",
                     img: "../src/assets/Logo/schools.png",
-                    numbers: null,
+                    numbers: 0,
+                    targetNumber: null,
                 },
                 {
                     title: "الطلاب",
@@ -107,6 +110,8 @@ export default {
                     numbers: 20,
                 },
             ],
+            countingInterval: null,
+            countingSpeed: 500,
         };
     },
     mounted() {
@@ -131,9 +136,24 @@ export default {
         DisplayDashboardNumbers() {
             this.data.forEach((item) => {
                 if (item.title === "المدارس") {
-                    item.numbers = this.schools.length;
+                    item.targetNumber = this.schools.length;
+                    this.updateNumber(item);
                 }
             });
+        },
+        updateNumber(item) {
+            if (this.countingInterval) clearInterval(this.countingInterval);
+            const step = Math.ceil(
+                item.targetNumber / (this.countingSpeed / 100)
+            );
+            this.countingInterval = setInterval(() => {
+                if (item.numbers < item.targetNumber) {
+                    item.numbers += step;
+                } else {
+                    clearInterval(this.countingInterval);
+                    item.numbers = item.targetNumber;
+                }
+            }, 100);
         },
     },
 };

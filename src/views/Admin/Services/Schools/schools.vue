@@ -25,7 +25,7 @@
         ></FilterComponent>
         <div class="relative">
             <table_Component
-                :items="schools" 
+                :items="filtered_Array" 
                 :editRoute="'/Admin/Schools/updateSchool'"
                 :infoRoute="'/Admin/Schools/InfoSchool'"
                 :fetching="fetchSchoolsStatus"
@@ -57,7 +57,8 @@ export default {
     },
     created() {
         this.fetchData();
-        // console.log(this.schools);
+
+        console.log(this.fetchSchoolsStatus);
     },
     methods: {
         ...mapActions(["fetchSchools", "RemoveSchool"]),

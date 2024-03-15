@@ -9,6 +9,7 @@ export default {
       schools: [],
       addSchoolStatus: 'idle',
       fetchSchoolsStatus: 'idle',
+      TotalSchool:null
     };
   },
   mutations,
