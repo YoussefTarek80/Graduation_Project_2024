@@ -28,7 +28,7 @@ export default {
                         {
                             label: "عدد الشكاوي في الشهر",
                             data: [65, 59, 80, 81, 56, 55, 40], 
-                            borderColor: "rgba(92,44,126)",
+                            borderColor: "rgba(92,44,126,0.7)",
                             borderWidth: 2,
                             fill: true,
                         },

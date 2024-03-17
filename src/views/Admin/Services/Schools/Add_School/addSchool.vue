@@ -9,9 +9,8 @@
                 ></i>
             </div>
         </BaseTeleport>
-
         <section
-            class="m-6 sm:m-16"
+            class="m-6 sm:m-16 z-50"
             data-aos="fade-up"
             data-aos-duration="1000"
         >
@@ -22,7 +21,7 @@
                 ></i>
             </div>
             <div
-                class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full mx-auto"
+                class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full mx-auto school "
             >
                 <div class="my-5">
                     <span class="text-2xl">بيانات المدرسة</span>
@@ -228,6 +227,7 @@
                             id="in11"
                             v-model="Manger_Phone"
                             @input="validInputs"
+                            :class="{ error: checkPhone }"
                         />
                     </div>
                     <div class="flex flex-col">
@@ -236,10 +236,11 @@
                             <span class="text-red-600">*</span></label
                         >
                         <input
-                            type="text"
+                            type="email"
                             id="in12"
                             v-model="Manger_Email"
                             @input="validInputs"
+                            :class="{ error: checkEmail }"
                         />
                     </div>
 
@@ -298,9 +299,10 @@ export default {
             Manger_Address: "",
             close: true,
             success: false,
-            falied: false,
             messagesError: [],
             countries: [],
+            checkPhone: false,
+            checkEmail: false,
         };
     },
     mounted() {
@@ -352,7 +354,29 @@ export default {
             this.Manger_Email = "";
             this.Manger_Address = "";
         },
+        EmailRegex() {
+            if (
+                this.Manger_Email.trim() !== "" &&
+                !/^\S+@\S+\.\S+$/.test(this.Manger_Email)
+            ) {
+                this.checkEmail = true;
+            } else {
+                this.checkEmail = false;
+            }
+        },
+        PhoneRegex() {
+            if (
+                this.Manger_Phone.trim() !== "" &&
+                this.Manger_Phone.length !== 11
+            ) {
+                this.checkPhone = true;
+            } else {
+                this.checkPhone = false;
+            }
+        },
         validInputs() {
+            this.EmailRegex();
+            this.PhoneRegex();
             if (
                 this.name.trim() === "" ||
                 this.country === "" ||
@@ -364,7 +388,9 @@ export default {
                 this.Manger_Name.trim() === "" ||
                 this.Manger_Phone.trim() === "" ||
                 this.Manger_Email.trim() === "" ||
-                this.Manger_Address.trim() === ""
+                this.Manger_Address.trim() === "" ||
+                this.checkPhone === true ||
+                this.checkEmail === true
             ) {
                 this.close = true;
             } else {
@@ -386,12 +412,9 @@ export default {
                 setTimeout(() => {
                     this.success = false;
                     this.clear();
+                    this.close = true;
                 }, 2000);
             } catch (err) {
-                this.falied = true;
-                setTimeout(() => {
-                    this.falied = false;
-                }, 2000);
                 console.log(err.response.data.data);
                 this.messagesError = Object.values(
                     err.response.data.data

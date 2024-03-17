@@ -3,10 +3,6 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: "/",
-            redirect: "/School/Login",
-        },
-        {
             path: "/School/Login",
             component: () => import("../../views/School/Auth/Login/login.vue"),
             meta: { title: "Login" },
@@ -26,7 +22,7 @@ const router = createRouter({
             meta: {
                 title: "ManagerProfile",
                 requiresAuth: true,
-                roles: ["Manager"],
+                roles: ["ManagerProfile"],
             },
         },
         {
@@ -39,12 +35,67 @@ const router = createRouter({
             },
         },
         {
+            path: "/School/Services/Students/InfoStudent/:id",
+            component: () => import("../../views/School/Services/Students/Info_Student/InfoStudent.vue"),
+            meta: {
+                title: "SchoolStudentInfo",
+                requiresAuth: true,
+                props: true,
+                roles: ["SchoolStudenInfo"],
+            },
+        },
+        {
             path: "/School/Teachers",
-            component: () => import("../../views/School/Profile/profile.vue"),
+            component: () => import("../../views/School/Services/Teachers/Teachers.vue"),
             meta: {
                 title: "SchoolTeachers",
                 requiresAuth: true,
                 roles: ["SchoolTeachers"],
+            },
+        },
+        {
+            path: "/School/Services/Requests",
+            component: () => import("../../views/School/Services/Requests/Requests.vue"),
+            meta: {
+                title: "SchoolRequests",
+                requiresAuth: true,
+                roles: ["SchoolRequests"],
+            },
+        },
+        {
+            path: "/School/Services/Subjects",
+            component: () => import("../../views/School/Services/Subjects/Subjects.vue"),
+            meta: {
+                title: "SchoolSubjects",
+                requiresAuth: true,
+                roles: ["SchoolSubjects"],
+            },
+        },
+        {
+            path: "/School/Services/Events",
+            component: () => import("../../views/School/Services/Events/Events.vue"),
+            meta: {
+                title: "SchoolEvents",
+                requiresAuth: true,
+                roles: ["SchoolEvents"],
+            },
+        },
+        {
+            path: "/School/Services/Complaints",
+            component: () => import("../../views/School/Services/Complaints/Complaints.vue"),
+            meta: {
+                title: "SchoolComplaints",
+                requiresAuth: true,
+                roles: ["SchoolComplaints"],
+            },
+        },
+        {
+            path: "/School/Services/Controllers",
+            component: () => import("../../views/School/Services/Controllers/Controllers.vue"),
+            meta: {
+                title: "SchoolControllers",
+                requiresAuth: true,
+                roles: ["SchoolControllers"],
             },
         },
     ],

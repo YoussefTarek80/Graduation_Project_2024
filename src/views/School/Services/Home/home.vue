@@ -4,13 +4,16 @@
         data-aos-duration="1000">
         <div class="sm:col-span-1 col-span-2 bg-customBGCards rounded-2xl shadow-2xl p-3">
             <div class="p-4 flex flex-row-reverse items-center justify-center space-x-6 rounded-2xl py-5">
-                <!-- <div>
-                    <img :src="GetUser.image" class="sm:w-60 rounded-full border-2 border-customPurple p-1" alt="" />
+                <div>
+                    <img src="../../../../assets/Logo/personal-img-1.jpg"
+                        class="sm:w-60 rounded-full border-2 border-customPurple p-1" alt="" />
+                    <!-- <img :src="GetUser.image" class="sm:w-60 rounded-full border-2 border-customPurple p-1" alt="" /> -->
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-2xl">{{ GetUser.name }} </span>
-                    <span class="text-customDarkPurple">مسئول ادارة</span>
-                </div> -->
+                    <span class="text-2xl">مجدي خالد </span>
+                    <!-- <span class="text-2xl">{{ GetUser.name }} </span> -->
+                    <span class="text-customDarkPurple">مدير المدرسة</span>
+                </div>
             </div>
             <button @click="this.$router.push('/Manager/Profile')"
                 class="border-2 border-dashed border-customDarkPurple p-6 my-5 rounded-full block m-auto hover:bg-customDarkPurple text-customDarkPurple hover:text-lime-50 transition-all hover:border-solid w-full">
@@ -54,13 +57,14 @@ import Pie from "../../../../Charts/PieChart.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
     components: { chart, Pie },
+    inject: ['students'],
     data() {
         return {
             data: [
                 {
                     title: "الطلاب",
                     img: "../src/assets/Logo/students.png",
-                    numbers: 20,
+                    numbers: null,
                 },
                 {
                     title: "المناسبات",
@@ -90,8 +94,12 @@ export default {
     computed: {
     },
     created() {
+        this.GetStudentsNo();
     },
     methods: {
+        GetStudentsNo() {
+            this.data[0].numbers = this.students.length;
+        },
         // ...mapActions(["fetchSchools", "FetchUser"]),
         // async fetchData() {
         //     try {

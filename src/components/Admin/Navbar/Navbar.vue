@@ -20,7 +20,7 @@
                     <span>{{GetUser.name }}</span>
                     <span class="text-customYellow">ادمن</span>
                 </div>
-                <div class="relative">
+                <div class="relative" >
                     <i
                         class="fa-thin fa-bell sm:text-4xl text-2xl"
                         style="color: #ffffff"
@@ -77,12 +77,12 @@
                             >
                         </li>
                         <li key="school3">
-                            <router-link to="/schools/school3"
+                            <router-link to="/Admin/Teacher"
                                 >قائمة المدرسين</router-link
                             >
                         </li>
                         <li key="school4">
-                            <router-link to="/schools/school4"
+                            <router-link to="/Admin/Request"
                                 >قائمة الطلبات</router-link
                             >
                         </li>
@@ -99,31 +99,21 @@
                     ></i>
                     <transition-group name="fade">
                         <ul class="dropdown">
-                            <li key="school1">
+                            <li key="1">
                                 <router-link to="/Admin/Schools"
-                                    >قائمة المدارس</router-link
+                                    >قائمة السنين الدراسية</router-link
                                 >
                             </li>
-                            <li key="school2">
+                            <li key="2">
                                 <router-link to="/schools/school2"
-                                    >قائمة الطلاب</router-link
-                                >
-                            </li>
-                            <li key="school3">
-                                <router-link to="/schools/school3"
-                                    >قائمة المدرسين</router-link
-                                >
-                            </li>
-                            <li key="school4">
-                                <router-link to="/schools/school4"
-                                    >قائمة الطلبات</router-link
+                                    >المناهج الدراسية</router-link
                                 >
                             </li>
                         </ul>
                     </transition-group>
                 </li>
                 <li class="sm:p-10 p-4 sm:text-xl text-sm">
-                    <router-link to="/">المناسبات</router-link>
+                    <router-link to="/Admin/Event">المناسبات</router-link>
                 </li>
                 <li class="sm:p-10 p-4 sm:text-xl text-sm">
                     <router-link to="/">التقارير</router-link>
@@ -136,7 +126,6 @@
     </header>
 </template>
 <script>
-import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
 export default {
     data() {

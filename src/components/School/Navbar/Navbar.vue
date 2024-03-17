@@ -13,7 +13,7 @@
                 <div class="flex flex-col text-center sm:text-xl text-xs">
                     <!-- <span>{{ GetUser.name }}</span> -->
                     <span>مجدي خالد </span>
-                    <span class="text-customYellow">ادمن</span>
+                    <span class="text-customYellow">مدير المدرسة</span>
                 </div>
                 <div class="relative">
                     <i class="fa-thin fa-bell sm:text-4xl text-2xl" style="color: #ffffff"></i>
@@ -65,25 +65,25 @@
                     <transition-group name="fade">
                         <ul class="dropdown">
                             <li key="school1">
-                                <router-link to="/schools/school2">المواد</router-link>
+                                <router-link to="/School/Services/Subjects">المواد</router-link>
                             </li>
                             <li key="school2">
-                                <router-link to="/schools/school3">المدرسين</router-link>
+                                <router-link to="/school/Teachers">المدرسين</router-link>
                             </li>
                         </ul>
                     </transition-group>
                 </li>
                 <li class="sm:p-10 p-4 sm:text-xl text-sm">
-                    <router-link to="/">المناسبات</router-link>
+                    <router-link to="/School/Services/Events">المناسبات</router-link>
                 </li>
                 <li class="sm:p-10 p-4 sm:text-xl text-sm">
-                    <router-link to="/">الطلبات</router-link>
+                    <router-link to="/School/Services/Requests">الطلبات</router-link>
                 </li>
                 <li class="sm:p-10 p-4 sm:text-xl text-sm">
-                    <router-link to="/">المسؤولين</router-link>
+                    <router-link to="/School/Services/Controllers">المسؤولين</router-link>
                 </li>
                 <li class="sm:p-10 p-4 sm:text-xl text-sm">
-                    <router-link to="/">الشكاوي</router-link>
+                    <router-link to="/School/Services/Complaints">الشكاوي</router-link>
                 </li>
             </ul>
         </nav>

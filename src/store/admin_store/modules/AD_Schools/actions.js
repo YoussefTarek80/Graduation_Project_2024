@@ -5,7 +5,7 @@ export const actions = {
         try {
             const token = localStorage.getItem("token");
             const data = { name, phone, address,manager_name,manager_address,manager_phone,manager_email };
-            await axios.post("http://127.0.0.1:8000/api/addSchool", data, {
+            await axios.post("http://192.168.1.18:8000/api/addSchool", data, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -23,7 +23,7 @@ export const actions = {
         try {
             const token = localStorage.getItem("token");
             const response = await axios.get(
-                "http://127.0.0.1:8000/api/showSchool",
+                "http://192.168.1.18:8000/api/showSchool",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ export const actions = {
             const token = localStorage.getItem("token");
             console.log(id);
             await axios.post(
-                `http://127.0.0.1:8000/api/deleteSchool/${id}`,
+                `http://192.168.1.18:8000/api/deleteSchool/${id}`,
                 {},
                 {
                     headers: {
@@ -68,7 +68,7 @@ export const actions = {
             formData.append("manager_phone", manager_phone);
             formData.append("manager_email", manager_email);
             await axios.post(
-                `http://127.0.0.1:8000/api/updateSchool/${id}`,
+                `http://192.168.1.18:8000/api/updateSchool/${id}`,
                 formData,
                 {
                     headers: {

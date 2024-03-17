@@ -126,10 +126,8 @@
             </form>
         </div>
     </section>
-
     <Footer_Component></Footer_Component>
 </template>
-
 <script>
 import { mapGetters, mapActions } from "vuex";
 import axios from "axios";
@@ -188,7 +186,7 @@ export default {
                 formData.append("image", this.file);
                 formData.append("address", this.address);
                 await axios.post(
-                    "http://127.0.0.1:8000/api/updateProfile",
+                    "http://192.168.1.18:8000/api/updateProfile",
                     formData,
                     {
                         headers: {
@@ -224,7 +222,7 @@ export default {
             formData.append("password_confirmation", this.NewPasswordConf);
             try {
                 await axios.post(
-                    "http://127.0.0.1:8000/api/updatePassword",
+                    "http://192.168.1.18:8000/api/updatePassword",
                     formData,
                     {
                         headers: {
@@ -252,7 +250,6 @@ export default {
     },
 };
 </script>
-
 <style scoped>
 @import url("./profile.css");
 @import url("../../../UI/CustomsCss/Custombutton.css");

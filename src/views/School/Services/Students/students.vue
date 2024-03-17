@@ -13,18 +13,7 @@
                 <laoding_Search :show="search_status" class="absolute left-5 top-0"></laoding_Search>
             </div>
             <div class="grid sm:grid-cols-2 grid-cols-1 w-full gap-6">
-                <div class="custom-select relative">
-                    <select v-model="selectedSchool" @change="selectSchool"
-                        class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple">
-                        <option disabled selected>اختيار مدرسة</option>
-                        <option value="ascending">السعيدية</option>
-                        <option value="descending">احمد زويل</option>
-                    </select>
-                    <div class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none">
-                        <i class="fa-light fa-school mx-4"></i>
-                    </div>
-                </div>
-                <div class="custom-select relative">
+                <div class="custom-select relative ">
                     <select v-model="selectedSortOption" @change="handleSort"
                         class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple">
                         <option disabled selected>ترتيب</option>
@@ -38,39 +27,24 @@
             </div>
         </div>
         <div class="relative">
-            <table_Component :items="filtered_Array" :infoRoute="'/School/Services/Students/InfoStudent'"></table_Component>
+            <table_Component :items="filtered_Array" :infoRoute="'/School/Services/Students/InfoStudent'">
+            </table_Component>
         </div>
     </section>
 
     <Footer_Component></Footer_Component>
 </template>
 <script>
-import table_Component from "../../../../UI/Tables/StudentTable/ScTable.vue";
+import table_Component from "../../../../UI/Tables/StudentTable/Table.vue";
 
 export default {
     components: { table_Component },
+    inject: ['students'],
     data() {
         return {
             selectedSortOption: "ترتيب",
-            selectedSchool: "اختيار مدرسة",
             search_words: "",
             search_status: false,
-            Students: [
-                {
-                    id: 1,
-                    schoolname: "السعيدية",
-                    schoolAdminstration: "الجيزة",
-                    name: "احمد حسام",
-                    nationalID: "024144657498798354",
-                },
-                {
-                    id: 2,
-                    schoolname: "الهرم",
-                    schoolAdminstration: "الجيزة",
-                    name: " كريم طارق",
-                    nationalID: "1",
-                },
-            ],
             schools: [
                 {
                     id: 1,
@@ -119,7 +93,7 @@ export default {
         },
     },
     created() {
-        this.filtered_Array = this.Students;
+        this.filtered_Array = this.students;
     },
     methods: {
         selectSchool() {

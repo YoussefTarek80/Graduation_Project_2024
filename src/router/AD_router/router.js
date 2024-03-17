@@ -2,12 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        // {
-        //     path: "/",
-        //     redirect: "/Login",
-        // },
         {
-            path: "/Login",
+            path: "/Admin/Login",
             component: () => import("../../views/Admin/Auth/Login/login.vue"),
             meta: { title: "Login" },
         },
@@ -104,6 +100,39 @@ const router = createRouter({
             path: "/Admin/Students/InfoStudent/:index",
             component: () =>
                 import("../../views/Admin/Services/Students/Info_Student/InfoStudent.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
+        {
+            path: "/Admin/Teacher",
+            component: () =>
+                import("../../views/Admin/Services/Teachers/teacher.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
+        {
+            path: "/Admin/Request",
+            component: () =>
+                import("../../views/Admin/Services/Requests/request.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
+        {
+            path: "/Admin/Event",
+            component: () =>
+                import("../../views/Admin/Services/Events/event.vue"),
             meta: {
                 title: "AdminDashboard",
                 requiresAuth: true,
