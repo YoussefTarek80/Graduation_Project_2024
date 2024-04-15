@@ -9,11 +9,11 @@
                 ></i>
             </div>
             <button
-                class="sm:w-80 flex justify-around items-center"
+                class="sm:w-80 flex justify-around items-center "
                 @click="this.$router.push('/Admin/Schools/addSchool')"
             >
-                <span class="sm:text-xl text-lg">اضافة مدرسة جديدة</span>
-                <i class="fa-solid fa-plus"></i>
+                <span class="sm:text-xl text-sm ">اضافة مدرسة جديدة</span>
+                <i class="fa-solid fa-plus p-1"></i>
             </button>
         </div>
         <FilterComponent

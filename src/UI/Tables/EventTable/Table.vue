@@ -36,10 +36,10 @@
           />
           <div class="bg-white" v-if="showInfo === index">
             <ul
-                class="absolute rounded-xl text-customDarkPurple sm:flex sm:flex-col sm:top-10 sm:left-32 left-10 z-50 bg-white"
+                class="absolute rounded-xl text-customDarkPurple sm:flex sm:flex-col sm:top-5 sm:left-32 left-20 z-50 bg-white"
             >
               <li
-                  class="py-2 px-6 border-2 border-customSearch hover:bg-customBGCards cursor-pointer"
+                  class="py-1 px-6 border-2 border-customSearch hover:bg-customBGCards cursor-pointer"
               >
                 <router-link :to="infoRoute(item.id)"
                 >التفاصيل
@@ -61,30 +61,30 @@
                 حذف
               </li>
             </ul>
-          </div>
-          <BaseTeleport :show="confirm">
-            <div class="flex flex-col">
+            <BaseTeleport :show="confirm">
+              <div class="flex flex-col">
                                 <span class="text-red-700 text-4xl">
                                     تاكيد الحذف
                                 </span>
-              <div
-                  class="flex items-center justify-around mt-10"
-              >
-                <button
-                    class="w-96"
-                    @click="handleDeleteSchool(item.id)"
+                <div
+                    class="flex items-center justify-around mt-10"
                 >
-                  تاكيد
-                </button>
-                <button
-                    class="w-52"
-                    @click="confirm = false"
-                >
-                  الغاء
-                </button>
+                  <button
+                      class="w-96"
+                      @click="handleDeleteSchool(item.id)"
+                  >
+                    تاكيد
+                  </button>
+                  <button
+                      class="w-52"
+                      @click="confirm = false"
+                  >
+                    الغاء
+                  </button>
+                </div>
               </div>
-            </div>
-          </BaseTeleport>
+            </BaseTeleport>
+          </div>
         </td>
       </tr>
       </tbody>
@@ -146,6 +146,22 @@ export default {
         this.showInfo = index;
       }
     },
+    handleDeleteSchool(id) {
+      this.$emit("delete-event", id);
+      this.showInfo = null;
+      this.confirm = false;
+    },
+    closeActionWindow(event) {
+      if (!this.$refs.tableBody.contains(event.target)) {
+        this.showInfo = null;
+      }
+    },
+  },
+  mounted() {
+    document.body.addEventListener("click", this.closeActionWindow);
+  },
+  beforeDestroy() {
+    document.body.removeEventListener("click", this.closeActionWindow);
   },
 };
 </script>

@@ -42,7 +42,7 @@
                         />
                         <div class="bg-white" v-if="showInfo === index">
                             <ul
-                                class="absolute rounded-xl text-customDarkPurple sm:flex sm:flex-col sm:top-10 sm:left-32 left-10 z-50 bg-white"
+                                class="absolute rounded-xl text-customDarkPurple sm:flex sm:flex-col sm:top-10 sm:left-32 left-20 z-50 bg-white"
                             >
                                 <li
                                     class="py-2 px-6 border-2 border-customSearch hover:bg-customBGCards cursor-pointer"

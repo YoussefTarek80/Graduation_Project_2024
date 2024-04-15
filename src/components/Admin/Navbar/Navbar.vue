@@ -20,14 +20,14 @@
                     <span>{{GetUser.name }}</span>
                     <span class="text-customYellow">ادمن</span>
                 </div>
-                <div class="relative" >
+                <div class="relative cursor-pointer relative" @click="this.$router.push('/Admin/Notifications')">
                     <i
                         class="fa-thin fa-bell sm:text-4xl text-2xl"
                         style="color: #ffffff"
                     ></i>
-                    <i
-                        class="fa-solid fa-circle text-customYellow absolute right-0 sm:text-xl text-sm sm:bottom-6 bottom-4"
-                    ></i>
+                  <i class=" bg-customYellow text-black text-center rounded-full w-7 h-7 p-1 absolute -right-2 sm:text-xl text-sm sm:bottom-6 bottom-4">
+                    1
+                  </i>
                 </div>
                 <transition name="bounce">
                     <div
@@ -127,11 +127,16 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
+import Notify from '../../../views/Admin/Notifications/Notify.vue'
 export default {
+    components:{
+      Notify
+    },
     data() {
         return {
             userLogout: false,
             loading: false,
+            Notification:false
         };
     },
     computed: {
@@ -150,6 +155,9 @@ export default {
                 this.$router.push("/login");
             }, 3000);
         },
+      showNotify() {
+          this.Notification=!this.Notification
+      }
     },
 };
 </script>

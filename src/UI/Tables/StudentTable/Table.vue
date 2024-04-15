@@ -87,7 +87,18 @@ export default {
                 this.showInfo = index;
             }
         },
+        closeActionWindow(event) {
+          if (!this.$refs.tableBody.contains(event.target)) {
+            this.showInfo = null;
+          }
+        },
     },
+  mounted() {
+    document.body.addEventListener("click", this.closeActionWindow);
+  },
+  beforeDestroy() {
+    document.body.removeEventListener("click", this.closeActionWindow);
+  },
 };
 </script>
 <style scoped>

@@ -35,5 +35,42 @@ export const actions = {
         } catch (err) {
             console.log(err);
         }
+    },
+    async RemoveEvent({ commit,dispatch  }, id) {
+        try {
+            const token = localStorage.getItem("token");
+            console.log(id);
+            await axios.post(
+                `http://192.168.1.18:8000/api/deleteEvent/${id}`,
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            await dispatch('FetchEvents');
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async UpdateEvent({commit},{updateData, id}){
+        try{
+            const token=localStorage.getItem("token");
+            await axios.post(
+                `http://192.168.1.18:8000/api/updateEvent/${id}`,
+                updateData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            console.log("updated Succeffuly")
+        }
+        catch(err){
+            console.log(err)
+        }
     }
+
 };

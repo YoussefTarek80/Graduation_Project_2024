@@ -1,6 +1,5 @@
 <template>
     <Navbar_Component></Navbar_Component>
-
     <section
         v-if="item"
         class="m-10"
