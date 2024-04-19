@@ -1,7 +1,0 @@
-thead {
-    background: linear-gradient(to left, #e546e8, #4d394d);
-}
-.active {
-    filter: drop-shadow(5px 5px 2px #b00eb3);
-    transition: 0.3s ease;
-}
