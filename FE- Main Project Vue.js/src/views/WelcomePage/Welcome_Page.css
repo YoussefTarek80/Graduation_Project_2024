@@ -1,0 +1,22 @@
+section {
+    background: url("../../assets/AdminLogin/BG.png");
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: "Kufam", sans-serif;
+}
+.role {
+    background: linear-gradient(to top, #ffffff, #ffffff);
+    transition: .5s ease-in-out;
+    cursor:pointer
+}
+.role:hover{
+    transform: scale(1.1);
+}
+.gradient-text {
+    background-clip: text;
+    -webkit-background-clip: text; /* For Safari/Chrome */
+    color: transparent;
+    background-image: linear-gradient(to right, #cb3acd, #680568);
+}

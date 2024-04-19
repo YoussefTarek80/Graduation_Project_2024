@@ -1,0 +1,31 @@
+input {
+    border-radius: 0.75rem;
+    padding: 0.84rem;
+    margin-top: 0.75rem;
+    font-size: 20px;
+    border: 1px solid rgb(210, 208, 208);
+    outline: none;
+}
+label {
+    font-size: 20px;
+}
+.custom-select {
+    position: relative;
+}
+.custom-select select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-radius: 0.75rem;
+    padding: 15px;
+    margin: 10px;
+    font-size: 20px;
+    border: 1px solid rgb(210, 208, 208);
+}
+
+select option {
+    font-size: 14px; 
+}
+.error{
+    border:1px solid red
+}

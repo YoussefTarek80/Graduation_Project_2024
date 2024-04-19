@@ -1,6 +1,8 @@
 <template>
     <div>
+        <sc-navbar-comp></sc-navbar-Comp>
 
+        <Footer_Component></Footer_Component>
     </div>
 </template>
 <script>
@@ -12,5 +14,4 @@ export default {
     }
 }
 </script>
-<style scoped>
-</style>
+<style scoped></style>
