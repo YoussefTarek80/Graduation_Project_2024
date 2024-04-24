@@ -6,7 +6,8 @@
         <span class="sm:text-3xl text-2xl">قائمة الطلبات </span>
         <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink"></i>
       </div>
-      <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="requests" :nationalIDS="true">
+      <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="this.GetRequests"
+        :nationalIDS="true">
       </FilterComponent>
       <div class="relative">
         <table_Component :items="filtered_Array" :infoRoute="'/School/Services/Requests/Request'">
@@ -18,12 +19,12 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import table_Component from "../../../../UI/Tables/RequestTable/Table.vue";
 import FilterComponent from "../../../../components/School/Filtration/Filter.vue";
 
 export default {
   components: { table_Component, FilterComponent },
-  inject: ['requests'],
   data() {
     return {
       search_words: "",
@@ -31,10 +32,25 @@ export default {
       filtered_Array: [],
     }
   },
+  computed: {
+    ...mapGetters(['GetRequests'])
+  },
   created() {
-    this.filtered_Array = this.requests;
+    this.fetchData();
+    this.filtered_Array = this.GetRequests;
   },
   methods: {
+    ...mapActions(['FetchRequests']),
+    async fetchData() {
+      try {
+        await this.FetchRequests();
+        this.filtered_Array = this.GetRequests;
+        console.log(this.filtered_Array);
+      }
+      catch (error) {
+        throw '( fetching Requests Error: ' + error + ')';
+      }
+    },
     handleFilter(filteredArray) {
       this.filtered_Array = filteredArray;
     },

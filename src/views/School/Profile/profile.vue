@@ -12,7 +12,6 @@
                 <i class="fa-sharp fa-solid fa-badge-check text-red-700 text-7xl m-3"></i>
             </div>
         </BaseTeleport>
-
         <img src="../../../assets/Logo/head-bg.png" class="sm:h-full h-36" alt="" />
         <button class="float-left sm:m-10 m-2 absolute top-0 left-0 sm:w-96 w-32 flex items-center justify-around"
             @click="this.$router.push('/School/Home')">
@@ -36,8 +35,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
                     <div class="flex flex-col">
                         <label for="in1">اسم مدير المدرسة</label>
-                        <input v-model="name" disabled id="email" placeholder=" العنوان " type="text"
-                            class="item-data" />
+                        <input v-model="name" id="email" placeholder=" العنوان " type="text" class="item-data" />
                     </div>
                     <div class="flex flex-col">
                         <label for="in1">البريد الالكتروني</label>
@@ -58,12 +56,37 @@
                     </div>
                 </div>
                 <div class="m-5 flex items-center justify-end">
-                    <button class="w-60">حفظ</button>
+                    <button @click="submit" class="w-60">حفظ</button>
                 </div>
             </form>
         </div>
 
         <div class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full">
+            <div class="my-5">
+                <span class="text-2xl">بيانات المدرسة</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
+                <div class="flex flex-col">
+                    <label for="in1">اسم المدرسة</label>
+                    <input disabled v-model="school_name" id="email" placeholder=" العنوان " type="text"
+                        class="item-data" />
+                </div>
+                <div class="flex flex-col">
+                    <label for="in2">الدولة</label>
+                    <input disabled value="مصر" id="email" placeholder="العنوان" type="text" class="item-data" />
+                </div>
+                <div class="flex flex-col">
+                    <label for="in3">المحافظة</label>
+                    <input disabled v-model="adminstartion_state" id="email" placeholder="العنوان" type="text"
+                        class="item-data" />
+                </div>
+                <div class="flex flex-col">
+                    <label for="in3">العنوان</label>
+                    <input disabled v-model="school_address" id="email" placeholder="العنوان" type="text"
+                        class="item-data" />
+                </div>
+            </div>
+
             <div class="my-5">
                 <span class="text-2xl">بيانات الادارة (للمسئول)</span>
             </div>
@@ -71,31 +94,27 @@
                 <div class="input_Div grid grid-cols-1 sm:grid-cols-4 gap-6">
                     <div class="flex flex-col">
                         <label for="in1">اسم الادارة</label>
-                        <input disabled value="" id="email" placeholder=" العنوان " type="text" class="item-data" />
-                        <!-- <input disabled :value="GetUser.adminstration_name" id="email" placeholder=" العنوان "
-                            type="text" class="item-data" /> -->
+                        <input disabled v-model="adminstartion_name" id="email" placeholder=" اسم الادارة " type="text"
+                            class="item-data" />
                     </div>
                     <div class="flex flex-col">
                         <label for="in2">الدولة</label>
-                        <input disabled value="مصر" id="email" placeholder=" العنوان " type="text" class="item-data" />
+                        <input disabled value="مصر" id="email" placeholder=" دولة " type="text" class="item-data" />
                     </div>
                     <div class="flex flex-col">
                         <label for="in3">عنوان الادارة</label>
-                        <input disabled value="" id="email" placeholder=" العنوان " type="text" class="item-data" />
-                        <!-- <input disabled :value="GetUser.adminstration_address" id="email" placeholder=" العنوان "
-                            type="text" class="item-data" /> -->
+                        <input disabled v-model="adminstartion_address" id="email" placeholder=" العنوان " type="text"
+                            class="item-data" />
                     </div>
                     <div class="flex flex-col">
                         <label for="in4">المحافظة</label>
-                        <input disabled value="" id="email" placeholder=" العنوان " type="text" class="item-data" />
-                        <!-- <input disabled :value="GetUser.adminstration_State" id="email" placeholder=" العنوان "
-                            type="text" class="item-data" /> -->
+                        <input disabled v-model="adminstartion_state" id="email" placeholder=" العنوان " type="text"
+                            class="item-data" />
                     </div>
                     <div class="flex flex-col">
                         <label for="in5">رقم هاتف الادارة</label>
-                        <!-- <input disabled :value="GetUser.adminstration_Phone" id="email" placeholder=" العنوان "
-                            type="text" class="item-data" /> -->
-                        <input disabled value="" id="email" placeholder=" العنوان " type="text" class="item-data" />
+                        <input disabled v-model="adminstartion_phone" id="email" placeholder=" العنوان " type="text"
+                            class="item-data" />
                     </div>
                 </div>
             </form>
@@ -125,12 +144,11 @@
                         class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none" />
                 </div>
                 <div class="m-5 flex items-center justify-end">
-                    <button class="w-60">تغيير كلمة المرور</button>
+                    <button @click="submit" class="w-60">تغيير كلمة المرور</button>
                 </div>
             </form>
         </div>
     </section>
-
     <Footer_Component></Footer_Component>
 </template>
 
@@ -141,11 +159,6 @@ export default {
     data() {
         return {
             imageURL: null,
-            profileArray: [],
-            name: "",
-            email: "",
-            phone: "",
-            address: "",
             file: null,
             saved: false,
             success: false,
@@ -159,100 +172,105 @@ export default {
         ...mapGetters(["GetUser2"]),
     },
     mounted() {
+        console.log(this.imageURL);
+        this.initData;
         this.FetchData();
     },
     methods: {
-        ...mapActions(["FetchUser"]),
+        ...mapActions(["FetchUser2"]),
         handleFile(event) {
             this.file = event.target.files[0];
             this.imageURL = URL.createObjectURL(this.file);
         },
         initData() {
-            this.name = this.GetUser.name;
-            this.email = this.GetUser.email;
-            this.phone = this.GetUser.phone;
-            this.imageURL = this.GetUser.image;
-            this.address = this.GetUser.address;
+            this.name = this.GetUser2.name;
+            this.email = this.GetUser2.email;
+            this.phone = this.GetUser2.phone;
+            this.imageURL = this.GetUser2.school_image;
+            this.address = this.GetUser2.address;
+            this.school_name = this.GetUser2.school_name;
+            this.school_address = this.GetUser2.school_address;
+            this.adminstartion_name = this.GetUser2.adminstartion_name;
+            this.adminstartion_state = this.GetUser2.adminstartion_state;
+            this.adminstartion_phone = this.GetUser2.adminstartion_phone;
+            this.adminstartion_address = this.GetUser2.adminstartion_address;
         },
-        // async FetchData() {
-        //     try {
-        //         await this.FetchUser();
-        //         this.initData();
-        //     } catch (error) {
-        //         console.error("Error fetching profile info:", error);
-        //     }
-        // },
-        // async update() {
-        //     try {
-        //         const token = localStorage.getItem("token");
-        //         const formData = new FormData();
-        //         formData.append("name", this.name);
-        //         formData.append("email", this.email);
-        //         formData.append("phone", this.phone);
-        //         formData.append("image", this.file);
-        //         formData.append("address", this.address);
-        //         await axios.post(
-        //             "http://127.0.0.1:8000/api/updateProfile",
-        //             formData,
-        //             {
-        //                 headers: {
-        //                     Authorization: `Bearer ${token}`,
-        //                     "Content-Type": "multipart/form-data",
-        //                 },
-        //             }
-        //         );
-
-        //         this.success = true;
-        //         setTimeout(() => {
-        //             this.success = false;
-        //         }, 1000);
-        //         console.log("added succc");
-        //     } catch (error) {
-        //         console.error("Error fetching profile info:", error);
-        //         this.failed = true;
-        //         setTimeout(() => {
-        //             this.failed = false;
-        //         }, 1000);
-        //     }
-        // },
+        async FetchData() {
+            try {
+                await this.FetchUser2();
+                this.initData();
+            } catch (error) {
+                console.error("Error fetching profile info:", error);
+            }
+        },
+        async update() {
+            try {
+                const token = localStorage.getItem("token");
+                const updatedData = new FormData();
+                updatedData.append("manager_name", this.name);
+                updatedData.append("manager_phone", this.phone);
+                updatedData.append("manager_address", this.address);
+                updatedData.append("image", this.file);
+                await axios.post(
+                    "http://127.0.0.1:8000/api/school/updateProfile",
+                    updatedData,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "multipart/form-data",
+                        },
+                    }
+                );
+                await this.FetchUser2();
+                this.success = true;
+                setTimeout(() => {
+                    this.success = false;
+                }, 1000);
+                console.log("Data Updated successfully");
+            } catch (error) {
+                console.error("Error fetching profile info:", error);
+                this.failed = true;
+                setTimeout(() => {
+                    this.failed = false;
+                }, 1000);
+            }
+        },
+        async updatePassword() {
+            const token = localStorage.getItem("token");
+            const updatedData = new FormData();
+            updatedData.append("current_password", this.OldPassword);
+            updatedData.append("password", this.NewPassword);
+            updatedData.append("password_confirmation", this.NewPasswordConf);
+            try {
+                await axios.post(
+                    "http://127.0.0.1:8000/api/school/updatePassword",
+                    updatedData,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "multipart/form-data",
+                        },
+                    }
+                );
+                this.success = true;
+                setTimeout(() => {
+                    this.success = false;
+                }, 1000);
+                console.log("Password Changed Successfully");
+            } catch (err) {
+                console.log("error");
+                this.failed = true;
+                setTimeout(() => {
+                    this.failed = false;
+                }, 1000);
+            }
+            this.clear();
+        },
         clear() {
             this.OldPassword = "";
             this.NewPassword = "";
             this.NewPasswordConf = "";
         },
-        // async updatePassword() {
-        //     const token = localStorage.getItem("token");
-        //     const formData = new FormData();
-        //     formData.append("current_password", this.OldPassword);
-        //     formData.append("password", this.NewPassword);
-        //     formData.append("password_confirmation", this.NewPasswordConf);
-        //     try {
-        //         await axios.post(
-        //             "http://127.0.0.1:8000/api/updatePassword",
-        //             formData,
-        //             {
-        //                 headers: {
-        //                     Authorization: `Bearer ${token}`,
-        //                     "Content-Type": "multipart/form-data",
-        //                 },
-        //             }
-        //         );
-        //         this.success = true;
-        //         setTimeout(() => {
-        //             this.success = false;
-        //         }, 1000);
-
-        //         console.log("updatedSuccess");
-        //     } catch (err) {
-        //         console.log("error");
-        //         this.failed = true;
-        //         setTimeout(() => {
-        //             this.failed = false;
-        //         }, 1000);
-        //     }
-        //     this.clear();
-
-        // },
     },
 };
 </script>

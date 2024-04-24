@@ -7,12 +7,12 @@
             </div>
             <div class="relative user_Info flex flex-row-reverse items-center justify-center sm:space-x-4 space-x-2">
                 <div class="sm:w-20 w-10 cursor-pointer " @click="userLogout = !userLogout">
-                    <img src="../../../assets/Logo/personal-img-1.jpg" alt=""
+                    <!-- <img :src="GetUser2.imageURL" alt="" class=" rounded-full border-2 border-white p-1" /> -->
+                    <img src="../../../assets/Logo/personal-img-2.jpg" alt=""
                         class=" rounded-full border-2 border-white p-1" />
                 </div>
                 <div class="flex flex-col text-center sm:text-xl text-xs">
-                    <!-- <span>{{ GetUser.name }}</span> -->
-                    <span>مجدي خالد </span>
+                    <span>{{ GetUser2.name }}</span>
                     <span class="text-customYellow">مدير المدرسة</span>
                 </div>
                 <div class="relative">
@@ -56,31 +56,16 @@
                     </ul>
                 </li>
                 <li class="sm:p-10 p-4 sm:text-xl text-sm">
-                    المواد
-                    <i class="fa-sharp fa-solid fa-chevron-down m-3" :class="{
-                    'rotate-180 transition-all duration-500 ease-in-out transform':
-                        hover,
-                }
-                    "></i>
-                    <transition-group name="fade">
-                        <ul class="dropdown">
-                            <li key="school1">
-                                <router-link to="/School/Services/Subjects">المواد</router-link>
-                            </li>
-                            <li key="school2">
-                                <router-link to="/school/Teachers">المدرسين</router-link>
-                            </li>
-                        </ul>
-                    </transition-group>
+                    <router-link to="/School/Services/Requests">الطلبات</router-link>
                 </li>
                 <li class="sm:p-10 p-4 sm:text-xl text-sm">
                     <router-link to="/School/Services/Events">المناسبات</router-link>
                 </li>
                 <li class="sm:p-10 p-4 sm:text-xl text-sm">
-                    <router-link to="/School/Services/Requests">الطلبات</router-link>
+                    <router-link to="/School/Services/Controllers">المسؤولين</router-link>
                 </li>
                 <li class="sm:p-10 p-4 sm:text-xl text-sm">
-                    <router-link to="/School/Services/Controllers">المسؤولين</router-link>
+                    <router-link to="/School/Services/Subjects">المواد</router-link>
                 </li>
                 <li class="sm:p-10 p-4 sm:text-xl text-sm">
                     <router-link to="/School/Services/Complaints">الشكاوي</router-link>

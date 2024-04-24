@@ -26,12 +26,12 @@
             </tbody>
         </table>
     </div>
+    <Pagination :currentPage="currentPage" :totalPages="totalPages" :nextPage="nextPage" :prevPage="prevPage" />
 </template>
 
 <script>
 export default {
     props: ["items", "infoRoute"],
-    inject: ['requests'],
     data() {
         return {
             showInfo: null,

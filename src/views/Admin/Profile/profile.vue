@@ -167,6 +167,7 @@ export default {
             this.phone = this.GetUser.phone;
             this.imageURL = this.GetUser.image;
             this.address = this.GetUser.address;
+            this.adminstration = this.GetUser.adminstration;
         },
         async FetchData() {
             try {
@@ -222,7 +223,7 @@ export default {
             formData.append("password_confirmation", this.NewPasswordConf);
             try {
                 await axios.post(
-                    "http://192.168.1.18:8000/api/updatePassword",
+                    "http://127.0.0.1:8000/api/school/updatePassword",
                     formData,
                     {
                         headers: {

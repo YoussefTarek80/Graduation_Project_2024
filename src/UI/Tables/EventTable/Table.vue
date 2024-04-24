@@ -8,48 +8,68 @@
                 <th class="sm:py-5 sm:px-4 px-7 py-3">اسم المناسبة</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">وقت المناسبة</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">تاريخ المناسبة</th>
+                <th class="sm:py-5 sm:px-4 px-7 py-3">الحالة</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tl-2xl">
                     الاجراء
                 </th>
             </thead>
-            <!-- <tbody class="text-center relative" ref="tableBody">
-                <tr
-                    v-for="(item, index) in paginatedItems"
-                    :key="index"
-                    class="h-20 odd:bg-white even:bg-gray-100"
-                >
-                    <td class="py-2 px-4">
-                        {{ (currentPage - 1) * pageSize + index + 1 }}
-                    </td>
-                    <td class="py-2 px-4">{{ item.schoolname }}</td>
-                    <td class="py-2 px-4">{{ item.schoolAdminstration }}</td>
+            <tbody class="text-center relative" ref="tableBody">
+                <tr v-for="(item, index) in paginatedItems" :key="index" class="h-20 odd:bg-white even:bg-gray-100">
+                    <td class="py-2 px-4">{{ (currentPage - 1) * pageSize + index + 1 }}</td>
                     <td class="py-2 px-4">{{ item.name }}</td>
+                    <td class="py-2 px-4">{{ item.time }}</td>
+                    <td class="py-2 px-4">{{ item.date }}</td>
+                    <td class="py-2 px-4">{{ item.state }}</td>
                     <td class="py-2 px-4 relative">
-                        {{ item.nationalID }}
-                    </td>
-                    <td class="py-2 px-4 relative">
-                        <router-link
-                            :to="infoRoute(index)"
-                            class="bg-[#4d394d] text-white px-5 py-3 rounded-md font-bold"
-                            >التفاصيل</router-link
-                        >
+                        <img class="block m-auto w-9 cursor-pointer" :class="{ active: showInfo === index }"
+                            src="../../../assets/Logo/Info.png" alt="" @click="toggleShowInfo(index)" />
+                        <div class="bg-white" v-if="showInfo === index">
+                            <ul
+                                class="absolute rounded-xl text-customDarkPurple sm:flex sm:flex-col sm:top-5 sm:left-32 left-20 z-50 bg-white">
+                                <li
+                                    class="py-1 px-6 border-2 border-customSearch hover:bg-customBGCards cursor-pointer">
+                                    <router-link :to="infoRoute(item.id)">التفاصيل
+                                    </router-link>
+                                </li>
+                                <li
+                                    class="py-2 px-6 border-2 border-customSearch hover:bg-customBGCards cursor-pointer">
+                                    <router-link :to="editRoute(item.id)">تعديل
+                                    </router-link>
+                                </li>
+                                <li class="py-2 px-6 border-2 border-customSearch hover:bg-customBGCards cursor-pointer"
+                                    @click="confirm = true">
+                                    حذف
+                                </li>
+                            </ul>
+                            <BaseTeleport :show="confirm">
+                                <div class="flex flex-col">
+                                    <span class="text-red-700 text-4xl">
+                                        تاكيد الحذف
+                                    </span>
+                                    <div class="flex items-center justify-around mt-10">
+                                        <button class="w-96" @click="handleDeleteSchool(item.id)">
+                                            تاكيد
+                                        </button>
+                                        <button class="w-52" @click="confirm = false">
+                                            الغاء
+                                        </button>
+                                    </div>
+                                </div>
+                            </BaseTeleport>
+                        </div>
                     </td>
                 </tr>
-            </tbody> -->
+            </tbody>
         </table>
     </div>
-    <Pagination
-        :currentPage="currentPage"
-        :totalPages="totalPages"
-        :nextPage="nextPage"
-        :prevPage="prevPage"
-    />
+    <Pagination :currentPage="currentPage" :totalPages="totalPages" :nextPage="nextPage" :prevPage="prevPage" />
 </template>
-<!-- <script>
+<script>
 import axios from "axios";
 import { mapActions } from "vuex";
+
 export default {
-    props: ["items", "infoRoute"],
+    props: ["items", "editRoute", "infoRoute"],
     data() {
         return {
             showInfo: null,
@@ -64,7 +84,7 @@ export default {
             return Math.ceil(this.items.length / this.pageSize);
         },
         paginatedItems() {
-       const startIndex = (this.currentPage - 1) * this.pageSize;
+            const startIndex = (this.currentPage - 1) * this.pageSize;
             const endIndex = startIndex + this.pageSize;
             return this.items.slice(startIndex, endIndex);
         },
@@ -72,6 +92,9 @@ export default {
     methods: {
         infoRoute(index) {
             return `${this.infoRoute}/${index}`;
+        },
+        editRoute(index) {
+            return `${this.editRoute}/${index}`;
         },
         prevPage() {
             if (this.currentPage > 1) {
@@ -90,9 +113,25 @@ export default {
                 this.showInfo = index;
             }
         },
+        handleDeleteEvent(id) {
+            this.$emit("delete-event", id);
+            this.showInfo = null;
+            this.confirm = false;
+        },
+        closeActionWindow(event) {
+            if (!this.$refs.tableBody.contains(event.target)) {
+                this.showInfo = null;
+            }
+        },
+    },
+    mounted() {
+        document.body.addEventListener("click", this.closeActionWindow);
+    },
+    beforeDestroy() {
+        document.body.removeEventListener("click", this.closeActionWindow);
     },
 };
-</script> -->
+</script>
 <style scoped>
 @import url("../../../UI/CustomsCss/Custombutton.css");
 @import url("../../../UI/Tables/table.css");

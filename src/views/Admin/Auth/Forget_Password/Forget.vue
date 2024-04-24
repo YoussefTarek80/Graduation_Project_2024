@@ -1,53 +1,22 @@
 <template>
     <div class="body flex flex-col justify-center items-center h-screen">
         <div
-            class="box relative shadow-2xl sm:w-5/12 w-11/12 m-6 sm:h-5/6 h-4/6 flex flex-col items-center justify-center rounded-3xl text-sm"
-        >
+            class="box relative shadow-2xl sm:w-5/12 w-11/12 m-6 sm:h-5/6 h-4/6 flex flex-col items-center justify-center rounded-3xl text-sm">
             <div class="sm:w-7/12 w-8/12">
                 <img src="../../../../assets/Logo/Logo.png" alt="" />
             </div>
-            <form
-                action=""
-                class="w-11/12 space-y-4 flex flex-col"
-                @submit.prevent="SendRequest"
-            >
+            <form action="" class="w-11/12 space-y-4 flex flex-col" @submit.prevent="SendRequest">
                 <div class="flex flex-col">
-                    <label for="email" class="my-2 mx-2"
-                        >البريد الالكتروني<span class="text-red-600"
-                            >*</span
-                        ></label
-                    >
-                    <input
-                        id="email"
-                        v-model="email"
-                        placeholder="البريد الالكتروني"
-                        type="email"
-                        class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none"
-                        @input="Invalid_Data"
-                    />
+                    <label for="email" class="my-2 mx-2">البريد الالكتروني<span class="text-red-600">*</span></label>
+                    <input id="email" v-model="email" placeholder="البريد الالكتروني" type="email"
+                        class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none" @input="Invalid_Data" />
                 </div>
-                <button
-                    class="border-2 border-solid px-2 py-4 rounded-full text-lime-50 text-xl"
-                    :class="{ disabledBtn: invalid }"
-                    :disabled="invalid"
-                >
+                <button class="border-2 border-solid px-2 py-4 rounded-full text-lime-50 text-xl"
+                    :class="{ disabledBtn: invalid }" :disabled="invalid">
                     <span v-if="!loading">ارسال</span>
                     <loading :show="loading" />
                 </button>
             </form>
-            <button
-                class="p-5 text-lime-50 rounded-full flex justify-around absolute bottom-3 left-6 w-40"
-                @click="this.$router.push('/Login')"
-                :class="{ disabledBtn: security }"
-                :disabled="security"
-            >
-                <div>
-                    <span>رجوع</span>
-                </div>
-                <div>
-                    <i class="fa-regular fa-arrow-turn-left"></i>
-                </div>
-            </button>
         </div>
         <div class="space-x-2 text-customPink opacity-50">
             <span>جميع الحقوق محفوظة </span>

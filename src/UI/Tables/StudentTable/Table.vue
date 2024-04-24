@@ -19,9 +19,7 @@
                         {{ (currentPage - 1) * pageSize + index + 1 }}
                     </td>
                     <td class="py-2 px-4">{{ item.name }}</td>
-                    <td class="py-2 px-4 relative">
-                        {{ item.nationalID }}
-                    </td>
+                    <td class="py-2 px-4 relative">{{ item.nationalId }}</td>
                     <td class="py-2 px-4">{{ item.level }}</td>
                     <td class="py-2 px-4">{{ item.parent }} ({{ item.parentPassion }})</td>
                     <td class="py-2 px-4 relative">

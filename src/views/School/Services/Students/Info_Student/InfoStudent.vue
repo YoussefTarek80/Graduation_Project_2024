@@ -25,28 +25,27 @@
                 <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
                     <div class="flex flex-col">
                         <label for="in1">اسم الطالب</label>
-                        <input v-model="this.getStudInfo.name" disabled id="email" type="text" class="item-data" />
+                        <input v-model="this.name" id="email" type="text" class="item-data" />
                     </div>
                     <div class="flex flex-col">
                         <label for="in1">المستوي الدراسي</label>
-                        <input v-model="this.getStudInfo.level" disabled id="level" value="" type="text"
-                            class="item-data" />
+                        <input v-model="this.level" id="level" value="" type="text" class="item-data" />
                     </div>
                     <div class="flex flex-col">
                         <label for="in2">مكان المنشأ/الاقامة</label>
-                        <input disabled v-model=this.getStudInfo.address id="country" type="text" class="item-data" />
+                        <input v-model=this.address id="country" type="text" class="item-data" />
                     </div>
                     <div class="flex flex-col">
                         <label for="in3">الرقم القومي</label>
-                        <input v-model="this.getStudInfo.nationalId" disabled id="nId" type="text" class="item-data" />
+                        <input v-model="this.nationalId" id="nId" type="text" class="item-data" />
                     </div>
                     <div class="flex flex-col">
                         <label for="in4">العنوان</label>
-                        <input v-model="this.getStudInfo.detailedAddress" id="address" type="text" class="item-data" />
+                        <input v-model="this.detailedAddress" id="address" type="text" class="item-data" />
                     </div>
                 </div>
                 <div class="m-5 flex items-center justify-end">
-                    <button class="w-60">حفظ</button>
+                    <button @click="submit" class="w-60">حفظ</button>
                 </div>
             </form>
         </div>
@@ -59,33 +58,23 @@
                 <div class="input_Div grid grid-cols-1 sm:grid-cols-4 gap-6">
                     <div class="flex flex-col">
                         <label for="in1">اسم الأب</label>
-                        <input disabled v-model="this.getStudInfo.parentName" id="parentName" type="text"
-                            class="item-data" />
-                        <!-- <input disabled :value="GetUser.adminstration_name" id="email" placeholder=" العنوان "
-                            type="text" class="item-data" /> -->
+                        <input disabled v-model="this.parentName" id="parentName" type="text" class="item-data" />
                     </div>
                     <div class="flex flex-col">
                         <label for="in2">الدولة</label>
-                        <input disabled v-model="this.getStudInfo.country" id="country" type="text" class="item-data" />
+                        <input disabled v-model="this.country" id="country" type="text" class="item-data" />
                     </div>
                     <div class="flex flex-col">
                         <label for="in3">الجنسية</label>
                         <input disabled v-model="this.nationality" id="email" type="text" class="item-data" />
-                        <!-- <input disabled :value="GetUser.adminstration_address" id="email" placeholder=" العنوان "
-                            type="text" class="item-data" /> -->
                     </div>
                     <div class="flex flex-col" v-if="!this.isAppriate">
                         <label for="in4">المحافظة</label>
-                        <input disabled v-model="this.getStudInfo.state" id="state" type="text" class="item-data" />
-                        <!-- <input disabled :value="GetUser.adminstration_State" id="email" placeholder=" العنوان "
-                            type="text" class="item-data" /> -->
+                        <input disabled v-model="this.state" id="state" type="text" class="item-data" />
                     </div>
                     <div class="flex flex-col">
                         <label for="in5">المهنة</label>
-                        <!-- <input disabled :value="GetUser.adminstration_Phone" id="email" placeholder=" العنوان "
-                            type="text" class="item-data" /> -->
-                        <input disabled v-model="this.getStudInfo.parentPassion" id="parentJop" type="text"
-                            class="item-data" />
+                        <input disabled v-model="this.parentPassion" id="parentJop" type="text" class="item-data" />
                     </div>
                 </div>
             </form>
@@ -95,57 +84,104 @@
     <Footer_Component></Footer_Component>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex';
+import axios from "axios";
 export default {
     inject: ['students'],
     data() {
         return {
+            id: this.$route.params.id,
             isAppriate: false,
-            nationality: "",
-            imageURL: null,
-            profileArray: [],
             name: "",
             parentName: "",
             parentPassion: "",
+            schoolname: "",
+            schoolAdminstration: "",
+            level: "",
             address: "",
-            saved: false,
+            detailedAddress: "",
+            nationality: "",
+            nationalId: "",
+            country: "",
+            state: "",
             success: false,
             failed: false,
         };
     },
     computed: {
-        getStudInfo() {
-            const object =
-            {
-                id: this.$route.params.id,
-                name: this.students[this.$route.params.id].name,
-                parentName: this.students[this.$route.params.id].parent,
-                parentPassion: this.students[this.$route.params.id].parentPassion,
-                nationalId: this.students[this.$route.params.id].nationalID,
-                level: this.students[this.$route.params.id].level,
-                nationality: this.students[this.$route.params.id].nationality,
-                country: this.students[this.$route.params.id].country,
-                address: this.students[this.$route.params.id].address,
-                detailedAddress: this.students[this.$route.params.id].detailedAddress,
-                state: this.students[this.$route.params.id].state,
-            }
-            return object;
-        },
+        ...mapGetters(["GetStudents"]),
     },
     created() {
-        this.isEgyptien(this.getStudInfo.nationality)
-        console.log(this.nationality);
+        this.isEgyptien();
+    },
+    mounted() {
+        this.initData;
+        this.FetchData();
     },
     methods: {
-        isEgyptien(nv) {
-            if (nv === "مصري") {
-                this.nationality = 'مصري';
+        ...mapActions(["FetchStudents"]),
+        isEgyptien() {
+            if (this.nationality === "مصري") {
                 this.isAppriate = false;
             }
             else {
                 this.isAppriate = true;
-                this.nationality = this.getStudInfo.nationality + '- مغترب';
+                this.nationality = this.nationality + '- مغترب';
             }
-        }
+        },
+        initData() {
+            this.name = this.GetStudents[this.id].name;
+            this.parentName = this.GetStudents[this.id].parent;
+            this.parentPassion = this.GetStudents[this.id].parentPassion;
+            this.schoolname = this.GetStudents[this.id].schoolname;
+            this.schoolAdminstration = this.GetStudents[this.id].schoolAdminstration;
+            this.level = this.GetStudents[this.id].level;
+            this.address = this.GetStudents[this.id].address;
+            this.detailedAddress = this.GetStudents[this.id].detailedAddress;
+            this.nationalId = this.GetStudents[this.id].nationalId;
+            this.nationality = this.GetStudents[this.id].nationality;
+            this.country = this.GetStudents[this.id].country;
+            this.state = this.GetStudents[this.id].state;
+        },
+        async FetchData() {
+            try {
+                await this.FetchStudents();
+                this.initData();
+            } catch (error) {
+                console.error("Error fetching profile info:", error);
+            }
+        },
+        async update() {
+            try {
+                const token = localStorage.getItem("token");
+                const formData = new FormData();
+                formData.append("name", this.name);
+                formData.append("email", this.email);
+                formData.append("phone", this.phone);
+                formData.append("address", this.address);
+                // await axios.post(
+                //     "http://192.168.1.18:8000/api/updateProfile",
+                //     formData,
+                //     {
+                //         headers: {
+                //             Authorization: `Bearer ${token}`,
+                //             "Content-Type": "multipart/form-data",
+                //         },
+                //     }
+                // );
+                this.success = true;
+                setTimeout(() => {
+                    this.success = false;
+                }, 1000);
+                console.log("added succc");
+            } catch (error) {
+                console.error("Error fetching profile info:", error);
+                this.failed = true;
+                setTimeout(() => {
+                    this.failed = false;
+                }, 1000);
+            }
+        },
     },
 };
 </script>

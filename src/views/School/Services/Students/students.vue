@@ -12,7 +12,7 @@
                 <i class="fa-regular fa-arrow-turn-left sm:text-3xl text-sm"></i>
             </button>
         </div>
-        <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="Students"
+        <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="this.GetStudents"
             :nationalIDS="true"></FilterComponent>
         <div class="relative">
             <table_Component :items="filtered_Array" :infoRoute="'/School/Services/Students/InfoStudent'">
@@ -24,23 +24,32 @@
 <script>
 import table_Component from "../../../../UI/Tables/StudentTable/Table.vue";
 import FilterComponent from "../../../../components/Admin/Filtration/Filter.vue";
-
+import { mapGetters, mapActions } from 'vuex';
 export default {
     components: { table_Component, FilterComponent },
-    inject: ['students'],
     data() {
         return {
-            selectedSortOption: "ترتيب",
-            search_status: false,
             filtered_Array: [],
         };
     },
-    watch: {
+    computed: {
+        ...mapGetters(["GetStudents"])
     },
     created() {
-        this.filtered_Array = this.students;
+        this.fetchData();
+        this.filtered_Array = this.GetStudents;
     },
     methods: {
+        ...mapActions(["FetchStudents"]),
+        async fetchData() {
+            try {
+                await this.FetchStudents();
+                this.filtered_Array = this.GetStudents;
+                console.log(this.filtered_Array);
+            } catch (err) {
+                console.error(err);
+            }
+        },
         handleFilter(filteredArray) {
             this.filtered_Array = filteredArray;
         },

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -8,12 +9,25 @@ const router = createRouter({
             meta: { title: "Login" },
         },
         {
+            path: "/School/Login/ForgetPass",
+            component: () =>
+                import("../../views/School/Auth/Forget_Password/Forget.vue"),
+            meta: { title: "Forget" },
+        },
+        {
+            path: "/School/resetPassword/:token",
+            component: () =>
+                import("../../views/School/Auth/Reset_Password/reset.vue"),
+            meta: { title: "reset" },
+            props: true,
+        },
+        {
             path: "/School/Home",
             component: () => import("../../views/School/Services/Home/home.vue"),
             meta: {
                 title: "ManagerDashboard",
                 requiresAuth: true,
-                roles: ["Manager"],
+                roles: ["ManagerDashboard"],
             },
         },
         {
@@ -41,7 +55,7 @@ const router = createRouter({
                 title: "SchoolStudentInfo",
                 requiresAuth: true,
                 props: true,
-                roles: ["SchoolStudenInfo"],
+                roles: ["SchoolStudentInfo"],
             },
         },
         {
@@ -64,7 +78,7 @@ const router = createRouter({
             },
         },
         {
-            path: "/School/Teachers",
+            path: "/School/Services/Teachers",
             component: () => import("../../views/School/Services/Teachers/Teachers.vue"),
             meta: {
                 title: "SchoolTeachers",
@@ -100,6 +114,73 @@ const router = createRouter({
             },
         },
         {
+            path: "/School/Services/Events/AddEvent",
+            component: () => import("../../views/School/Services/Events/Add_Event/add_event.vue"),
+            meta: {
+                title: "AddEvent",
+                requiresAuth: true,
+                roles: ["AddEvent"],
+            },
+        },
+        {
+            path: "/School/Services/Events/InfoEvent/:id",
+            component: () => import("../../views/School/Services/Events/Info_Event/infoEvent.vue"),
+            meta: {
+                title: "Info_Event",
+                requiresAuth: true,
+                props: true,
+                roles: ["Info_Event"],
+            },
+        },
+        {
+            path: "/School/Services/Events/UpdateEvent/:id",
+            component: () => import("../../views/School/Services/Events/Update_Event/updateEvent.vue"),
+            meta: {
+                title: "Update_Event",
+                requiresAuth: true,
+                roles: ["Update_Event"],
+            },
+        },
+        {
+            path: "/School/Teachers",
+            component: () => import("../../views/School/Services/Teachers/Teachers.vue"),
+            meta: {
+                title: "Teachers",
+                requiresAuth: true,
+                props: true,
+                roles: ["Teachers"],
+            },
+        },
+        {
+            path: "/School/Teachers/AddEvent",
+            component: () => import("../../views/School/Services/Teachers/Add_Teacher/AddTeacher.vue"),
+            meta: {
+                title: "AddTeacher",
+                requiresAuth: true,
+                roles: ["AddTeacher"],
+            },
+        },
+        {
+            path: "/School/Teachers/TeacherInfo/:id",
+            component: () => import("../../views/School/Services/Teachers/Info_Teacher/TeacherInfo.vue"),
+            meta: {
+                title: "Info_Teacher",
+                requiresAuth: true,
+                props: true,
+                roles: ["Info_Teacher"],
+            },
+        },
+        {
+            path: "/School/Teachers/EditTeacherInfo/:id",
+            component: () => import("../../views/School/Services/Teachers/Edit_Teacher/Edit_TeacherInfo.vue"),
+            meta: {
+                title: "Edit_TeacherInfo",
+                requiresAuth: true,
+                props: true,
+                roles: ["Edit_TeacherInfo"],
+            },
+        },
+        {
             path: "/School/Services/Complaints",
             component: () => import("../../views/School/Services/Complaints/Complaints.vue"),
             meta: {
@@ -115,6 +196,36 @@ const router = createRouter({
                 title: "SchoolControllers",
                 requiresAuth: true,
                 roles: ["SchoolControllers"],
+            },
+        },
+        {
+            path: "/School/Services/Controllers/AddController/",
+            component: () => import("../../views/School/Services/Controllers/AddController/AddController.vue"),
+            meta: {
+                title: "AddController",
+                requiresAuth: true,
+                props: true,
+                roles: ["AddController"],
+            },
+        },
+        {
+            path: "/School/Services/Controllers/ControllerInfo/:id",
+            component: () => import("../../views/School/Services/Controllers/ControllerInfo/ControllerInfo.vue"),
+            meta: {
+                title: "ControllerInfo",
+                requiresAuth: true,
+                props: true,
+                roles: ["ControllerInfo"],
+            },
+        },
+        {
+            path: "/School/Services/Controllers/UpdateController/:id",
+            component: () => import("../../views/School/Services/Controllers/EditController/EditController.vue"),
+            meta: {
+                title: "UpdateController",
+                requiresAuth: true,
+                props: true,
+                roles: ["UpdateController"],
             },
         },
     ],

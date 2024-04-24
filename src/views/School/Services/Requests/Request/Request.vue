@@ -25,8 +25,8 @@
             class="leading-8 tx-era resize-none px-4 border-2 rounded-xl">
             <p>إلى : <span>{{ this.request.currSchool }}</span></p>
             <p>العنوان : <span>{{ this.request.newScAddress }}</span><br>
-              التاريخ : <span> {{ this.request.date.day + '/' + this.request.date.month + '/' + this.request.date.year
-                }}</span></p>
+              التاريخ : <span> {{ this.request.date.day + '/' + this.request.date.month + '/' +
+              this.request.date.year }}</span></p>
             <p>وقت الإرسال : <span>{{ this.request.time.hrs + ':' + this.request.time.mins + ':' +
               this.request.time.secs }}</span></p>
             <p>الموضوع : طلب تحويل طالب من مدرسة إلى مدرسة</p><br>
@@ -60,31 +60,37 @@
 
           <section v-else-if="this.req2" disabled type="text"
             class="leading-8 tx-era resize-none px-4 border-2 rounded-xl">
+            <p> التاريخ : <span>{{ this.request.date.day + ':' + this.request.date.month + ':' +
+              this.request.date.year }}</span></p>
             <p>وقت الإرسال : <span>{{ this.request.time.hrs + ':' + this.request.time.mins + ':' +
               this.request.time.secs }}</span></p>
             <div>
               <h3 class="font-bold">البيانات الشخصية :</h3>
               <span class="bg-black w-20 block h-0.5 m-2"></span>
-              <p class="font-bold"> الإسم الكامل : <span class="font-thin">[الإسم الكامل للطالب]</span></p>
-              <p class="font-bold"> تاريخ الميلاد : <span class="font-thin">[تاريخ الميلاد]</span></p>
-              <p class="font-bold"> مكان الميلاد : <span class="font-thin">[مكان الميلاد]</span></p>
-              <p class="font-bold"> الجنسية : <span class="font-thin">[الجنسية]</span></p>
-              <p class="font-bold"> الجنس : <span class="font-thin">[ذكر/أنثى]</span></p>
-              <p class="font-bold"> الرقم القومي/الهوية : <span class="font-thin">[رقم الهوية]</span></p>
+              <p class="font-bold"> الإسم الكامل : <span class="font-thin">{{ this.request.studname }}</span></p>
+              <p class="font-bold"> تاريخ الميلاد : <span class="font-thin">{{ this.request.dob.day + '/' +
+              this.request.dob.month + '/' + this.request.dob.year }}</span>
+              </p>
+              <p class="font-bold"> مكان الميلاد : <span class="font-thin">{{ this.request.address }}</span></p>
+              <p class="font-bold"> الجنسية : <span class="font-thin">{{ this.request.nationlity }}</span></p>
+              <p class="font-bold"> الجنس : <span class="font-thin">{{ this.request.gender }}</span></p>
+              <p class="font-bold"> الرقم القومي/الهوية : <span class="font-thin">{{ this.request.nationalId }}</span>
+              </p>
             </div>
             <span class="bg-black w-80 block h-0.5 m-2"></span>
             <div>
               <h3 class="font-bold">بيانات الاتصال :</h3>
               <span class="bg-black w-20 block h-0.5 m-2"></span>
-              <p class="font-bold"> عنوان السكن : <span class="font-thin">[العنوان الكامل]</span></p>
-              <p class="font-bold"> رقم الهاتف : <span class="font-thin">[رقم الهاتف]</span></p>
-              <p class="font-bold"> البريد الإلكتروني : <span class="font-thin">[البريد الإلكتروني]</span></p>
+              <p class="font-bold"> عنوان السكن : <span class="font-thin">{{ this.request.address }}</span></p>
+              <p class="font-bold"> رقم الهاتف : <span class="font-thin">{{ this.request.phone }}</span></p>
+              <p class="font-bold"> البريد الإلكتروني : <span class="font-thin">{{ this.request.parentEmail }}</span>
+              </p>
             </div>
             <span class="bg-black w-80 block h-0.5 m-2"></span>
             <div>
               <h3 class="font-bold">البيانات الأكاديمية :</h3>
               <span class="bg-black w-20 block h-0.5 m-2"></span>
-              <p class="font-bold"> الصف الدراسي الحالي : <span class="font-thin">[الصف الدراسي]</span></p>
+              <p class="font-bold"> الصف الدراسي الحالي : <span class="font-thin">{{ this.request.level }}</span></p>
             </div>
             <span class="bg-black w-80 block h-0.5 m-2"></span>
           </section>
@@ -92,14 +98,17 @@
           <section v-else-if="this.req3" disabled type="text"
             class="leading-8 tx-era resize-none px-4 border-2 rounded-xl">
             <div>
-              <p class="font-bold"> البريد الإلكتروني : <span class="font-thin">[البريد الإلكتروني]</span></p>
-              <p class="font-bold"> التاريخ : <span class="font-thin">[التاريخ]</span></p>
-              <p>وقت الإرسال : <span>{{ this.request.time.hrs + ':' + this.request.time.mins + ':' +
+              <p class="font-bold"> البريد الإلكتروني : <span class="font-thin">{{ this.request.parentEmail }}</span>
+              </p>
+              <p class="font-bold"> التاريخ : <span class="font-thin">{{ this.request.date.day + ':' +
+              this.request.date.month + ':' + this.request.date.year }}</span></p>
+              <p class="font-bold"> وقت الإرسال : <span class="font-thin">{{ this.request.time.hrs + ':' +
+              this.request.time.mins + ':' +
               this.request.time.secs }}</span></p>
             </div>
             <span class="bg-black w-80 block h-0.5 m-2"></span>
             <div>
-              <p>إلى السيد/السيدة <span>[اسم المسؤول]</span></p>
+              <p>إلى السيد/السيدة <span class="font-bold">{{ this.request.manager }}</span></p>
               <p class="leading-10"> الموضوع: استفسار عن <span>[ذكر البرنامج أو الدورة التي تود الاستفسار عنها]</span>
                 أود أن أسأل عن المواد الدراسية
                 المقدمة ضمن هذا البرنامج، الشروط والمعايير الأساسية للقبول، وأية متطلبات
@@ -110,7 +119,7 @@
                 الأنشطة البحثية ضمن هذا المجال. وهل توجد فرص للتعاون مع المؤسسات والشركات المحلية أو الدولية أثناء
                 الدراسة؟
               </p><br>
-              <p> عزيزي/عزيزتي, <span> [اسم المسؤول]</span>.</p>
+              <p> عزيزي/عزيزتي, <span class="font-bold">{{ this.request.manager }}</span>.</p>
             </div>
           </section>
         </div>
@@ -155,8 +164,9 @@
   </div>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
-  inject: ['requests'],
   props: ['items', 'InfoRoute'],
   data() {
     return {
@@ -172,82 +182,111 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['GetRequests']),
     request() {
       var object;
       if (this.type == "تحويل") {
         object =
         {
           id: this.$route.params.id,
-          senderName: this.requests[this.id].parentName,
-          type: this.requests[this.id].type,
-          studname: this.requests[this.id].studname,
-          newScAddress: this.requests[this.id].newScAddress,
-          currSchool: this.requests[this.id].currSchool,
-          newSchool: this.requests[this.id].newSchool,
+          type: this.GetRequests[this.id].type,
+          studname: this.GetRequests[this.id].studname,
+          senderName: this.GetRequests[this.id].parentName,
+          parentPhone: this.GetRequests[this.id].parentPhone,
+          parentEmail: this.GetRequests[this.id].parentEmail,
+          newScAddress: this.GetRequests[this.id].newScAddress,
+          currSchool: this.GetRequests[this.id].currSchool,
+          newSchool: this.GetRequests[this.id].newSchool,
           date: {
-            day: this.requests[this.id].date.day,
-            month: this.requests[this.id].date.month,
-            year: this.requests[this.id].date.year,
+            day: this.GetRequests[this.id].date.day,
+            month: this.GetRequests[this.id].date.month,
+            year: this.GetRequests[this.id].date.year,
           },
-          level: this.requests[this.id].level,
-          schoolYear: this.requests[this.id].schoolYear,
-          reason: this.requests[this.id].reason,
-          parentPhone: this.requests[this.id].parentPhone,
-          parentEmail: this.requests[this.id].parentEmail,
-          time: this.requests[this.id].time,
+          level: this.GetRequests[this.id].level,
+          schoolYear: this.GetRequests[this.id].schoolYear,
+          reason: this.GetRequests[this.id].reason,
+          time: this.GetRequests[this.id].time,
         }
       }
       else if (this.type == "تسجيل") {
         object =
         {
           id: this.$route.params.id,
-          senderName: this.requests[this.id].parentName,
-          type: this.requests[this.id].type,
-          studname: this.requests[this.id].studentName,
-          parentName: this.requests[this.id].parentName,
-          dob: {
-            day: this.requests[this.id].dob.day,
-            month: this.requests[this.id].dob.month,
-            year: this.requests[this.id].dob.year
+          senderName: this.GetRequests[this.id].parentName,
+          type: this.GetRequests[this.id].type,
+          studname: this.GetRequests[this.id].studname,
+          date: {
+            day: this.GetRequests[this.id].date.day,
+            month: this.GetRequests[this.id].date.month,
+            year: this.GetRequests[this.id].date.year
           },
-          gender: this.requests[this.id].gender,
-          religion: this.requests[this.id].religion,
-          nationlity: this.requests[this.id].nationlity,
-          nationalId: this.requests[this.id].nationalId,
-          phone: this.requests[this.id].phone,
-          parentEmail: this.requests[this.id].parentEmail,
-          level: this.requests[this.id].level,
-          schoolYear: this.requests[this.id].schoolYear,
-          grade: this.requests[this.id].grade,
-          time: this.requests[this.id].time,
+          dob: {
+            day: this.GetRequests[this.id].dob.day,
+            month: this.GetRequests[this.id].dob.month,
+            year: this.GetRequests[this.id].dob.year
+          },
+          gender: this.GetRequests[this.id].gender,
+          religion: this.GetRequests[this.id].religion,
+          nationlity: this.GetRequests[this.id].nationlity,
+          nationalId: this.GetRequests[this.id].nationalId,
+          phone: this.GetRequests[this.id].phone,
+          parentEmail: this.GetRequests[this.id].parentEmail,
+          level: this.GetRequests[this.id].level,
+          schoolYear: this.GetRequests[this.id].schoolYear,
+          grade: this.GetRequests[this.id].grade,
+          time: this.GetRequests[this.id].time,
         }
       }
       else {
         object =
         {
           id: this.$route.params.id,
-          senderName: this.requests[this.$route.params.id].parentName,
-          type: this.requests[this.$route.params.id].type,
-          time: this.requests[this.id].time,
+          senderName: this.GetRequests[this.$route.params.id].parentName,
+          type: this.GetRequests[this.$route.params.id].type,
+          parentEmail: this.GetRequests[this.$route.params.id].senderEmail,
+          manager: this.GetRequests[this.$route.params.id].manager,
+          time: {
+            hrs: this.GetRequests[this.id].time.hrs,
+            mins: this.GetRequests[this.id].time.mins,
+            secs: this.GetRequests[this.id].time.secs,
+          },
+          date: {
+            day: this.GetRequests[this.id].date.day,
+            month: this.GetRequests[this.id].date.month,
+            year: this.GetRequests[this.id].date.year,
+          },
         }
       }
       return object;
     },
     reqType() {
-      this.type = this.requests[this.id].type;
+      this.type = this.GetRequests[this.id].type;
       if (this.type === 'تحويل') { this.req1 = true; this.accRejbtn = true }
       else if (this.type === 'تسجيل') { this.req2 = true; this.accRejbtn = true; }
       else if (this.type === 'استفسار') { this.req3 = true; }
     },
   },
   created() {
+    console.log(this.request);
+    this.fetchData();
     this.reqType;
     this.getReqInfo;
   },
   methods: {
+    ...mapActions(['FetchRequests']),
+    async fetchData() {
+      try {
+        await this.FetchRequests();
+        console.log(this.GetRequests);
+      }
+      catch (error) {
+        throw `Something went wrong! ${error}`;
+      }
+    }
+    ,
     accept(req) { },
-    reject(req) { },
-    sendQuery() {
+    reject(req) { }, *
+      sendQuery() {
       console.log('تم إرسال ردك بنجاح');
       // this.confirm = true;
       this.sent = false;

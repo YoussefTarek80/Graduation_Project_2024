@@ -5,13 +5,13 @@
         <div class="sm:col-span-1 col-span-2 bg-customBGCards rounded-2xl shadow-2xl p-3">
             <div class="p-4 flex flex-row-reverse items-center justify-center space-x-6 rounded-2xl py-5">
                 <div>
-                    <img src="../../../../assets/Logo/personal-img-1.jpg"
+                    <!-- <img :src="GetUser2.imageURL" class="sm:w-60 rounded-full border-2 border-customPurple p-1"
+                        alt="" /> -->
+                    <img src="../../../../assets/Logo/personal-img-2.jpg"
                         class="sm:w-60 rounded-full border-2 border-customPurple p-1" alt="" />
-                    <!-- <img :src="GetUser2.image" class="sm:w-60 rounded-full border-2 border-customPurple p-1" alt="" /> -->
                 </div>
                 <div class="flex flex-col">
-                    <span class="text-2xl">مجدي خالد </span>
-                    <!-- <span class="text-2xl">{{ GetUser2.name }} </span> -->
+                    <span class="text-2xl">{{ GetUser2.name }} </span>
                     <span class="text-customDarkPurple">مدير المدرسة</span>
                 </div>
             </div>
@@ -49,13 +49,11 @@
 </template>
 
 <script>
-import axios from "axios";
 import chart from "../../../../Charts/LineChart.vue";
 import Pie from "../../../../Charts/PieChart.vue";
-import { mapGetters, mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
     components: { chart, Pie },
-    inject: ['students', 'requests'],
     data() {
         return {
             data: [
@@ -80,42 +78,41 @@ export default {
                     numbers: null,
                 },
                 {
-                    title: "العمال",
+                    title: "المعلمين",
                     img: "../src/assets/Logo/team.png",
                     numbers: null,
                 },
             ],
         };
     },
-    mounted() {
-    },
     computed: {
-        ...mapGetters(["GetUser2"]),
+        ...mapGetters(["GetUser2", "GetStudents", "GetRequests", "GetEvents", "GetTeachers"]),
     },
-    created() {
+    async mounted() {
+        await this.fetchAllData();
         this.DisplayDashboardNumbers();
     },
     methods: {
-        ...mapActions(["FetchUser2"]),
+        ...mapActions(["FetchUser2", "FetchStudents", "FetchRequests", "FetchEvents", "FetchTeachers"]),
         DisplayDashboardNumbers() {
-            this.data.forEach((item) => {
-                if (item.title === "الطلاب") {
-                    this.data[0].numbers = this.students.length;
-                }
-                else if (item.title === "المناسبات") {
-                    this.data[1].numbers = 0;
-                }
-                else if (item.title === "المسئولين") {
-                    this.data[2].numbers = 0;
-                }
-                else if (item.title === "الطلبات") {
-                    this.data[3].numbers = this.requests.length;
-                }
-                else if (item.title === "العمال") {
-                    this.data[4].numbers = 0;
-                }
-            });
+            this.data[0].numbers = this.GetStudents.length;
+            this.data[1].numbers = this.GetEvents.length;
+            this.data[2].numbers = 13;
+            this.data[3].numbers = this.GetRequests.length;
+            this.data[4].numbers = this.GetTeachers.length;
         },
+        async fetchAllData() {
+            try {
+                await this.FetchUser2();
+                await this.FetchStudents();
+                await this.FetchTeachers();
+                await this.FetchRequests();
+                await this.FetchEvents();
+                console.log("All Data Fetched Successfully");
+            } catch (error) {
+                throw `Fetching All Data  Error : ${error}`;
+            }
+        }
     },
 };
 </script>

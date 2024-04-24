@@ -18,7 +18,7 @@
                         class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none" @input="Invalid_Data" />
                 </div>
                 <div class="text-left underline mx-4">
-                    <router-link to="/Login/ForgetPass">نسيت كلمة المرور ؟</router-link>
+                    <router-link to="/School/Login/ForgetPass">نسيت كلمة المرور ؟</router-link>
                 </div>
                 <button class="" :class="{ disabledBtn: invalid }" :disabled="invalid">
                     <span v-if="!loading">تسجيل الدخول</span>
@@ -62,6 +62,8 @@ export default {
             return this.getDate;
         },
     },
+    created() {
+    },
     mounted() {
         this.Invalid_Data();
     },
@@ -102,6 +104,9 @@ export default {
                 this.email = "";
                 this.password = "";
             }, 3000);
+        },
+        clearLocalStorage() {
+            localStorage.clear();
         },
         async onSubmit() {
             this.loading_Fun();
