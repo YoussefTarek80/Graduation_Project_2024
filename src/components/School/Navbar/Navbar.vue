@@ -15,8 +15,8 @@
                 </div>
                 <div class="relative">
                     <i class="fa-thin fa-bell sm:text-4xl text-2xl" style="color: #ffffff"></i>
-                    <i
-                        class="fa-solid fa-circle text-customYellow absolute right-0 sm:text-xl text-sm sm:bottom-6 bottom-4"></i>
+                    <i class="fa-solid fa-circle text-customYellow absolute 
+                        right-0 sm:text-xl text-sm sm:bottom-6 bottom-4"></i>
                 </div>
                 <transition name="bounce">
                     <div class="bg-white w-52 z-40 text-black text-center absolute top-20 rounded-tr-2xl rounded-bl-2xl rounded-br-2xl shadow-lg"
@@ -80,6 +80,7 @@ export default {
         return {
             userLogout: false,
             loading: false,
+            role: ""
         };
     },
     computed: {

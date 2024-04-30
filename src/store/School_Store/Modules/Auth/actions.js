@@ -62,96 +62,55 @@ export const actions = {
             console.error("Error fetching Students info:", error);
         }
     },
-    ///
-    async FetchRequests({ commit }) {
+    async FetchSCRequests({ commit }) {
         try {
             const token = localStorage.getItem("token");
-            // const response = await axios.get(
-            //     "http://127.0.0.1:8000/api/school/showProfile",
+            const response = await axios.get(
+                "http://127.0.0.1:8000/api/school/ShowEnrollRequests",
+                {
+                    headers: { Authorization: `Bearer ${token}`, },
+                }
+            );
+            const requests = response.data.data;
+            commit("Set_SCRequests", requests);
+            // response = await axios.get(
+            //     "http://127.0.0.1:8000/api/school/ShowEnrollRequests",
             //     {
             //         headers: { Authorization: `Bearer ${token}`, },
             //     }
             // );
-            // const user = response.data.data;
-            const requests = [
-                {
-                    type: "تحويل",
-                    newScAddress: 'فيصل - الهرم - سهل حمزة',
-                    manager: null,
-                    studname: "يوسف طارق صلاح محمد",
-                    parentName: "طارق صلاح محمد",
-                    newSchool: 'عبدالله بن رواحة',
-                    currSchool: 'مصطفي كامل',
-                    level: 'الصف الخامس الابتدائي',
-                    schoolYear: new Date().getFullYear(),
-                    reason: 'ذكر السبب، مثل: عائلية، أو تغيير مكان الإقامة، أو أسباب صحية، أو أي سبب آخر',
-                    parentPhone: '+201065390754',
-                    parentEmail: 'tarek.salah122@gmail.com',
-                    date: {
-                        day: new Date().getDay() + 1,
-                        month: new Date().getMonth(),
-                        year: new Date().getFullYear(),
-                    },
-                    time: {
-                        hrs: new Date().getHours(),
-                        mins: new Date().getMinutes(),
-                        secs: new Date().getSeconds(),
-                    }
-                },
-                {
-                    type: "تسجيل",
-                    studname: "الاء خميس عبد النعيم",
-                    parentName: "خميس عبد النعيم",
-                    gender: "أنثي",
-                    religion: "مسلم",
-                    nationlity: "مصري",
-                    address: "القاهرة - الهرم - المنيب",
-                    nationalId: "084756456456",
-                    phone: "+201065390754",
-                    parentEmail: "khamess.abdel@gmail.com",
-                    level: "الصف الأول الثانوي",
-                    schoolYear: new Date().getFullYear(),
-                    grade: "A+",
-                    dob: {
-                        day: '٩',
-                        month: "يناير",
-                        year: '٢٠٠٩',
-                    },
-                    date: {
-                        day: new Date().getDay() + 1,
-                        month: new Date().getMonth(),
-                        year: new Date().getFullYear(),
-                    },
-                    time: {
-                        hrs: new Date().getHours(),
-                        mins: new Date().getMinutes(),
-                        secs: new Date().getSeconds(),
-                    }
-                },
-                {
-                    parentName: "رمضان شوقي إسماعيل",
-                    type: "استفسار",
-                    query: "وصف الاستفسار؟",
-                    senderEmail: "ramadan.shawky@gmail.com",
-                    manager: 'مصطفي الخولي',
-                    date: {
-                        day: new Date().getDay() + 1,
-                        month: new Date().getMonth(),
-                        year: new Date().getFullYear(),
-                    },
-                    time: {
-                        hrs: new Date().getHours(),
-                        mins: new Date().getMinutes(),
-                        secs: new Date().getSeconds(),
-                    }
-                },
-            ];
-            localStorage.setItem("Requests", JSON.stringify(requests));
-            commit("Set_Requests", requests);
+            // requests = response.data.data;
+            // commit("Set_SCTransferRequests", requests);
+            // response = await axios.get(
+            //     "http://127.0.0.1:8000/api/school/ShowEnrollRequests",
+            //     {
+            //         headers: { Authorization: `Bearer ${token}`, },
+            //     }
+            // );
+            // requests = response.data.data;
+            // commit("Set_SCQuestionRequests", requests);
         } catch (error) {
             console.error("Error fetching Requests info:", error);
         }
     },
+    async AcceptEnrollStudent({ commit }, { id, status }) {
+        const token = localStorage.getItem("token");
+
+        console.log(status);
+        console.log(id);
+        try {
+            const reponse = await axios.post(
+                `http://127.0.0.1:8000/api/school/SendEnrollRequests/${id}`,
+                status,
+                {
+                    headers: { Authorization: `Bearer ${token}`, },
+                });
+            console.log(reponse.data.data);
+        } catch (err) {
+            throw err;
+        }
+    },
+    ///
     async FetchSCEvents({ commit }) {
         try {
             const token = localStorage.getItem("token");

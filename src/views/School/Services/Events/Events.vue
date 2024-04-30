@@ -12,7 +12,7 @@
                 <i class="fa-solid fa-plus p-1"></i>
             </button>
         </div>
-        <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="GetEvents" :event="true"
+        <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="GetSCEvents" :event="true"
             :Search="true"></FilterComponent>
         <table_Component :items="filtered_Array" :infoRoute="'/School/Services/Events/InfoEvent'"
             :editRoute="'/School/Services/Events/UpdateEvent'" @delete-event="deleteEvent"></table_Component>
@@ -35,10 +35,10 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["GetEvents"]),
+        ...mapGetters(["GetSCEvents"]),
     },
     created() {
-        this.filtered_Array = this.GetEvents;
+        this.filtered_Array = this.GetSCEvents;
         this.fetchData();
     },
     methods: {

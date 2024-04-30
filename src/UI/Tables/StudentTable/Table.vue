@@ -21,7 +21,7 @@
                     <td class="py-2 px-4">{{ item.name }}</td>
                     <td class="py-2 px-4 relative">{{ item.national_id }}</td>
                     <td class="py-2 px-4">{{ item.level }}</td>
-                    <td class="py-2 px-4">{{ item.parent }} ({{ item.parentPassion }})</td>
+                    <td class="py-2 px-4">{{ item.parent_name }} ({{ item.parent_job }})</td>
                     <td class="py-2 px-4 relative">
                         <router-link :to="infoRoute(index)"
                             class="bg-[#4d394d] text-white px-5 py-3 rounded-md font-bold">التفاصيل</router-link>

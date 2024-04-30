@@ -55,7 +55,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["GetEvents"]),
+    ...mapGetters(["GetSCEvents"]),
   },
   created() {
     this.fetchEvent();
@@ -66,7 +66,7 @@ export default {
       try {
         await this.FetchSCEvents();
         const index = this.$route.params.id;
-        this.event = this.GetEvents.find(
+        this.event = this.GetSCEvents.find(
           (event) => event.id === parseInt(index)
         );
         console.log(this.event)

@@ -12,7 +12,7 @@
                 <i class="fa-sharp fa-solid fa-badge-check text-red-700 text-7xl m-3"></i>
             </div>
         </BaseTeleport>
-        
+
         <img src="../../../assets/Logo/head-bg.png" class="sm:h-full h-36" alt="" />
         <button class="float-left sm:m-10 m-2 absolute top-0 left-0 sm:w-96 w-32 flex items-center justify-around"
             @click="this.$router.push('/School/Home')">
@@ -21,7 +21,7 @@
         </button>
         <div class="profileImage">
             <label for="fileInput" data-aos="fade-up" data-aos-duration="1000">
-                <img :src="this.GetUser2.school_image" alt="My Image" />
+                <img :src="GetUser2.school_image" alt="My Image" />
             </label>
             <input id="fileInput" type="file" style="display: none" @change="handleFile" />
         </div>

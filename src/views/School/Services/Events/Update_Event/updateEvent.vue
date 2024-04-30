@@ -92,7 +92,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["GetEvents"]),
+    ...mapGetters(["GetSCEvents"]),
   },
   async mounted() {
     await this.fetchEvent();
@@ -114,7 +114,7 @@ export default {
       }
     },
     intiData() {
-      this.event = this.GetEvents[this.id];
+      this.event = this.GetSCEvents[this.id];
     },
     async handleUpdateEvent() {
       try {

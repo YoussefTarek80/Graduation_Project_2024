@@ -65,9 +65,6 @@
     <Pagination :currentPage="currentPage" :totalPages="totalPages" :nextPage="nextPage" :prevPage="prevPage" />
 </template>
 <script>
-import axios from "axios";
-import { mapActions } from "vuex";
-
 export default {
     props: ["items", "editRoute", "infoRoute"],
     data() {

@@ -11,6 +11,25 @@
             </div>
 
             <form action="" class="w-11/12 space-y-4 flex flex-col" @submit.prevent="onSubmit">
+                <div class="flex flex-row gap-4">
+                    <div class="flex items-center mb-4">
+                        <input @click="role == 'manager'" id="manager" type="radio" name="acc-check" class="cursor-pointer w-4 h-4 
+                        text-blue-600 bg-gray-100 rounded focus:ring-blue-500">
+                        <label for="manager" class="ms-2 cursor-pointer text-xl 
+                        text-customPurple dark:text-customPurple">
+                            <i class="fa-solid fa-chalkboard-user text-2xl"></i>&ThinSpace;&ThinSpace;مدير
+                            المدرسة</label>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <input id="control" type="radio" name="acc-check" class="cursor-pointer w-4 h-4 
+                        text-blue-600 bg-gray-100 rounded focus:ring-blue-500">
+                        <label for="control"
+                            class="ms-2 cursor-pointer text-xl text-customPurple dark:text-customPurple">
+                            <i class="fa-solid fa-people-roof text-2xl"></i>&ThinSpace;&ThinSpace;مسؤول في
+                            المدرسة</label>
+                    </div>
+                </div>
+                <!--  -->
                 <div class="flex flex-col">
                     <label for="email" class="my-2 mx-2">البريد الالكتروني<span class="text-red-600">*</span></label>
                     <input id="email" v-model="email" placeholder="البريد الالكتروني" type="email"
@@ -25,7 +44,11 @@
                 <div class="text-left underline mx-4">
                     <router-link to="/School/Login/ForgetPass">نسيت كلمة المرور ؟</router-link>
                 </div>
-                <button class="" :class="{ disabledBtn: invalid }" :disabled="invalid">
+                <button v-if="role == 'Manager'" @click="" :class="{ disabledBtn: invalid }" :disabled="invalid">
+                    <span v-if="!loading">تسجيل الدخول</span>
+                    <loading :show="loading" />
+                </button>
+                <button v-else @click="" :class="{ disabledBtn: invalid }" :disabled="invalid">
                     <span v-if="!loading">تسجيل الدخول</span>
                     <loading :show="loading" />
                 </button>
@@ -54,6 +77,7 @@ export default {
             invalid: false,
             login_Failed: false,
             loading: false,
+            role: ""
         };
     },
     computed: {

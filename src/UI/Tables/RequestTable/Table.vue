@@ -16,8 +16,10 @@
                     <td class="py-2 px-4">
                         {{ (currentPage - 1) * pageSize + index + 1 }}
                     </td>
-                    <td class="py-2 px-4">{{ item.parentName }}</td>
-                    <td class="py-2 px-4">{{ item.type }}</td>
+                    <td class="py-2 px-4">{{ item.name }}</td>
+                    <td v-if="item.type == 'تسجيل'" class="py-2 px-4">تسجيل\تقديم</td>
+                    <td v-else-if="item.type == 'تحويل'" class="py-2 px-4">تحويل</td>
+                    <td v-else-if="item.type == 'إستفسار'" class="py-2 px-4"> إستفسار</td>
                     <td class="py-2 px-4 relative">
                         <router-link :to="infoRoute(index)"
                             class="bg-[#4d394d] text-white px-5 py-3 rounded-md font-bold">التفاصيل</router-link>
@@ -39,6 +41,9 @@ export default {
             pageSize: 5,
             confirm: false,
             clickable: false,
+            req1: true,
+            req2: false,
+            req3: false,
         }
     },
     created() { },

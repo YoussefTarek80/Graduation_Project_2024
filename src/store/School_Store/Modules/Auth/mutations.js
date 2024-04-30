@@ -5,10 +5,10 @@ export const mutations = {
     Set_Students(state, studs) {
         state.studs = studs;
     },
-    Set_Requests(state, requests) {
+    Set_SCRequests(state, requests) {
         state.requests = requests;
     },
-    Set_Events(state, events) {
+    Set_SCEvents(state, events) {
         state.events = events;
     },
     Set_Teachers(state, teachers) {

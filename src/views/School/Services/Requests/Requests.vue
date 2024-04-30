@@ -6,8 +6,8 @@
         <span class="sm:text-3xl text-2xl">قائمة الطلبات </span>
         <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink"></i>
       </div>
-      <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="GetRequests" :request="true"
-        :Search="true">
+      <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="Get_SCRequests"
+        :request="true" :Search="true">
       </FilterComponent>
       <div class="relative">
         <table_Component :items="filtered_Array" :infoRoute="'/School/Services/Requests/Request'">
@@ -31,22 +31,22 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['GetRequests'])
+    ...mapGetters(['Get_SCRequests'])
   },
   created() {
     this.fetchData();
-    this.filtered_Array = this.GetRequests;
+    this.filtered_Array = this.Get_SCRequests;
   },
   methods: {
-    ...mapActions(['FetchRequests']),
+    ...mapActions(['FetchSCRequests']),
     async fetchData() {
       try {
-        await this.FetchRequests();
-        this.filtered_Array = this.GetRequests;
+        await this.FetchSCRequests();
+        this.filtered_Array = this.Get_SCRequests;
         console.log(this.filtered_Array);
       }
       catch (error) {
-        throw '( fetching Requests Error: ' + error + ')';
+        throw '( fetching School Requests Error: ' + error + ')';
       }
     },
     handleFilter(filteredArray) {
