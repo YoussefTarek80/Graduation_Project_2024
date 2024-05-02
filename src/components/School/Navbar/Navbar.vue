@@ -7,11 +7,13 @@
             </div>
             <div class="relative user_Info flex flex-row-reverse items-center justify-center sm:space-x-4 space-x-2">
                 <div class="sm:w-20 w-10 cursor-pointer " @click="userLogout = !userLogout">
-                    <img :src="GetUser2.school_image" alt="" class=" rounded-full border-2 border-white p-1" />
+                    <img :src="GetUser2.school_image" alt="Personal-img"
+                        class=" rounded-full border-2 border-white p-1" />
                 </div>
                 <div class="flex flex-col text-center sm:text-xl text-xs">
                     <span>{{ GetUser2.name }}</span>
-                    <span class="text-customYellow">مدير المدرسة</span>
+                    <span v-if="role === 'manager'" class="text-customYellow">مدير المدرسة</span>
+                    <span v-else-if="role === 'staff'" class="text-customYellow">مسؤول في المدرسة</span>
                 </div>
                 <div class="relative">
                     <i class="fa-thin fa-bell sm:text-4xl text-2xl" style="color: #ffffff"></i>
@@ -59,7 +61,7 @@
                 <li class="sm:p-10 p-4 sm:text-xl text-sm">
                     <router-link to="/School/Services/Events">المناسبات</router-link>
                 </li>
-                <li class="sm:p-10 p-4 sm:text-xl text-sm">
+                <li v-if="role == 'manager'" class="sm:p-10 p-4 sm:text-xl text-sm">
                     <router-link to="/School/Services/Controllers">المسؤولين</router-link>
                 </li>
                 <li class="sm:p-10 p-4 sm:text-xl text-sm">
@@ -73,21 +75,21 @@
     </header>
 </template>
 <script>
-import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
 export default {
     data() {
         return {
+            role: "",
             userLogout: false,
             loading: false,
-            role: ""
         };
     },
     computed: {
         ...mapGetters(["GetUser2"]),
     },
     mounted() {
-        this.FetchUser2();
+        this.role = localStorage.getItem('role');
+        this.FetchUser2(this.role);
     },
     methods: {
         ...mapActions(["logoutSC", "FetchUser2"]),

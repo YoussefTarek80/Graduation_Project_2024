@@ -38,16 +38,26 @@
           <span v-if="role == 'حدد الدور الوظيفي...' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
         <div class="flex flex-col">
-          <label for="in1">العمر
+          <label for="in1">تاريخ الميلاد
             <span class="text-red-600">*</span></label>
-          <input type="number" v-model="age" placeholder="كم عمر المدير..." class="outline-customDarkPurple" />
-          <span v-if="age == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+          <input type="date" v-model="birthdate" placeholder="كم عمر المدير..." class="outline-customDarkPurple" />
+          <span v-if="birthdate == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
         <div class="flex flex-col">
-          <label for="in1">العنوان
+          <label for="in1">رقم الهاتف
             <span class="text-red-600">*</span></label>
+          <input type="text" v-model="phone" placeholder="ك المدير..." class="outline-customDarkPurple" />
+          <span v-if="phone == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+        </div>
+        <div class="flex flex-col">
+          <label for="in1">العنوان<span class="text-red-600">*</span></label>
           <input type="text" v-model="address" placeholder="أكتب العنوان..." class="outline-customDarkPurple" />
           <span v-if="address == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+        </div>
+        <div class="flex flex-col">
+          <label for="in1">البريد الإلكتروني<span class="text-red-600">*</span></label>
+          <input type="text" v-model="email" placeholder="أكتب العنوان..." class="outline-customDarkPurple" />
+          <span v-if="email == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
       </div>
     </div>
@@ -72,7 +82,9 @@ export default {
       name: "",
       role: "حدد الدور الوظيفي...",
       address: "",
-      age: "",
+      birthdate: "",
+      phone: "",
+      email: "",
       failed: false,
       success: false,
       empty: false,
@@ -82,35 +94,34 @@ export default {
   },
   methods: {
     ...mapActions(["AddController"]),
-    formatTime(time) {
-      const [hours, minutes, seconds] = time.split(":");
-      const formattedHours = ("0" + hours).slice(-2);
-      const formattedMinutes = ("0" + minutes).slice(-2);
-      return `${formattedHours}:${formattedMinutes} `;
-    },
     async addController() {
       try {
-        if (this.name != '' && this.role != 'حدد الدور الوظيفي...' && this.address != '' && this.age != '') {
+        // if (this.name != '') {
+          // if (this.name != '' && this.role != 'حدد الدور الوظيفي...'
+          //   && this.address != '' && this.phone != '' && this.birthdate != '' && this.email != '') {
+          console.log('qwtqwtqw');
           await this.AddController({
             name: this.name,
+            email: this.email,
             address: this.address,
+            phone: this.phone,
+            birthdate: this.birthdate,
             role: this.role,
-            age: this.age,
           });
           this.success = true;
           setTimeout(() => { this.success = false }, 1000);
           console.log("Controller Added Successfully");
-        }
-        else {
-          this.empty = true;
-          this.failed = true;
-          setTimeout(() => { this.failed = false }, 1000);
-        }
+        // }
+        // else {
+        //   this.empty = true;
+        //   this.failed = true;
+        //   setTimeout(() => { this.failed = false }, 1000);
+        // }
       } catch (err) {
-        console.log(err);
         this.empty = true;
         this.failed = true;
         setTimeout(() => { this.failed = false }, 1000);
+        throw `adding ${err}`;
       }
     },
   },

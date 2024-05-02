@@ -6,11 +6,12 @@
             <div class="p-4 flex flex-row-reverse items-center justify-center space-x-6 rounded-2xl py-5">
                 <div>
                     <img :src="GetUser2.school_image" class="sm:w-60 rounded-full border-2 border-customPurple p-1"
-                        alt="" />
+                        alt="Personal-Image" />
                 </div>
                 <div class="flex flex-col">
                     <span class="text-2xl">{{ GetUser2.name }} </span>
-                    <span class="text-customDarkPurple">مدير المدرسة</span>
+                    <span v-if="role === 'manager'" class="text-customDarkPurple">مدير المدرسة</span>
+                    <span v-else-if="role === 'staff'" class="text-customDarkPurple">مسؤول في المدرسة</span>
                 </div>
             </div>
             <button @click="this.$router.push('/Manager/Profile')"
@@ -81,32 +82,36 @@ export default {
                     numbers: null,
                 },
             ],
+            role: ""
         };
     },
     computed: {
         ...mapGetters(["GetUser2", "GetStudents", "GetRequests", "GetEvents", "GetTeachers"]),
     },
-    async mounted() {
-        await this.fetchAllData();
+    created() {
+        this.role = localStorage.getItem('role');
+        console.log(this.GetUser2);
+        this.fetchAllData();
         this.DisplayDashboardNumbers();
     },
     methods: {
         ...mapActions(["FetchUser2", "FetchStudents", "FetchRequests", "FetchEvents", "FetchTeachers"]),
         DisplayDashboardNumbers() {
             this.data[0].numbers = this.GetStudents.length;
-            this.data[1].numbers = this.GetEvents.length;
+            // this.data[1].numbers = this.GetEvents.length;
             this.data[2].numbers = 13;
-            this.data[3].numbers = this.GetRequests.length;
-            this.data[4].numbers = this.GetTeachers.length;
+            // this.data[3].numbers = this.GetRequests.length;
+            // this.data[4].numbers = this.GetTeachers.length;
         },
         async fetchAllData() {
             try {
-                await this.FetchUser2();
-                await this.FetchStudents();
-                await this.FetchTeachers();
-                await this.FetchRequests();
-                await this.FetchEvents();
+                await this.FetchUser2(this.role);
+                // await this.FetchStudents();
+                // await this.FetchTeachers();
+                // await this.FetchRequests();
+                // await this.FetchEvents();
                 console.log("All Data Fetched Successfully");
+                console.log(this.GetUser2);
             } catch (error) {
                 throw `Fetching All Data  Error : ${error}`;
             }

@@ -27,3 +27,10 @@ app.component("Navbar_Component", Navbar_Component);
 app.component("ScNavbarComp", ScNavbarComp);
 app.component("Footer_Component", Footer_Component);
 app.mount("#app");
+
+function formatTime(time) {
+    const [hours, minutes, seconds] = time.split(":");
+    const formattedHours = ("0" + hours).slice(-2);
+    const formattedMinutes = ("0" + minutes).slice(-2);
+    return `${formattedHours}:${formattedMinutes} `;
+}

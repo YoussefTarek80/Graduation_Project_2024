@@ -23,7 +23,7 @@
             <label for="fileInput" data-aos="fade-up" data-aos-duration="1000">
                 <img :src="GetUser2.school_image" alt="My Image" />
             </label>
-            <input id="fileInput" type="file" style="display: none" @change="handleFile" />
+            <input v-if="role == 'manager'" id="fileInput" type="file" style="display: none" @change="handleFile" />
         </div>
     </section>
 
@@ -169,6 +169,7 @@ import axios from "axios";
 export default {
     data() {
         return {
+            role: "",
             imageURL: null,
             file: null,
             v_m_name: true,
@@ -186,6 +187,7 @@ export default {
         ...mapGetters(["GetUser2"]),
     },
     created() {
+        this.role = localStorage.getItem('role');
         this.initData();
         this.FetchData();
     },
@@ -212,7 +214,7 @@ export default {
         },
         async FetchData() {
             try {
-                await this.FetchUser2();
+                await this.FetchUser2(this.role);
                 this.initData();
             } catch (error) {
                 console.error("Error fetching profile info:", error);
@@ -224,21 +226,39 @@ export default {
                     this.v_m_name = this.valid_input1(this.name);
                     const token = localStorage.getItem("token");
                     const updatedData = new FormData();
-                    updatedData.append("manager_name", this.name);
-                    updatedData.append("manager_phone", this.phone);
-                    updatedData.append("manager_address", this.address);
-                    updatedData.append("image", this.file);
-                    await axios.post(
-                        "http://127.0.0.1:8000/api/school/updateProfile",
-                        updatedData,
-                        {
-                            headers: {
-                                Authorization: `Bearer ${token}`,
-                                "Content-Type": "multipart/form-data",
-                            },
-                        }
-                    );
-                    await this.FetchUser2();
+                    if (this.role == 'manager') {
+                        updatedData.append("manager_name", this.name);
+                        updatedData.append("manager_phone", this.phone);
+                        updatedData.append("manager_address", this.address);
+                        updatedData.append("image", this.file);
+                        await axios.post(
+                            "http://127.0.0.1:8000/api/school/manager/updateProfile",
+                            updatedData,
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${token}`,
+                                    "Content-Type": "multipart/form-data",
+                                },
+                            }
+                        );
+                    }
+                    else if (this.role == 'staff') {
+                        updatedData.append("staff_name", this.name);
+                        updatedData.append("staff_phone", this.phone);
+                        updatedData.append("staff_address", this.address);
+                        updatedData.append("image", this.file);
+                        await axios.post(
+                            "http://127.0.0.1:8000/api/school/staff/updateProfile",
+                            updatedData,
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${token}`,
+                                    "Content-Type": "multipart/form-data",
+                                },
+                            }
+                        );
+                    }
+                    await this.FetchUser2(this.role);
                     this.v_m_name = this.valid_input1(this.name);
                     this.v_m_phone = this.valid_input2(this.phone);
                     this.success = true;

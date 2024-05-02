@@ -13,18 +13,17 @@
             <form action="" class="w-11/12 space-y-4 flex flex-col" @submit.prevent="onSubmit">
                 <div class="flex flex-row gap-4">
                     <div class="flex items-center mb-4">
-                        <input @click="role == 'manager'" id="manager" type="radio" name="acc-check" class="cursor-pointer w-4 h-4 
-                        text-blue-600 bg-gray-100 rounded focus:ring-blue-500">
+                        <input @click="rolee('manager')" id="manager" type="radio" name="acc-check" class="cursor-pointer w-4 h-4 
+                        text-customPurple bg-customPurple">
                         <label for="manager" class="ms-2 cursor-pointer text-xl 
                         text-customPurple dark:text-customPurple">
-                            <i class="fa-solid fa-chalkboard-user text-2xl"></i>&ThinSpace;&ThinSpace;مدير
-                            المدرسة</label>
+                            <i class="fa-solid fa-user text-2xl"></i>&ThinSpace;&ThinSpace;مدير المدرسة</label>
                     </div>
                     <div class="flex items-center mb-4">
-                        <input id="control" type="radio" name="acc-check" class="cursor-pointer w-4 h-4 
-                        text-blue-600 bg-gray-100 rounded focus:ring-blue-500">
-                        <label for="control"
-                            class="ms-2 cursor-pointer text-xl text-customPurple dark:text-customPurple">
+                        <input @click="rolee('staff')" id="control" type="radio" name="acc-check" class="cursor-pointer w-4 h-4 
+                        text-customPurple bg-customPurple">
+                        <label for="control" class="ms-2 cursor-pointer text-xl text-customPurple
+                        dark:text-customPurple">
                             <i class="fa-solid fa-people-roof text-2xl"></i>&ThinSpace;&ThinSpace;مسؤول في
                             المدرسة</label>
                     </div>
@@ -74,10 +73,10 @@ export default {
         return {
             email: "",
             password: "",
+            role: "",
             invalid: false,
             login_Failed: false,
             loading: false,
-            role: ""
         };
     },
     computed: {
@@ -90,6 +89,7 @@ export default {
         },
     },
     created() {
+        console.log(this.rolee());
     },
     mounted() {
         this.Invalid_Data();
@@ -126,14 +126,18 @@ export default {
         },
         clearLocalStorage() {
             localStorage.clear();
+        }, rolee(v) {
+            this.role = v;
+            localStorage.setItem('role', this.role);
         },
         async onSubmit() {
             this.loading_Fun();
-            const { email, password } = this;
+            const { email, password, role } = this;
             try {
-                await this.loginSC({ email, password });
+                await this.loginSC({ email, password, role });
                 this.$router.push("/School/Home");
-            } catch (error) {
+            }
+            catch (error) {
                 console.error("Login error:", error);
                 this.Handle_Error();
             }

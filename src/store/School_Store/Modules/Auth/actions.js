@@ -1,10 +1,11 @@
 import axios from "axios";
+import { controllers } from "chart.js";
 export const actions = {
-    async loginSC({ commit, dispatch }, { email, password }) {
+    async loginSC({ commit, dispatch }, { email, password, role }) {
         try {
             const response = await axios.post(
                 "http://127.0.0.1:8000/api/school/login",
-                { email, password }
+                { email, password, role }
             );
             const data = response.data.data;
             localStorage.setItem("token", data.token);
@@ -25,24 +26,38 @@ export const actions = {
                     },
                 }
             );
-            localStorage.clear();
+            localStorage.removeItem('token');
+            localStorage.removeItem('User');
             commit("LOGOUT2");
         } catch (error) {
             console.error("Logout failed:", error);
         }
     },
-    async FetchUser2({ commit }) {
+    async FetchUser2({ commit }, role) {
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.get(
-                "http://127.0.0.1:8000/api/school/showProfile",
-                {
-                    headers: { Authorization: `Bearer ${token}`, },
-                }
-            );
-            const user = response.data.data;
-            localStorage.setItem("User", JSON.stringify(user));
-            commit("Set_User2", user);
+            if (role === 'manager') {
+                const response = await axios.get(
+                    "http://127.0.0.1:8000/api/school/manager/showProfile",
+                    {
+                        headers: { Authorization: `Bearer ${token}`, },
+                    }
+                );
+                const user = response.data.data;
+                localStorage.setItem("User", JSON.stringify(user));
+                commit("Set_User2", user);
+            }
+            else if (role === 'staff') {
+                const response = await axios.get(
+                    "http://127.0.0.1:8000/api/school/staff/showProfile",
+                    {
+                        headers: { Authorization: `Bearer ${token}`, },
+                    }
+                );
+                const user = response.data.data;
+                localStorage.setItem("User", JSON.stringify(user));
+                commit("Set_User2", user);
+            }
         } catch (error) {
             console.error("Error fetching profile info:", error);
         }
@@ -108,6 +123,35 @@ export const actions = {
             console.log(reponse.data.data);
         } catch (err) {
             throw err;
+        }
+    },
+    async AddController({ commit, dispatch }, { name, email, address, phone, birthdate, role }) {
+        try {
+            const token = localStorage.getItem("token");
+            const data = new FormData();
+            data.append('staff_name', name);
+            data.append('email', email);
+            data.append('staff_phone', phone);
+            data.append('staff_address', address);
+            data.append('birthdate', birthdate);
+            data.append('staff_role', role);
+
+            console.log(data);
+            // const response = await axios.post(
+            await axios.post(
+                "http://127.0.0.1:8000/api/school/addStaff",
+                data,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            // const controller = response.data.data;
+            // commit("Set_Controller", controller);
+            await dispatch("FetchControllers");
+        } catch (err) {
+            throw `Adding Controller Error : ${err}`;
         }
     },
     ///
@@ -408,25 +452,6 @@ export const actions = {
         } catch (err) {
             console.log(err);
             throw err;
-        }
-    },
-    async AddController({ dispatch }, controllerData) {
-        try {
-            const token = localStorage.getItem("token");
-            // const response = await axios.post(
-            //     "http://127.0.0.1:8000/api/addEvent",
-            //     eventData,
-            //     {
-            //         headers: {
-            //             Authorization: `Bearer ${token}`,
-            //         },
-            //     }
-            // );
-            // controllers.push(controllerData);
-            // commit("Set_Controllers", controllers)
-            await dispatch("FetchControllers");
-        } catch (err) {
-            throw `Adding Controller Error : ${err}`;
         }
     },
 };
