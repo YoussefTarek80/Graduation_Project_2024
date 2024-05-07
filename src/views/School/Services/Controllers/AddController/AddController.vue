@@ -30,10 +30,10 @@
           <select v-model="role"
             class="bg-white border border-gray-300 rounded-xl my-3 py-4 px-4 focus:border-customDarkPurple">
             <option :value="role" disabled selected>حدد الدور الوظيفي...</option>
-            <option value="كنترول إزالة ملف">كنترول إزالة ملف</option>
-            <option value="كنترول تصحيح">كنترول تصحيح </option>
-            <option value="كنترول تحويل الطلاب">كنترول تحويل الطلاب </option>
-            <option value="كنترول تسجيل الطلاب">كنترول تسجيل الطلاب </option>
+            <option value="مسؤول الملفات">مسؤول الملفات</option>
+            <option value="مسؤول التصحيح">مسؤول التصحيح</option>
+            <option value="مسؤول الطلبات">مسؤول الطلبات</option>
+            <option value="مسؤول الدعم والشكاوي">مسؤول الدعم والشكاوي</option>
           </select>
           <span v-if="role == 'حدد الدور الوظيفي...' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
@@ -96,9 +96,8 @@ export default {
     ...mapActions(["AddController"]),
     async addController() {
       try {
-        // if (this.name != '') {
-          // if (this.name != '' && this.role != 'حدد الدور الوظيفي...'
-          //   && this.address != '' && this.phone != '' && this.birthdate != '' && this.email != '') {
+        if (this.name != '' && this.role != 'حدد الدور الوظيفي...'
+          && this.address != '' && this.phone != '' && this.birthdate != '' && this.email != '') {
           console.log('qwtqwtqw');
           await this.AddController({
             name: this.name,
@@ -111,12 +110,12 @@ export default {
           this.success = true;
           setTimeout(() => { this.success = false }, 1000);
           console.log("Controller Added Successfully");
-        // }
-        // else {
-        //   this.empty = true;
-        //   this.failed = true;
-        //   setTimeout(() => { this.failed = false }, 1000);
-        // }
+        }
+        else {
+          this.empty = true;
+          this.failed = true;
+          setTimeout(() => { this.failed = false }, 1000);
+        }
       } catch (err) {
         this.empty = true;
         this.failed = true;

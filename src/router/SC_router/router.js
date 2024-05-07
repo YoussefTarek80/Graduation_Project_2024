@@ -68,13 +68,41 @@ const router = createRouter({
             },
         },
         {
-            path: "/School/Services/Requests/Request/:id",
-            component: () => import("../../views/School/Services/Requests/Request/Request.vue"),
+            path: "/School/Services/enroll-requests",
+            component: () => import("../../views/School/Services/Requests/enroll-requests.vue"),
             meta: {
-                title: "RequestPage",
+                title: "school-enroll-requests",
+                requiresAuth: true,
+                roles: ["school-enroll-requests"],
+            },
+        },
+        {
+            path: "/school/services/requests/enroll-request/:id",
+            component: () => import("../../views/School/Services/Requests/Request/enroll-request.vue"),
+            meta: {
+                title: "enroll-req-page",
                 requiresAuth: true,
                 props: true,
-                roles: ["RequestPage"],
+                roles: ["enroll-req-Page"],
+            },
+        },
+        {
+            path: "/School/Services/transfer-requests",
+            component: () => import("../../views/School/Services/Requests/transfer-requests.vue"),
+            meta: {
+                title: "school-transfer-requests",
+                requiresAuth: true,
+                roles: ["school-transfer-requests"],
+            },
+        },
+        {
+            path: "/school/services/requests/transfer-request/:id",
+            component: () => import("../../views/School/Services/Requests/Request/transfer-request.vue"),
+            meta: {
+                title: "transfer-req-page",
+                requiresAuth: true,
+                props: true,
+                roles: ["transfer-req-Page"],
             },
         },
         {
@@ -84,15 +112,6 @@ const router = createRouter({
                 title: "SchoolTeachers",
                 requiresAuth: true,
                 roles: ["SchoolTeachers"],
-            },
-        },
-        {
-            path: "/School/Services/Requests",
-            component: () => import("../../views/School/Services/Requests/Requests.vue"),
-            meta: {
-                title: "SchoolRequests",
-                requiresAuth: true,
-                roles: ["SchoolRequests"],
             },
         },
         {

@@ -11,16 +11,28 @@
                     الاجراء
                 </th>
             </thead>
-            <tbody class="text-center relative" ref="tableBody">
-                <tr v-for="(item, index) in paginatedItems" :key="index" class="h-20 odd:bg-white even:bg-gray-100">
-                    <td class="py-2 px-4">
-                        {{ (currentPage - 1) * pageSize + index + 1 }}
+            <tbody v-if="tableEmpty">
+                <h1 class="p-5 w-full text-center">لا يوجد طلبات حتي الأن...</h1>
+            </tbody>
+            <tbody v-if="!tableEmpty" class="text-center relative" ref="tableBody">
+                <tr v-for="(item, index) in paginatedItems" :key="index" v-if="this.reqtype == 'تقديم'"
+                    class="h-20 odd:bg-white even:bg-gray-100">
+                    <td class="py-2 px-4" v-if="item.type == 'تسجيل'"> {{ (currentPage - 1) * pageSize + index + 1 }}
                     </td>
-                    <td class="py-2 px-4">{{ item.name }}</td>
-                    <td v-if="item.type == 'تسجيل'" class="py-2 px-4">تسجيل\تقديم</td>
-                    <td v-else-if="item.type == 'تحويل'" class="py-2 px-4">تحويل</td>
-                    <td v-else-if="item.type == 'إستفسار'" class="py-2 px-4"> إستفسار</td>
-                    <td class="py-2 px-4 relative">
+                    <td class="py-2 px-4" v-if="item.type == 'تسجيل'">{{ item.name }}</td>
+                    <td class="py-2 px-4" v-if="item.type == 'تسجيل'">{{ item.type }}</td>
+                    <td class="py-2 px-4 relative" v-if="item.type == 'تسجيل'">
+                        <router-link :to="infoRoute(index)"
+                            class="bg-[#4d394d] text-white px-5 py-3 rounded-md font-bold">التفاصيل</router-link>
+                    </td>
+                </tr>
+                <tr v-for="(item, index) in paginatedItems" :key="index" v-if="this.reqtype == 'تحويل'"
+                    class="h-20 odd:bg-white even:bg-gray-100">
+                    <td class="py-2 px-4" v-if="item.type == 'تحويل'">{{ (currentPage - 1) * pageSize + index + 1 }}
+                    </td>
+                    <td class="py-2 px-4" v-if="item.type == 'تحويل'">{{ item.name }}</td>
+                    <td class="py-2 px-4" v-if="item.type == 'تحويل'">{{ item.type }}</td>
+                    <td class="py-2 px-4 relative" v-if="item.type == 'تحويل'">
                         <router-link :to="infoRoute(index)"
                             class="bg-[#4d394d] text-white px-5 py-3 rounded-md font-bold">التفاصيل</router-link>
                     </td>
@@ -33,7 +45,7 @@
 
 <script>
 export default {
-    props: ["items", "infoRoute"],
+    props: ["items", "infoRoute", "reqtype"],
     data() {
         return {
             showInfo: null,
@@ -41,12 +53,14 @@ export default {
             pageSize: 5,
             confirm: false,
             clickable: false,
-            req1: true,
-            req2: false,
-            req3: false,
+            tableEmpty: false,
         }
     },
-    created() { },
+    created() {
+        console.log(this.reqtype);
+        console.log(this.paginatedItems);
+        this.tableEmpty = this.check;
+    },
     computed: {
         totalPages() {
             return Math.ceil(this.items.length / this.pageSize);
@@ -56,6 +70,14 @@ export default {
             const endIndex = startIndex + this.pageSize;
             return this.items.slice(startIndex, endIndex);
         },
+        check() {
+            if (this.paginatedItems.length === 0) {
+                return true;
+            }
+            else if (this.paginatedItems.length > 0) {
+                return false;
+            }
+        }
     },
     methods: {
         infoRoute(index) {

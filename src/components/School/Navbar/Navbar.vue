@@ -13,7 +13,7 @@
                 <div class="flex flex-col text-center sm:text-xl text-xs">
                     <span>{{ GetUser2.name }}</span>
                     <span v-if="role === 'manager'" class="text-customYellow">مدير المدرسة</span>
-                    <span v-else-if="role === 'staff'" class="text-customYellow">مسؤول في المدرسة</span>
+                    <span v-else-if="role === 'staff'" class="text-customYellow">{{ roleTitle }} في المدرسة</span>
                 </div>
                 <div class="relative">
                     <i class="fa-thin fa-bell sm:text-4xl text-2xl" style="color: #ffffff"></i>
@@ -43,7 +43,7 @@
                 <li class="sm:p-10 p-4 sm:text-xl text-sm">
                     <router-link to="/School/Home">الرئيسية</router-link>
                 </li>
-                <li class="sm:p-10 p-4 sm:text-xl text-sm">
+                <li v-if="role == 'manager' || roleTitle == 'مسؤول التصحيح'" class="sm:p-10 p-4 sm:text-xl text-sm">
                     مدرستي
                     <i class="fa-sharp fa-solid fa-chevron-down m-3"></i>
                     <ul class="dropdown">
@@ -55,19 +55,36 @@
                         </li>
                     </ul>
                 </li>
-                <li class="sm:p-10 p-4 sm:text-xl text-sm">
-                    <router-link to="/School/Services/Requests">الطلبات</router-link>
+                <!-- <li v-else-if="roleTitle == 'مسؤول التصحيح'" key="teachers">
+                    <router-link to="/School/Teachers">قائمة المدرسين</router-link>
+                </li> -->
+                <li v-if="role == 'manager' || roleTitle == 'مسؤول الطلبات'" class="sm:p-10 p-4 sm:text-xl text-sm">
+                    الطلبات
+                    <i class="fa-sharp fa-solid fa-chevron-down m-3"></i>
+                    <ul class="dropdown">
+                        <li>
+                            <router-link to="/School/Services/enroll-requests">التقديمات</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/School/Services/transfer-requests">التحويلات</router-link>
+                        </li>
+                    </ul>
                 </li>
-                <li class="sm:p-10 p-4 sm:text-xl text-sm">
+                <li v-if="role == 'manager' || roleTitle == 'مسؤول الملفات'" class="sm:p-10 p-4 sm:text-xl text-sm">
                     <router-link to="/School/Services/Events">المناسبات</router-link>
                 </li>
                 <li v-if="role == 'manager'" class="sm:p-10 p-4 sm:text-xl text-sm">
                     <router-link to="/School/Services/Controllers">المسؤولين</router-link>
                 </li>
-                <li class="sm:p-10 p-4 sm:text-xl text-sm">
+                <li v-if="role == 'manager' || roleTitle == 'مسؤول التصحيح'" class="sm:p-10 p-4 sm:text-xl text-sm">
                     <router-link to="/School/Services/Subjects">المواد</router-link>
                 </li>
-                <li class="sm:p-10 p-4 sm:text-xl text-sm">
+                <li v-if="role == 'manager' || roleTitle == 'مسؤول الدعم والشكاوي'"
+                    class="sm:p-10 p-4 sm:text-xl text-sm">
+                    <router-link to="/School/Services/Complaints">الدعم</router-link>
+                </li>
+                <li v-if="role == 'manager' || roleTitle == 'مسؤول الدعم والشكاوي'"
+                    class="sm:p-10 p-4 sm:text-xl text-sm">
                     <router-link to="/School/Services/Complaints">الشكاوي</router-link>
                 </li>
             </ul>
@@ -80,6 +97,7 @@ export default {
     data() {
         return {
             role: "",
+            roleTitle: "",
             userLogout: false,
             loading: false,
         };
@@ -89,6 +107,8 @@ export default {
     },
     mounted() {
         this.role = localStorage.getItem('role');
+        this.roleTitle = localStorage.getItem('staff_role');
+        console.log(this.GetUser2);
         this.FetchUser2(this.role);
     },
     methods: {

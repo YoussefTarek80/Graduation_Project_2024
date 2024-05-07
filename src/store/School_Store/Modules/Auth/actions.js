@@ -9,6 +9,7 @@ export const actions = {
             );
             const data = response.data.data;
             localStorage.setItem("token", data.token);
+            localStorage.setItem("staff_role", data.staff_role);
             await dispatch("FetchUser2");
         } catch (error) {
             throw error;
@@ -110,9 +111,6 @@ export const actions = {
     },
     async AcceptEnrollStudent({ commit }, { id, status }) {
         const token = localStorage.getItem("token");
-
-        console.log(status);
-        console.log(id);
         try {
             const reponse = await axios.post(
                 `http://127.0.0.1:8000/api/school/SendEnrollRequests/${id}`,
@@ -135,7 +133,6 @@ export const actions = {
             data.append('staff_address', address);
             data.append('birthdate', birthdate);
             data.append('staff_role', role);
-
             console.log(data);
             // const response = await axios.post(
             await axios.post(

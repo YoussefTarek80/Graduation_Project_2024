@@ -73,13 +73,13 @@
                 <span class="text-2xl"> بيانات الأب ({{ this.appriateNational }})</span>
             </div>
             <div v-else-if="!this.isAppriate" class="my-5">
-                <span class="text-2xl">بيانات الأب </span>
+                <span class="text-2xl">بيانات الأب/الأم</span>
             </div>
             <form action="" @submit.prevent>
                 <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="flex flex-col">
-                        <label for="in1">اسم الأب</label>
-                        <input disabled v-model="student.parent_id" id="parentName" type="text" class="item-data" />
+                        <label for="in1">الإسم </label>
+                        <input disabled v-model="student.parent_name" id="parentName" type="text" class="item-data" />
                     </div>
                     <div class="flex flex-col">
                         <label for="in2">الدولة</label>
@@ -95,7 +95,7 @@
                     </div>
                     <div class="flex flex-col">
                         <label for="in5">المهنة</label>
-                        <input disabled v-model="student.parent_id" id="parentJop" type="text" class="item-data" />
+                        <input disabled v-model="student.parent_job" id="parentJop" type="text" class="item-data" />
                     </div>
                 </div>
             </form>
@@ -126,13 +126,13 @@ export default {
         },
     },
     created() {
-        this.level = this.student.level;
         this.FetchData();
     },
     methods: {
         ...mapActions(["FetchStudents", "UpdateStudent"]),
         initData() {
             this.student = this.GetStudents[this.id];
+            console.log(this.student.level);
             if (this.student.nationality != "مصري") {
                 this.isAppriate = true;
             }

@@ -8,7 +8,7 @@
             <loading_Search :show="search_status" class="absolute left-5 top-0"></loading_Search>
         </div>
 
-        <div class="relative  w-full" v-else>
+        <div class="relative col-span-1 sm:col-span-3  m-2" v-else>
             <input type="text" v-if="national_id" placeholder="بحث بالرقم القومي... " class="p-3 w-full rounded-2xl"
                 v-model="search_words" />
             <input type="text" v-else-if="!national_id" placeholder="بحث بالأسم..." class="p-3 w-full rounded-2xl"
@@ -17,7 +17,7 @@
             <loading_Search :show="search_status" class="absolute left-5 top-0"></loading_Search>
         </div>
 
-        <div class="col-span-1 sm:col-span-1">
+        <div class="col-span-1 sm:col-span-1 m-2" v-if="!request">
             <div class="custom-select relative">
                 <select v-model="selectedSortOption" @change="handleSort"
                     class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple">
@@ -27,6 +27,34 @@
                 </select>
                 <div class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none">
                     <i class="fa-duotone fa-sort mx-4"></i>
+                </div>
+            </div>
+        </div>
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6" v-else>
+            <div class="custom-select relative w-full">
+                <select v-model="selectedRequestType" @change="show"
+                    class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple">
+                    <option :value="selectedRequestType" disabled selected> ترتيب علي حسب نوع الطلب</option>
+                    <option>الكل</option>
+                    <option value="Transfer">تحويل طالب</option>
+                    <option value="Register">تسجيل طالب </option>
+                    <option value="Query">استسفار دراسي</option>
+                </select>
+                <div class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none">
+                    <i class="fa-duotone fa-sort mx-4"></i>
+                </div>
+            </div>
+            <div class="w-full">
+                <div class="custom-select relative">
+                    <select v-model="selectedSortOption" @change="handleSort"
+                        class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple">
+                        <option :value="selectedSortOption" disabled selected>ترتيب</option>
+                        <option value="ascending">تصاعديا</option>
+                        <option value="descending">تنازليا</option>
+                    </select>
+                    <div class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none">
+                        <i class="fa-duotone fa-sort mx-4"></i>
+                    </div>
                 </div>
             </div>
         </div>

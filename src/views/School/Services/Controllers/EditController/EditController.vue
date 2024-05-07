@@ -42,10 +42,10 @@
                     <div class="custom-select relative">
                         <select v-model="controller.role"
                             class="w-full appearance-none bg-white border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-customDarkPurple">
-                            <option value="كنترول إزالة ملف">كنترول إزالة ملف</option>
-                            <option value="كنترول تصحيح">كنترول تصحيح </option>
-                            <option value="كنترول تحويل الطلاب">كنترول تحويل الطلاب </option>
-                            <option value="كنترول تسجيل الطلاب">كنترول تسجيل الطلاب </option>
+                            <option value="مسؤول الملفات">مسؤول الملفات</option>
+                            <option value="مسؤول التصحيح">مسؤول التصحيح</option>
+                            <option value="مسؤول الطلبات">مسؤول الطلبات</option>
+                            <option value="مسؤول الدعم والشكاوي">مسؤول الدعم والشكاوي</option>
                         </select>
                         <div class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none">
                             <i class="fa-regular fa-angle-down"></i>

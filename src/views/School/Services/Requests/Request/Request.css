@@ -6,11 +6,31 @@ body {
   padding: 10px;
   border-radius: 10px;
   margin: 10px;
+  color: #000000;
+  background-color: #3d396e !important;
 }
-.tx-era {
-  background: linear-gradient(to left, #d9d9d9, #f3f3f3);
-  min-height: 20rem;
-  overflow: hidden;
+table thead {
+  color: #f2f2f2;
+  background: #383651;
+}
+table thead th:nth-child(1) {
+  border-top-right-radius: 5px;
+}
+table thead th:nth-child(2) {
+  border-top-left-radius: 5px;
+}
+table tbody tr td {
+  padding: 10px;
+}
+table tbody tr td:nth-child(2) {
+  background-color: #dbd9d9;
+}
+table tbody tr td:nth-child(1) {
+  color: #f2f2f2;
+  background-color: #383651;
+}
+.main {
+  margin: 10px auto;
 }
 .response input {
   border: solid 2px rgba(128, 0, 128, 0.244);
