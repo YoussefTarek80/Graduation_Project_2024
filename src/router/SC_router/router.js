@@ -59,8 +59,8 @@ const router = createRouter({
             },
         },
         {
-            path: "/School/Services/Students/add-n-stud",
-            component: () => import("../../views/School/Services/Students/Add_Student/add-n-stud.vue"),
+            path: "/School/Services/Students/StudentGrades/:id",
+            component: () => import("../../views/School/Services/Students/Info_Student/student-grades.vue"),
             meta: {
                 title: "SchoolStudentAddNewSudent",
                 requiresAuth: true,
@@ -78,7 +78,7 @@ const router = createRouter({
         },
         {
             path: "/school/services/requests/enroll-request/:id",
-            component: () => import("../../views/School/Services/Requests/Request/enroll-request.vue"),
+            component: () => import("../../views/School/Services/Requests/Request/enroll-request/enroll-request.vue"),
             meta: {
                 title: "enroll-req-page",
                 requiresAuth: true,
@@ -97,7 +97,7 @@ const router = createRouter({
         },
         {
             path: "/school/services/requests/transfer-request/:id",
-            component: () => import("../../views/School/Services/Requests/Request/transfer-request.vue"),
+            component: () => import("../../views/School/Services/Requests/Request/transfer-request/transfer-request.vue"),
             meta: {
                 title: "transfer-req-page",
                 requiresAuth: true,
@@ -121,6 +121,26 @@ const router = createRouter({
                 title: "SchoolSubjects",
                 requiresAuth: true,
                 roles: ["SchoolSubjects"],
+            },
+        },
+        {
+            path: "/School/Services/Subjects/SubjectInfo/:id",
+            component: () => import("../../views/School/Services/Subjects/Subj-info/subject-info.vue"),
+            meta: {
+                title: "subject-info",
+                requiresAuth: true,
+                props: true,
+                roles: ["subject-info"],
+            },
+        },
+        {
+            path: "/School/Services/Subjects/SubjectInfo/SubjectStuds/:id",
+            component: () => import("../../views/School/Services/Subjects/Subj-info/subject-studs.vue"),
+            meta: {
+                title: "subject-studs",
+                requiresAuth: true,
+                props: true,
+                roles: ["subject-studs"],
             },
         },
         {

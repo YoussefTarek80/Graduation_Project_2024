@@ -86,7 +86,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["GetUser2", "GetStudents", "GetRequests", "GetEvents", "GetTeachers"]),
+        ...mapGetters(["GetUser2", "GetStudents", "GetRequests", "GetEvents", "GetTeachers", "GetControllers"]),
     },
     created() {
         this.role = localStorage.getItem('role');
@@ -99,17 +99,13 @@ export default {
         DisplayDashboardNumbers() {
             this.data[0].numbers = this.GetStudents.length;
             // this.data[1].numbers = this.GetEvents.length;
-            this.data[2].numbers = 13;
+            this.data[2].numbers = this.GetControllers.length;
             // this.data[3].numbers = this.GetRequests.length;
             // this.data[4].numbers = this.GetTeachers.length;
         },
         async fetchAllData() {
             try {
                 await this.FetchUser2(this.role);
-                // await this.FetchStudents();
-                // await this.FetchTeachers();
-                // await this.FetchRequests();
-                // await this.FetchEvents();
                 console.log("All Data Fetched Successfully");
                 console.log(this.GetUser2);
             } catch (error) {

@@ -1,0 +1,74 @@
+<template>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item, index) in items" :key="item.id">
+                    <td>{{ item.id }}</td>
+                    <td v-if="!item.isEditing">{{ item.name }}</td>
+                    <td v-else>
+                        <input v-model="item.name" />
+                    </td>
+                    <td>
+                        <button v-if="!item.isEditing" @click="editItem(index)">Edit</button>
+                        <button v-else @click="saveItem(index)">Save</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<script>
+import { reactive, toRefs } from 'vue';
+
+export default {
+    setup() {
+        const state = reactive({
+            items: [
+                { id: 1, name: 'John Doe', isEditing: false },
+                { id: 2, name: 'Jane Smith', isEditing: false },
+                { id: 3, name: 'Sam Johnson', isEditing: false },
+            ],
+        });
+
+        const editItem = (index) => {
+            state.items[index].isEditing = true;
+        };
+
+        const saveItem = (index) => {
+            state.items[index].isEditing = false;
+        };
+
+        return {
+            ...toRefs(state),
+            editItem,
+            saveItem,
+        };
+    },
+};
+</script>
+
+<style>
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+button {
+    margin: 0 5px;
+}
+</style>

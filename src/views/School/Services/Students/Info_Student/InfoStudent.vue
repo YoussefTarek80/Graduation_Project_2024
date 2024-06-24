@@ -63,7 +63,12 @@
                     </div>
                 </div>
                 <div class="m-5 flex items-center justify-end">
-                    <button @click="submit" class="w-60">حفظ</button>
+                    <button class="w-80 m-1">
+                        <router-link :to="this.infoRoute(this.id)">
+                            كشف درجات الطالب
+                        </router-link>
+                    </button>
+                    <button @click="submit" class="w-60 m-1">حفظ</button>
                 </div>
             </form>
         </div>
@@ -108,7 +113,6 @@
 import { mapGetters, mapActions } from 'vuex';
 import axios from "axios";
 export default {
-    inject: ['students'],
     data() {
         return {
             id: this.$route.params.id,
@@ -137,6 +141,9 @@ export default {
                 this.isAppriate = true;
             }
             else { this.isAppriate = false; }
+        },
+        infoRoute(index) {
+            return `/School/Services/Students/StudentGrades/${index}`;
         },
         async FetchData() {
             try {

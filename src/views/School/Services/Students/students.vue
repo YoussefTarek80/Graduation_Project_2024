@@ -8,7 +8,7 @@
             </div>
         </div>
         <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="this.GetStudents"
-            :national_id="true" :Search="true" :request="false"></FilterComponent>
+            :nationalId="true" :Search="true"></FilterComponent>
         <div class="relative">
             <table_Component :items="filtered_Array" :infoRoute="'/School/Services/Students/InfoStudent'">
             </table_Component>
@@ -32,7 +32,7 @@ export default {
     },
     created() {
         this.fetchData();
-        this.filtered_Array = this.GetStudents;
+        console.log(this.filtered_Array);
     },
     methods: {
         ...mapActions(["FetchStudents"]),

@@ -6,7 +6,7 @@
                 <span class="sm:text-3xl text-2xl">قائمة الطلبات </span>
                 <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink"></i>
             </div>
-            <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="Get_SCRequests"
+            <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="Get_SCTRequests"
                 :request="true" :Search="true">
             </FilterComponent>
             <div class="relative">
@@ -33,18 +33,19 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['Get_SCRequests'])
+        ...mapGetters(['Get_SCTRequests'])
     },
     created() {
         this.fetchData();
-        this.filtered_Array = this.Get_SCRequests;
+        console.log(this.Get_SCTRequests);
+        this.filtered_Array = this.Get_SCTRequests;
     },
     methods: {
-        ...mapActions(['FetchSCRequests']),
+        ...mapActions(['FetchTRequests']),
         async fetchData() {
             try {
-                await this.FetchSCRequests();
-                this.filtered_Array = this.Get_SCRequests;
+                await this.FetchTRequests();
+                this.filtered_Array = this.Get_SCTRequests;
                 console.log(this.filtered_Array);
             }
             catch (error) {

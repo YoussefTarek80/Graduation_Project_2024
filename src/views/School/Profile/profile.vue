@@ -190,6 +190,7 @@ export default {
         this.role = localStorage.getItem('role');
         this.initData();
         this.FetchData();
+        console.log(this.GetUser2)
     },
     methods: {
         ...mapActions(["FetchUser2"]),

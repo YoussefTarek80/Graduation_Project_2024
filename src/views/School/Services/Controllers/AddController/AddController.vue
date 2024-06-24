@@ -98,7 +98,6 @@ export default {
       try {
         if (this.name != '' && this.role != 'حدد الدور الوظيفي...'
           && this.address != '' && this.phone != '' && this.birthdate != '' && this.email != '') {
-          console.log('qwtqwtqw');
           await this.AddController({
             name: this.name,
             email: this.email,
@@ -107,6 +106,7 @@ export default {
             birthdate: this.birthdate,
             role: this.role,
           });
+
           this.success = true;
           setTimeout(() => { this.success = false }, 1000);
           console.log("Controller Added Successfully");

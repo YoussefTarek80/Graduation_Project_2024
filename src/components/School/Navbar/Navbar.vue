@@ -108,7 +108,6 @@ export default {
     mounted() {
         this.role = localStorage.getItem('role');
         this.roleTitle = localStorage.getItem('staff_role');
-        console.log(this.GetUser2);
         this.FetchUser2(this.role);
     },
     methods: {
