@@ -23,7 +23,6 @@
     </div>
 </template>
 <script>
-
 import table_Component from "../../../../UI/Tables/ControllerTable/Table.vue";
 import FilterComponent from "../../../../components/School/Filtration/Filter-school.vue";
 import { mapGetters, mapActions } from "vuex";
@@ -41,14 +40,17 @@ export default {
         ...mapGetters(["GetControllers"]),
     },
     created() {
-        this.filtered_Array = this.GetControllers;
         this.fetchData();
     },
     methods: {
         ...mapActions(["FetchControllers", "RemoveController"]),
+        initData() {
+            this.filtered_Array = this.GetControllers;
+        },
         async fetchData() {
             try {
                 await this.FetchControllers();
+                this.initData();
             }
             catch (error) {
                 throw `Fetching Controllers Error ${error}`;
@@ -59,7 +61,8 @@ export default {
         async deleteController(id) {
             try {
                 await this.RemoveController(id);
-                console.log("Controller Deleted Successfully");
+                this.initData();
+                console.log("Controller the administrator has been dismissed successfully");
             } catch (error) {
                 console.error(error);
             }

@@ -4,47 +4,17 @@ export const actions = {
     async FetchControllers({ commit }) {
         try {
             const token = localStorage.getItem("token");
-            // const response = await axios.get(
-            //     "http://127.0.0.1:8000/api/showEvent",
-            //     {
-            //         headers: {
-            //             Authorization: `Bearer ${token}`,
-            //         },
-            //     }
-            // );
-            // console.log(response.data.data)
-            const schoolControllers = [
+            const response = await axios.get(
+                "http://127.0.0.1:8000/api/school/showStaff",
                 {
-                    id: 0,
-                    name: "مصطفي كامل",
-                    address: "الجيزة - الزمالك",
-                    role: "كنترول تصحيح",
-                    age: 42
-                },
-                {
-                    id: 1,
-                    name: "محمد فتحي",
-                    address: "القاهرة - المهندسين",
-                    role: "كنترول تسجيل الطلاب",
-                    age: 40
-                },
-                {
-                    id: 2,
-                    name: "محمد عزت",
-                    address: "القاهرة - المهندسين",
-                    role: "كنترول تحويل الطلاب",
-                    age: 38
-                },
-                {
-                    id: 3,
-                    name: "معتز خالد",
-                    address: "الجيزة - فيصل",
-                    role: "كنترول إزالة ملف",
-                    age: 35
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 }
-            ];
-            localStorage.setItem("SchoolControllers", JSON.stringify(schoolControllers));
-            commit("Set_Controllers", schoolControllers);
+            );
+            const Controllers = response.data.data;
+            console.log(Controllers);
+            commit("Set_Controllers", Controllers);
         } catch (error) {
             console.error("Error fetching Controllers :", error);
         }
@@ -80,17 +50,14 @@ export const actions = {
     async RemoveController({ commit, dispatch }, id) {
         try {
             const token = localStorage.getItem("token");
-            // await axios.post(
-            //     `http://127.0.0.1:8000/api/deleteEvent/${id}`,
-            //     {},
-            //     {
-            //         headers: {
-            //             Authorization: `Bearer ${token}`,
-            //         },
-            //     }
-            // );
-            console.log(controllers);
-            commit('Set_Controllers', controllers);
+            await axios.get(
+                `http://127.0.0.1:8000/api/school/deleteStaff/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
             await dispatch('FetchControllers');
         } catch (err) {
             console.log(err);

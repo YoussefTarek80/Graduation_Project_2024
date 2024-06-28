@@ -1,5 +1,22 @@
 <template>
     <div class="sm:overflow-hidden overflow-auto">
+        <section class="m-10" data-aos="fade-up" data-aos-duration="1000">
+            <BaseTeleport :show="success">
+                <div class="flex flex-col">
+                    <span class="text-green-700 text-4xl">
+                        تم تعديل درجة الطالب : {{ this.updatedStud }}</span>
+                    <i class="fa-sharp fa-solid fa-badge-check text-green-700 text-7xl m-3"></i>
+                </div>
+            </BaseTeleport>
+            <BaseTeleport :show="failed">
+                <div class="flex flex-col">
+                    <span class="text-red-700 text-4xl" v-if="this.response">
+                        فشل التعديل: الطالب لم يجتاز مواد الترم الأول
+                    </span>
+                    <i class="fa-sharp fa-solid fa-badge-check text-red-700 text-7xl m-3"></i>
+                </div>
+            </BaseTeleport>
+        </section>
         <table class="sm:w-full sm:my-20 mt-9 sm:text-lg text-sm">
             <thead class="text-white">
                 <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tr-2xl">
@@ -7,9 +24,7 @@
                 </th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">إسم الطالب</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">كود الطالب</th>
-                <!-- <th class="sm:py-5 sm:px-4 px-7 py-3">أعمال السنة</th> -->
                 <th class="sm:py-5 sm:px-4 px-7 py-3">الدرجة</th>
-                <!-- <th class="sm:py-5 sm:px-4 px-7 py-3">الدرجة النهائية</th> -->
                 <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tl-2xl">الإجراء</th>
             </thead>
             <tbody class="text-center relative" ref="tableBody">
@@ -19,9 +34,10 @@
                     </td>
                     <td class="py-2 px-4">{{ item.name }}</td>
                     <td class="py-2 px-4">{{ item.national_id }}</td>
-                    <td class="py-2 px-4"><input type="text" :disabled="!item.isEdit" v-model="this.result"></td>
+                    <td class="py-2 px-4"><input type="text" class="text-center" :disabled="!item.is_edit"
+                            placeholder="-" v-model="item.score"></td>
                     <td class="py-2 px-4">
-                        <button class="text-customPurple underline" v-if="!item.isEdit" @click="editItem(item)">
+                        <button class="text-customPurple underline" v-if="!item.is_edit" @click="editItem(item)">
                             تعديل</button>
                         <button class="text-customPurple underline" v-else @click="saveItem(item)">حفظ</button>
                     </td>
@@ -32,16 +48,21 @@
     <Pagination :currentPage="currentPage" :totalPages="totalPages" :nextPage="nextPage" :prevPage="prevPage" />
 </template>
 <script>
+import axios from "axios"
 export default {
     props: ["items"],
     data() {
         return {
+            id: this.$route.params.id,
+            updatedStud: "",
             showInfo: null,
             currentPage: 1,
             pageSize: 5,
-            result: 0,
-            edit: false,
+            score: 0,
+            response: "",
             confirm: false,
+            success: false,
+            failed: false,
         };
     },
     computed: {
@@ -76,11 +97,41 @@ export default {
             }
         },
         editItem(item) {
-            item.isEdit = true;
+            console.log(item.score);
+            item.is_edit = true;
+            this.updatedStud = item.name;
         },
-        saveItem(item) {
-            item.isEdit = false;
+        async saveItem(item) {
+            console.log(item.score);
+            await this.updateGrade(item.id, this.id, item.score);
+            item.is_edit = false;
         },
+        async updateGrade(student_id, term_subject, score) {
+            try {
+                console.log(student_id, term_subject, score)
+                const form = new FormData();
+                form.append('score', score);
+                const token = localStorage.getItem('token');
+                this.response = await axios.post(`http://127.0.0.1:8000/api/school/addStudentScore/${student_id}/${term_subject}`,
+                    form, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                });
+                this.success = true;
+                setTimeout(() => {
+                    this.success = false;
+                }, 2500);
+            }
+            catch (err) {
+                console.log(err);
+                this.response = err.response.status;
+                this.failed = true;
+                setTimeout(() => {
+                    this.failed = false;
+                }, 2500);
+            }
+        }
     },
 };
 </script>

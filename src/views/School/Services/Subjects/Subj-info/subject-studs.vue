@@ -43,23 +43,6 @@ export default {
         return {
             id: this.$route.params.id,
             students: [],
-            scores: reactive({
-                data: [],
-                // {
-                //         name: 'محمد',
-                //         codeId: 353424235,
-                //         worksheet: 35,
-                //         examscore: 45,
-                //         isEdit: false
-                //     },
-                //     {
-                //         name: 'محمد',
-                //         codeId: 353424235,
-                //         worksheet: 35,
-                //         examscore: 45,
-                //         isEdit: false
-                //     }
-            }),
             success: false,
             failed: false,
         };
@@ -83,11 +66,10 @@ export default {
         ...mapActions(["fetchStudSubject"]),
         initData() {
             this.students = this.GetStudSubject;
-            // this.scores.data = this.GetStudSubject;
         },
         async fetchData() {
             try {
-                await this.fetchStudSubject(3);
+                await this.fetchStudSubject(this.id);
                 this.initData();
             } catch (error) {
                 console.error(error);

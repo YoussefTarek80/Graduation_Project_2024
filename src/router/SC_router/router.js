@@ -144,40 +144,59 @@ const router = createRouter({
             },
         },
         {
-            path: "/School/Services/Events",
-            component: () => import("../../views/School/Services/Events/Events.vue"),
+            path: "/School/Services/SC-Events",
+            component: () => import("../../views/School/Services/Events/SC-Events.vue"),
             meta: {
-                title: "SchoolEvents",
+                title: "SC-School-Events",
                 requiresAuth: true,
-                roles: ["SchoolEvents"],
+                roles: ["SC-School-Events"],
             },
         },
         {
-            path: "/School/Services/Events/AddEvent",
+            path: "/School/Services/AD-Events",
+            component: () => import("../../views/School/Services/Events/AD-Events.vue"),
+            meta: {
+                title: "AD-School-Events",
+                requiresAuth: true,
+                roles: ["AD-School-Events"],
+            },
+        },
+        {
+            path: "/School/Services/SC-Events/AddEvent",
             component: () => import("../../views/School/Services/Events/Add_Event/add_event.vue"),
             meta: {
-                title: "AddEvent",
+                title: "Add-SC-Event",
                 requiresAuth: true,
-                roles: ["AddEvent"],
+                roles: ["Add-SC-Event"],
             },
         },
         {
-            path: "/School/Services/Events/InfoEvent/:id",
-            component: () => import("../../views/School/Services/Events/Info_Event/infoEvent.vue"),
+            path: "/School/Services/SC-Events/InfoEvent/:id",
+            component: () => import("../../views/School/Services/Events/Info_Event/SC_InfoEvent.vue"),
             meta: {
-                title: "Info_Event",
+                title: "SC-Info-Event",
                 requiresAuth: true,
                 props: true,
-                roles: ["Info_Event"],
+                roles: ["SC-Info-Event"],
             },
         },
         {
-            path: "/School/Services/Events/UpdateEvent/:id",
+            path: "/School/Services/AD-Events/InfoEvent/:id",
+            component: () => import("../../views/School/Services/Events/Info_Event/AD_InfoEvent.vue"),
+            meta: {
+                title: "AD-Info-Event",
+                requiresAuth: true,
+                props: true,
+                roles: ["AD-Info-Event"],
+            },
+        },
+        {
+            path: "/School/Services/SC-Events/UpdateEvent/:id",
             component: () => import("../../views/School/Services/Events/Update_Event/updateEvent.vue"),
             meta: {
-                title: "Update_Event",
+                title: "Update-Event",
                 requiresAuth: true,
-                roles: ["Update_Event"],
+                roles: ["Update-Event"],
             },
         },
         {

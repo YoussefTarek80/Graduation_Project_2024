@@ -11,22 +11,22 @@
       <div class="pt-12 input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="flex flex-col">
           <label for="in1">اسم مدير الكنترول </label>
-          <input disabled v-model="this.controller.name"
+          <input disabled v-model="this.controller.staff_name"
             class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
         </div>
         <div class="flex flex-col">
           <label for="in4">الدور الوظيفي </label>
-          <input disabled v-model="this.controller.role"
+          <input disabled v-model="this.controller.staff_role"
             class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
         </div>
         <div class="flex flex-col">
-          <label for="in5"> العمر </label>
-          <input disabled v-model="this.controller.age"
+          <label for="in5"> الهاتف </label>
+          <input disabled v-model="this.controller.staff_phone"
             class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
         </div>
         <div class="flex flex-col">
           <label for="in6">العنوان </label>
-          <input disabled v-model="this.controller.address"
+          <input disabled v-model="this.controller.staff_address"
             class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
         </div>
       </div>

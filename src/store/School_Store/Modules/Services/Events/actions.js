@@ -4,35 +4,33 @@ export const actions = {
     async FetchSCEvents({ commit }) {
         try {
             const token = localStorage.getItem("token");
-            // const response = await axios.get(
-            //     "http://127.0.0.1:8000/api/showEvent",
-            //     {
-            //         headers: {
-            //             Authorization: `Bearer ${token}`,
-            //         },
-            //     }
-            // );
-            // console.log(response.data.data)
-            const events = [
+            const response = await axios.get(
+                "http://127.0.0.1:8000/api/school/ShowAdEvent",
                 {
-                    id: 0,
-                    name: "بدء الحجة",
-                    address: "دار الأوبرا",
-                    date: '2024-04-15',
-                    time: '09:00',
-                    status: "تم الحدث",
-                },
-                {
-                    id: 1,
-                    name: "نهائة الحجة",
-                    address: "دار الأوبرا",
-                    date: '2024-06-15',
-                    time: '09:00',
-                    status: "مفعل",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 }
-            ];
-            localStorage.setItem("Events", JSON.stringify(events));
-            commit("Set_Events", events);
+            );
+            const SC_Events = response.data.data;
+            commit("Set_SCEvents", SC_Events);
+        } catch (error) {
+            console.error("Error fetching Events info:", error);
+        }
+    },
+    async FetchADEvents({ commit }) {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await axios.get(
+                "http://127.0.0.1:8000/api/school/ShowAdEvent",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            const AD_Events = response.data.data;
+            commit("Set_ADEvents", AD_Events);
         } catch (error) {
             console.error("Error fetching Events info:", error);
         }

@@ -55,8 +55,8 @@
       <div>
         <div class="flex flex-col mt-6">
           <label for="in1">وصف المناسبة <span class="text-red-600">*</span></label>
-          <textarea placeholder="أكتب وصف الحدث هنا..." v-model="desc" rows="5" cols="10"
-            class="resize-none p-5 outline-none rounded-2xl mt-5"></textarea>
+          <textarea placeholder="أكتب وصف الحدث بالتفصيل من حيث المراحل الدراسية المتعلقة والي اخره..." v-model="desc"
+            rows="5" cols="10" class="resize-none p-5 outline-none rounded-2xl mt-5"></textarea>
           <span v-if="desc == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
       </div>

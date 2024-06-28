@@ -5,8 +5,10 @@
                 <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tr-2xl">
                     التسلسل
                 </th>
-                <th class="sm:py-5 sm:px-4 px-7 py-3">اسم مدير الكنترول</th>
-                <th class="sm:py-5 sm:px-4 px-7 py-3">الدور الوظيفي</th>
+                <th class="sm:py-5 sm:px-4 px-7 py-3">اسم المناسبة</th>
+                <th class="sm:py-5 sm:px-4 px-7 py-3">وقت المناسبة</th>
+                <th class="sm:py-5 sm:px-4 px-7 py-3">تاريخ المناسبة</th>
+                <th class="sm:py-5 sm:px-4 px-7 py-3">الحالة</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tl-2xl">
                     الاجراء
                 </th>
@@ -14,8 +16,10 @@
             <tbody class="text-center relative" ref="tableBody">
                 <tr v-for="(item, index) in paginatedItems" :key="index" class="h-20 odd:bg-white even:bg-gray-100">
                     <td class="py-2 px-4">{{ (currentPage - 1) * pageSize + index + 1 }}</td>
-                    <td class="py-2 px-4">{{ item.staff_name }}</td>
-                    <td class="py-2 px-4">{{ item.staff_role }}</td>
+                    <td class="py-2 px-4">{{ item.name }}</td>
+                    <td class="py-2 px-4">{{ item.time }}</td>
+                    <td class="py-2 px-4">{{ item.date }}</td>
+                    <td class="py-2 px-4">{{ item.state }}</td>
                     <td class="py-2 px-4 relative">
                         <img class="block m-auto w-9 cursor-pointer" :class="{ active: showInfo === index }"
                             src="../../../assets/Logo/Info.png" alt="" @click="toggleShowInfo(index)" />
@@ -43,7 +47,7 @@
                                         تاكيد الحذف
                                     </span>
                                     <div class="flex items-center justify-around mt-10">
-                                        <button class="w-96" @click="handleDeleteController(item.id)">
+                                        <button class="w-96" @click="handleDeleteSchool(item.id)">
                                             تاكيد
                                         </button>
                                         <button class="w-52" @click="confirm = false">
@@ -61,7 +65,6 @@
     <Pagination :currentPage="currentPage" :totalPages="totalPages" :nextPage="nextPage" :prevPage="prevPage" />
 </template>
 <script>
-import axios from "axios"
 export default {
     props: ["items", "editRoute", "infoRoute"],
     data() {
@@ -107,13 +110,13 @@ export default {
                 this.showInfo = index;
             }
         },
-        handleDeleteController(id) {
-            this.$emit("delete-controller", id);
+        handleDeleteEvent(id) {
+            this.$emit("delete-event", id);
             this.showInfo = null;
             this.confirm = false;
         },
-        closeActionWindow(controller) {
-            if (!this.$refs.tableBody.contains(controller.target)) {
+        closeActionWindow(event) {
+            if (!this.$refs.tableBody.contains(event.target)) {
                 this.showInfo = null;
             }
         },

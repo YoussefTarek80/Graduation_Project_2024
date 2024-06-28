@@ -71,7 +71,16 @@
                     </ul>
                 </li>
                 <li v-if="role == 'manager' || roleTitle == 'مسؤول الملفات'" class="sm:p-10 p-4 sm:text-xl text-sm">
-                    <router-link to="/School/Services/Events">المناسبات</router-link>
+                    المناسبات
+                    <i class="fa-sharp fa-solid fa-chevron-down m-3"></i>
+                    <ul class="dropdown">
+                        <li>
+                            <router-link to="/School/Services/AD-Events">المناسبات المُرسلة</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/School/Services/SC-Events">المناسبات الخاصة بالمدرسة</router-link>
+                        </li>
+                    </ul>
                 </li>
                 <li v-if="role == 'manager'" class="sm:p-10 p-4 sm:text-xl text-sm">
                     <router-link to="/School/Services/Controllers">المسؤولين</router-link>

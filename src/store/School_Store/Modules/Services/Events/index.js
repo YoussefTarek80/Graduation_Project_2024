@@ -5,10 +5,9 @@ import { getters } from './getters';
 export default {
   namespace: true,
   state() {
-    const storedEvents = localStorage.getItem("Events");
-    const events = JSON.parse(storedEvents);
     return {
-      events: events,
+      SC_Events: [],
+      AD_Events: [],
     };
   },
   mutations,

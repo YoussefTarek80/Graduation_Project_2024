@@ -7,6 +7,10 @@ export default {
   state() {
     return {
       studs: [],
+      subjects: [],
+      stages: [],
+      levels: [],
+      terms: [],
     };
   },
   mutations,

@@ -30,7 +30,7 @@
                 <div class="flex flex-row flex-wrap justify-center">
                     <div class="m-5">
                         <button class="w-25 sm:w-40 md:w-96">
-                            <router-link :to="infoRoute(this.id)"> عرض الطلاب المُسجلين بالدورة</router-link>
+                            <router-link :to="infoRoute(subject.id)"> عرض الطلاب المُسجلين بالدورة</router-link>
                         </button>
                     </div>
                     <div class="m-5">

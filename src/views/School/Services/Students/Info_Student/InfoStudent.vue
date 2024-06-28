@@ -136,7 +136,7 @@ export default {
         ...mapActions(["FetchStudents", "UpdateStudent"]),
         initData() {
             this.student = this.GetStudents[this.id];
-            console.log(this.student.level);
+            console.log(this.student.id);
             if (this.student.nationality != "مصري") {
                 this.isAppriate = true;
             }

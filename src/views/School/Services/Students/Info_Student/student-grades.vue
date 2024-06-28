@@ -15,17 +15,19 @@
         </BaseTeleport>
     </section>
 
-    <section data-v-5f1c1d65="" class="m-16 md:mx-16 aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
+    <section v-if="this.student" data-v-5f1c1d65="" class="m-16 md:mx-16 aos-init aos-animate" data-aos="fade-up"
+        data-aos-duration="1000">
         <div class="flex flex-row justify-between">
             <div class="self-center flex flex-col">
-                <span class="sm:text-3xl text-2xl">قائمة الطلاب</span>
+                <span class="sm:text-3xl text-2xl">كشف درجات مواد الطالب </span>
                 <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink"></i>
             </div>
         </div>
-        <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="this.scores.data"
-            :Subject="true" :Search="true">
-        </FilterComponent>
-        <ScoreTable :items="this.scores.data">
+        <FilterScores @term-selected="handleTermSelected" @level-selected="handlelevelSelected"
+            @level-name-selected="handlelevelSelectedName" @Retrived-done="handleRetrived"
+            @Retrived-false="handleResetRetrived" :studId="this.student.id">
+        </FilterScores>
+        <ScoreTable :items="GetStdScSubjects" :studId="this.student.id">
         </ScoreTable>
     </section>
     <Footer_Component></Footer_Component>
@@ -33,52 +35,28 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import ScoreTable from '../../../../../UI/Tables/GradesTable/ScoreTable.vue';
-import FilterComponent from '../../../../../components/School/Filtration/Filter-school.vue';
-import { reactive, toRefs } from 'vue';
+import FilterScores from '../Filteration/filterStudents.vue';
 export default {
-    components: { ScoreTable, FilterComponent },
+    components: { ScoreTable, FilterScores },
     data() {
         return {
             id: this.$route.params.id,
-            student: {},
-            scores: reactive({
-                data: [
-                    {
-                        subjname: "عربي",
-                        level: "الصف الأول الإبتدائي",
-                        class: "الفصل الدراسي الأول",
-                        worksheet: 40,
-                        examscore: 50,
-                        total: 90,
-                        isEdit: false
-                    },
-                    {
-                        subjname: "الرياضيات",
-                        level: "الصف الثاني الإبتدائي",
-                        class: "الفصل الدراسي الأول",
-                        worksheet: 40,
-                        examscore: 55,
-                        total: 95,
-                        isEdit: false
-                    },
-                ],
-            }),
-            filtered_Array: [],
+            student: null,
             success: false,
             failed: false,
         };
     },
     computed: {
-        ...mapGetters(["GetStudents"]),
+        ...mapGetters(["GetStudents", "GetStdScSubjects"]),
     },
-    created() {
-        this.FetchData();
+    async created() {
+        await this.FetchData();
+
     },
     methods: {
-        ...mapActions(["FetchStudents"]),
+        ...mapActions(["FetchStudents", "fetchStdSubjects"]),
         initData() {
             this.student = this.GetStudents[this.id];
-            this.filtered_Array = this.scores.data;
         },
         async FetchData() {
             try {
@@ -91,7 +69,6 @@ export default {
         handleFilter(filteredArray) {
             this.filtered_Array = filteredArray;
         },
-
     },
 };
 </script>

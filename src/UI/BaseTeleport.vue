@@ -5,7 +5,6 @@
             <dialog open v-if="show">
                 <section>
                     <slot></slot>
-
                 </section>
             </dialog>
         </transition>
