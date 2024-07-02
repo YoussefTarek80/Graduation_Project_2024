@@ -5,7 +5,9 @@ import { getters } from './getters';
 export default {
   namespace: true,
   state() {
-
+    return{
+      notifications:[]
+    }
   },
   mutations,
   actions,

@@ -1,6 +1,7 @@
 <template>
   <NavBar_View></NavBar_View>
-  <section class="m-6 sm:m-16 " data-aos="fade-up" data-aos-duration="1000">
+  <laoding_INFO v-if="!request"></laoding_INFO>
+  <section class="m-6 sm:m-16 " data-aos="fade-up" data-aos-duration="1000" v-if="request">
     <div class="flex flex-col text-xl ">
       <div class="flex items-center justify-between">
         <div class="flex flex-col ">
@@ -61,7 +62,7 @@
 <script>
 
 import {defineComponent} from "vue";
-import NavBar_View from "../../../../../../components/Parent/NavBar.vue";
+import NavBar_View from "../../../../../../../components/Parent/NavBar.vue";
 import {mapActions, mapGetters} from "vuex";
 
 export default defineComponent({
@@ -119,7 +120,7 @@ export default defineComponent({
 
 
 <style scoped>
-@import url("../../../../../../UI/CustomsCss/Custombutton.css");
+@import url("../../../../../../../UI/CustomsCss/Custombutton.css");
 .word-spacing{
   word-spacing: 10px;
 }

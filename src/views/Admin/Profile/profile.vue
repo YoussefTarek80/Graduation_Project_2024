@@ -43,21 +43,19 @@
     </section>
     <section class="mt-40 sm:mx-36" data-aos="fade-up" data-aos-duration="1000">
         <div class="bg-customBGCards rounded-xl shadow-xl p-6 sm:w-full">
-            <div class="my-5">
-                <span class="text-2xl">بيانات المسئول</span>
-            </div>
+          <span class="text-3xl  text-customDarkPurple px-5 py-3 rounded-2xl flex items-center gap-2 m-10">  <i class="fa-duotone fa-sparkles"></i>بيانات المسئول </span>
+
             <form action="" @submit.prevent="update">
-                <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-10">
                     <div class="flex flex-col">
-                        <label for="in1">اسم المسئول</label>
-                        <input
-                            v-model="name"
-                            disabled
-                            id="email"
-                            placeholder=" العنوان "
-                            type="text"
-                            class="item-data"
-                        />
+                      <label for="in1" >اسم المسئول</label>
+                      <input
+                          v-model="name"
+                          disabled
+                          id="email"
+                          type="text"
+                          class="item-data"
+                      />
                     </div>
                     <div class="flex flex-col">
                         <label for="in1">البريد الالكتروني </label>
@@ -65,7 +63,6 @@
                             v-model="email"
                             disabled
                             id="email"
-                            placeholder=" العنوان "
                             type="text"
                             class="item-data"
                         />
@@ -82,38 +79,45 @@
                         />
                     </div>
                     <div class="flex flex-col">
-                        <label for="in3">العنوان</label>
-                        <input
-                            v-model="address"
-                            id="email"
-                            placeholder=" العنوان "
-                            type="text"
-                            class="item-data"
-                        />
+                      <label for="in6">الدور الوظيفي</label>
+                      <input
+                          v-model="job"
+                          disabled
+                          id="job"
+                          type="text"
+                          class="item-data"
+                      />
                     </div>
-                  <div class="flex flex-col">
-                    <label for="in5">رقم الهاتف </label>
-                    <input
-                        id="email"
-                        v-model="phone"
-                        class="item-data"
-                        placeholder=" رقم الهاتف "
-                        type="text"
-                    />
-
-                    <label for="in5"> الدور الوظيفي</label>
-                    <input value="" type="text" class="item-data"/>
-                  </div>
+                    <div class="flex flex-col input-group">
+                      <input
+                          id="email"
+                          v-model="phone"
+                          class="input"
+                          required=""
+                          autocomplete="off"
+                          type="text"
+                      />
+                      <label for="in5" class="user-label">رقم الهاتف </label>
+                    </div>
+                    <div class="flex flex-col input-group">
+                      <input
+                          id="email"
+                          v-model="address"
+                          class="input"
+                          required=""
+                          autocomplete="off"
+                          type="text"
+                      />
+                      <label for="in5" class="user-label">العنوان </label>
+                    </div>
                 </div>
-                <div class="m-5 flex items-center justify-end">
+                <div class="mt-10 flex items-center justify-end">
                     <button class="w-60">حفظ</button>
                 </div>
             </form>
         </div>
         <div class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full">
-            <div class="my-5">
-                <span class="text-2xl">بيانات الادارة (للمسئول)</span>
-            </div>
+          <span class="text-3xl  text-customDarkPurple px-5 py-3 rounded-2xl flex items-center gap-2 m-10">  <i class="fa-duotone fa-sparkles"></i>بيانات الادارة (للمسئول) </span>
             <form action="" @submit.prevent>
                 <div class="input_Div grid grid-cols-1 sm:grid-cols-4 gap-6">
                     <div class="flex flex-col">
@@ -175,51 +179,53 @@
             </form>
         </div>
         <div class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full">
-            <div class="my-5">
-                <span class="text-2xl">تغيير كلمة المرور</span>
-            </div>
-            <form action="" @submit.prevent="updatePassword">
-                <div class="flex flex-col">
-                    <label for="email" class="my-2 mx-2">
-                        كلمة المرور القديمة<span class="text-red-600"
-                            >*</span
-                        ></label
-                    >
+          <span class="text-3xl  text-customDarkPurple px-5 py-3 rounded-2xl flex items-center gap-2 m-10">  <i class="fa-duotone fa-sparkles"></i>تغيير كلمة المرور </span>
+
+            <form action="" @submit.prevent="updatePassword" class="flex flex-col gap-10">
+                <div class="flex flex-col input-group">
                     <input
                         v-model="OldPassword"
+                        required=""
+                        autocomplete="off"
                         id="Oemail"
-                        placeholder="كلمة المرور "
                         type="password"
-                        class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none"
+                        class="input"
                     />
-                </div>
-                <div class="flex flex-col">
-                    <label for="email" class="my-2 mx-2">
-                        كلمة المرور الجديدة<span class="text-red-600"
-                            >*</span
-                        ></label
+                    <label for="email" class="user-label ">
+                      كلمة المرور القديمة<span class="text-red-600"
+                    >*</span
+                    ></label
                     >
+                </div>
+                <div class="flex flex-col input-group">
                     <input
                         v-model="NewPassword"
+                        required=""
+                        autocomplete="off"
                         id="Nemail"
-                        placeholder="كلمة المرور "
                         type="password"
-                        class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none"
+                        class="input"
                     />
-                </div>
-                <div class="flex flex-col mt-5">
-                    <label for="email" class="my-2 mx-2">
-                        تاكيد كلمة المرور الجديدة<span class="text-red-600"
-                            >*</span
-                        ></label
+                    <label for="email" class="user-label">
+                      كلمة المرور الجديدة<span class="text-red-600"
+                    >*</span
+                    ></label
                     >
+                </div>
+                <div class="flex flex-col input-group">
                     <input
                         v-model="NewPasswordConf"
                         id="password"
-                        placeholder=" تاكيد كلمة المرور"
+                        required=""
+                        autocomplete="off"
                         type="password"
-                        class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none"
+                        class="input"
                     />
+                    <label for="password" class="user-label">
+                      تاكيد كلمة المرور الجديدة<span class="text-red-600"
+                    >*</span
+                    ></label
+                    >
                 </div>
                 <div class="m-5 flex items-center justify-end">
                     <button class="w-60">تغيير كلمة المرور</button>
@@ -249,6 +255,7 @@ export default {
             OldPassword: "",
             NewPassword: "",
             NewPasswordConf: "",
+            job:""
         };
     },
     computed: {
@@ -269,6 +276,7 @@ export default {
             this.phone = this.GetUser.phone;
             this.imageURL = this.GetUser.image;
             this.address = this.GetUser.address;
+            this.job="مسئول ادارة"
         },
         async FetchData() {
             try {
@@ -288,7 +296,7 @@ export default {
                 formData.append("image", this.file);
                 formData.append("address", this.address);
                 await axios.post(
-                    "http://192.168.1.18:8000/api/updateProfile",
+                    "http://127.0.0.1:8000/api/updateProfile",
                     formData,
                     {
                         headers: {
@@ -324,7 +332,7 @@ export default {
             formData.append("password_confirmation", this.NewPasswordConf);
             try {
                 await axios.post(
-                    "http://192.168.1.18:8000/api/updatePassword",
+                    "http://127.0.0.1:8000/api/updatePassword",
                     formData,
                     {
                         headers: {
@@ -355,4 +363,5 @@ export default {
 <style scoped>
 @import url("./profile.css");
 @import url("../../../UI/CustomsCss/Custombutton.css");
+@import url("../../../UI/CustomsCss/CustomInput.css");
 </style>

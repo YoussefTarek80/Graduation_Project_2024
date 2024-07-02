@@ -1,11 +1,10 @@
 import axios from "axios";
 export const actions = {
-    async addNewSchool({ commit }, { name, phone, address,manager_name,manager_address,manager_phone,manager_email }) {
+    async addNewSchool({ commit }, {formData} ) {
         commit("SET_ADD_SCHOOL_STATUS", "loading");
         try {
             const token = localStorage.getItem("token");
-            const data = { name, phone, address,manager_name,manager_address,manager_phone,manager_email };
-            await axios.post("http://192.168.1.18:8000/api/addSchool", data, {
+            await axios.post("http://127.0.0.1:8000/api/addSchool", formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -23,7 +22,7 @@ export const actions = {
         try {
             const token = localStorage.getItem("token");
             const response = await axios.get(
-                "http://192.168.1.18:8000/api/showSchool",
+                "http://127.0.0.1:8000/api/showSchool",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -35,7 +34,6 @@ export const actions = {
         } catch (error) {
             commit("SET_FETCH_SCHOOLS_STATUS", "error");
             console.error("Error fetching schools:", error);
-            
         }
     },
     async RemoveSchool({ commit }, id) {
@@ -43,7 +41,7 @@ export const actions = {
             const token = localStorage.getItem("token");
             console.log(id);
             await axios.post(
-                `http://192.168.1.18:8000/api/deleteSchool/${id}`,
+                `http://127.0.0.1:8000/api/deleteSchool/${id}`,
                 {},
                 {
                     headers: {
@@ -55,20 +53,12 @@ export const actions = {
             console.log(err);
         }
     },
-    async updateSchool({ commit }, { id, name, phone, address, file,manager_name,manager_address,manager_phone,manager_email}) {
+    async updateSchool({ commit }, {formData ,id }) {
         try {
             const token = localStorage.getItem("token");
-            const formData = new FormData();
-            formData.append("name", name);
-            formData.append("phone", phone);
-            formData.append("address", address);
-            formData.append("image", file);
-            formData.append("manager_name", manager_name);
-            formData.append("manager_address", manager_address);
-            formData.append("manager_phone", manager_phone);
-            formData.append("manager_email", manager_email);
+
             await axios.post(
-                `http://192.168.1.18:8000/api/updateSchool/${id}`,
+                `http://127.0.0.1:8000/api/updateSchool/${id}`,
                 formData,
                 {
                     headers: {

@@ -9,11 +9,15 @@
       <th class="sm:py-5 sm:px-4 px-7 py-3">وقت المناسبة</th>
       <th class="sm:py-5 sm:px-4 px-7 py-3">تاريخ المناسبة</th>
       <th class="sm:py-5 sm:px-4 px-7 py-3">الحالة</th>
+      <th class="sm:py-5 sm:px-4 px-7 py-3" v-if="this.$route.path === '/Darb/ShowGrade/Events'">اسم المدرسة المستضيفه</th>
       <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tl-2xl">
         الاجراء
       </th>
       </thead>
-      <tbody class="text-center relative" ref="tableBody">
+      <tbody v-if="items.length === 0" class="flex text-3xl p-10 items-center justify-center absolute left-1/3">
+      لم يتم انشاء مناسبة  حني الان
+      </tbody>
+      <tbody v-else class="text-center relative" ref="tableBody" v-if="paginatedItems">
       <tr
           v-for="(item, index) in paginatedItems"
           :key="index"
@@ -25,7 +29,8 @@
         <td class="py-2 px-4">{{ item.name }}</td>
         <td class="py-2 px-4">{{ item.time }}</td>
         <td class="py-2 px-4">{{ item.date }}</td>
-        <td class="py-2 px-4">جاري</td>
+        <td class="py-2 px-4">{{handleValidEvent(item.status)}}</td>
+        <td class="py-2 px-4" v-if="this.$route.path === '/Darb/ShowGrade/Events'">العمرانيه</td>
         <td class="py-2 px-4 relative">
           <img
               class="block m-auto w-9 cursor-pointer"
@@ -91,6 +96,7 @@
     </table>
   </div>
   <Pagination
+      v-if="items.length!==0"
       :currentPage="currentPage"
       :totalPages="totalPages"
       :nextPage="nextPage"
@@ -100,8 +106,10 @@
 <script>
 import axios from "axios";
 import {mapActions} from "vuex";
+import Loading_info2 from "../../loadingInformation/loading_info2.vue";
 
 export default {
+  components: {Loading_info2},
   props: ["items", "editRoute", "infoRoute"],
   data() {
     return {
@@ -110,6 +118,7 @@ export default {
       pageSize: 5,
       confirm: false,
       clickable: false,
+      isLoading: true,
     };
   },
   computed: {
@@ -123,6 +132,10 @@ export default {
     },
   },
   methods: {
+    handleValidEvent(status){
+      if(status===0) return 'جاري'
+      if(status===1) return 'انتهي'
+    },
     infoRoute(index) {
       return `${this.infoRoute}/${index}`;
     },
@@ -159,6 +172,9 @@ export default {
   },
   mounted() {
     document.body.addEventListener("click", this.closeActionWindow);
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
   },
   beforeDestroy() {
     document.body.removeEventListener("click", this.closeActionWindow);

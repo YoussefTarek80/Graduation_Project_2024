@@ -6,7 +6,9 @@ export default {
   namespace: true,
   state() {
     return {
-      children:[]
+      Requests:[],
+      Children:[],
+      Grade:[]
     };
   },
   mutations,

@@ -1,5 +1,5 @@
 export const mutations = {
-    SET_EVENTS(state, events) {
-        state.events = events;
+    SET_ADMINS(state, admins) {
+        state.admins = admins;
     }
 };

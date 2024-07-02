@@ -1,4 +1,4 @@
-<template>
+ <template>
     <div class="body flex flex-col justify-center items-center h-screen">
         <div
             data-aos="fade-right"
@@ -10,13 +10,13 @@
             </div>
             <div class="absolute top-0 left-0 cursor-pointer " v-if="admin"
 
-            @click="this.$router.push('/SelectRole')">
+            @click="this.$router.push('/DarbAdmins')">
                 <i
                     class="fa-solid fa-user-tie sm:text-6xl text-4xl p-10 rounded-full text-customPurple hover:transform hover:scale-110 transition-all"
                 ></i>
             </div>
             <div class="absolute top-0 left-0 cursor-pointer" v-if="!admin"
-            @click="this.$router.push('/SelectRole')">
+            @click="this.$router.push('/DarbAdmins')">
                 <i
                     class="fa-sharp fa-light fa-school sm:text-6xl text-4xl p-10 rounded-full text-customPurple hover:transform hover:scale-110 transition-all"
                 ></i>

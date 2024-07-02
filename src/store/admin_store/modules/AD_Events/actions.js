@@ -4,7 +4,7 @@ export const actions = {
         try {
             const token = localStorage.getItem("token");
             const response = await axios.post(
-                "http://192.168.1.18:8000/api/addEvent",
+                "http://127.0.0.1:8000/api/addEvent",
                 eventData,
                 {
                     headers: {
@@ -23,7 +23,7 @@ export const actions = {
         try {
             const token = localStorage.getItem("token");
             const response = await axios.get(
-                "http://192.168.1.18:8000/api/showEvent",
+                "http://127.0.0.1:8000/api/showEvent",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -41,7 +41,7 @@ export const actions = {
             const token = localStorage.getItem("token");
             console.log(id);
             await axios.post(
-                `http://192.168.1.18:8000/api/deleteEvent/${id}`,
+                `http://127.0.0.1:8000/api/deleteEvent/${id}`,
                 {},
                 {
                     headers: {
@@ -58,7 +58,7 @@ export const actions = {
         try{
             const token=localStorage.getItem("token");
             await axios.post(
-                `http://192.168.1.18:8000/api/updateEvent/${id}`,
+                `http://127.0.0.1:8000/api/updateEvent/${id}`,
                 updateData,
                 {
                     headers: {
@@ -69,7 +69,7 @@ export const actions = {
             console.log("updated Succeffuly")
         }
         catch(err){
-            console.log(err)
+            throw err
         }
     }
 

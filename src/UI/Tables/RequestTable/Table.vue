@@ -16,6 +16,7 @@
                     v-for="(item, index) in paginatedItems"
                     :key="index"
                     class="h-20 odd:bg-white even:bg-gray-100"
+
                 >
                     <td class="py-2 px-4">
                         {{ (currentPage - 1) * pageSize + index + 1 }}

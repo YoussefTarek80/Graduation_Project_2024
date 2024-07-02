@@ -1,8 +1,5 @@
 export const mutations = {
-    Set_User(state, user) {
+    Set_Parent(state, user) {
         state.user = user;
     },
-    LOGOUT(state) {
-        state.user = null;
-    }
 };

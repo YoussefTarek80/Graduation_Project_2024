@@ -3,7 +3,7 @@ export const actions = {
     async login({ commit, dispatch  }, { email, password }) {
         try {
             const response = await axios.post(
-                "http://192.168.1.18:8000/api/login",
+                "http://127.0.0.1:8000/api/login",
                 { email, password }
             );
             const data = response.data.data;
@@ -17,7 +17,7 @@ export const actions = {
         try {
             const token = localStorage.getItem("token");
             await axios.post(
-                "http://192.168.1.18:8000/api/logout",
+                "http://127.0.0.1:8000/api/logout",
                 {},
                 {
                     headers: {
@@ -36,7 +36,7 @@ export const actions = {
         try {
             const token = localStorage.getItem("token");
             const response = await axios.get(
-                "http://192.168.1.18:8000/api/showProfile",
+                "http://127.0.0.1:8000/api/showProfile",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

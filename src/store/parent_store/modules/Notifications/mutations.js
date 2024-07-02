@@ -1,5 +1,5 @@
 export const mutations = {
-    // Set_Parent(state, user) {
-    //     state.user = user;
-    // },
+    setNotify(state, notifications) {
+        state.notifications = notifications;
+    },
 };

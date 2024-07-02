@@ -21,7 +21,7 @@
       <ChildInfo :formData="formData"></ChildInfo>
     </div>
     <div v-if="currentStep === 2">
-      <SchoolsInfo :formData="formData"></SchoolsInfo>
+      <SchoolsInfo :formData="formData" @validchild="validData"> </SchoolsInfo>
     </div>
 
     <div class="mx-20">
@@ -49,10 +49,10 @@
 </template>
 
 <script>
-import ChildInfo from "../../../../Services/Dashboard/Children/AddChild/ChildPage/child.vue"
-import SchoolsInfo from "../../../../Services/Dashboard/Children/AddChild/SchoolsPage/school.vue"
+import ChildInfo from "./ChildPage/child.vue"
+import SchoolsInfo from "./SchoolsPage/school.vue"
 import {mapActions} from "vuex";
-import BaseTeleport from "../../../../../../UI/BaseTeleport.vue";
+import BaseTeleport from "../../../../../../../UI/BaseTeleport.vue";
 
 export default {
   components: {
@@ -69,8 +69,15 @@ export default {
         selectedIndex: null,
         selected: false,
         name: '',
+        nationality:'',
+        country:'',
+        stateRegion:'',
+        type:'',
+        religion:'',
+        state: "",
+        ad_ID: "",
         gender: null,
-        childbirth_certificate: '',
+        childbirth_certificate: null,
         birthdate: null,
         image: null,
         age: 0,
@@ -79,13 +86,10 @@ export default {
         requestTime: null,
         requestDate: null,
         SchoolIDs: [],
-        state: "المحافظات",
-        ad_ID: "الادارات",
         checked: true,
         selectIndexSchools: [],
         std_nationalID:'',
-        religion:'',
-        best: true
+        best: true,
       },
       timeExpire:false,
     }
@@ -107,12 +111,16 @@ export default {
     ...mapActions(['AddRequest']),
     validData() {
       if (
-          this.formData.name === null ||
+          this.formData.name === "" ||
           this.formData.gender === null ||
           this.formData.age === 0 ||
           this.formData.childbirth_certificate === null ||
+          this.formData.ChImage === null ||
+          this.formData.avatar=== null ||
           this.formData.religion === '' ||
-          this.formData.std_nationalID===''
+          this.formData.std_nationalID===''||
+          this.formData.nationality===''||
+          !this.formData.SchoolIDs.length>0
       ) {
         this.invalid = true;
       } else {
@@ -121,7 +129,6 @@ export default {
     },
     async Signup() {
       try {
-
         const form = new FormData();
         form.append('name', this.formData.name);
         form.append('gender', this.formData.gender);
@@ -129,7 +136,12 @@ export default {
         form.append('childbirth_certificate', this.formData.childbirth_certificate);
         form.append('image', this.formData.image);
         form.append('religion', this.formData.religion);
-        form.append('student_national_id', this.formData.std_nationalID);
+        form.append('student_national_id', parseInt(this.formData.std_nationalID));
+        form.append('nationality', this.formData.nationality);
+        form.append('country', this.formData.country);
+        form.append('state', this.formData.stateRegion);
+        form.append('type', this.formData.type);
+
         this.formData.SchoolIDs.forEach((schoolId) => {
           form.append('schools[]', schoolId);
         });
@@ -159,7 +171,7 @@ export default {
         localStorage.removeItem('formData');
         localStorage.removeItem('currentStep');
         this.timeExpire = true;
-      }, 120000);
+      }, 160000);
     },
     refresh(){
       this.timeExpire=false;
@@ -179,7 +191,7 @@ export default {
 </script>
 
 <style scoped>
-@import "../../../../../../UI/CustomsCss/Custombutton.css";
+@import "../../../../../../../UI/CustomsCss/Custombutton.css";
 
 .progressBar {
   display: flex;

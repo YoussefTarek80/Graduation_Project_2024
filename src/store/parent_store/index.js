@@ -1,13 +1,19 @@
-import { createStore } from "vuex";
+
 import authModule from "./modules/Auth/index.js";
-import schoolsModule from "./modules/AD_Schools/index.js";
-import eventsModule from "./modules/AD_Events/index.js";
-const store = createStore({
+import childModule from "./modules/Requests/index.js";
+import schoolModule from "./modules/Schools/index.js";
+import profileModule from "./modules/Profile/index.js";
+import notificationModule from "./modules/Notifications/index.js";
+import ChatBotModule from "./modules/Chatbot/index.js";
+const store = ({
     namespace: true,
     modules: {
         auth: authModule,
-        school:schoolsModule,
-        event:eventsModule
+        child:childModule,
+        school:schoolModule,
+        profile:profileModule,
+        notification:notificationModule,
+        chatBot:ChatBotModule
     },
 });
 export default store;

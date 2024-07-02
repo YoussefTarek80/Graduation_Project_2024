@@ -108,6 +108,17 @@ const router = createRouter({
             },
         },
         {
+            path: "/Admin/Students/InfoStudent/studScores/:index",
+            component: () =>
+                import("../../views/Admin/Services/Students/Info_Student/ScoreData/score_data.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
+        {
             path: "/Admin/Teacher",
             component: () => 
             import("../../views/Admin/Services/Teachers/teacher.vue"),
@@ -184,12 +195,43 @@ const router = createRouter({
                 props: true,
             },
         },
+        {
+            path: "/Admin/Subjects",
+            component: () =>
+                import("../../views/Admin/Services/Subjects/subjects.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
+        {
+            path: "/Admin/Reports",
+            component: () =>
+                import("../../views/Admin/Services/Reports/report.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
+        {
+            path: "/Admin/Reports/AddReport",
+            component: () =>
+                import("../../views/Admin/Services/Reports/Add-report/addReport.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
+
     ],
-    scrollBehavior(to, from, savedPosition) {
-        return { top: 0 };
-    },
 });
-router.beforeEach((to, from, next) => {
+export function routerGuardAdmin(to, from, next){
     document.title = to.meta.title || "Your Default Title";
     const isAuthenticated = localStorage.getItem("token");
     const userRole = localStorage.getItem("user");
@@ -202,5 +244,5 @@ router.beforeEach((to, from, next) => {
     } else {
         next();
     }
-});
+}
 export default router;

@@ -25,7 +25,7 @@
         ></FilterComponent>
         <div class="relative">
             <table_Component
-                :items="schools"
+                :items="filtered_Array"
                 :editRoute="'/Admin/Schools/updateSchool'"
                 :infoRoute="'/Admin/Schools/InfoSchool'"
                 :fetching="fetchSchoolsStatus"

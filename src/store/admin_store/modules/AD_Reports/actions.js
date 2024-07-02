@@ -1,10 +1,10 @@
 import axios from "axios";
 export const actions = {
-    async SetEvent({ commit }, eventData) {
+    async SetReport({ commit }, eventData) {
         try {
             const token = localStorage.getItem("token");
             const response = await axios.post(
-                "http://127.0.0.1:8000/api/addEvent",
+                "http://127.0.0.1:8000/api/addReport",
                 eventData,
                 {
                     headers: {
@@ -12,65 +12,46 @@ export const actions = {
                     },
                 }
             );
-            // commit('ADD_EVENT');
+
             console.log("Added Successfully");
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    },
+    async FetchReports({commit}){
+        try {
+            const token = localStorage.getItem("token");
+            const response = await axios.get(
+                "http://127.0.0.1:8000/api/showReport",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            commit('SET_REPORTS',response.data.data);
+            console.log(response.data.data);
         } catch (err) {
             console.log(err);
             throw err; // Propagate the error to the caller if needed
         }
     },
-    async FetchEvents({ commit }){
+    async DeleteReport({ commit, dispatch }, id) {
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.get(
-                "http://127.0.0.1:8000/api/showEvent",
+            await axios.get(
+                `http://127.0.0.1:8000/api/deleteReport/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 }
             );
-            // console.log(response.data.data)
-            commit("SET_EVENTS", response.data.data);
+            await dispatch('FetchReports');
         } catch (err) {
             console.log(err);
-        }
-    },
-    async RemoveEvent({ commit,dispatch  }, id) {
-        try {
-            const token = localStorage.getItem("token");
-            console.log(id);
-            await axios.post(
-                `http://127.0.0.1:8000/api/deleteEvent/${id}`,
-                {},
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-            await dispatch('FetchEvents');
-        } catch (err) {
-            console.log(err);
-        }
-    },
-    async UpdateEvent({commit},{updateData, id}){
-        try{
-            const token=localStorage.getItem("token");
-            await axios.post(
-                `http://127.0.0.1:8000/api/updateEvent/${id}`,
-                updateData,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-            console.log("updated Succeffuly")
-        }
-        catch(err){
-            console.log(err)
+            throw err;
         }
     }
-
 };

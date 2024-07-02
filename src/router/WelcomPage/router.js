@@ -4,17 +4,14 @@ const router = createRouter({
     routes: [
         {
             path: "/",
-            redirect: "/SelectRole",
+            redirect: "/DarbAdmins",
         },
         {
-            path: "/SelectRole",
-            component: () => import("../../views/WelcomePage/Welcome_Page.vue"),
-            meta: { title: "SelectRole" },
+            path: "/DarbAdmins",
+            component: () => import("../../views/Parent/WelcomePage/Welcome_Page.vue"),
+            meta: { title: "DarbAdmins" },
         },
     ],
-    scrollBehavior(to, from, savedPosition) {
-        return { top: 0 };
-    },
 });
 router.beforeEach((to, from, next) => {
     if (from.path === "/SelectRole" && to.path === "/Login") {

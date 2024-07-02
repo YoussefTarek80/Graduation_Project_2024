@@ -7,7 +7,7 @@
         <div
             class="flex flex-col items-center justify-center gap-4 text-center relative"
         >
-            <span class="sm:text-6xl text-2xl font-bold gradient-text"
+            <span class="sm:text-6xl text-sm font-bold gradient-text"
                 >اهلا بك في نظام درب التعليمي</span
             >
             <span class="sm:text-2xl text-xl gradient-text"
@@ -59,5 +59,5 @@ export default {
 };
 </script>
 <style scoped>
-@import url("./Welcome_Page.css");
+@import url("Welcome_Page.css");
 </style>

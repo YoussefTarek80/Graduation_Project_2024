@@ -4,10 +4,13 @@
       <div class="mt-10">
         <span>اختر صورة طفلك</span>
         <div class="w sm:w-full w-96">
-<!--          <div v-for="(image, index) in images" :key="index"  class="item">-->
-<!--            <img :src="image.img" class=" w-28 p-2 rounded-full" @click="selectImage(image.img,index)" :class="{ 'selected': formData.childselectedIndex === index }">-->
-<!--          </div>-->
-          <div class="input-upload mx-20 my-8">
+          <div class=" mx-20 my-8 relative">
+            <div class="absolute -right-12 -top-2 cursor-pointer" @click="removeFile(1)" v-if="formData.avatar">
+              <i class="fa-regular fa-circle-xmark text-red-700 text-4xl"></i>
+            </div>
+            <img :src="formData.avatar" class=" w-28 p-2 rounded-full border-2 border-gray-400" v-if="formData.avatar">
+          </div>
+          <div class="input-upload mx-20 my-8" v-if="!formData.avatar">
             <input class="upload" name="file" type="file" @change="handleFileUpload(1, $event)">
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" class="icon"><polyline points="16 16 12 12 8 16"></polyline><line y2="21" x2="12" y1="12" x1="12"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline></svg>
           </div>
@@ -37,21 +40,7 @@
           </div>
         <hr>
         <div class="">
-          <span>تاريخ ميلاده؟</span>
-          <div class="inputGroup sm:w-full w-96 ">
-            <input type="date" required="" autocomplete="off" v-model="formData.age">
-          </div>
-        </div>
-        <hr>
-        <div class="">
-          <span>الرقم القومي للطفل</span>
-          <div class="inputGroup sm:w-full w-96 ">
-            <input type="text" required="" autocomplete="off" v-model="formData.std_nationalID">
-          </div>
-        </div>
-        <hr>
-        <div class="">
-          <span>هل طفلك جنسيته ..</span>
+          <span>هل طفلك ديانته ..</span>
           <div class="flex mt-2">
             <div class="mx-10">
               <input type="radio" class="mx-3 input green" name="religion" value="مسلم" v-model="formData.religion">
@@ -63,10 +52,57 @@
             </div>
           </div>
         </div>
+        <hr>
+        <div class="">
+          <div class="inputGroup sm:w-full w-96 ">
+            <input type="text" required="" autocomplete="off" v-model="formData.std_nationalID">
+            <label for="password">الرقم القومي للطفل</label>
+          </div>
+        </div>
+        <hr>
+        <div class="">
+          <span>هل طفلك جنسيته ..</span>
+          <div class="flex mt-2">
+            <div class="mx-10">
+              <input type="radio" class="mx-3 input green" name="nationality" value="مصري" v-model="formData.nationality">
+              <label>مصري</label>
+            </div>
+            <div class="mx-10" >
+              <input type="radio" class="mx-3 input red" name="nationality" value="مغترب" v-model="formData.nationality">
+              <label>مغترب</label>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="">
+          <span>تاريخ ميلاده؟</span>
+          <div class="inputGroup sm:w-full w-96 ">
+            <input type="date" required="" autocomplete="off" v-model="formData.age">
+          </div>
+        </div>
+        <hr>
+        <div class="">
+          <div class="inputGroup sm:w-full w-96 ">
+            <input type="text" required="" autocomplete="off" v-model="formData.country">
+            <label for="password">الدولة</label>
+          </div>
+        </div>
+        <div class="">
+          <div class="inputGroup sm:w-full w-96 ">
+            <input type="text" required="" autocomplete="off" v-model="formData.stateRegion">
+            <label for="password">المحافظة</label>
+          </div>
+        </div>
+        <div class="">
+          <div class="inputGroup sm:w-full w-96 ">
+            <input type="text" required="" autocomplete="off" v-model="formData.type">
+            <label for="password">النوع</label>
+          </div>
+        </div>
       </div>
     </div>
     <div class="flex flex-col space-y-9 mt-20 relative shadow-2xl p-10 rounded-2xl">
-      <div class="absolute -left-2 -top-2 cursor-pointer" @click="removeFile" v-if="formData.ChImage">
+      <div class="absolute -left-2 -top-2 cursor-pointer" @click="removeFile(2)" v-if="formData.ChImage">
         <i class="fa-regular fa-circle-xmark text-red-700 text-4xl"></i>
       </div>
       <div class="flex gap-10">
@@ -80,12 +116,15 @@
         <input v-else type="file" id="birthCertificate" class="hidden" disabled>
       </div>
     </div>
+
   </section>
 </template>
 
 
 <script >
+
 export default {
+
   props:['formData'],
   data(){
     return{
@@ -161,8 +200,14 @@ export default {
         }
       }
     },
-    removeFile() {
-      this.formData.ChImage = null;
+    removeFile(file) {
+      if(file===1){
+        this.formData.avatar = null;
+
+      }
+      if(file===2){
+        this.formData.ChImage = null;
+      }
     },
   }
 }
@@ -171,7 +216,7 @@ export default {
 
 
 <style scoped>
-@import url("../../../../../../../UI/CustomsCss/CustomParentInput.css");
+@import url("../../../../../../../../UI/CustomsCss/CustomParentInput.css");
 @import url("child.css");
 
 </style>
