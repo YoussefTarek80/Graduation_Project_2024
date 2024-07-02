@@ -1,5 +1,6 @@
 <template>
     <div class="sm:overflow-hidden overflow-auto">
+
         <table class="sm:w-full sm:text-lg text-sm ">
             <thead class="text-white">
                 <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tr-2xl">
@@ -58,7 +59,7 @@ export default {
             }
         },
         infoRoute(index) {
-            return `/School/Services/Subjects/SubjectInfo/${index}`;
+            return `${this.infoRoute}/${index}`;
         },
         editRoute(index) {
             return `${this.editRoute}/${index}`;

@@ -8,7 +8,7 @@
         <FilterSubjects @term-selected="handleTermSelected" @level-selected="handlelevelSelected"
             @level-name-selected="handlelevelSelectedName" @Retrived-done="handleRetrived"
             @Retrived-false="handleResetRetrived"></FilterSubjects>
-        <laoding_INFO3 v-if="!RetrivedDone && termID"></laoding_INFO3>
+        <!-- <laoding_INFO3 v-if="!RetrivedDone && termID"></laoding_INFO3> -->
         <div class="subjects bg-customBGCards shadow-2xl rounded-2xl py-10" v-if="RetrivedDone" data-aos="fade-left">
             <div class="flex  justify-evenly">
                 <div class="flex flex-col gap-10 ">
@@ -23,7 +23,7 @@
                         عدد المواد الفرعية: 12
                     </span>
                 </div>
-                <Table :items="GetScSubjects"></Table>
+                <Table :items="GetScSubjects" :info-route="'/school/services/subjects/subject-info'"></Table>
             </div>
         </div>
     </section>
@@ -39,27 +39,32 @@ export default {
     data() {
         return {
             items: [],
-            termID: null,
-            levelID: null,
+            levelID: localStorage.getItem('levelID'),
+            termID: localStorage.getItem('termID'),
             levelName: "",
             RetrivedDone: false,
             SubhjectRetrivedDone: false,
-            RetrivedTermDone: false
         }
     },
     computed: {
         ...mapGetters(['GetScSubjects']),
         RetrivedDone() {
-            if (this.RetrivedDone && this.SubhjectRetrivedDone) {
-                return true;
-            }
-            else {
-                return false;
-            }
+            if (this.RetrivedDone && this.SubhjectRetrivedDone) { return true; }
+            else { return false; }
         }
     },
-    created() { },
-    mounted() { },
+    async created() {
+        if (localStorage.getItem('stageID')) {
+            await this.fetchScSubjects({ levelID: this.levelID, termID: this.termID })
+            this.RetrivedDone = true;
+            this.SubhjectRetrivedDone = true;
+            this.levelName = this.levelID;
+            console.log('Selected levelID:', this.levelID);
+            console.log('Selected termID:', this.termID);
+            console.log('array :', this.GetScSubjects);
+        }
+    },
+    async mounted() { },
     methods: {
         ...mapActions(['fetchScSubjects'])
         ,
@@ -70,9 +75,7 @@ export default {
                 await this.fetchScSubjects({ levelID: this.levelID, termID: this.termID })
                 this.SubhjectRetrivedDone = true;
             }
-            catch (err) {
-                console.log(err)
-            }
+            catch (err) { console.log(err) }
         },
         handlelevelSelected(levelID) {
             this.levelID = levelID;

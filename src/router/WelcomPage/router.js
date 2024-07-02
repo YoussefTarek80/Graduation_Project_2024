@@ -4,10 +4,10 @@ const router = createRouter({
     routes: [
         {
             path: "/",
-            redirect: "/SelectRole",
+            redirect: "/select-role/",
         },
         {
-            path: "/SelectRole",
+            path: "/select-role",
             component: () => import("../../views/WelcomePage/Welcome_Page.vue"),
             meta: { title: "SelectRole" },
         },
@@ -17,12 +17,12 @@ const router = createRouter({
     },
 });
 router.beforeEach((to, from, next) => {
-    if (from.path === "/SelectRole" && to.path === "/Login") {
+    if (from.path === "/select-role" && to.path === "/login") {
         const selectedRole = localStorage.getItem("selectedRole");
         if (selectedRole) {
             next();
         } else {
-            next("/SelectRole");
+            next("/select-role");
         }
     } else {
         next();

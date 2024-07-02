@@ -19,7 +19,9 @@
             <span class="sm:text-3xl text-2xl font-bold">درجات طلاب المادة </span>
             <span class="w-2/12 h-1 bg-black m-1 rounded-2xl"></span>
         </div>
-        <FilterComponent :items="GetStudents" :Subject="true"></FilterComponent>
+        <FilterComponent :levelID="this.id" :disable="GetStudSubject.length === 0" :items="GetStudSubject"
+            :Subject="true">
+        </FilterComponent>
         <GradeTable :items="students">
         </GradeTable>
     </section>
@@ -33,12 +35,6 @@ import { mapGetters, mapActions } from 'vuex';
 import { reactive } from 'vue';
 export default {
     components: { GradeTable, FilterComponent },
-    props: {
-        levelID: {
-            type: String,
-            required: true
-        }
-    },
     data() {
         return {
             id: this.$route.params.id,
@@ -61,6 +57,7 @@ export default {
     created() {
         console.log(this.id);
         this.fetchData();
+        console.log(this.GetStudSubject);
     },
     methods: {
         ...mapActions(["fetchStudSubject"]),

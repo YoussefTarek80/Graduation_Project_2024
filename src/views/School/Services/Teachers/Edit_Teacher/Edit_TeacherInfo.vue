@@ -77,7 +77,7 @@
       <button class="w-60" @click="handleUpdateTeacher" :class="{ disabledBtn: close }" :disabled="close">
         حفظ
       </button>
-      <button class="w-48" @click="this.$router.replace('/School/Teachers')">
+      <button class="w-48" @click="this.$router.replace('/school/teachers')">
         الغاء
       </button>
     </div>

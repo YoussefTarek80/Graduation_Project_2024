@@ -7,9 +7,10 @@
                 <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink"></i>
             </div>
         </div>
-        <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="GetADEvents" :event="true"
-            :Search="true"></FilterComponent>
-        <table_Component :items="filtered_Array" :infoRoute="'/School/Services/AD-Events/InfoEvent'"></table_Component>
+        <FilterComponent :disable="GetADEvents.length === 0" :filteredArray="filtered_Array" @filter="handleFilter"
+            :MainArray="GetADEvents" :event="true" :Search="true"></FilterComponent>
+        <table_Component :items="filtered_Array" :infoRoute="'/school/services/ad-events/event-info'">
+        </table_Component>
     </section>
     <Footer_Component></Footer_Component>
 </template>
@@ -29,8 +30,8 @@ export default {
         ...mapGetters(["GetADEvents"]),
     },
     created() {
-        console.log(this.GetADEvents);
         this.fetchData();
+        console.log(this.GetADEvents);
     },
     methods: {
         ...mapActions(["FetchADEvents", "RemoveADEvent"]),

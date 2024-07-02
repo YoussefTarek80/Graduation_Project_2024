@@ -15,12 +15,12 @@ export const actions = {
             console.error("Error fetching Students info:", error);
         }
     },
-    async UpdateStudent({ commit }, { id, name, level, address }) {
+    async UpdateStudent({ commit }, { id, name, grade_name, address }) {
         try {
             const token = localStorage.getItem("token");
             const formData = new FormData();
             formData.append("name", name);
-            formData.append("level", level);
+            formData.append("level", grade_name);
             formData.append("address", address);
             await axios.post(
                 `http://127.0.0.1:8000/api/school/updateStudent/${id}`,

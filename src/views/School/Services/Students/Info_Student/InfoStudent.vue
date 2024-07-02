@@ -23,15 +23,19 @@
             </div>
             <form action="" @submit.prevent="update">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="flex flex-col">
-                        <label for="in1">اسم الطالب<span class="text-red-600">*</span></label>
-                        <input v-model="student.name" type="text" class="item-data" />
+                    <div class="flex flex-col input-group">
+                        <input required v-model="student.name" type="text" class="input" />
+                        <label for="" class="user-label">اسم الطالب<span class="text-red-600">*</span></label>
                         <span v-if="student.name == ''" class="text-red-600">هذا الحقل مطلوب</span>
                     </div>
-                    <div class="flex flex-col">
-                        <label for="in1">المستوي الدراسي<span class="text-red-600">*</span></label>
-                        <select class="item-data" v-model="student.level">
-                            <option value=""></option>
+                    <div class="flex flex-col input-group">
+                        <input v-model="student.address" type="text" class="input" />
+                        <label for="" class="user-label">العنوان<span class="text-red-600">*</span></label>
+                        <span v-if="student.address == ''" class="text-red-600">هذا الحقل مطلوب</span>
+                    </div>
+                    <div class="flex flex-col input-group">
+                        <label for="" class="user-slabel">الصف الدراسي</label>
+                        <select required class="input" v-model="student.grade_name">
                             <option value="الصف الأول الإبتدائي">الصف الأول الإبتدائي</option>
                             <option value="الصف الثاني الإبتدائي">الصف الثاني الإبتدائي</option>
                             <option value="الصف الثالث الإبتدائي">الصف الثالث الإبتدائي</option>
@@ -42,24 +46,20 @@
                             <option value="الصف الثاني الثانوي">الصف الثاني الثانوي</option>
                             <option value="الصف الثالث الثانوي">الصف الثالث الثانوي</option>
                         </select>
+                        <!-- <label for="in1" class="user-label">المستوي الدراسي<span class="text-red-600">*</span></label> -->
                         <span v-if="student.level == ''" class="text-red-600">هذا الحقل مطلوب</span>
                     </div>
-                    <div class="flex flex-col">
-                        <label for="in3">الرقم القومي</label>
-                        <input disabled v-model="student.national_id" type="text" class="item-data" />
+                    <div class="flex flex-col input-group">
+                        <label for="" class="p-2">الرقم القومي</label>
+                        <input disabled required v-model="student.national_id" type="text" class="input" />
                     </div>
-                    <div class="flex flex-col">
-                        <label for="in3">الجنس</label>
-                        <input disabled v-model="student.gender" type="text" class="item-data" />
+                    <div class="flex flex-col input-group">
+                        <label for="" class="p-2"> الجنس</label>
+                        <input disabled required v-model="student.gender" type="text" class="input" />
                     </div>
-                    <div class="flex flex-col">
-                        <label for="in2">مكان المنشأ/الاقامة</label>
-                        <input disabled v-model="student.state" type="text" class="item-data" />
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="in4">العنوان<span class="text-red-600">*</span></label>
-                        <input v-model="student.address" type="text" class="item-data" />
-                        <span v-if="student.address == ''" class="text-red-600">هذا الحقل مطلوب</span>
+                    <div class="flex flex-col input-group">
+                        <label for="" class="p-2">مكان المنشأ/الاقامة</label>
+                        <input disabled required v-model="student.state" type="text" class="input" />
                     </div>
                 </div>
                 <div class="m-5 flex items-center justify-end">
@@ -82,25 +82,25 @@
             </div>
             <form action="" @submit.prevent>
                 <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="flex flex-col">
-                        <label for="in1">الإسم </label>
-                        <input disabled v-model="student.parent_name" id="parentName" type="text" class="item-data" />
+                    <div class="flex flex-col input-group">
+                        <label for="" class="p-2">الإسم </label>
+                        <input disabled v-model="student.parent_name" id="parentName" type="text" class="input" />
                     </div>
-                    <div class="flex flex-col">
-                        <label for="in2">الدولة</label>
-                        <input disabled v-model="student.country" id="country" type="text" class="item-data" />
+                    <div class="flex flex-col input-group">
+                        <label for="" class="p-2">الدولة</label>
+                        <input disabled v-model="student.country" id="country" type="text" class="input" />
                     </div>
-                    <div class="flex flex-col">
-                        <label for="in3">الجنسية</label>
-                        <input disabled v-model="student.nationality" id="email" type="text" class="item-data" />
+                    <div class="flex flex-col input-group">
+                        <label for="" class="p-2">الجنسية</label>
+                        <input disabled v-model="student.nationality" id="email" type="text" for="" class="input" />
                     </div>
-                    <div class="flex flex-col" v-if="!this.isAppriate">
-                        <label for="in4">المحافظة</label>
-                        <input disabled v-model="student.state" id="state" type="text" class="item-data" />
+                    <div class="flex flex-col input-group" v-if="!this.isAppriate">
+                        <label for="" class="p-2">المحافظة</label>
+                        <input disabled v-model="student.state" id="state" type="text" class="input" />
                     </div>
-                    <div class="flex flex-col">
-                        <label for="in5">المهنة</label>
-                        <input disabled v-model="student.parent_job" id="parentJop" type="text" class="item-data" />
+                    <div class="flex flex-col input-group">
+                        <label for="" class="p-2">المهنة</label>
+                        <input disabled v-model="student.parent_job" id="parentJop" type="text" class="input" />
                     </div>
                 </div>
             </form>
@@ -143,7 +143,7 @@ export default {
             else { this.isAppriate = false; }
         },
         infoRoute(index) {
-            return `/School/Services/Students/StudentGrades/${index}`;
+            return `/school/services/students/student-grades/${index}`;
         },
         async FetchData() {
             try {
@@ -159,7 +159,7 @@ export default {
                     await this.UpdateStudent({
                         id: this.student.id,
                         name: this.student.name,
-                        level: this.student.level,
+                        level: this.student.grade_name,
                         address: this.student.address,
                     });
                     this.success = true;
@@ -187,4 +187,5 @@ export default {
 <style scoped>
 @import url("../../../Profile/profile.css");
 @import url("../../../../../UI/CustomsCss/Custombutton.css");
+@import url("../../../../../UI/CustomsCss/CustomInput.css");
 </style>

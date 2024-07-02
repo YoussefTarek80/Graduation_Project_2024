@@ -40,7 +40,7 @@
           <input type="time" v-model="time" class="outline-customDarkPurple" />
           <span v-if="time == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
-        <div class="flex flex-col">
+        <!-- <div class="flex flex-col">
           <label for="in1">حالة المناسبة<span class="text-red-600">*</span></label>
           <select v-model="status"
             class="w-full appearance-none bg-white border border-gray-300 rounded-xl py-4 px-4 focus:outline-none focus:border-customDarkPurple">
@@ -50,14 +50,14 @@
             <option value="تم الحدث">تم الحدث</option>
           </select>
           <span v-if="status == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
-        </div>
+        </div> -->
       </div>
       <div>
         <div class="flex flex-col mt-6">
           <label for="in1">وصف المناسبة <span class="text-red-600">*</span></label>
-          <textarea placeholder="أكتب وصف الحدث بالتفصيل من حيث المراحل الدراسية المتعلقة والي اخره..." v-model="desc"
-            rows="5" cols="10" class="resize-none p-5 outline-none rounded-2xl mt-5"></textarea>
-          <span v-if="desc == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+          <textarea placeholder="أكتب وصف الحدث بالتفصيل من حيث المراحل الدراسية المتعلقة والي اخره..."
+            v-model="description" rows="5" cols="10" class="resize-none p-5 outline-none rounded-2xl mt-5"></textarea>
+          <span v-if="this.description == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@
       <button class="w-60" @click="addEvent" :class="{ disabledBtn: close }" :disabled="close">
         حفظ
       </button>
-      <button class="w-48" @click="this.$router.replace('/School/Services/Events/')">
+      <button class="w-48" @click="this.$router.replace('/school/services/sc-events')">
         الغاء
       </button>
     </div>
@@ -82,14 +82,15 @@ export default {
       name: "",
       date: "",
       time: "",
+      description: "",
       status: "",
-      desc: "",
       success: false,
       failed: false,
       empty: false,
     };
   },
   created() {
+    console.log();
   },
   computed: {
   },
@@ -104,13 +105,11 @@ export default {
     },
     async addEvent() {
       try {
-        if (this.name != '' && this.status != 'إختار حالة الحدث...'
-          && this.date != '' && this.time != '' && this.desc != '') {
+        if (this.name != '' && this.description != '' && this.date != '' && this.time != '') {
           await this.AddEvent({
             name: this.name,
+            description: this.description,
             date: this.date,
-            desc: this.time,
-            status: this.status,
             time: this.formatTime(this.time),
           });
           this.success = true;

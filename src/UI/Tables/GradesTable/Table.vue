@@ -17,7 +17,12 @@
                 </div>
             </BaseTeleport>
         </section>
-        <table class="sm:w-full sm:my-20 mt-9 sm:text-lg text-sm">
+
+        <div v-if="paginatedItems.length === 0" class="inline-block m-auto w-full">
+            <p class="text-center m-5 mt-10 p-5 text-customPurple font-bold text-2xl">لا يوجد طلاب مُسجلين بالمادة حتي
+                الأن... </p>
+        </div>
+        <table v-else class="sm:w-full sm:my-20 mt-9 sm:text-lg text-sm">
             <thead class="text-white">
                 <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tr-2xl">
                     التسلسل
@@ -49,6 +54,7 @@
 </template>
 <script>
 import axios from "axios"
+import { mapGetters, mapActions } from 'vuex';
 export default {
     props: ["items"],
     data() {

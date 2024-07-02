@@ -7,10 +7,10 @@
                 <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink"></i>
             </div>
         </div>
-        <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="this.GetStudents"
-            :nationalId="true" :Search="true"></FilterComponent>
+        <FilterComponent :disable="GetStudents.length === 0" :filteredArray="filtered_Array" @filter="handleFilter"
+            :MainArray="GetStudents" :nationalId="true" :Search="true"></FilterComponent>
         <div class="relative">
-            <table_Component :items="filtered_Array" :infoRoute="'/School/Services/Students/InfoStudent'">
+            <table_Component :items="filtered_Array" :infoRoute="'/school/services/students/student-info'">
             </table_Component>
         </div>
     </section>

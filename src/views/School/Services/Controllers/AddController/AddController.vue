@@ -65,7 +65,7 @@
       <button class="w-60" @click="addController" :class="{ disabledBtn: close }" :disabled="close">
         حفظ
       </button>
-      <button class="w-48" @click="this.$router.replace('/School/Services/Controllers/')">
+      <button class="w-48" @click="this.$router.replace('/school/services/controllers')">
         الغاء
       </button>
     </div>

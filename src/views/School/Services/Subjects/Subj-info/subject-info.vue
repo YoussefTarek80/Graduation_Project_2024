@@ -35,7 +35,7 @@
                     </div>
                     <div class="m-5">
                         <button class="flex items-center justify-around w-25 sm:w-40 md:w-80">
-                            <router-link to="/School/Services/Subjects">الرجوع إلي قائمة المواد</router-link>
+                            <router-link to="/school/services/subjects">الرجوع إلي قائمة المواد</router-link>
                             <i class="fa-duotone fa-arrow-left"></i>
                         </button>
                     </div>
@@ -75,11 +75,11 @@ export default {
             try {
                 this.initData();
             } catch (error) {
-                console.error("Error fetching student info:", error);
+                console.error("Error fetching subject info:", error);
             }
         },
         infoRoute(index) {
-            return `/School/Services/Subjects/SubjectInfo/SubjectStuds/${index}`;
+            return `/school/services/subjects/subject-info/subject-studs/${index}`;
         },
     },
 }

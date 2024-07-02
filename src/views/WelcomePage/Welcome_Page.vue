@@ -31,11 +31,11 @@ export default {
     },
     methods: {
         Admin() {
-            this.$router.push('/Admin/Login')
+            this.$router.push('/admin/login')
             localStorage.setItem('role', this.admin);
         },
         School() {
-            this.$router.push('/School/Login')
+            this.$router.push('/school/login')
             localStorage.setItem('role', this.school);
         },
     },

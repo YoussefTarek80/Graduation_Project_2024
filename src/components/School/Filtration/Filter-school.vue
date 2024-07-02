@@ -2,24 +2,24 @@
     <div class="bg-customSearch shadow-2xl w-full grid grid-cols-1 sm:grid-cols-2 gap-6 p-5 mt-6 rounded-xl">
 
         <div class="relative w-full" v-if="request">
-            <input type="text" placeholder="بحث بأسم المُرسل..." class="p-3 w-full rounded-2xl"
+            <input type="text" :disabled="this.disable" placeholder="بحث بأسم المُرسل..." class="p-3 w-full rounded-2xl"
                 v-model="search_words" />
             <i v-if="!search_status" class="fa-thin fa-magnifying-glass absolute left-5 top-4"></i>
             <loading_Search :show="search_status" class="absolute left-5 top-0"></loading_Search>
         </div>
 
         <div class="relative  w-full" v-else>
-            <input type="text" v-if="nationalId" placeholder="بحث بالرقم القومي... " class="p-3 w-full rounded-2xl"
-                v-model="search_words" />
-            <input type="text" v-else-if="!nationalId" placeholder="بحث بالأسم..." class="p-3 w-full rounded-2xl"
-                v-model="search_words" />
+            <input type="text" v-if="nationalId" :disabled="this.disable" placeholder="بحث بالرقم القومي... "
+                class="p-3 w-full rounded-2xl" v-model="search_words" />
+            <input type="text" :disabled="this.disable" v-else-if="!nationalId" placeholder="بحث بالأسم..."
+                class="p-3 w-full rounded-2xl" v-model="search_words" />
             <i v-if="!search_status" class="fa-thin fa-magnifying-glass absolute left-5 top-4"></i>
             <loading_Search :show="search_status" class="absolute left-5 top-0"></loading_Search>
         </div>
 
         <div class="col-span-1 sm:col-span-1" v-if="!this.Subject">
             <div class="custom-select relative">
-                <select v-model="selectedSortOption" @change="handleSort"
+                <select :disabled="this.disable" v-model="selectedSortOption" @change="handleSort"
                     class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple">
                     <option class="font-medium" :value="selectedSortOption" disabled selected>ترتيب</option>
                     <option class="font-medium" value="ascending">تصاعديا</option>
@@ -32,12 +32,12 @@
         </div>
         <div class="col-span-1 sm:col-span-1" v-if="this.Subject">
             <div class="custom-select relative">
-                <select v-model="selectedLevel" @change="handleLevel"
+                <select :disabled="this.disable" v-model="selectedLevel" @change="handleLevel"
                     class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple">
                     <option class="font-medium text-gray-400" :value="selectedLevel" selected> إختيار الصف...
                     </option>
-                    <option class="font-medium text-gray-400" v-for="(item, index) in stages" :value="selectedLevel"
-                        selected> {{ item.stage_name }}
+                    <option class="font-medium text-gray-400" v-for="(item, index) in levels" :value="selectedLevel"
+                        selected> {{ item.level_name }}
                     </option>
                     <!-- <option class="font-medium" value="الصف الأول الإبتدائي">الصف الأول الإبتدائي</option>
                     <option class="font-medium" value="الصف الثاني الإبتدائي">الصف الثاني الإبتدائي</option>
@@ -56,6 +56,7 @@
 
 <script>
 
+import { mapGetters, mapActions } from 'vuex';
 export default {
     props: {
         filteredArray: {
@@ -94,12 +95,21 @@ export default {
             type: Boolean,
             required: true,
         },
+        disable: {
+            type: Boolean,
+            required: true,
+        },
+        levelID: {
+            type: Number,
+            required: true,
+        }
     },
     data() {
         return {
             selectedSortOption: "ترتيب أبجدي",
             selectedLevel: "إختار الصف...",
             search_words: "",
+            levels: [],
             search_status: false,
         };
     },
@@ -147,9 +157,11 @@ export default {
             }, 1500);
         },
     },
-    created() {
+    async created() {
+        await this.fetchScLevels(this.levelID);
     },
     methods: {
+        ...mapActions(["fetchScLevels",]),
         show() {
             var newData = [...this.MainArray];
             if (this.selectedRequestType == 'Transfer') {
@@ -200,3 +212,9 @@ export default {
     },
 };
 </script>
+<style scoped>
+input[disabled],
+select[disabled] {
+    background: #d8d8d8;
+}
+</style>

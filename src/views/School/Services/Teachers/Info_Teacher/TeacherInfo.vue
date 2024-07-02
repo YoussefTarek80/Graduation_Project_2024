@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="m-5 flex items-center justify-end sm:gap-5">
-                    <button class="w-96" @click="this.$router.push('/School/Teachers')">الرجوع الي قائمة
+                    <button class="w-96" @click="this.$router.push('/school/teachers')">الرجوع الي قائمة
                         المُعلمين</button>
                 </div>
             </div>

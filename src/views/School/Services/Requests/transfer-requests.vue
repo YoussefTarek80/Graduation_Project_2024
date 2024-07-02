@@ -3,15 +3,15 @@
         <sc-navbar-comp></sc-navbar-Comp>
         <section class="m-6 sm:m-16" data-aos="fade-up" data-aos-duration="1000">
             <div class="flex flex-col">
-                <span class="sm:text-3xl text-2xl">قائمة الطلبات </span>
+                <span class="sm:text-3xl text-2xl">قائمة التحويلات </span>
                 <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink"></i>
             </div>
-            <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="Get_SCTRequests"
-                :request="true" :Search="true">
+            <FilterComponent :disable="Get_SCTRequests.length == 0" :filteredArray="filtered_Array"
+                @filter="handleFilter" :MainArray="Get_SCTRequests" :request="true" :Search="true">
             </FilterComponent>
             <div class="relative">
                 <table_Component :reqtype="req" :items="filtered_Array"
-                    :infoRoute="'/school/services/requests/transfer-request'">
+                    :infoRoute="'/school/services/transfer-requests/request-info'">
                 </table_Component>
             </div>
         </section>

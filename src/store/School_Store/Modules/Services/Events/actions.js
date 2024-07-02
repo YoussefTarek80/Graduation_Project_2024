@@ -5,7 +5,7 @@ export const actions = {
         try {
             const token = localStorage.getItem("token");
             const response = await axios.get(
-                "http://127.0.0.1:8000/api/school/ShowAdEvent",
+                "http://127.0.0.1:8000/api/school/showEvent",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -39,52 +39,60 @@ export const actions = {
         try {
             const token = localStorage.getItem("token");
             console.log(id);
-            // await axios.post(
-            //     `http://127.0.0.1:8000/api/deleteEvent/${id}`,
-            //     {},
-            //     {
-            //         headers: {
-            //             Authorization: `Bearer ${token}`,
-            //         },
-            //     }
-            // );
-            console.log(id);
-            // commit('Set_Events', events);
-            // await dispatch('FetchSCEvents');
+            const response = await axios.get(
+                `http://127.0.0.1:8000/api/school/deleteEvent/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            console.log(response.data.message);
+            await dispatch('FetchSCEvents');
         } catch (err) {
             console.log(err);
         }
     },
-    async UpdateSCEvent({ commit }, { id, name, date, time, status, desc }) {
+    async UpdateSCEvent({ commit }, { id, name, date, time, description }) {
         try {
             const token = localStorage.getItem("token");
-            // await axios.post(
-            //     `http://127.0.0.1:8000/api/updateEvent/${id}`,
-            //     updateData,
-            //     {
-            //         headers: {
-            //             Authorization: `Bearer ${token}`,
-            //         },
-            //     }
-            // );
-            console.log("Event Info Updated Successfully");
+            const updateData = new FormData();
+            updateData.append("name", name);
+            updateData.append("date", date);
+            updateData.append("time", time);
+            updateData.append("description", description);
+            const response = await axios.post(
+                `http://127.0.0.1:8000/api/school/updateEvent/${id}`,
+                updateData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            console.log(response.data.message);
         }
         catch (err) {
             throw `Updating School Event Error:${err}`;
         }
     },
-    async AddEvent({ dispatch }, { name, date, time, status, desc }) {
+    async AddEvent({ dispatch }, { name, description, date, time }) {
         try {
             const token = localStorage.getItem("token");
-            // const response = await axios.post(
-            //     "http://127.0.0.1:8000/api/addEvent",
-            //     eventData,
-            //     {
-            //         headers: {
-            //             Authorization: `Bearer ${token}`,
-            //         },
-            //     }
-            // );
+            const eventData = new FormData();
+            eventData.append("name", name);
+            eventData.append("description", description);
+            eventData.append("date", date);
+            eventData.append("time", time);
+            const response = await axios.post(
+                "http://127.0.0.1:8000/api/school/addEvent",
+                eventData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
             await dispatch("FetchSCEvents");
             console.log("Event Added Successfully");
         } catch (err) {

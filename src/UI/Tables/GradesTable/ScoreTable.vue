@@ -20,14 +20,14 @@
                 </div>
             </BaseTeleport>
         </section>
-        <table class="sm:w-full sm:my-20 mt-9 sm:text-lg text-sm">
+
+        <table v-if="paginatedItems.length != 0" class="sm:w-full sm:my-20 mt-9 sm:text-lg text-sm">
             <thead class="text-white">
                 <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tr-2xl">
                     التسلسل
                 </th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">إسم المادة</th>
-                <th class="sm:py-5 sm:px-4 px-7 py-3">الدرجة</th>
-                <!-- <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tl-2xl">الإجراء</th> -->
+                <th class="sm:py-5 sm:px-4 px-7 py-3  rounded-tl-2xl">الدرجة</th>
             </thead>
             <tbody class="text-center relative" ref="tableBody">
                 <tr v-for="(item, index) in  paginatedItems " :key="index" class="h-20 odd:bg-white even:bg-gray-100">
@@ -37,16 +37,12 @@
                     <td class="py-2 px-4">{{ item.score_subject }}</td>
                     <td class="py-2 px-4"><input type="text" class="text-center" :disabled="!item.is_edit"
                             placeholder="-" v-model="item.Score"></td>
-                    <!-- <td class="py-2 px-4">
-                        <button class="text-customPurple underline" v-if="!item.is_edit" @click="editItem(item)">
-                            تعديل</button>
-                        <button class="text-customPurple underline" v-else @click="saveItem(item)">حفظ</button>
-                    </td> -->
                 </tr>
             </tbody>
         </table>
     </div>
-    <Pagination :currentPage="currentPage" :totalPages="totalPages" :nextPage="nextPage" :prevPage="prevPage" />
+    <Pagination v-if="paginatedItems.length != 0" :currentPage="currentPage" :totalPages="totalPages"
+        :nextPage="nextPage" :prevPage="prevPage" />
 </template>
 <script>
 import axios from "axios"

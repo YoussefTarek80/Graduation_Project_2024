@@ -29,9 +29,14 @@
           <input disabled v-model="this.controller.staff_address"
             class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
         </div>
+        <div class="flex flex-col">
+          <label for="in6">البريد الإلكتروني </label>
+          <input disabled v-model="this.controller.email"
+            class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+        </div>
       </div>
       <div class="m-5 flex items-center justify-end sm:gap-5">
-        <button class="w-96" @click="this.$router.push('/School/Services/Controllers')">الرجوع الي قائمة
+        <button class="w-96" @click="this.$router.push('/school/services/controllers')">الرجوع الي قائمة
           المُدراء</button>
       </div>
     </div>

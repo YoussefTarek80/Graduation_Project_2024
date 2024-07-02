@@ -3,7 +3,7 @@
         <div data-aos="fade-right" data-aos-duration="1000"
             class="relative box shadow-2xl sm:w-5/12 w-11/12 m-6 sm:h-5/6 h-4/6 flex flex-col items-center justify-center rounded-3xl text-sm">
             <div class="sm:w-7/12 w-8/12">
-                <img src="../../../../assets/Logo/Logo.png" alt="" />
+                <img src="../../../../assets/Logo/Logo5.png" alt="" />
             </div>
             <div class="absolute top-0 left-0 cursor-pointer " @click="this.$router.push('/SelectRole')">
                 <i class="fa-sharp fa-light fa-school sm:text-6xl text-4xl p-10 rounded-full 
@@ -41,7 +41,7 @@
                         class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none" @input="Invalid_Data" />
                 </div>
                 <div class="text-left underline mx-4">
-                    <router-link to="/School/Login/ForgetPass">نسيت كلمة المرور ؟</router-link>
+                    <router-link to="/school/login/forget-password">نسيت كلمة المرور ؟</router-link>
                 </div>
                 <button v-if="role == 'Manager'" @click="" :class="{ disabledBtn: invalid }" :disabled="invalid">
                     <span v-if="!loading">تسجيل الدخول</span>
@@ -135,7 +135,7 @@ export default {
             const { email, password, role } = this;
             try {
                 await this.loginSC({ email, password, role });
-                this.$router.push("/School/Home");
+                this.$router.push("/school/home");
             }
             catch (error) {
                 console.error("Login error:", error);

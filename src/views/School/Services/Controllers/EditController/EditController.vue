@@ -21,26 +21,26 @@
             <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="flex flex-col">
                     <label for="">إسم مدير الكنترول<span class="text-red-600">*</span></label>
-                    <input type="text" v-model="controller.name" placeholder="أكتب إسم المدير..."
+                    <input type="text" v-model="controller.staff_name" placeholder="أكتب إسم المدير..."
                         class="outline-customDarkPurple" />
-                    <span v-if="controller.name == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+                    <span v-if="controller.staff_name == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
                 <div class="flex flex-col">
-                    <label for="">العمر<span class="text-red-600">*</span></label>
-                    <input type="text" v-model="controller.age" placeholder="كم عمر المدير..."
+                    <label for="">الهاتف<span class="text-red-600">*</span></label>
+                    <input type="text" v-model="controller.staff_phone" placeholder="كم عمر المدير..."
                         class="outline-customDarkPurple" />
-                    <span v-if="controller.age == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+                    <span v-if="controller.staff_phone == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
                 <div class="flex flex-col">
                     <label for="">العنوان<span class="text-red-600">*</span></label>
-                    <input type="text" v-model="controller.address" placeholder="أكتب العنوان..."
+                    <input type="text" v-model="controller.staff_address" placeholder="أكتب العنوان..."
                         class="outline-customDarkPurple" />
-                    <span v-if="controller.address == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+                    <span v-if="controller.staff_address == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
                 <div class="flex flex-col">
                     <label for="">الدور الوظيفي<span class="text-red-600">*</span></label>
                     <div class="custom-select relative">
-                        <select v-model="controller.role"
+                        <select v-model="controller.staff_role"
                             class="w-full appearance-none bg-white border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-customDarkPurple">
                             <option value="مسؤول الملفات">مسؤول الملفات</option>
                             <option value="مسؤول التصحيح">مسؤول التصحيح</option>
@@ -58,7 +58,7 @@
             <button class="w-60" @click="handleUpdateController" :class="{ disabledBtn: close }" :disabled="close">
                 حفظ
             </button>
-            <button class="w-48" @click="this.$router.replace('/School/Services/Controllers/')">
+            <button class="w-48" @click="this.$router.replace('/school/services/controllers')">
                 الغاء
             </button>
         </div>
@@ -82,41 +82,44 @@ export default {
     computed: {
         ...mapGetters(["GetControllers"]),
     },
-    async mounted() {
-        await this.fetchController();
+    created() {
+        this.fetchData();
     },
     methods: {
         ...mapActions(["FetchControllers", "UpdateController"]),
+        intiData() {
+            const index = this.id;
+            this.controller = this.GetControllers.find(
+                (controller) => controller.id === parseInt(index)
+            );
+        },
         formatTime(time) {
             const [hours, minutes, seconds] = time.split(":");
             const formattedHours = ("0" + hours).slice(-2);
             const formattedMinutes = ("0" + minutes).slice(-2);
             return `${formattedHours}:${formattedMinutes} `;
         },
-        async fetchController() {
+        async fetchData() {
             try {
                 await this.FetchControllers();
                 const index = this.$route.params.id;
                 this.controller = this.GetControllers.find(
                     (controller) => controller.id === parseInt(index)
                 );
-                this.intiData();
+                console.log(this.controller);
             } catch (err) {
                 console.error(err);
             }
-        },
-        intiData() {
-            this.controller = this.GetControllers[this.id];
         },
         async handleUpdateController() {
             try {
                 if (this.controller.name != '' && this.controller.address != '' && this.controller.age != '') {
                     await this.UpdateController({
                         id: this.controller.id,
-                        name: this.controller.name,
-                        age: this.controller.age,
-                        address: this.controller.address,
-                        role: this.controller.role
+                        name: this.controller.staff_name,
+                        phone: this.controller.staff_phone,
+                        address: this.controller.staff_address,
+                        role: this.controller.staff_role
                     });
                     this.success = true;
                     setTimeout(() => { this.success = false }, 1000);

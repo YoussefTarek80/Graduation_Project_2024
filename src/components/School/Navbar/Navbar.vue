@@ -2,7 +2,7 @@
     <header>
         <div class="flex justify-between items-center sm:mx-24 p-4">
             <div class="sm:w-3/12 w-6/12 flex justify-center items-center">
-                <img src="../../../assets/Logo/NavbarLogo.png" alt="" />
+                <img src="../../../assets/Logo/Logo4.png" alt="" />
                 <i class="fa-solid fa-pipe sm:text-6xl text-2xl text-customYellow"></i>
             </div>
             <div class="relative user_Info flex flex-row-reverse items-center justify-center sm:space-x-4 space-x-2">
@@ -25,7 +25,7 @@
                         v-if="userLogout">
                         <ul>
                             <li class="hover:bg-slate-200 px-10 py-2 rounded-xl">
-                                <router-link to="/Manager/profile">
+                                <router-link to="/school-account/profile">
                                     الملف الشخصي
                                 </router-link>
                             </li>
@@ -41,32 +41,32 @@
         <nav>
             <ul class="flex sm:items-center items-center sm:justify-evenly flex-wrap">
                 <li class="sm:p-10 p-4 sm:text-xl text-sm">
-                    <router-link to="/School/Home">الرئيسية</router-link>
+                    <router-link to="/school/home">الرئيسية</router-link>
                 </li>
                 <li v-if="role == 'manager' || roleTitle == 'مسؤول التصحيح'" class="sm:p-10 p-4 sm:text-xl text-sm">
                     مدرستي
                     <i class="fa-sharp fa-solid fa-chevron-down m-3"></i>
                     <ul class="dropdown">
                         <li key="students">
-                            <router-link to="/School/Students">قائمة الطلاب</router-link>
+                            <router-link to="/school/students">قائمة الطلاب</router-link>
                         </li>
                         <li key="teachers">
-                            <router-link to="/School/Teachers">قائمة المدرسين</router-link>
+                            <router-link to="/school/teachers">قائمة المدرسين</router-link>
+                        </li>
+                        <li key="teachers">
+                            <router-link to="/school/reports">التقارير الواردة</router-link>
                         </li>
                     </ul>
                 </li>
-                <!-- <li v-else-if="roleTitle == 'مسؤول التصحيح'" key="teachers">
-                    <router-link to="/School/Teachers">قائمة المدرسين</router-link>
-                </li> -->
                 <li v-if="role == 'manager' || roleTitle == 'مسؤول الطلبات'" class="sm:p-10 p-4 sm:text-xl text-sm">
                     الطلبات
                     <i class="fa-sharp fa-solid fa-chevron-down m-3"></i>
                     <ul class="dropdown">
                         <li>
-                            <router-link to="/School/Services/enroll-requests">التقديمات</router-link>
+                            <router-link to="/school/services/enroll-requests">التقديمات</router-link>
                         </li>
                         <li>
-                            <router-link to="/School/Services/transfer-requests">التحويلات</router-link>
+                            <router-link to="/school/services/transfer-requests">التحويلات</router-link>
                         </li>
                     </ul>
                 </li>
@@ -75,26 +75,22 @@
                     <i class="fa-sharp fa-solid fa-chevron-down m-3"></i>
                     <ul class="dropdown">
                         <li>
-                            <router-link to="/School/Services/AD-Events">المناسبات المُرسلة</router-link>
+                            <router-link to="/school/services/ad-events">المناسبات الواردة من الإدارات</router-link>
                         </li>
                         <li>
-                            <router-link to="/School/Services/SC-Events">المناسبات الخاصة بالمدرسة</router-link>
+                            <router-link to="/school/services/sc-events">المناسبات الخاصة بالمدرسة</router-link>
                         </li>
                     </ul>
                 </li>
                 <li v-if="role == 'manager'" class="sm:p-10 p-4 sm:text-xl text-sm">
-                    <router-link to="/School/Services/Controllers">المسؤولين</router-link>
+                    <router-link to="/school/services/controllers">المسؤولين</router-link>
                 </li>
                 <li v-if="role == 'manager' || roleTitle == 'مسؤول التصحيح'" class="sm:p-10 p-4 sm:text-xl text-sm">
-                    <router-link to="/School/Services/Subjects">المواد</router-link>
+                    <router-link to="/school/services/subjects">المواد</router-link>
                 </li>
                 <li v-if="role == 'manager' || roleTitle == 'مسؤول الدعم والشكاوي'"
                     class="sm:p-10 p-4 sm:text-xl text-sm">
-                    <router-link to="/School/Services/Complaints">الدعم</router-link>
-                </li>
-                <li v-if="role == 'manager' || roleTitle == 'مسؤول الدعم والشكاوي'"
-                    class="sm:p-10 p-4 sm:text-xl text-sm">
-                    <router-link to="/School/Services/Complaints">الشكاوي</router-link>
+                    <router-link to="/school/services/technical-support">الدعم</router-link>
                 </li>
             </ul>
         </nav>

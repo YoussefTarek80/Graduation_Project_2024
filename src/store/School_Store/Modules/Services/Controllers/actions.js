@@ -63,18 +63,23 @@ export const actions = {
             console.log(err);
         }
     },
-    async UpdateController({ commit }, { id, name, age, address, role }) {
+    async UpdateController({ commit }, { id, name, phone, address, role }) {
         try {
             const token = localStorage.getItem("token");
-            // await axios.post(
-            //     `http://127.0.0.1:8000/api/updateEvent/${id}`,
-            //     updateData,
-            //     {
-            //         headers: {
-            //             Authorization: `Bearer ${token}`,
-            //         },
-            //     }
-            // );
+            const updateData = new FormData();
+            updateData.append('staff_name', name);
+            updateData.append('staff_phone', phone);
+            updateData.append('staff_address', address);
+            updateData.append('staff_role', role);
+            await axios.post(
+                `http://127.0.0.1:8000/api/school/updateStaff/${id}`,
+                updateData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
             console.log("Controller Info Updated Successfully")
         }
         catch (err) {

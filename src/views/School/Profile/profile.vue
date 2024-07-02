@@ -15,7 +15,7 @@
 
         <img src="../../../assets/Logo/head-bg.png" class="sm:h-full h-36" alt="" />
         <button class="float-left sm:m-10 m-2 absolute top-0 left-0 sm:w-96 w-32 flex items-center justify-around"
-            @click="this.$router.push('/School/Home')">
+            @click="this.$router.push('/school/home')">
             <span class="sm:text-2xl text-sm">رجوع للصفحة الرئيسية</span>
             <i class="fa-regular fa-arrow-turn-left sm:text-3xl text-sm"></i>
         </button>
@@ -29,38 +29,37 @@
 
     <section class="mt-40 mx-8 md:mx-24" data-aos="fade-up" data-aos-duration="1000">
         <div class="bg-customBGCards rounded-xl shadow-xl p-6 sm:w-full">
-            <div class="my-5">
+            <div class="mt-5 mb-10">
                 <span class="text-2xl">بيانات المدير</span>
             </div>
             <form action="" @submit.prevent="updateSchoolProfile">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="flex flex-col">
-                        <label for="in1">اسم مدير المدرسة<span class="text-red-600">*</span></label>
-                        <input v-model="name" id="email" placeholder=" العنوان " type="text" class="item-data" />
+                    <div class="flex flex-col input-group">
+                        <input v-model="name" required placeholder=" العنوان " type="text" class="input" />
+                        <label for="" class="user-label">اسم مدير المدرسة<span class="text-red-600">*</span></label>
                         <span v-if="!this.v_m_name && name != ''" class="text-red-600">ادخل حروفاً عربية فقط </span>
                         <span v-else-if="name == ''" class="text-red-600">هذا الحقل مطلوب</span>
                     </div>
-                    <div class="flex flex-col">
-                        <label for="in1">البريد الالكتروني</label>
-                        <input v-model="email" disabled id="email" placeholder=" ايميل الكتروني " type="text"
-                            class="item-data" />
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="in2">الدولة</label>
-                        <input disabled value="مصر" id="email" placeholder="العنوان" type="text" class="item-data" />
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="in3">العنوان<span class="text-red-600">*</span></label>
-                        <input v-model="address" id="email" placeholder="العنوان" type="text" class="item-data" />
+                    <div class="flex flex-col input-group">
+                        <input v-model="address" required placeholder="العنوان" type="text" class="input" />
+                        <label for="" class="user-label">العنوان<span class="text-red-600">*</span></label>
                         <span v-if="address == ''" class="text-red-600">هذا الحقل مطلوب</span>
                     </div>
-                    <div class="flex flex-col">
-                        <label for="in5">رقم الهاتف<span class="text-red-600">*</span></label>
-                        <input v-model="phone" id="email" placeholder=" رقم الهاتف " type="text" class="item-data" />
+                    <div class="flex flex-col input-group">
+                        <input v-model="phone" required placeholder=" رقم الهاتف " type="text" class="input" />
+                        <label for="" class="user-label">رقم الهاتف<span class="text-red-600">*</span></label>
                         <span v-if="!this.v_m_phone && phone != ''" class="text-red-600 text-xs">رقم الهاتف يجب ان يكون
                             11
-                            رقم ويبدء ب 010 او 011 او 012</span>
+                            رقم ويبدء ب 010 او 011 او 012او 015</span>
                         <span v-else-if="phone == ''" class="text-red-600">هذا الحقل مطلوب</span>
+                    </div>
+                    <div class="flex flex-col input-group">
+                        <label for="" class="p-2">البريد الالكتروني</label>
+                        <input v-model="email" disabled placeholder=" ايميل الكتروني " type="text" class="input" />
+                    </div>
+                    <div class="flex flex-col input-group">
+                        <label for="" class="p-2">الدولة</label>
+                        <input disabled value="مصر" placeholder="العنوان" type="text" class="input" />
                     </div>
                 </div>
                 <div class="m-5 flex items-center justify-end">
@@ -69,60 +68,58 @@
             </form>
         </div>
 
-        <div class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full">
+        <div class="bg-customBGCards rounded-xl shadow-xl p-6 mt-14 sm:w-full">
             <div class="my-5">
                 <span class="text-2xl">بيانات المدرسة</span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="flex flex-col">
-                    <label for="in1">اسم المدرسة</label>
-                    <input disabled v-model="school_name" id="email" placeholder=" العنوان " type="text"
-                        class="item-data" />
+                <div class="flex flex-col input-group">
+                    <label for="" class="p-2">اسم المدرسة</label>
+                    <input disabled v-model="school_name" placeholder=" العنوان " type="text" class="input" />
                 </div>
-                <div class="flex flex-col">
-                    <label for="in2">الدولة</label>
-                    <input disabled value="مصر" id="email" placeholder="العنوان" type="text" class="item-data" />
+                <div class="flex flex-col input-group">
+                    <label for="" class="p-2">الدولة</label>
+                    <input disabled value="مصر" placeholder="العنوان" type="text" class="input" />
                 </div>
-                <div class="flex flex-col">
-                    <label for="in3">المحافظة</label>
-                    <input disabled v-model="adminstartion_state" id="email" placeholder="العنوان" type="text"
-                        class="item-data" />
+                <div class="flex flex-col input-group">
+                    <label for="" class="p-2">المحافظة</label>
+                    <input disabled v-model="adminstartion_state" placeholder="العنوان" type="text" class="input" />
                 </div>
-                <div class="flex flex-col">
-                    <label for="in3">العنوان</label>
+                <div class="flex flex-col input-group">
+                    <label for="" class="p-2">العنوان</label>
                     <input disabled v-model="school_address" id="email" placeholder="العنوان" type="text"
-                        class="item-data" />
+                        class="input" />
                 </div>
             </div>
-
-            <div class="my-5">
-                <span class="text-2xl">بيانات الادارة (للمسئول)</span>
+            <hr class="h-1 m-5 bg-gray-700">
+            <div class="mt-14 mb-5">
+                <span class="text-2xl">بيانات الإدارة التابعة لها المدرسة</span>
             </div>
             <form action="" @submit.prevent>
                 <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="flex flex-col">
-                        <label for="in1">اسم الادارة</label>
-                        <input disabled v-model="adminstartion_name" id="email" placeholder=" اسم الادارة " type="text"
-                            class="item-data" />
+                        <label for="" class="p-2">اسم الادارة</label>
+                        <input disabled v-model="adminstartion_name" placeholder=" اسم الادارة " type="text"
+                            class="input" />
                     </div>
                     <div class="flex flex-col">
-                        <label for="in2">الدولة</label>
-                        <input disabled value="مصر" id="email" placeholder=" دولة " type="text" class="item-data" />
+                        <label for="" class="p-2">الدولة</label>
+                        <input disabled value="مصر" placeholder=" دولة " type="text" class="input" />
                     </div>
                     <div class="flex flex-col">
-                        <label for="in3">عنوان الادارة</label>
-                        <input disabled v-model="adminstartion_address" id="email" placeholder=" العنوان " type="text"
-                            class="item-data" />
+                        <label for="" class="p-2">عنوان الادارة</label>
+                        <input disabled v-model="adminstartion_address" placeholder=" العنوان " type="text"
+                            class="input" />
                     </div>
                     <div class="flex flex-col">
-                        <label for="in4">المحافظة</label>
-                        <input disabled v-model="adminstartion_state" id="email" placeholder=" العنوان " type="text"
-                            class="item-data" />
+                        <label for="" class="p-2">المحافظة</label>
+                        <input disabled v-model="adminstartion_state" placeholder=" العنوان " type="text"
+                            class="input" />
                     </div>
                     <div class="flex flex-col">
-                        <label for="in5">رقم هاتف الادارة</label>
-                        <input disabled v-model="adminstartion_phone" id="email" placeholder=" العنوان " type="text"
-                            class="item-data" />
+                        <label for="" class="p-2">رقم هاتف الادارة</label>
+                        <input disabled v-model="adminstartion_phone" placeholder=" العنوان " type="text"
+                            class="input" />
                     </div>
                 </div>
             </form>
@@ -134,23 +131,23 @@
             </div>
             <form action="" @submit.prevent="updatePassword">
                 <div class="flex flex-col">
-                    <label for="email" class="my-2 mx-2">
+                    <label for="" class="p-2">
                         كلمة المرور القديمة<span class="text-red-600">*</span></label>
-                    <input v-model="OldPassword" id="Oemail" placeholder="كلمة المرور " type="password"
-                        class="border-2 border-gray-300 px-5 py-2 rounded-xl outline-none" />
+                    <input v-model="OldPassword" placeholder="كلمة المرور " type="password"
+                        class="border-2 border-gray-300 px-5 py-2 rounded-xl outline-none " />
                     <span v-if="OldPassword == '' && submit" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
                 <div class="flex flex-col">
-                    <label for="email" class="my-2 mx-2">
+                    <label for="" class="p-2">
                         كلمة المرور الجديدة<span class="text-red-600">*</span></label>
-                    <input v-model="NewPassword" id="Nemail" placeholder="كلمة المرور " type="password"
-                        class="border-2 border-gray-300 px-5 py-2 rounded-xl outline-none" />
+                    <input v-model="NewPassword" placeholder="كلمة المرور " type="password"
+                        class="border-2 border-gray-300 px-5 py-2 rounded-xl outline-none " />
                     <span v-if="NewPassword == '' && submit" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
                 <div class="flex flex-col mt-5">
-                    <label for="email" class="my-2 mx-2">
+                    <label for="" class="p-2">
                         تاكيد كلمة المرور الجديدة<span class="text-red-600">*</span></label>
-                    <input v-model="NewPasswordConf" id="password" placeholder=" تاكيد كلمة المرور" type="password"
+                    <input v-model="NewPasswordConf" placeholder=" تاكيد كلمة المرور" type="password"
                         class="border-2 border-gray-300 px-5 py-2 rounded-xl outline-none" />
                     <span v-if="NewPasswordConf == '' && submit" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
@@ -327,7 +324,7 @@ export default {
             return arabicPattern.test(v);
         },
         valid_input2(v) {
-            var phonePattern = /^(010|011|012)[0-9]{8}$/;
+            var phonePattern = /^(010|011|012|015)[0-9]{8}$/;
             return phonePattern.test(v) && v.length == 11;
         }
     },
@@ -337,4 +334,5 @@ export default {
 <style scoped>
 @import url("./profile.css");
 @import url("../../../UI/CustomsCss/Custombutton.css");
+@import url("../../../UI/CustomsCss/CustomInput.css");
 </style>

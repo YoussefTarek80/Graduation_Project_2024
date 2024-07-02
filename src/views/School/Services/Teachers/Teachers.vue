@@ -8,15 +8,16 @@
                     <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink"></i>
                 </div>
                 <button class="sm:w-80 flex justify-around items-center"
-                    @click="this.$router.push('/School/Teachers/AddEvent')">
+                    @click="this.$router.push('/school/teachers/add-teacher')">
                     <span class="sm:text-xl text-sm">اضافة مُعلم جديد</span>
                     <i class="fa-solid fa-plus p-1"></i>
                 </button>
             </div>
+            <!-- <FilterComponent :disable="GetTeachers.length === 0" :filteredArray="filtered_Array" @filter="handleFilter" -->
             <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="GetTeachers"
-                :teacher="true" :Search="true" :request="false"></FilterComponent>
-            <table_Component :items="filtered_Array" :infoRoute="'/School/Teachers/TeacherInfo'"
-                :editRoute="'/School/Teachers/EditTeacherInfo'" @delete-teacher="deleteTeacher">
+                :teacher="true" :Search="true"></FilterComponent>
+            <table_Component :items="filtered_Array" :infoRoute="'/school/teachers/teacher-info'"
+                :editRoute="'/school/teachers/edit-teacher-info'" @delete-teacher="deleteTeacher">
             </table_Component>
         </section>
         <Footer_Component></Footer_Component>
@@ -42,15 +43,17 @@ export default {
     },
     created() {
         this.fetchData();
-        this.filtered_Array = this.GetTeachers;
+        console.log(this.filtered_Array);
     },
     methods: {
         ...mapActions(["FetchTeachers", "RemoveTeacher"]),
+        initData() {
+            this.filtered_Array = this.GetTeachers;
+        },
         async fetchData() {
             try {
                 await this.FetchTeachers();
-                this.filtered_Array = this.GetTeachers;
-                console.log(this.filtered_Array);
+                this.initData();
             }
             catch (error) {
                 throw `Fetching Teachers Error ${error}`;
@@ -61,7 +64,7 @@ export default {
         async deleteTeacher(id) {
             try {
                 await this.RemoveTeacher(id, this.GetTeachers);
-                console.log("Deleted Done");
+                console.log("Teacher Deleted Done");
             } catch (error) {
                 console.error(error);
             }

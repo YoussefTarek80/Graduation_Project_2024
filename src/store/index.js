@@ -9,9 +9,8 @@ import module7 from './School_Store/modules/Services/Controllers/index';
 import module8 from './School_Store/modules/Services/Requests/index';
 import module9 from './School_Store/modules/Services/Events/index';
 import module10 from './School_Store/modules/Services/Subjects/index';
-// import module11 from "./parent_store/modules/Auth/index";
-// import module12 from "./parent_store/modules/Children/index";
-// import module13 from "./parent_store/modules/Schools/index";
+import module11 from './School_Store/modules/Services/Reports/index';
+import module12 from './School_Store/modules/Services/Technical-Support/index';
 
 const store = createStore({
     namespace: true,
@@ -26,8 +25,8 @@ const store = createStore({
         module8,
         module9,
         module10,
-        // module11,
-        // module12,
+        module11,
+        module12,
         // module13,
     },
 });

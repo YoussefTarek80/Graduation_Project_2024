@@ -3,9 +3,9 @@
         <div
             class="box relative shadow-2xl sm:w-5/12 w-11/12 m-6 sm:h-5/6 h-4/6 flex flex-col items-center justify-center rounded-3xl text-sm">
             <div class="sm:w-7/12 w-8/12">
-                <img src="../../../../assets/Logo/Logo.png" alt="" />
+                <img src="../../../../assets/Logo/Logo5.png" alt="" />
             </div>
-            <form action="" class="w-11/12 space-y-4 flex flex-col" @submit.prevent="SendRequest">
+            <form class="w-11/12 space-y-4 flex flex-col" @submit.prevent="SendRequest">
                 <div class="flex flex-col">
                     <label for="email" class="my-2 mx-2">البريد الالكتروني<span class="text-red-600">*</span></label>
                     <input id="email" v-model="email" placeholder="البريد الالكتروني" type="email"

@@ -4,15 +4,15 @@ export const actions = {
     async FetchTeachers({ commit }) {
         try {
             const token = localStorage.getItem("token");
-            // const response = await axios.get(
-            //     "http://127.0.0.1:8000/api/showEvent",
-            //     {
-            //         headers: {
-            //             Authorization: `Bearer ${token}`,
-            //         },
-            //     }
-            // );
-            // console.log(response.data.data)
+            const response = await axios.get(
+                "http://127.0.0.1:8000/api/school/showTeachers",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            console.log(response.data.data)
             const teachers = [
                 {
                     id: 0,

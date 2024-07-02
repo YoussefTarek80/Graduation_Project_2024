@@ -23,20 +23,19 @@
                 <span class="text-2xl">بيانات المُعلم</span>
             </div>
             <form action="" class="input_Div grid grid-cols-1 sm:grid-cols-3 gap-6" @submit.prevent="">
-                <div class="flex flex-col">
-                    <label for="">اسم المُعلم <span class="text-red-600">*</span></label>
-                    <input type="text" placeholder="اكتب إسم المٌعلٍم بالكامل..." :placeholder v-model="name"
-                        class="outline-customDarkPurple" />
+                <div class="flex flex-col input-group">
+                    <input type="text" required v-model="name" class="outline-customDarkPurple input" />
+                    <label for="" class="user-label">اسم المُعلم <span class="text-red-600">*</span></label>
                     <span v-if="name == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
-                <div class="flex flex-col">
-                    <label for="">عمر المُعلم <span class="text-red-600">*</span></label>
-                    <input type="number" placeholder="عمر المٌعلٍم..." v-model="age" class="outline-customDarkPurple" />
+                <div class="flex flex-col input-group">
+                    <input type="number" required v-model="age" class="outline-customDarkPurple input" />
+                    <label for="" class="user-label">عمر المُعلم <span class="text-red-600">*</span></label>
                     <span v-if="age == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
-                <div class="flex flex-col">
-                    <label for="">المادة <span class="text-red-600">*</span></label>
-                    <select v-model="subject" class="item-data outline-customDarkPurple">
+                <div class="flex flex-col input-group">
+                    <label for="" class="user-slabel">المادة <span class="text-red-600">*</span></label>
+                    <select v-model="subject" class="input outline-customDarkPurple input">
                         <option :value="subject" disabled selected>إختار المادة...</option>
                         <option disabled class="bg-customDarkPurple text-[#fff] font-bold">مواد اللغات</option>
                         <option value="اللغة العربية"> اللغة العربية</option>
@@ -67,11 +66,9 @@
                     </select>
                     <span v-if="subject == 'إختار المادة...' && empty" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
-                <div class="flex flex-col">
-                    <label for="in1">العنوان
-                        <span class="text-red-600">*</span></label>
-                    <input type="text" v-model="address" placeholder="أدخل العنوان..."
-                        class="outline-customDarkPurple" />
+                <div class="flex flex-col input-group">
+                    <input type="text" required v-model="address" class="outline-customDarkPurple input" />
+                    <label for="" class="user-label">العنوان<span class="text-red-600">*</span></label>
                     <span v-if="address == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
             </form>
@@ -80,7 +77,7 @@
             <button class="w-60" @click="addTeacher" :class="{ disabledBtn: close }" :disabled="close">
                 حفظ
             </button>
-            <button class="w-48" @click="this.$router.replace('/School/Teachers')">
+            <button class="w-48" @click="this.$router.replace('/school/teachers')">
                 الغاء
             </button>
         </div>

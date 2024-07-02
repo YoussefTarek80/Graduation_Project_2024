@@ -42,7 +42,7 @@
           <span v-if="event.time == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
 
-        <div class="flex flex-col">
+        <!-- <div class="flex flex-col">
           <label for="">الحالة <span class="text-red-600">*</span></label>
           <div class="custom-select relative">
             <select v-model="event.status"
@@ -55,14 +55,14 @@
               <i class="fa-regular fa-angle-down"></i>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div>
         <div class="flex flex-col mt-6">
           <label for="">وصف المناسبة <span class="text-red-600">*</span></label>
-          <textarea placeholder="أكتب وصف الحدث هنا..." v-model="event.desc" rows="5"
+          <textarea placeholder="أكتب وصف الحدث هنا..." v-model="event.description" rows="5"
             class="resize-none p-5 outline-customDarkPurple rounded-2xl mt-5"></textarea>
-          <span v-if="event.desc == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+          <span v-if="event.description == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@
       <button class="w-60" @click="handleUpdateEvent" :class="{ disabledBtn: close }" :disabled="close">
         حفظ
       </button>
-      <button class="w-48" @click="this.$router.replace('/School/Services/Events/')">
+      <button class="w-48" @click="this.$router.replace('/school/services/sc-events')">
         الغاء
       </button>
     </div>
@@ -94,18 +94,26 @@ export default {
   computed: {
     ...mapGetters(["GetSCEvents"]),
   },
-  async mounted() {
-    await this.fetchEvent();
+  created() {
+    this.fetchData();
+    console.log(this.GetSCEvents);
+    console.log(this.event);
   },
   methods: {
     ...mapActions(["FetchSCEvents", "UpdateSCEvent"]),
+    intiData() {
+      const index = this.$route.params.id;
+      this.event = this.GetSCEvents.find(
+        (event) => event.id === parseInt(index)
+      );
+    },
     formatTime(time) {
       const [hours, minutes, seconds] = time.split(":");
       const formattedHours = ("0" + hours).slice(-2);
       const formattedMinutes = ("0" + minutes).slice(-2);
       return `${formattedHours}:${formattedMinutes} `;
     },
-    async fetchEvent() {
+    async fetchData() {
       try {
         await this.FetchSCEvents();
         this.intiData();
@@ -113,20 +121,17 @@ export default {
         throw `fetch Event Error: ${err}`;
       }
     },
-    intiData() {
-      this.event = this.GetSCEvents[this.id];
-    },
     async handleUpdateEvent() {
       try {
-        if (this.event.name != '' && this.event.date != '' && this.event.desc != '') {
-          await this.UpdateSCEvent({
-            id: this.event.id,
-            name: this.event.name,
-            date: this.event.date,
-            time: this.formatTime(this.event.time),
-            status: this.event.status,
-            desc: this.event.desc,
-          });
+        if (this.event.name != '' && this.event.date != '' && this.event.description != '') {
+          await this.UpdateSCEvent(
+            {
+              id: this.event.id,
+              name: this.event.name,
+              date: this.event.date,
+              time: this.formatTime(this.event.time),
+              description: this.event.description,
+            });
           this.success = true;
           setTimeout(() => { this.success = false }, 1000);
         }
@@ -152,5 +157,4 @@ export default {
 @import url("../../../../../UI/CustomsCss/CustomInput.css");
 @import url("../../../../../UI/CustomsCss/Custombutton.css");
 @import url("./updateEvent.css");
-@import url("../../Teachers/Add_Teacher/AddTeacher.css");
 </style>

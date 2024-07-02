@@ -14,29 +14,33 @@
       <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="flex flex-col">
           <label for="in1">اسم المناسبة <span class="text-red-600">*</span></label>
-          <input disabled v-model="this.event.name" class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+          <input disabled v-model="event.name" class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
         </div>
         <div class="flex flex-col">
           <label for="in4">تاريخ المناسبة <span class="text-red-600">*</span></label>
-          <input disabled v-model="this.event.date" class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+          <input disabled v-model="event.date" class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
         </div>
         <div class="flex flex-col">
           <label for="in5"> وقت الحدث<span class="text-red-600">*</span></label>
-          <input disabled v-model="this.event.time" class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+          <input disabled v-model="event.time" class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
         </div>
         <div class="flex flex-col">
           <label for="in6">عنوان الحدث<span class="text-red-600">*</span></label>
-          <input disabled v-model="this.event.address"
-            class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+          <input disabled v-model="event.address" class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
         </div>
         <div class="flex flex-col">
           <label for="in7">الحالة <span class="text-red-600">*</span></label>
-          <input disabled v-model="this.event.state"
-            class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+          <input disabled v-model="event.state" class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
         </div>
       </div>
+      <div class="flex flex-col mt-6">
+        <label for="">وصف المناسبة <span class="text-red-600">*</span></label>
+        <textarea disabled placeholder="أكتب وصف الحدث هنا..." v-model="event.description" rows="5"
+          class="tx-report resize-none border-2 border-customPurple p-5 outline-none rounded-2xl mt-5"></textarea>
+        <span v-if="event.description == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+      </div>
       <div class="m-5 flex items-center justify-end sm:gap-5">
-        <button class="w-96" @click="this.$router.push('/School/Services/SC-Events')">الرجوع الي قائمة
+        <button class="w-96" @click="this.$router.push('/school/services/sc-events')">الرجوع الي قائمة
           المناسبات</button>
       </div>
     </div>

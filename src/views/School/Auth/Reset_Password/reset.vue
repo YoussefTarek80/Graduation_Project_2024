@@ -3,7 +3,7 @@
         <div
             class="box shadow-2xl sm:w-5/12 w-11/12 m-6 sm:h-5/6 h-4/6 flex flex-col items-center justify-center rounded-3xl text-sm">
             <div class="sm:w-7/12 w-8/12">
-                <img src="../../../../assets/Logo/Logo.png" alt="" />
+                <img src="../../../../assets/Logo/Logo5.png" alt="" />
             </div>
             <form action="" class="w-11/12 space-y-4 flex flex-col" @submit.prevent="resetPassword">
                 <div class="flex flex-col">

@@ -11,6 +11,9 @@ export const actions = {
             console.log(data);
             localStorage.setItem("token", data.token);
             localStorage.setItem("staff_role", data.staff_role);
+            localStorage.setItem('stageID', '');
+            localStorage.setItem('levelID', '');
+            localStorage.setItem('termID', '');
             await dispatch("FetchUser2");
         } catch (error) {
             throw error;
@@ -30,6 +33,9 @@ export const actions = {
             );
             localStorage.removeItem('token');
             localStorage.removeItem('User');
+            localStorage.removeItem('stageID');
+            localStorage.removeItem('levelID');
+            localStorage.removeItem('termID');
             commit("LOGOUT2");
         } catch (error) {
             console.error("Logout failed:", error);

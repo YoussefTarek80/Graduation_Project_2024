@@ -14,7 +14,7 @@
                     <span v-else-if="role === 'staff'" class="text-customDarkPurple">مسؤول في المدرسة</span>
                 </div>
             </div>
-            <button @click="this.$router.push('/Manager/Profile')"
+            <button @click="this.$router.push('/school-account/profile')"
                 class="border-2 border-dashed border-customDarkPurple p-6 my-5 rounded-full block m-auto hover:bg-customDarkPurple text-customDarkPurple hover:text-lime-50 transition-all hover:border-solid w-full">
                 الملف الشخصي
             </button>
@@ -86,30 +86,30 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["GetUser2", "GetStudents", "GetRequests", "GetEvents", "GetTeachers", "GetControllers"]),
+        ...mapGetters(["GetUser2", "GetStudents", "Get_SCRequests", "Get_SCTRequests", "GetSCEvents",
+            "GetADEvents", "GetTeachers", "GetControllers"]),
     },
     created() {
         this.role = localStorage.getItem('role');
-        console.log(this.GetUser2);
-        this.fetchAllData();
+        this.fetchData();
         this.DisplayDashboardNumbers();
+        console.log(this.GetUser2);
     },
     methods: {
-        ...mapActions(["FetchUser2", "FetchStudents", "FetchRequests", "FetchEvents", "FetchTeachers"]),
+        ...mapActions(["FetchUser2"]),
         DisplayDashboardNumbers() {
             this.data[0].numbers = this.GetStudents.length;
-            // this.data[1].numbers = this.GetEvents.length;
+            this.data[1].numbers = this.GetSCEvents.length + this.GetADEvents.length;
             this.data[2].numbers = this.GetControllers.length;
-            // this.data[3].numbers = this.GetRequests.length;
+            this.data[3].numbers = this.Get_SCRequests.length + this.Get_SCTRequests.length;
             // this.data[4].numbers = this.GetTeachers.length;
         },
-        async fetchAllData() {
+        async fetchData() {
             try {
                 await this.FetchUser2(this.role);
-                console.log("All Data Fetched Successfully");
                 console.log(this.GetUser2);
             } catch (error) {
-                throw `Fetching All Data  Error : ${error}`;
+                throw `Fetching Main Page Data  Error : ${error}`;
             }
         }
     },
