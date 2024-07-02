@@ -1,0 +1,25 @@
+
+.Responses{
+    height: 80vh;
+}
+@keyframes fade-left {
+    0% {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+.element {
+    animation: fade-left 0.5s ease forwards;
+}
+.inputSupport{
+
+}
+@media (max-width: 1000px){
+    img{
+        display: none;
+    }
+}

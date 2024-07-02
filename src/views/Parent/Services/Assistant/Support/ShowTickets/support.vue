@@ -8,7 +8,7 @@
             class="fa-regular fa-horizontal-rule fa-2xl text-customPink"
         ></i>
       </div>
-      <button class="w-3/12" @click="this.$router.push('/Darb/Dashboard/')">
+      <button class="w-3/12" @click="this.$router.push('/Darb/Assistant/Support/AddTicket')" >
         انشاء تذكرة
       </button>
     </div>
@@ -18,8 +18,8 @@
 <script>
 
 import {defineComponent} from "vue";
-import NavbarView from "../../../../../components/Parent/NavBar.vue";
-import SupportTable from "../../../../../UI/Tables/SupportTable/Table.vue"
+import NavbarView from "../../../../../../components/Parent/NavBar.vue";
+import SupportTable from "../../../../../../UI/Tables/SupportTable/Table.vue"
 export default defineComponent({
   components: {NavbarView,SupportTable},
   inject:['support'],
@@ -29,5 +29,5 @@ export default defineComponent({
 })
 </script>
 <style scoped>
-@import url('../../../../../UI/CustomsCss/Custombutton.css');
+@import url('../../../../../../UI/CustomsCss/Custombutton.css');
 </style>

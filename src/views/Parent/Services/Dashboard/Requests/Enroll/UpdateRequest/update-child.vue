@@ -43,10 +43,10 @@
 </template>
 
 <script>
-import ChildInfo from "../../../../Services/Dashboard/Children/AddChild/ChildPage/child.vue"
-import SchoolsInfo from "../../../../Services/Dashboard/Children/AddChild/SchoolsPage/school.vue"
+import ChildInfo from "../AddRequest/ChildPage/child.vue"
+import SchoolsInfo from "../AddRequest/SchoolsPage/school.vue"
 import {mapActions, mapGetters} from "vuex";
-import BaseTeleport from "../../../../../../UI/BaseTeleport.vue";
+import BaseTeleport from "../../../../../../../UI/BaseTeleport.vue";
 
 export default {
   components: {
@@ -78,6 +78,7 @@ export default {
         checked: true,
         selectIndexSchools: [],
         std_nationalID: '',
+        nationality:'',
         religion: null,
         best: true
       },
@@ -120,7 +121,8 @@ export default {
       // this.formData.childbirth_certificate=this.request.childbirth_certificate;
       this.formData.religion=this.request.religion;
       this.formData.std_nationalID=this.request.student_national_id;
-      this.formData.state = 'الجيزة';
+      this.formData.nationality=this.request.nationality;
+      this.formData.state = this.request.state;
       this.formData.ad_ID = this.request.adminstration.id;
       this.formData.selectIndexSchools = [];
       this.request.schools.forEach((school) => {
@@ -151,6 +153,9 @@ export default {
         form.append('childbirth_certificate', this.formData.childbirth_certificate);
         form.append('image', this.formData.image);
         form.append('religion', this.formData.religion);
+        form.append('nationality', this.formData.nationality);
+        form.append('state', this.formData.state);
+        form.append('country', this.formData.country);
         form.append('student_national_id', this.formData.std_nationalID);
         this.formData.SchoolIDs.forEach((schoolId) => {
           form.append('schools[]', schoolId);
@@ -178,7 +183,7 @@ export default {
 </script>
 
 <style scoped>
-@import "../../../../../../UI/CustomsCss/Custombutton.css";
+@import "../../../../../../../UI/CustomsCss/Custombutton.css";
 
 .progressBar {
   display: flex;

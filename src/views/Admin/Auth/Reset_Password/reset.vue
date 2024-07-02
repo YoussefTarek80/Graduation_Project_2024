@@ -117,7 +117,7 @@ export default {
             try {
                 this.loading_Fun();
                 console.log(this.$route.params.token)
-                await axios.post("http://192.168.1.18:8000/api/reset-password", {
+                await axios.post("http://127.0.0.1:8000/api/reset-password", {
                     token: this.$route.params.token,
                     email: this.email,
                     password: this.pass,

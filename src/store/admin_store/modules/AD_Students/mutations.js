@@ -1,14 +1,20 @@
 export const mutations = {
-    SetStatges(state, stages) {
+    SetStudents(state, students) {
+        state.students = students;
+    },
+    SetAllStd(state,std){
+        state.std = std;
+    },
+    studentDetails(state,info){
+        state.info = info;
+    },
+    Setstages(state,stages){
         state.stages = stages;
     },
-    SetLevels(state, level) {
-        state.level = level;
+    Setlevels(state,levels){
+        state.levels = levels;
     },
-    SetTerms(state, terms) {
-        state.terms = terms;
-    },
-    SetSubject(state, subjects) {
-        state.subjects = subjects;
-    },
+    SetScore(state,score){
+        state.score = score;
+    }
 };

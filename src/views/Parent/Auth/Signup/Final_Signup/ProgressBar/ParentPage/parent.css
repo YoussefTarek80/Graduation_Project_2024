@@ -1,0 +1,10 @@
+img{
+    transition: 0.2s ease-in-out;
+}
+img:hover{
+    transform: scale(1.1);
+}
+.selected{
+    border: solid 1px black;
+    border-radius: 9999px;
+}

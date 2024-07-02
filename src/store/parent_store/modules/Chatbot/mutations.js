@@ -1,5 +1,5 @@
 export const mutations = {
-    setNotify(state, notifications) {
-        state.notifications = notifications;
+    setSchools(state, schools) {
+        state.schools = schools;
     },
 };

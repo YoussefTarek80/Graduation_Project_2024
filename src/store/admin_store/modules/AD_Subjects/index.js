@@ -6,10 +6,10 @@ export default {
   namespace: true,
   state() {
     return {
-      schools: [],
-      addSchoolStatus: 'idle',
-      fetchSchoolsStatus: 'idle',
-      TotalSchool:null
+      stages: [],
+      level: [],
+      terms:[],
+      subjects:[]
     };
   },
   mutations,

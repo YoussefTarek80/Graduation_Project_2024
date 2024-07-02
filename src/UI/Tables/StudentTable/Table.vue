@@ -13,7 +13,7 @@
                     الاجراء
                 </th>
             </thead>
-            <tbody class="text-center relative" ref="tableBody">
+            <tbody class="text-center relative" ref="tableBody" v-if="paginatedItems">
                 <tr
                     v-for="(item, index) in paginatedItems"
                     :key="index"
@@ -22,18 +22,21 @@
                     <td class="py-2 px-4">
                         {{ (currentPage - 1) * pageSize + index + 1 }}
                     </td>
-                    <td class="py-2 px-4">{{ item.schoolname }}</td>
-                    <td class="py-2 px-4">{{ item.schoolAdminstration }}</td>
+                    <td class="py-2 px-4">{{ item.school.name }}</td>
+                    <td class="py-2 px-4">{{ item.school.adminstration.name }}</td>
                     <td class="py-2 px-4">{{ item.name }}</td>
                     <td class="py-2 px-4 relative">
-                        {{ item.nationalID }}
+                        {{ item.national_id }}
                     </td>
                     <td class="py-2 px-4 relative">
-                        <router-link :to="infoRoute(index)"  class="bg-[#4d394d] text-white px-5 py-3 rounded-md font-bold">التفاصيل</router-link>
+                        <router-link :to="infoRoute(item.id)"  class="bg-[#4d394d] text-white px-5 py-3 rounded-md font-bold">التفاصيل</router-link>
                     </td>
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div class="flex w-full  " v-if="items.length===0">
+      <loading_info2></loading_info2>
     </div>
     <Pagination
         :currentPage="currentPage"
@@ -45,7 +48,9 @@
 <script>
 import axios from "axios";
 import { mapActions } from "vuex";
+import Loading_info2 from "../../loadingInformation/loading_info2.vue";
 export default {
+  components: {Loading_info2},
     props: ["items", "infoRoute"],
     data() {
         return {

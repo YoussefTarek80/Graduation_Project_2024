@@ -1,5 +1,6 @@
 <template>
     <Navbar_Component></Navbar_Component>
+    <loading_info2 v-if="!item"></loading_info2>
     <section
         v-if="item"
         class="m-10"
@@ -17,9 +18,8 @@
         <div
             class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full mx-auto"
         >
-            <div class="my-5">
-                <span class="text-2xl">بيانات المدرسة</span>
-            </div>
+          <span class="text-3xl  text-customDarkPurple px-5 py-3 rounded-2xl flex items-center gap-2 m-10">  <i class="fa-duotone fa-sparkles"></i>بيانات المدرسة </span>
+
             <div class="input_Div grid grid-cols-1 sm:grid-cols-4 gap-6">
                 <div class="flex flex-col">
                     <label for="in1"
@@ -33,18 +33,7 @@
                     >
                     <span class="item-data">مصر</span>
                 </div>
-                <div class="flex flex-col">
-                    <label for="in3"
-                        >نوع شهادة المدرسة
-                        <span class="text-red-600">*</span></label
-                    >
-                </div>
-                <div class="flex flex-col">
-                    <label for="in4"
-                        >الفصول الدراسية
-                        <span class="text-red-600">*</span></label
-                    >
-                </div>
+
                 <div class="flex flex-col">
                     <label for="in5"
                         >رقم هاتف المدرسة
@@ -65,7 +54,15 @@
                     >
                     <span class="item-data">{{ HandleStatus(item.status) }}</span>
                 </div>
+              <div class="flex flex-col" >
+                <label for="in5"
+                >المراحل الدراسية
+                  <span class="text-red-600">*</span></label
+                >
+                <span class="item-data flex" v-for="stage in item.stages" :key="stage.id">{{ stage.stage_name }}</span>
+              </div>
             </div>
+
             <div class="flex flex-col w-full sm:w-auto mb-4 sm:mb-0 mt-3">
                 <label for="in8"
                     >شعار المدرسة <span class="text-red-600">*</span></label
@@ -108,16 +105,19 @@
                     <span class="item-data">{{ item.manager_address }}</span>
                 </div>
             </div>
-            <div class="m-5 flex items-center justify-end sm:gap-5">
-                <button class="w-96" @click="this.$router.push('/Admin/Schools')">الرجوع الي قائمة المدارس</button>
-            </div>
+
         </div>
+      <div class="m-5 flex items-center justify-end sm:gap-5 mt-10">
+        <button class="w-96" @click="this.$router.push('/Admin/Schools')">الرجوع الي قائمة المدارس</button>
+      </div>
     </section>
 </template>
 <script>
 import axios from "axios";
 import { mapActions,mapGetters } from "vuex";
+import Loading_info2 from "../../../../../UI/loadingInformation/loading_info2.vue";
 export default {
+  components: {Loading_info2},
     data() {
         return {
             item: null,

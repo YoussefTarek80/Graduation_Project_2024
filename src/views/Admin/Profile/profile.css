@@ -35,14 +35,13 @@
 section {
     font-family: "Kufam", sans-serif;
 }
-.item-data {
+.item-data2 {
     padding: 10px;
     border-radius: 10px;
     margin: 10px;
-    border: 1px solid rgb(183, 183, 183);
 }
 input[disabled] {
-    background: linear-gradient(to left, #d9d9d9, #f3f3f3);
+    background: linear-gradient(to left, #e8e7e7, #f3f3f3);
 }
 @media (max-width: 1000px) {
     .profileImage {

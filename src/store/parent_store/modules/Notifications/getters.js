@@ -1,3 +1,4 @@
 export const getters = {
-    // GetParent: (state) => state.user,
+    GetNotifications: (state) => state.notifications,
+    GetNotificationsLength: (state) => state.notifications.length
 };

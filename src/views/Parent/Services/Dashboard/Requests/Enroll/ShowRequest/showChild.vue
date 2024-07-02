@@ -17,8 +17,8 @@
   </section>
 </template>
 <script>
-import NavBar_View from "../../../../../../components/Parent/NavBar.vue";
-import ChildrenTable from "../../../../../../UI/Tables/ChildrenTable/Table.vue"
+import NavBar_View from "../../../../../../../components/Parent/NavBar.vue";
+import ChildrenTable from "../../../../../../../UI/Tables/ChildrenTable/Table.vue"
 import {mapActions, mapGetters} from "vuex";
 
 export default {
@@ -53,5 +53,5 @@ export default {
 }
 </script>
 <style scoped>
-@import url('../../../../../../UI/CustomsCss/Custombutton.css');
+@import url('../../../../../../../UI/CustomsCss/Custombutton.css');
 </style>

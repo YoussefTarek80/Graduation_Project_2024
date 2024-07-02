@@ -6,26 +6,26 @@
         <span class="sm:text-4xl text-2xl text-customDarkPurple">الدعم والشكاوي</span>
         <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink"></i>
       </div>
-      <div class="p-10">
+      <div class="sm:p-10 pt-5">
         <p>يمكنك التحدث إلى الدعم أو إضافة شكوى من خلال هذه الصفحة بسهولة. لدينا فريق دعم عملاء متاح دائمًا لمساعدتك في
           حال كان لديك أي استفسارات أو مشكلات. كل ما عليك فعله هو النقر على زر الدعم أو تعبئة نموذج الشكوى وسنقوم بالرد
           عليك في أقرب وقت ممكن. نحن نهتم بتقديم أفضل خدمة لكل عميل، لذا لا تتردد في الاتصال بنا إذا كنت بحاجة إلى
           مساعدة</p>
       </div>
-      <div class="cards flex items-center justify-evenly">
+      <div class="cards flex items-center justify-evenly flex-wrap sm:space-y-0 space-y-10">
         <div class="card flex flex-col h-80 w-80 shadow-2xl rounded-2xl items-center justify-evenly p-5">
           <div class="flex items-center gap-10">
             <span class="text-2xl text-customDarkPurple font-bold">الدعم</span>
             <i class="fa-duotone fa-headset text-6xl"></i>
           </div>
-          <button class="w-full">عرض التذاكر</button>
+          <button class="w-full" @click="this.$router.push('/Darb/Assistant/Support')">عرض التذاكر</button>
         </div>
         <div class="card  flex flex-col h-80 w-80 shadow-2xl rounded-2xl items-center justify-evenly p-5 ">
           <div class="flex items-center justify-evenly w-full">
             <span class="text-2xl text-customDarkPurple font-bold">الشكوي</span>
             <img src="../../../../assets/Parent/complaint.png" class="w-16">
           </div>
-          <button class="w-full">عرض الشكاوي</button>
+          <button class="w-full" @click="this.$router.push('/Darb/Assistant/Compliment')">عرض الشكاوي</button>
         </div>
       </div>
       <!--      <div class="my-10" v-for="q in support" :key="q.id">-->
@@ -84,5 +84,5 @@ export default {
 <style scoped>
 @import url("../../../../UI/CustomsCss/CustomParentInput.css");
 @import url("../../../../UI/CustomsCss/Custombutton.css");
-@import "./support.css";
+@import "assistant.css";
 </style>

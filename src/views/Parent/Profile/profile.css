@@ -1,0 +1,25 @@
+.data span{
+    font-size: 1rem;
+    margin-right:20px ;
+    margin-bottom: 10px;
+}
+p{
+    font-size: 1.1rem;
+    border: 2px solid #d5d4d4;
+    padding: 10px;
+    color:black;
+    border-radius: 20px;
+    width: 100%;
+}
+::placeholder{
+    font-size: 20px;
+}
+.readonly-input:read-only {
+    background: black;
+}
+.data{
+    background: linear-gradient(63deg, #e3e3e3, #fdfdfd);
+}
+.head{
+    background: url("../../../assets/Logo/head-bg.png");
+}

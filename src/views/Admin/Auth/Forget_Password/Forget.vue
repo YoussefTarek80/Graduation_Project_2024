@@ -8,7 +8,7 @@
             </div>
             <form
                 action=""
-                class="w-11/12 space-y-4 flex flex-col"
+                class="w-11/12 space-y-4 flex flex-col relative"
                 @submit.prevent="SendRequest"
             >
                 <div class="flex flex-col">
@@ -35,19 +35,7 @@
                     <loading :show="loading" />
                 </button>
             </form>
-            <button
-                class="p-5 text-lime-50 rounded-full flex justify-around absolute bottom-3 left-6 w-40"
-                @click="this.$router.push('/Login')"
-                :class="{ disabledBtn: security }"
-                :disabled="security"
-            >
-                <div>
-                    <span>رجوع</span>
-                </div>
-                <div>
-                    <i class="fa-regular fa-arrow-turn-left"></i>
-                </div>
-            </button>
+
         </div>
         <div class="space-x-2 text-customPink opacity-50">
             <span>جميع الحقوق محفوظة </span>
@@ -124,7 +112,7 @@ export default {
             this.loading = true;
             this.security = true;
             await axios
-                .post("http://192.168.1.18:8000/api/forgot-password", {
+                .post("http://127.0.0.1:8000/api/forgot-password", {
                     email: this.email,
                 })
                 .then((response) => {

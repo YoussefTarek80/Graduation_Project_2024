@@ -1,3 +1,3 @@
 export const getters = {
-    events: (state) => state.events,
+    GetallAdmins: (state) => state.admins,
 };

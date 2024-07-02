@@ -1,4 +1,3 @@
 export const getters = {
-    // getToken: (state) => state.token,
-    GetParent: (state) => state.user,
+    // GetParent: (state) => state.user,
 };

@@ -1,7 +1,6 @@
 section {
     font-family: "Kufam", sans-serif;
 }
-
 .file{
     border-radius: 20px;
     padding: 15px;
@@ -16,5 +15,11 @@ section {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+
 }
 

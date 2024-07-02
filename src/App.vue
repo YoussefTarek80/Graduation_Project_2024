@@ -5,22 +5,15 @@
 export default {
     data() {
         return {
-            array: [
-                {
-                    email: "admin@admin.com",
-                    password: "000",
-                },
-                {
-                    email: "school@admin.com",
-                    password: "000",
-                },
+            support: [
+
             ],
         };
     },
     provide() {
         return {
             items: this.items,
-            array: this.array,
+            support: this.support,
         };
     },
 };
@@ -34,11 +27,13 @@ export default {
 ::-webkit-scrollbar-thumb {
   background-color: #5c2c7e;
   height: 100px;
-
 }
 ::-webkit-scrollbar-track{
   background-color: white;
 
+}
+section{
+  user-select: none;
 }
 @media (max-width: 1000px) {
   ::-webkit-scrollbar {

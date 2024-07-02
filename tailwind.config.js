@@ -10,7 +10,9 @@ module.exports = {
         customYellow: '#FEF2A8',
         customDarkPurple: '#5C2C7E',
         customBGCards:'#F2F2F2',
-        customSearch:'#EAEAEA'
+        customSearch:'#EAEAEA',
+        customLightPurple:'#A342A5',
+          customOrange:'#FF725E'
       },
     },
   },

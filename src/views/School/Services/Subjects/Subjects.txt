@@ -1,0 +1,58 @@
+<template>
+    <div>
+        <sc-navbar-comp></sc-navbar-Comp>
+        <section class="m-16 md:mx-16" data-aos="fade-up" data-aos-duration="1000">
+            <div class="flex flex-row justify-between">
+                <div class="self-center flex flex-col">
+                    <span class="sm:text-3xl text-2xl">قائمة المواد</span>
+                    <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink"></i>
+                </div>
+            </div>
+            <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="GetScSubjects"
+                :Search="true" :Subject="true">
+            </FilterComponent>
+            <div class="relative">
+                <table_Component :items="filtered_Array" :infoRoute="'/School/Services/Subjects/SubjectInfo'">
+                </table_Component>
+            </div>
+        </section>
+        <Footer_Component></Footer_Component>
+    </div>
+</template>
+<script>
+import table_Component from "../../../../UI/Tables/SubjectTable/Table.vue";
+import FilterComponent from "../../../../components/School/Filtration/Filter-Subject.vue";
+import { mapGetters, mapActions } from 'vuex';
+export default {
+    components: { table_Component, FilterComponent },
+    data() {
+        return {
+            filtered_Array: [],
+        };
+    },
+    computed: {
+        ...mapGetters(["GetScSubjects", "GetScLevels", "GetScStages", "GetScTerms"])
+    },
+    created() {
+        this.fetchData();
+    },
+    methods: {
+        ...mapActions(["fetchScSubjects", "fetchScStages"]),
+        async fetchData() {
+            try {
+                await this.fetchScSubjects();
+                await this.fetchScStages();
+                this.filtered_Array = this.GetScSubjects;
+            } catch (err) {
+                console.error(err);
+            }
+        },
+        handleFilter(filteredArray) {
+            this.filtered_Array = filteredArray;
+        },
+    },
+}
+</script>
+<style scoped>
+@import url('../../../../UI/CustomsCss/Custombutton.css');
+</style>

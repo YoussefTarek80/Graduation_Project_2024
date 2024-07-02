@@ -1,6 +1,8 @@
 export const getters = {
-    GetAllstages: (state) => state.stages,
-    GetAllLevels: (state) => state.level,
-    GetAllTerms: (state) => state.terms,
-    GetAllSubjects: (state) => state.subjects,
+    GetAllstudents: (state) => state.students,
+    GetAllstds: (state) => state.std,
+    GetStdInfo: (state) => state.info,
+    GetStagesStud: (state) => state.stages,
+    GetLevelsStud: (state) => state.levels,
+    GetScoreStud: (state) => state.score,
 };

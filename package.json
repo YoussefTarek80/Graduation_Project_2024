@@ -14,10 +14,16 @@
     "aos": "^2.3.4",
     "axios": "^1.6.7",
     "chart.js": "^4.4.1",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
+    "leaflet": "^1.9.4",
+    "openai": "^4.0.0",
     "router": "^1.3.8",
+    "swiper": "^11.1.1",
     "vue": "^3.4.15",
     "vue-chartkick": "^1.1.0",
     "vue-router": "^4.2.5",
+    "vuesax": "^3.12.2",
     "vuex": "^4.1.0"
   },
   "devDependencies": {

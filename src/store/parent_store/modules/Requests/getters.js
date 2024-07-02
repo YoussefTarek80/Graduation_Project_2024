@@ -1,3 +1,5 @@
 export const getters = {
-    getChildren: state => state.children
+    getRequests: state => state.Requests,
+    getChildren: state => state.Children,
+    getTransfer: state => state.Grade,
 };

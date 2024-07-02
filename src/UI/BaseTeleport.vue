@@ -5,7 +5,6 @@
             <dialog open v-if="show">
                 <section>
                     <slot></slot>
-                    
                 </section>
             </dialog>
         </transition>
@@ -20,6 +19,11 @@ export default {
             required: true,
         },
     },
+  methods:{
+    tryClose(){
+
+    }
+  }
 };
 </script>
 
@@ -38,7 +42,7 @@ export default {
 dialog {
     font-family: "Kufam", sans-serif;
     position: fixed;
-    top: 40vh;
+    top: 30vh;
     right: 25%;
     width: 80%;
     height: auto;

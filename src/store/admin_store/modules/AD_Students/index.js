@@ -6,10 +6,12 @@ export default {
   namespace: true,
   state() {
     return {
-      stages: [],
-      level: [],
-      terms:[],
-      subjects:[]
+      students: [],
+      std:[],
+      info:[],
+      stages:[],
+      levels:[],
+      score:[]
     };
   },
   mutations,

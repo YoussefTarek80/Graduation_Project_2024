@@ -1,11 +1,14 @@
 export const mutations = {
-    SET_ADD_SCHOOL_STATUS(state, status) {
-        state.addSchoolStatus = status;
+    SetStatges(state, stages) {
+        state.stages = stages;
     },
-    SET_SCHOOLS(state, schools) {
-        state.schools = schools;
+    SetLevels(state, level) {
+        state.level = level;
     },
-    SET_FETCH_SCHOOLS_STATUS(state, status) {
-        state.fetchSchoolsStatus = status;
+    SetTerms(state, terms) {
+        state.terms = terms;
+    },
+    SetSubject(state, subjects) {
+        state.subjects = subjects;
     },
 };
