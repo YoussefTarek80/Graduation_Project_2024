@@ -8,8 +8,10 @@
 import Chart from 'chart.js/auto';
 
 export default {
+  props:['schools','students','events','requests','workers','admins'],
     mounted() {
         this.renderChart();
+        console.log("schools",this.schools)
     },
     methods: {
         renderChart() {
@@ -21,16 +23,15 @@ export default {
                         "المدارس",
                         "الطلاب",
                         "المناسبات",
-                        "المسئولين",
                         "الطلبات",
                         "العمال",
+                        "المسئولين",
                     ],
                     datasets: [
                         {
-                            label: "عدد الشكاوي في الشهر",
-                            data: [65, 59, 80, 81, 56, 55, 40],
+                            data: [this.schools, this.students, this.events, this.requests, this.workers, this.admins],
                             backgroundColor: [
-                                "rgba(255, 99, 132, 0.7)", 
+                                "rgba(255, 99, 132, 0.7)",
                                 "rgba(54, 162, 235, 0.7)", 
                                 "rgba(255, 206, 86, 0.7)", 
                                 "rgba(75, 192, 192, 0.7)", 

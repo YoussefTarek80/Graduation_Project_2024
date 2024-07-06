@@ -28,18 +28,18 @@
 
       <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="flex flex-col">
-          <label for="in1">اسم المُعلم
+          <label>اسم المُعلم
             <span class="text-red-600">*</span></label>
           <input type="text" v-model="name" class="outline-customDarkPurple" />
           <span v-if="name == ''" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
         <div class="flex flex-col">
-          <label for="in1">عمر المُعلم <span class="text-red-600">*</span></label>
+          <label>عمر المُعلم <span class="text-red-600">*</span></label>
           <input type="number" v-model="age" class="outline-customDarkPurple" />
           <span v-if="age == ''" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
         <div class="flex flex-col">
-          <label for="in1">المادة <span class="text-red-600">*</span></label>
+          <label>المادة <span class="text-red-600">*</span></label>
           <select v-model="subject" class="item-data outline-customDarkPurple">
             <option disabled class="bg-customDarkPurple text-[#fff] font-bold">مواد اللغات</option>
             <option value="اللغة العربية"> اللغة العربية</option>
@@ -65,10 +65,15 @@
           </select>
         </div>
         <div class="flex flex-col">
-          <label for="in1">العنوان
+          <label>العنوان
             <span class="text-red-600">*</span></label>
           <input type="text" v-model="address" class="outline-customDarkPurple" />
           <span v-if="address == ''" class="text-red-600">هذا الحقل مطلوب</span>
+        </div>
+        <div class="flex flex-col">
+          <label>الهاتف<span class="text-red-600">*</span></label>
+          <input type="text" v-model="phone" class="outline-customDarkPurple" />
+          <span v-if="phone == ''" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
       </div>
     </div>
@@ -114,6 +119,12 @@ export default {
       const formattedMinutes = ("0" + minutes).slice(-2);
       return `${formattedHours}:${formattedMinutes} `;
     },
+    intiData() {
+      this.name = this.teacher.name;
+      this.address = this.teacher.address;
+      this.age = this.teacher.age;
+      this.subject = this.teacher.subject;
+    },
     async FetchTeacher() {
       try {
         await this.FetchTeachers();
@@ -125,12 +136,6 @@ export default {
       } catch (err) {
         console.error(err);
       }
-    },
-    intiData() {
-      this.name = this.teacher.name;
-      this.address = this.teacher.address;
-      this.age = this.teacher.age;
-      this.subject = this.teacher.subject;
     },
     async handleUpdateTeacher() {
       try {

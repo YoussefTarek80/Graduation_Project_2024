@@ -1,67 +1,71 @@
 header {
-    color: white;
-    background: url("../../../assets/Logo/head-bg.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    font-family: "Kufam", sans-serif;
+  color: white;
+  background: url("../../../assets/Logo/head-bg.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Kufam", sans-serif;
 }
 li {
-    position: relative;
-    cursor: pointer;
+  position: relative;
+  cursor: pointer;
 }
 .dropdown {
-    position: absolute;
-    width: 100%;
-    height: auto;
-    background-color: white;
-    color: black;
-    top: 80%;
-    left: 10%;
-    box-shadow: 4px 4px 10px #ec74d7;
-    border-radius: 10px;
-    z-index: 11;
-    display: none;
-    transition: opacity 0.5s ease;
-    opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: auto;
+  background-color: white;
+  color: black;
+  top: 80%;
+  left: 10%;
+  box-shadow: 4px 4px 10px #ec74d7;
+  border-radius: 10px;
+  z-index: 11;
+  display: none;
+  transition: opacity 0.5s ease;
+  opacity: 0;
 }
 .dropdown li {
-    padding: 10px;
-    transition: 0.3s ease;
-    text-align: center;
-    border: 1px solid rgb(215, 215, 215);
+  padding: 10px;
+  transition: 0.3s ease;
+  text-align: center;
+  border: 1px solid rgb(215, 215, 215);
 }
 .dropdown li:nth-child(1) {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.dropdown li:last-child {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 li:hover .dropdown {
-    display: block;
-    opacity: 1;
+  display: block;
+  opacity: 1;
 }
 
 .dropdown li:hover {
-    background-color: #5c2c7e;
-    color: white;
+  background-color: #5c2c7e;
+  color: white;
 }
 li:hover .fa-chevron-down {
-    transform: rotate(180deg);
-    transition: transform 0.3s ease;
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
 }
 .bounce-enter-active {
-    animation: bounce-in 0.5s;
+  animation: bounce-in 0.5s;
 }
 .bounce-leave-active {
-    animation: bounce-in 0.5s reverse;
+  animation: bounce-in 0.5s reverse;
 }
 @keyframes bounce-in {
-    0% {
-        transform: scale(0);
-    }
-    50% {
-        transform: scale(1.25);
-    }
-    100% {
-        transform: scale(1);
-    }
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

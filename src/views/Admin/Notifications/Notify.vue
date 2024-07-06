@@ -3,9 +3,7 @@
   <section class="m-6 sm:m-16" data-aos="fade-up" data-aos-duration="1000">
     <div class="flex flex-col">
       <span class="sm:text-3xl text-2xl"> قائمة الاشعارات (1)</span>
-      <i
-          class="fa-regular fa-horizontal-rule fa-2xl text-customPink"
-      ></i>
+      <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink"></i>
     </div>
     <div class="flex flex-col">
       <div class="flex flex-col border-2 border-black w-80 mt-20 p-5 rounded-2xl shadow-2xl">
@@ -20,7 +18,7 @@
   </section>
   <Footer_Component></Footer_Component>
 </template>
-<script >
+<script>
 
 </script>
 <style scoped>

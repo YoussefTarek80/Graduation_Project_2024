@@ -3,13 +3,13 @@
     <section class="m-10" data-aos="fade-up" data-aos-duration="1000">
         <BaseTeleport :show="success">
             <div class="flex flex-col">
-                <span class="text-green-700 text-4xl"> تم التعديل بنجاح </span>
+                <span class="text-green-700 text-4xl"> تم إرسال الرد بنجاح </span>
                 <i class="fa-sharp fa-solid fa-badge-check text-green-700 text-7xl m-3"></i>
             </div>
         </BaseTeleport>
         <BaseTeleport :show="failed">
             <div class="flex flex-col">
-                <span class="text-red-700 text-4xl"> فشل التعديل</span>
+                <span class="text-red-700 text-4xl"> فشل الإرسال</span>
                 <i class="fa-sharp fa-solid fa-badge-check text-red-700 text-7xl m-3"></i>
             </div>
         </BaseTeleport>
@@ -77,16 +77,15 @@ export default {
     computed: {
         ...mapGetters(["GetQueries"]),
     },
-    created() {
-        this.fetchData();
+    async created() {
+        await this.fetchData();
         console.log(this.query);
         this.state = (this.query.answer ? true : false);
-        console.log(this.state);
     },
     methods: {
         ...mapActions(["FetchChatQueries", "AnswerQuery"]),
         initData() {
-            this.query = this.GetQueries[this.id];
+            this.query = this.GetQueries.find((v) => v.id === parseInt(this.id));
         },
         async fetchData() {
             try {
@@ -102,8 +101,12 @@ export default {
                 await this.AnswerQuery({ id: this.query.id, answer: this.query.answer });
                 this.confirm = false;
                 this.state = true;
+                this.success = true;
+                setTimeout(() => { this.success = false }, 1000);
             }
             catch (err) {
+                this.failed = true;
+                setTimeout(() => { this.failed = false }, 1000);
                 console.log(err);
             }
         }
@@ -114,6 +117,4 @@ export default {
 textarea[disabled] {
     background-color: #fff;
 }
-
-/* @import url('../../../../../UI/CustomsCss/Custombutton.css');*/
 </style>

@@ -39,7 +39,7 @@
     </div>
 </template>
 <script>
-import table_Component from "../../../../UI/Tables/ControllerTable/Table.vue";
+import table_Component from "../../../../UI/School_Tables/ControllerTable/Table.vue";
 import FilterComponent from "../../../../components/School/Filtration/Filter-school.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
@@ -57,8 +57,8 @@ export default {
     computed: {
         ...mapGetters(["GetControllers"]),
     },
-    created() {
-        this.fetchData();
+    async created() {
+        await this.fetchData();
     },
     methods: {
         ...mapActions(["FetchControllers", "RemoveController"]),

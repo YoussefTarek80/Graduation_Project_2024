@@ -23,15 +23,15 @@
         </div>
         <div class="bg-customBGCards rounded-xl shadow-xl p-6 sm:w-full">
             <form action="" @submit.prevent="update">
-                <div class="grid grid-cols-1  gap-6">
-                    <div class="flex flex-col w-48 input-group">
-                        <label for="" class="p-2 mb-5 font-bold">إسم التقرير (الموضوع)</label>
-                        <input disabled v-model="report.subject" type="text" class="input" />
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="flex flex-row items-center w-full">
+                        <label for="" class="pt-5 pl-5 font-bold">إسم التقرير (الموضوع):</label>
+                        <input disabled v-model="report.subject" type="text" class="item-data " />
                     </div>
-                    <div class="flex flex-col  select-none ">
-                        <label for="in3" class="mb-5">الوصف</label>
-                        <textarea disabled placeholder="" v-model="report.description" rows="5" cols="10"
-                            class="tx-report resize-none border-2 border-customPurple p-5 outline-none rounded-2xl mt-5"></textarea>
+                    <div class="flex flex-col">
+                        <label for="">الوصف</label>
+                        <textarea disabled v-model="report.description" rows="5" cols="10"
+                            class="item-data resize-none p-5 outline-none rounded-2xl"></textarea>
                     </div>
                 </div>
                 <div class="m-5 flex items-center justify-end">
@@ -64,7 +64,8 @@ export default {
     methods: {
         ...mapActions(["FetchSCReports"]),
         initData() {
-            this.report = this.GetSCReports[this.id];
+            this.report = this.GetSCReports.find(
+                (item) => item.id == parseInt(this.id));
         },
         async FetchData() {
             try {
@@ -79,6 +80,7 @@ export default {
 </script>
 <style scoped>
 @import url("../../../Profile/profile.css");
+@import url("../../Events/Info_Event/infoEvent.css");
 @import url("../../../../../UI/CustomsCss/Custombutton.css");
 @import url("../../../../../UI/CustomsCss/CustomInput.css");
 </style>

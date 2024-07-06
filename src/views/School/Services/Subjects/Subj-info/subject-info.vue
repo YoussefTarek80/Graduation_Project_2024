@@ -62,16 +62,16 @@ export default {
     computed: {
         ...mapGetters(["GetScSubjects"]),
     },
-    created() {
+    async created() {
         console.log(this.GetScSubjects)
-        this.fetchData();
+        await this.fetchData();
     },
     methods: {
         ...mapActions(["fetchScSubjects"]),
         initData() {
-            this.subject = this.GetScSubjects[this.id];
+            this.subject = this.GetScSubjects.find((v) => v.id === parseInt(this.id));
         },
-        fetchData() {
+        async fetchData() {
             try {
                 this.initData();
             } catch (error) {

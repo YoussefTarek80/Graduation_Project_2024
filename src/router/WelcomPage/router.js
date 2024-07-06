@@ -4,25 +4,22 @@ const router = createRouter({
     routes: [
         {
             path: "/",
-            redirect: "/select-role/",
+            redirect: "/darb-system",
         },
         {
-            path: "/select-role",
+            path: "/darb-system",
             component: () => import("../../views/WelcomePage/Welcome_Page.vue"),
-            meta: { title: "SelectRole" },
+            meta: { title: "نظام درب التعليمي" },
         },
     ],
-    scrollBehavior(to, from, savedPosition) {
-        return { top: 0 };
-    },
 });
 router.beforeEach((to, from, next) => {
-    if (from.path === "/select-role" && to.path === "/login") {
-        const selectedRole = localStorage.getItem("selectedRole");
+    const selectedRole = localStorage.getItem("role");
+    if (from.path === "/darb-system" && to.path === "/login") {
         if (selectedRole) {
             next();
         } else {
-            next("/select-role");
+            next("/darb-system");
         }
     } else {
         next();

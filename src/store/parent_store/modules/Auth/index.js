@@ -5,11 +5,11 @@ import { getters } from './getters';
 export default {
   namespace: true,
   state() {
-    const storedUser = localStorage.getItem("User");
-    const user = JSON.parse(storedUser);
+    const storedUser = sessionStorage.getItem("User");
+    const parent = JSON.parse(storedUser);
     return {
       token: null,
-      user: user,
+      parent: parent,
     };
   },
   mutations,

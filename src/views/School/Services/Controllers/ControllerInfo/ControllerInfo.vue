@@ -8,31 +8,26 @@
       <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink mt-2"></i>
     </div>
     <div class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full mx-auto">
-      <div class="pt-12 input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="pt-5 grid grid-cols-1 sm:grid-cols-4 gap-6">
         <div class="flex flex-col">
-          <label for="in1">اسم مدير الكنترول </label>
-          <input disabled v-model="this.controller.staff_name"
-            class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+          <label>اسم مدير الكنترول </label>
+          <input disabled required v-model="controller.staff_name" class="item-data">
         </div>
         <div class="flex flex-col">
-          <label for="in4">الدور الوظيفي </label>
-          <input disabled v-model="this.controller.staff_role"
-            class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+          <label>الدور الوظيفي </label>
+          <input disabled required v-model="controller.staff_role" class="item-data">
         </div>
         <div class="flex flex-col">
-          <label for="in5"> الهاتف </label>
-          <input disabled v-model="this.controller.staff_phone"
-            class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+          <label> الهاتف </label>
+          <input disabled required v-model="controller.staff_phone" class="item-data">
         </div>
         <div class="flex flex-col">
-          <label for="in6">العنوان </label>
-          <input disabled v-model="this.controller.staff_address"
-            class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+          <label>العنوان </label>
+          <input disabled required v-model="controller.staff_address" class="item-data">
         </div>
         <div class="flex flex-col">
-          <label for="in6">البريد الإلكتروني </label>
-          <input disabled v-model="this.controller.email"
-            class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+          <label>البريد الإلكتروني </label>
+          <input disabled required v-model="controller.email" class="item-data">
         </div>
       </div>
       <div class="m-5 flex items-center justify-end sm:gap-5">
@@ -52,24 +47,27 @@ export default {
   components: { Footer_Component },
   data() {
     return {
+      id: this.$route.params.id,
       controller: {}
     }
   },
   computed: {
     ...mapGetters(["GetControllers"]),
   },
-  created() {
-    this.fetchEvent();
+  async created() {
+    await this.fetchData();
   },
   methods: {
     ...mapActions(["FetchControllers"]),
-    async fetchEvent() {
+    initData() {
+      this.controller = this.GetControllers.find(
+        (item) => item.id === parseInt(this.id)
+      );
+    },
+    async fetchData() {
       try {
         await this.FetchControllers();
-        const index = this.$route.params.id;
-        this.controller = this.GetControllers.find(
-          (controller) => controller.id === parseInt(index)
-        );
+        this.initData();
         console.log(this.controller);
       } catch (err) {
         console.error(err);

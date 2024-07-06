@@ -12,34 +12,46 @@ export const actions = {
                     },
                 }
             );
-            console.log(response.data.data)
-            const teachers = [
-                {
-                    id: 0,
-                    name: "مصطفي كامل",
-                    address: "الجيزة - الزمالك",
-                    subject: "اللغة العربية",
-                    age: 42
-                },
-                {
-                    id: 1,
-                    name: "محمد فتحي",
-                    address: "القاهرة - المهندسين",
-                    subject: "اللغة الإنجليزية",
-                    age: 40
-                },
-                {
-                    id: 2,
-                    name: "محمد عزت",
-                    address: "القاهرة - المهندسين",
-                    subject: "الكيمياء",
-                    age: 38
-                }
-            ];
-            localStorage.setItem("Teachers", JSON.stringify(teachers));
+            const teachers = response.data.data
             commit("Set_Teachers", teachers);
+            console.log(response.data.data)
         } catch (error) {
             console.error("Error fetching Events info:", error);
+        }
+    },
+    async FetchTeacherApps({ commit }) {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await axios.get(
+                "http://127.0.0.1:8000/api/school/getApplication",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            const teachapps = response.data.data
+            commit("Set_TeacherApps", teachapps);
+            console.log(response.data.data)
+        } catch (error) {
+            console.error("Error fetching teachapps info:", error);
+        }
+    },
+    async AcceptRejectTeachApp({ commit, dispatch }, { id, status }) {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await axios.get(
+                "http://127.0.0.1:8000/api/school/getApplication",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            dispatch("FetchTeacherApps");
+            console(response.data.data);
+        } catch (error) {
+            console.error("Error fetching teachapp info:", error);
         }
     },
     async RemoveTeacher({ commit, dispatch }, id) {

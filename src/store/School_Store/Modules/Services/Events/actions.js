@@ -14,6 +14,7 @@ export const actions = {
             );
             const SC_Events = response.data.data;
             commit("Set_SCEvents", SC_Events);
+            console.log(SC_Events);
         } catch (error) {
             console.error("Error fetching Events info:", error);
         }
@@ -31,6 +32,7 @@ export const actions = {
             );
             const AD_Events = response.data.data;
             commit("Set_ADEvents", AD_Events);
+            console.log(AD_Events);
         } catch (error) {
             console.error("Error fetching Events info:", error);
         }
@@ -53,7 +55,7 @@ export const actions = {
             console.log(err);
         }
     },
-    async UpdateSCEvent({ commit }, { id, name, date, time, description }) {
+    async UpdateSCEvent({ commit }, { id, name, date, time, description, address }) {
         try {
             const token = localStorage.getItem("token");
             const updateData = new FormData();
@@ -61,6 +63,7 @@ export const actions = {
             updateData.append("date", date);
             updateData.append("time", time);
             updateData.append("description", description);
+            updateData.append("address", address);
             const response = await axios.post(
                 `http://127.0.0.1:8000/api/school/updateEvent/${id}`,
                 updateData,
@@ -76,14 +79,15 @@ export const actions = {
             throw `Updating School Event Error:${err}`;
         }
     },
-    async AddEvent({ dispatch }, { name, description, date, time }) {
+    async AddEvent({ dispatch }, { name, description, date, time, address }) {
         try {
             const token = localStorage.getItem("token");
             const eventData = new FormData();
             eventData.append("name", name);
-            eventData.append("description", description);
             eventData.append("date", date);
             eventData.append("time", time);
+            eventData.append("description", description);
+            eventData.append("address", address);
             const response = await axios.post(
                 "http://127.0.0.1:8000/api/school/addEvent",
                 eventData,

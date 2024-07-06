@@ -1,0 +1,70 @@
+.inputGroup {
+    margin: 2.5em 0 1em 0;
+    position: relative;
+}
+.inputGroup input,textarea {
+    font-size: 100%;
+    padding: 0.8em;
+    outline: none;
+    border: 2px solid rgb(200, 200, 200);
+    background-color: transparent;
+    border-radius: 20px;
+    width: 100%;
+
+}
+.inputGroup label {
+    font-size: 100%;
+    position: absolute;
+    right: 0;
+    padding: 0.8em;
+    margin-right: 0.5em;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: rgb(100, 100, 100);
+    background: transparent;
+    white-space: nowrap;
+}
+
+.inputGroup :is(textarea:focus,input:focus, input:valid, textarea:valid)~label {
+    transform: translateY(-70%) scale(0.9);
+    margin: 0;
+    margin-right: 0.5em;
+    padding: 1.5em;
+    background-color: transparent;
+}
+.inputGroup :is(textarea:focus,input:focus, input:valid, textarea:valid) {
+    border-color: rgb(150, 150, 200);
+}
+
+.inputGroup2{
+    margin: 2.5em 0 1em 0;
+    position: relative;
+    border: 1px dashed black;
+}
+.inputGroup2 input {
+    font-size: 100%;
+    padding: 0.8em;
+    outline: none;
+
+    background-color: transparent;
+    border-radius: 20px;
+    width: 100%;
+}
+.inputGroup2 label {
+    font-size: 90%;
+    position: absolute;
+    right: 0;
+    top:-40px;
+    padding: 0.8em;
+    margin-right: 0.5em;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: rgb(100, 100, 100);
+    background: transparent;
+    white-space: nowrap;
+}
+.inputGroup2:read-only{
+    background: linear-gradient(to right, rgba(185, 180, 180, 0.62), #fdfdfd);
+    border-radius: 20px;
+    outline: none;
+}

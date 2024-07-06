@@ -1,33 +1,43 @@
 <template>
-    <div class="body flex flex-col justify-center items-center h-screen">
+    <div class="flex flex-col justify-center items-center h-screen">
         <div data-aos="fade-right" data-aos-duration="1000"
-            class="relative box shadow-2xl sm:w-5/12 w-11/12 m-6 sm:h-5/6 h-4/6 flex flex-col items-center justify-center rounded-3xl text-sm">
-            <div class="sm:w-7/12 w-8/12">
+            class="relative box shadow-2xl sm:w-5/12 md:5/12 w-11/12 m-6 sm:h-5/6 h-4/6 flex flex-col items-center justify-center rounded-3xl text-sm">
+            <div class="sm:w-7/12 w-6/12">
                 <img src="../../../../assets/Logo/Logo5.png" alt="" />
             </div>
-            <div class="absolute top-0 left-0 cursor-pointer " @click="this.$router.push('/SelectRole')">
-                <i class="fa-sharp fa-light fa-school sm:text-6xl text-4xl p-10 rounded-full 
+            <div class="absolute top-0 left-0 cursor-pointer " title="الرجوع للرئيسية"
+                @click="this.$router.push('/darb-system')">
+                <i class="fa-sharp fa-light fa-school sm:text-5xl text-4xl p-10 rounded-full 
                     text-customPurple hover:transform hover:scale-110 transition-all"></i>
             </div>
 
             <form action="" class="w-11/12 space-y-4 flex flex-col" @submit.prevent="onSubmit">
-                <div class="flex flex-row gap-4">
+                <div class="w-full mt-5">
+                    <select v-model="role" @change="rolee"
+                        class=" w-full sm:w-6/12 p-2  m-auto border-2 text-md text-customPurple border-customDarkPurple rounded-xl cursor-pointer font-bold">
+                        <option value="" disabled selected>إختار الدور الوظيفي</option>
+                        <option :value="'manager'">مدير مدرسة</option>
+                        <option :value="'staff'">مسؤول في مدرسة</option>
+                    </select>
+                </div>
+                <!-- <div class="flex flex-row gap-4">
                     <div class="flex items-center mb-4">
-                        <input @click="rolee('manager')" id="manager" type="radio" name="acc-check" class="cursor-pointer w-4 h-4 
+                        <input @click="rolee('manager')" id="manager" type="radio" name="acc-check" class="accent-customPurple	cursor-pointer w-4 h-4 
                         text-customPurple bg-customPurple">
                         <label for="manager" class="ms-2 cursor-pointer text-xl 
                         text-customPurple dark:text-customPurple">
-                            <i class="fa-solid fa-user text-2xl"></i>&ThinSpace;&ThinSpace;مدير المدرسة</label>
+                            <i class="fa-solid fa-user text-md md:text-2xl"></i>&ThinSpace;&ThinSpace;مدير
+                            المدرسة</label>
                     </div>
                     <div class="flex items-center mb-4">
-                        <input @click="rolee('staff')" id="control" type="radio" name="acc-check" class="cursor-pointer w-4 h-4 
+                        <input @click="rolee('staff')" id="control" type="radio" name="acc-check" class="accent-customPurple cursor-pointer w-4 h-4 
                         text-customPurple bg-customPurple">
                         <label for="control" class="ms-2 cursor-pointer text-xl text-customPurple
                         dark:text-customPurple">
-                            <i class="fa-solid fa-people-roof text-2xl"></i>&ThinSpace;&ThinSpace;مسؤول في
+                            <i class="fa-solid fa-people-roof text-md md:text-2xl"></i>&ThinSpace;&ThinSpace;مسؤول في
                             المدرسة</label>
                     </div>
-                </div>
+                </div> -->
                 <!--  -->
                 <div class="flex flex-col">
                     <label for="email" class="my-2 mx-2">البريد الالكتروني<span class="text-red-600">*</span></label>
@@ -126,8 +136,8 @@ export default {
         },
         clearLocalStorage() {
             localStorage.clear();
-        }, rolee(v) {
-            this.role = v;
+        },
+        rolee() {
             localStorage.setItem('role', this.role);
         },
         async onSubmit() {

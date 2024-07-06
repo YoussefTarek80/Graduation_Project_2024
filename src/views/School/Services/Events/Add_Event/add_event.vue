@@ -24,39 +24,42 @@
         <span class="text-2xl">بيانات المناسبة</span>
       </div>
       <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="flex flex-col">
-          <label for="">إسم المناسبة <span class="text-red-600">*</span></label>
-          <input type="text" placeholder="أكتب إسم المناسبة..." v-model="name"
-            class="text-xs outline-customDarkPurple" />
+        <div class="flex flex-col input-group">
+          <input type="text" required v-model="name" class="input" />
+          <label for="" class="user-label">إسم المناسبة <span class="text-red-600">*</span></label>
           <span v-if="name == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
-        <div class="flex flex-col">
-          <label for="">تاريخ المناسبة <span class="text-red-600">*</span></label>
-          <input type="date" v-model="date" placeholder="إختار تاريخ المناسبة..." class="outline-customDarkPurple" />
+        <div class="flex flex-col input-group">
+          <label for="" class="user-slabel">تاريخ المناسبة <span class="text-red-600">*</span></label>
+          <input type="date" v-model="date" required class="input" />
           <span v-if="date == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
-        <div class="flex flex-col">
-          <label for="">وقت المناسبة<span class="text-red-600">*</span></label>
-          <input type="time" v-model="time" class="outline-customDarkPurple" />
+        <div class="flex flex-col input-group">
+          <input type="time" required v-model="time" class="input" />
+          <label for="" class="user-slabel">وقت المناسبة<span class="text-red-600">*</span></label>
           <span v-if="time == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
-        <!-- <div class="flex flex-col">
-          <label for="in1">حالة المناسبة<span class="text-red-600">*</span></label>
-          <select v-model="status"
-            class="w-full appearance-none bg-white border border-gray-300 rounded-xl py-4 px-4 focus:outline-none focus:border-customDarkPurple">
+        <div class="flex flex-col input-group">
+          <input type="text" required v-model="address" class="input" />
+          <label for="" class="user-label">مكان المناسبة<span class="text-red-600">*</span></label>
+          <span v-if="address == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+        </div>
+        <div class="flex flex-col input-group">
+          <label for="" class="user-slabel">حالة المناسبة<span class="text-red-600">*</span></label>
+          <select v-model="status" required class="input">
             <option :value="status" disabled selected>إختار حالة الحدث...</option>
             <option value="مفعل">مفعل</option>
             <option value="غير مفعل">غير مفعل</option>
             <option value="تم الحدث">تم الحدث</option>
           </select>
           <span v-if="status == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
-        </div> -->
+        </div>
       </div>
       <div>
-        <div class="flex flex-col mt-6">
-          <label for="in1">وصف المناسبة <span class="text-red-600">*</span></label>
+        <div class="flex flex-col mt-6 input-group">
           <textarea placeholder="أكتب وصف الحدث بالتفصيل من حيث المراحل الدراسية المتعلقة والي اخره..."
-            v-model="description" rows="5" cols="10" class="resize-none p-5 outline-none rounded-2xl mt-5"></textarea>
+            v-model="description" rows="5" cols="10" class="input resize-none p-5 outline-none rounded-2xl"></textarea>
+          <label for="" class="user-slabel">وصف المناسبة <span class="text-red-600">*</span></label>
           <span v-if="this.description == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
       </div>
@@ -82,6 +85,7 @@ export default {
       name: "",
       date: "",
       time: "",
+      address: "",
       description: "",
       status: "",
       success: false,
@@ -105,12 +109,13 @@ export default {
     },
     async addEvent() {
       try {
-        if (this.name != '' && this.description != '' && this.date != '' && this.time != '') {
+        if (this.name != '' && this.description != '' && this.date != '' && this.time != '' && this.address != '') {
           await this.AddEvent({
             name: this.name,
             description: this.description,
             date: this.date,
             time: this.formatTime(this.time),
+            address: this.address,
           });
           this.success = true;
           setTimeout(() => { this.success = false }, 1000);

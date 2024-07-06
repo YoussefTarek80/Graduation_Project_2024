@@ -15,7 +15,7 @@
     <Footer_Component></Footer_Component>
 </template>
 <script>
-import table_Component from "../../../../UI/Tables/EventTable/AD_Table.vue";
+import table_Component from "../../../../UI//School_Tables/EventTable/AD_Table.vue";
 import FilterComponent from "../../../../components/School/Filtration/Filter-school.vue";
 import { mapGetters, mapActions } from "vuex";
 
@@ -29,8 +29,8 @@ export default {
     computed: {
         ...mapGetters(["GetADEvents"]),
     },
-    created() {
-        this.fetchData();
+    async created() {
+        await this.fetchData();
         console.log(this.GetADEvents);
     },
     methods: {

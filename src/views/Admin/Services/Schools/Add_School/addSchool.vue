@@ -23,27 +23,54 @@
             <div
                 class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full mx-auto school "
             >
-                <div class="my-5">
-                    <span class="text-2xl">بيانات المدرسة</span>
-                </div>
+              <span class="text-3xl  text-customDarkPurple px-5 py-3 rounded-2xl flex items-center gap-2 m-10">  <i class="fa-duotone fa-sparkles"></i>بيانات المدرسة </span>
                 <div class="input_Div grid grid-cols-1 sm:grid-cols-3 gap-6">
-                    <div class="flex flex-col">
-                        <label for="in1"
-                            >اسم المدرسة
-                            <span class="text-red-600">*</span></label
-                        >
+                    <div class="flex flex-col input-group">
+
                         <input
+                            autocomplete="off"
+                            required=""
                             @input="validInputs"
                             type="text"
                             v-model="name"
                             id="in1"
-                            class="outline-customDarkPurple"
+                            class="outline-customDarkPurple input"
                         />
+                      <label for="in1" class="user-label">اسم المدرسة<span class="text-red-600">*</span></label>
+                    </div>
+                    <div class="flex flex-col input-group">
+                      <input
+                          autocomplete="off"
+                          required=""
+                          type="text"
+                          id="in5"
+                          v-model="phone"
+                          @input="validInputs"
+                          class="input"
+                      />
+                      <label for="in5" class="user-label"
+                      >رقم هاتف المدرسة
+                        <span class="text-red-600">*</span></label
+                      >
+                    </div>
+                    <div class="flex flex-col input-group">
+
+                      <input
+                          autocomplete="off"
+                          required=""
+                          type="text"
+                          id="in6"
+                          v-model="address"
+                          @input="validInputs"
+                          class="input"
+                      />
+                      <label for="in6" class="user-label"
+                      >عنوان المدرسة
+                        <span class="text-red-600 ">*</span></label
+                      >
+                      <span class="text-sm text-red-600 mx-2 mt-1">العنوان بالتفصيل - المحافظة : 270 شارع بورسعيد القاهره</span>
                     </div>
                     <div class="flex flex-col">
-                        <label for="in2"
-                            >الدولة <span class="text-red-600">*</span></label
-                        >
                         <div class="custom-select relative">
                             <select
                                 v-model="country"
@@ -51,7 +78,7 @@
                                 id="in2"
                                 class="w-full appearance-none bg-white border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-customDarkPurple"
                             >
-                                <option value="" selected></option>
+                                <option value="" selected disabled >الدولة</option>
                                 <option v-for="con in countries" :key="con">
                                     {{ con }}
                                 </option>
@@ -64,81 +91,6 @@
                         </div>
                     </div>
                     <div class="flex flex-col">
-                        <label for="in3"
-                            >نوع شهادة المدرسة
-                            <span class="text-red-600">*</span></label
-                        >
-                        <div class="custom-select relative">
-                            <select
-                                @change="validInputs"
-                                v-model="certificate_type"
-                                id="in3"
-                                class="w-full appearance-none bg-white border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-customDarkPurple"
-                            >
-                                <option value="" selected></option>
-                                <option>ابتدائية</option>
-                                <option>اعدادية</option>
-                                <option>ثانوية</option>
-                            </select>
-                            <div
-                                class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none"
-                            >
-                                <i class="fa-regular fa-angle-down"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="in4"
-                            >الفصول الدراسية
-                            <span class="text-red-600">*</span></label
-                        >
-                        <div class="custom-select relative">
-                            <select
-                                @change="validInputs"
-                                id="in4"
-                                v-model="education_type"
-                                class="w-full appearance-none bg-white border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-customDarkPurple"
-                            >
-                                <option value="" selected></option>
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
-                            </select>
-                            <div
-                                class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none"
-                            >
-                                <i class="fa-regular fa-angle-down"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="in5"
-                            >رقم هاتف المدرسة
-                            <span class="text-red-600">*</span></label
-                        >
-                        <input
-                            type="text"
-                            id="in5"
-                            v-model="phone"
-                            @input="validInputs"
-                        />
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="in6"
-                            >عنوان المدرسة
-                            <span class="text-red-600">*</span></label
-                        >
-                        <input
-                            type="text"
-                            id="in6"
-                            v-model="address"
-                            @input="validInputs"
-                        />
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="in7"
-                            >الحالة <span class="text-red-600">*</span></label
-                        >
                         <div class="custom-select relative">
                             <select
                                 v-model="status"
@@ -146,7 +98,7 @@
                                 @change="validInputs"
                                 class="w-full appearance-none bg-white border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-customDarkPurple"
                             >
-                                <option value="" selected></option>
+                                <option value="" selected disabled>الحالة</option>
                                 <option>مفعل</option>
                                 <option>غير مفعل</option>
                             </select>
@@ -158,8 +110,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="custom-checkbox-group m-3 mt-5 ">
+                  <span class="text-gray-400">المراحل الدراسية</span>
+                  <div class="flex items-center gap-5">
+                    <label v-for="stage in GetAllstages" :key="stage.id" class="mt-5 flex items-center gap-4">
+                      <input type="checkbox"  @change="addStages(stage.id)"   :value="stage.id" >
+                      <label :for="stage.id"> {{ stage.stage_name }}</label><br>
+                    </label>
+                  </div>
+                </div>
                 <div class="flex flex-col w-full sm:w-auto mb-4 sm:mb-0 mt-3">
-                    <label for="in8">شعار المدرسة</label>
+                    <label for="in8" class="px-5 pt-5 text-customDarkPurple text-xl">شعار المدرسة</label>
                     <div
                         class="relative"
                         @drop="handleFileDrop"
@@ -168,15 +129,15 @@
                         <input
                             type="file"
                             id="in8"
-                            class="hidden"
+                            class="hidden "
                             @change="handleFile"
                         />
                         <label
                             for="in8"
-                            class="w-96 py-2 px-4 text-center cursor-pointer Filelabel"
+                            class=" cursor-pointer Filelabel "
                             v-if="!file"
                         >
-                            <span>اختر ملف</span>
+                            <span >اختر ملف</span>
                             او
                             <span class="text-customDarkPurple font-bold"
                                 >قم بسحب الملف هنا</span
@@ -190,105 +151,132 @@
                             <img
                                 :src="imageURL"
                                 alt="error"
-                                class="w-96 m-3 rounded-full"
+                                class="w-60 h-60 m-3 rounded-full"
                             />
                         </div>
                         <input type="text" class="file" readonly v-if="!file" />
                     </div>
                 </div>
+                <div class="w-full">
+                  <Map :address="address" @update-lat-lng="handleUpdateLatLng"></Map>
+                </div>
             </div>
             <div
                 class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full mx-auto"
             >
-                <div class="my-5">
-                    <span class="text-2xl">بيانات المدير</span>
-                </div>
+              <span class="text-3xl  text-customDarkPurple px-5 py-3 rounded-2xl flex items-center gap-2 m-10">  <i class="fa-duotone fa-sparkles"></i>بيانات المدير </span>
                 <div class="input_Div grid grid-cols-1 sm:grid-cols-3 gap-6">
-                    <div class="flex flex-col">
-                        <label for="in10"
-                            >اسم المدير
-                            <span class="text-red-600">*</span></label
-                        >
+                    <div class="flex flex-col input-group">
                         <input
+                            autocomplete="off"
+                            required=""
                             @input="validInputs"
                             v-model="Manger_Name"
                             type="text"
                             id="in10"
-                            class="outline-customDarkPurple"
+                            class="outline-customDarkPurple input"
                         />
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="in11"
-                            >رقم هاتف المدير
-                            <span class="text-red-600">*</span></label
+                        <label for="in10" class="user-label"
+                        >اسم المدير
+                          <span class="text-red-600">*</span></label
                         >
+                    </div>
+                    <div class="flex flex-col input-group">
                         <input
+                            autocomplete="off"
+                            required=""
                             type="text"
                             id="in11"
                             v-model="Manger_Phone"
                             @input="validInputs"
                             :class="{ error: checkPhone }"
+                            class="input"
                         />
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="in12"
-                            >البريد الالكتروني للمدير
-                            <span class="text-red-600">*</span></label
+                        <label for="in11"  class="user-label"
+                        >رقم هاتف المدير
+                          <span class="text-red-600">*</span></label
                         >
-                        <input
-                            type="email"
-                            id="in12"
-                            v-model="Manger_Email"
-                            @input="validInputs"
-                            :class="{ error: checkEmail }"
-                        />
+                        <div class="error_email text-red-600 px-10 absolute -bottom-6 text-sm" v-if="checkPhone">
+                          <span>رقم الهاتف يجب ان يكون مكون من 11 رقم</span>
+                        </div>
                     </div>
+                    <div class="flex flex-col input-group relative">
+                      <input
+                          autocomplete="off"
+                          required=""
+                          type="text"
+                          id="in12"
+                          v-model="Manger_Email"
+                          @input="validInputs"
+                          :class="{ error: checkEmail || checkEmailCaps }"
+                          class="input"
+                      />
+                      <label for="in12" class="user-label"
+                      >البريد الالكتروني للمدير
+                        <span class="text-red-600">*</span></label
+                      >
+                      <div class="flex flex-col">
+                        <div class="error_email text-red-600 px-10 absolute -bottom-12 text-sm" v-if="checkEmailCaps">
+                          <span>البريد الإلكتروني يجب أن لا يحتوي على حروف كبيرة</span>
+                        </div>
+                        <div class="error_email text-red-600 px-10 absolute -bottom-6 text-sm" v-if="checkEmail">
+                          <span>البريد الإلكتروني يجب أن يحتوي علي @</span>
+                        </div>
+                      </div>
 
-                    <div class="flex flex-col">
-                        <label for="in14">
-                            عنوان المدير
-                            <span class="text-red-600">*</span></label
-                        >
+                    </div>
+                    <div class="flex flex-col input-group">
                         <input
+                            autocomplete="off"
+                            required=""
                             type="text"
                             id="in14"
                             v-model="Manger_Address"
                             @input="validInputs"
+                            class="input"
                         />
+                      <label for="in14" class="user-label">
+                        عنوان المدير
+                        <span class="text-red-600">*</span></label
+                      >
                     </div>
                 </div>
-                <div class="m-5 mt-10 flex items-center justify-end sm:gap-5">
-                    <button
-                        class="w-60"
-                        @click="add_New_School"
-                        :class="{ disabledBtn: close }"
-                        :disabled="close"
-                    >
-                        حفظ
-                    </button>
-                    <button
-                        class="w-48"
-                        @click="this.$router.replace('/Admin/Schools')"
-                    >
-                        الغاء
-                    </button>
-                </div>
+
             </div>
+          <div class="m-5 mt-10 flex items-center justify-end sm:gap-5">
+            <button
+                class="w-60"
+                @click="add_New_School"
+                :class="{ disabledBtn: close }"
+                :disabled="close"
+            >
+              حفظ
+            </button>
+            <button
+                class="w-48"
+                @click="this.$router.replace('/Admin/Schools')"
+            >
+              الغاء
+            </button>
+          </div>
         </section>
         <Footer_Component></Footer_Component>
     </div>
 </template>
 <script>
 import axios from "axios";
-import { mapActions } from "vuex";
+import Map from './MapLocation/map_location.vue'
+import {mapActions, mapGetters} from "vuex";
 export default {
+  components:{
+    Map
+  },
     data() {
         return {
             file: null,
             imageURL: null,
             name: "",
             country: "",
-            certificate_type: "",
             education_type: "",
             phone: "",
             address: "",
@@ -303,14 +291,25 @@ export default {
             countries: [],
             checkPhone: false,
             checkEmail: false,
+            checkEmailCaps:false,
+            stages:[],
+            lat:0,
+            lng:0,
+            showToggle:false
         };
     },
     mounted() {
         this.validInputs();
         this.loadCountries();
     },
+    computed:{
+      ...mapGetters(["GetAllstages"])
+    },
+    created(){
+       this.GetStages();
+    },
     methods: {
-        ...mapActions(["addNewSchool"]),
+        ...mapActions(["addNewSchool","GetStages"]),
         async loadCountries() {
             try {
                 const response = await axios.get(
@@ -354,74 +353,75 @@ export default {
             this.Manger_Email = "";
             this.Manger_Address = "";
         },
-        EmailRegex() {
-            if (
-                this.Manger_Email.trim() !== "" &&
-                !/^\S+@\S+\.\S+$/.test(this.Manger_Email)
-            ) {
-                this.checkEmail = true;
-            } else {
-                this.checkEmail = false;
-            }
-        },
-        PhoneRegex() {
-            if (
-                this.Manger_Phone.trim() !== "" &&
-                this.Manger_Phone.length !== 11
-            ) {
-                this.checkPhone = true;
-            } else {
-                this.checkPhone = false;
-            }
-        },
         validInputs() {
-            this.EmailRegex();
-            this.PhoneRegex();
-            if (
-                this.name.trim() === "" ||
-                this.country === "" ||
-                this.certificate_type === "" ||
-                this.education_type === "" ||
-                this.phone.trim() === "" ||
-                this.address.trim() === "" ||
-                this.status === "" ||
-                this.Manger_Name.trim() === "" ||
-                this.Manger_Phone.trim() === "" ||
-                this.Manger_Email.trim() === "" ||
-                this.Manger_Address.trim() === "" ||
-                this.checkPhone === true ||
-                this.checkEmail === true
-            ) {
-                this.close = true;
+          const phoneRegex = /^[0-9]{11}$/;
+          const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+          this.checkPhone = !phoneRegex.test(this.Manger_Phone);
+          this.checkEmail = !emailRegex.test(this.Manger_Email);
+          this.checkEmailCaps = /[A-Z]/.test(this.Manger_Email);
+          this.close =
+              !this.name ||
+              !this.phone ||
+              !this.address ||
+              !this.country ||
+              !this.status ||
+              !this.Manger_Name ||
+              !this.Manger_Phone ||
+              !this.Manger_Email ||
+              !this.Manger_Address ||
+              this.lat===0 ||
+              this.lng===0 ||
+              this.checkPhone ||
+              this.checkEmail ||
+              this.checkEmailCaps;
+
+        },
+        addStages(id) {
+            const index = this.stages.indexOf(id);
+            if (index > -1) {
+              this.stages.splice(index, 1);
             } else {
-                this.close = false;
+              this.stages.push(id);
             }
+            console.log(this.stages);
         },
-        async add_New_School() {
-            try {
-                await this.addNewSchool({
-                    name: this.name,
-                    phone: this.phone,
-                    address: this.address,
-                    manager_name: this.Manger_Name,
-                    manager_address: this.Manger_Address,
-                    manager_phone: this.Manger_Phone,
-                    manager_email: this.Manger_Email,
-                });
-                this.success = true;
-                setTimeout(() => {
-                    this.success = false;
-                    // this.clear();
-                    this.close = true;
-                }, 2000);
-            } catch (err) {
-                console.log(err.response.data.data);
-                this.messagesError = Object.values(
-                    err.response.data.data
-                ).flatMap((errorArray) => errorArray);
-                console.log(this.messagesError);
-            }
+        handleUpdateLatLng(coords){
+          this.lat = coords.lat;
+          this.lng = coords.lng;
+          this.validInputs();
+          console.log(this.lat,this.lng)
         },
+      async add_New_School() {
+        try {
+          const formData = new FormData();
+          formData.append("name", this.name);
+          formData.append("phone", this.phone);
+          formData.append("address", this.address);
+          formData.append("manager_name", this.Manger_Name);
+          formData.append("manager_address", this.Manger_Address);
+          formData.append("manager_phone", this.Manger_Phone);
+          formData.append("email", this.Manger_Email);
+          formData.append("lat", this.lat);
+          formData.append("lng", this.lng);
+          this.stages.forEach((stageID) => {
+            formData.append('stages[]', stageID);
+          });
+          formData.append("image", this.file);
+          await this.addNewSchool({formData:formData});
+
+          this.success = true;
+          setTimeout(() => {
+            this.success = false;
+            this.clear();
+            this.close = true;
+          }, 2000);
+        } catch (err) {
+          console.log(err.response.data.data);
+          this.messagesError = Object.values(err.response.data.data).flatMap((errorArray) => errorArray);
+          console.log(this.messagesError);
+        }
+      },
+
     },
 };
 </script>

@@ -27,10 +27,10 @@
                 </stud_form>
                 <div class="flex flex-row flex-wrap justify-center" v-if="request.request_status == -1">
                     <div class="m-5">
-                        <button @click="accept()" class="w-25 sm:w-40 md:w-60">موافقة</button>
+                        <button @click="accept()" class="w-25 sm:w-40 md:w-60">موافقة علي الطلب</button>
                     </div>
                     <div class="m-5">
-                        <button @click="reject()" class="w-25 sm:w-40 md:w-60">رفض</button>
+                        <button @click="reject()" class="w-25 sm:w-40 md:w-60">رفض الطلب</button>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,6 @@ export default {
         return {
             id: this.$route.params.id,
             request: {},
-            accepted: false,
             success: false,
             failed: false,
         }
@@ -55,19 +54,20 @@ export default {
     computed: {
         ...mapGetters(['GetUser2', 'Get_SCRequests']),
     },
-    created() {
-        this.fetchData();
+    async created() {
+        await this.fetchData();
+        console.log(this.request);
     },
     methods: {
         ...mapActions(['FetchSCRequests', 'AcceptEnrollStudent']),
         initData() {
-            this.request = this.Get_SCRequests[this.$route.params.id];
+            this.request = this.Get_SCRequests.find((request) => request.id == parseInt(this.id));
+            // this.request = this.Get_SCRequests[this.id];
         },
         async fetchData() {
             try {
                 await this.FetchSCRequests();
                 this.initData();
-                console.log(this.request)
             }
             catch (error) {
                 throw `Something went wrong! ${error}`;
@@ -114,5 +114,5 @@ export default {
 }
 </script>
 <style scoped>
-@import url('../request.css');
+@import url('../../../../../../UI/CustomsCss/Custombutton.css');
 </style>

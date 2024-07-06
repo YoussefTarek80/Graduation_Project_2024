@@ -22,7 +22,8 @@
       <select v-model="termID" @change="selectTerm" :disabled="select2"
         class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple">
         <option value="" disabled>اختر الترم الدراسي </option>
-        <option v-for="term in GetStdScTerms" :key="term.id" :value="term.id">{{ term.term_name }}</option>
+        <option v-for="term in GetStdScTerms" :key="term.id" :value="term.id">{{ term.term_name }}
+        </option>
       </select>
       <i class="fa-solid fa-arrow-down-big-small absolute left-5 top-2 text-2xl"></i>
     </div>
@@ -90,7 +91,7 @@ export default {
       this.$emit('Retrived-done', this.RetrivedDone);
 
     },
-    clear() {
+    async clear() {
       this.stageID = "";
       this.levelID = "";
       this.termID = "";
@@ -102,6 +103,7 @@ export default {
       this.$emit('term-selected', null);
       this.$emit('Retrived-done', false);
       this.$emit('Retrived-false', false);
+      await this.fetchStdSubjects({ studentId: this.studId, levelId: -1, termId: this.termID });
     }
   }
 }

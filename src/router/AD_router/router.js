@@ -3,18 +3,18 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: "/Admin/Login",
+            path: "/ad/login",
             component: () => import("../../views/Admin/Auth/Login/login.vue"),
             meta: { title: "Login" },
         },
         {
-            path: "/Admin/Login/ForgetPass",
+            path: "/Login/ForgetPass",
             component: () =>
                 import("../../views/Admin/Auth/Forget_Password/Forget.vue"),
             meta: { title: "Forget" },
         },
         {
-            path: "/Admin/resetPassword/:token",
+            path: "/resetPassword/:token",
             component: () =>
                 import("../../views/Admin/Auth/Reset_Password/reset.vue"),
             meta: { title: "reset" },
@@ -108,6 +108,17 @@ const router = createRouter({
             },
         },
         {
+            path: "/Admin/Students/InfoStudent/studScores/:index",
+            component: () =>
+                import("../../views/Admin/Services/Students/Info_Student/ScoreData/score_data.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
+        {
             path: "/Admin/Teacher",
             component: () =>
                 import("../../views/Admin/Services/Teachers/teacher.vue"),
@@ -184,23 +195,54 @@ const router = createRouter({
                 props: true,
             },
         },
+        {
+            path: "/Admin/Subjects",
+            component: () =>
+                import("../../views/Admin/Services/Subjects/subjects.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
+        {
+            path: "/Admin/Reports",
+            component: () =>
+                import("../../views/Admin/Services/Reports/report.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
+        {
+            path: "/Admin/Reports/AddReport",
+            component: () =>
+                import("../../views/Admin/Services/Reports/Add-report/addReport.vue"),
+            meta: {
+                title: "AdminDashboard",
+                requiresAuth: true,
+                roles: ["admin"],
+                props: true,
+            },
+        },
+
     ],
-    scrollBehavior(to, from, savedPosition) {
-        return { top: 0 };
-    },
 });
-router.beforeEach((to, from, next) => {
+export function routerGuardAdmin(to, from, next) {
     document.title = to.meta.title || "Your Default Title";
-    const isAuthenticated = localStorage.getItem("token");
+    const isAuthenticated = localStorage.getItem("adtoken");
     const userRole = localStorage.getItem("user");
     if (to.matched.some((record) => record.meta.requiresAuth)) {
         if (!isAuthenticated) {
-            next("/");
+            next("/darv-system/401-UnAuthorized");
         } else {
             next();
         }
     } else {
         next();
     }
-});
+}
 export default router;

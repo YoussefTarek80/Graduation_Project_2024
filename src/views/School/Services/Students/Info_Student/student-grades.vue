@@ -27,7 +27,7 @@
             @level-name-selected="handlelevelSelectedName" @Retrived-done="handleRetrived"
             @Retrived-false="handleResetRetrived" :studId="this.student.id">
         </FilterScores>
-        <ScoreTable :items="GetStdScSubjects" :studId="this.student.id">
+        <ScoreTable v-if="GetStdScSubjects.length != 0" :items="GetStdScSubjects" :studId="this.student.id">
         </ScoreTable>
     </section>
     <Footer_Component></Footer_Component>
@@ -35,7 +35,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import ScoreTable from '../../../../../UI/Tables/GradesTable/ScoreTable.vue';
-import FilterScores from '../Filteration/filterStudents.vue';
+import FilterScores from "../../../../../components/School/Filtration/Filter-students.vue";
 export default {
     components: { ScoreTable, FilterScores },
     data() {
@@ -47,20 +47,20 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["GetStudents", "GetStdScSubjects"]),
+        ...mapGetters(["GetScStudents", "GetStdScSubjects"]),
     },
     async created() {
         await this.FetchData();
 
     },
     methods: {
-        ...mapActions(["FetchStudents", "fetchStdSubjects"]),
+        ...mapActions(["FetchScStudents", "fetchStdSubjects"]),
         initData() {
-            this.student = this.GetStudents[this.id];
+            this.student = this.GetScStudents[this.id];
         },
         async FetchData() {
             try {
-                await this.FetchStudents();
+                await this.FetchScStudents();
                 this.initData();
             } catch (error) {
                 console.error("Error fetching student info:", error);

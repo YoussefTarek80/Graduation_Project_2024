@@ -16,22 +16,27 @@
                 <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="flex flex-col">
                         <label for="in1">اسم المُعلم </label>
-                        <input disabled v-model="this.teacher.name"
+                        <input disabled v-model="teacher.name"
                             class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
                     </div>
                     <div class="flex flex-col">
                         <label for="in4">المادة </label>
-                        <input disabled v-model="this.teacher.subject"
+                        <input disabled v-model="teacher.subject"
                             class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
                     </div>
                     <div class="flex flex-col">
                         <label for="in5">العمر </label>
-                        <input disabled v-model="this.teacher.age"
+                        <input disabled v-model="teacher.age"
                             class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
                     </div>
                     <div class="flex flex-col">
                         <label for="in6">العنوان </label>
-                        <input disabled v-model="this.teacher.address"
+                        <input disabled v-model="teacher.address"
+                            class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="in6">الهاتف </label>
+                        <input disabled v-model="teacher.phone"
                             class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
                     </div>
                 </div>
@@ -51,25 +56,23 @@ export default {
     components: { Footer_Component },
     data() {
         return {
+            id: this.$route.params.id,
             teacher: {}
         }
     },
     computed: {
         ...mapGetters(["GetTeachers"]),
     },
-    created() {
-        this.FetchTeacher();
-    },
-    mounted() {
+    async created() {
+        await this.FetchTeacher();
     },
     methods: {
         ...mapActions(["FetchTeachers"]),
         async FetchTeacher() {
             try {
                 await this.FetchTeachers();
-                const index = this.$route.params.id;
                 this.teacher = this.GetTeachers.find(
-                    (teacher) => teacher.id === parseInt(index)
+                    (teacher) => teacher.id === parseInt(this.id)
                 );
                 console.log(this.teacher);
             } catch (err) {
@@ -80,7 +83,10 @@ export default {
 }
 </script>
 <style scoped>
-@import url("./TeacherInfo.css");
+input[disabled] {
+    background: linear-gradient(to left, #d9d9d9, #f3f3f3);
+}
+
 @import url("../../../../../UI/CustomsCss/Custombutton.css");
 @import url("../../../../../UI/CustomsCss/CustomInput.css");
 </style>

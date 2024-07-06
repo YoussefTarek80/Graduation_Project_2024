@@ -71,6 +71,11 @@
                     <label for="" class="user-label">العنوان<span class="text-red-600">*</span></label>
                     <span v-if="address == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
+                <div class="flex flex-col input-group">
+                    <input type="text" required v-model="phone" class="outline-customDarkPurple input" />
+                    <label for="" class="user-label">الهاتف<span class="text-red-600">*</span></label>
+                    <span v-if="phone == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+                </div>
             </form>
         </div>
         <div class=" m-5 mt-10 flex items-center justify-end sm:gap-5">
@@ -115,11 +120,12 @@ export default {
         },
         async addTeacher() {
             try {
-                if (this.name != '' && this.address != '' && this.age != '' && this.subject != 'إختار المادة...') {
+                if (this.name != '' && this.address != '' && this.age != '' && this.phone != '' && this.subject != 'إختار المادة...') {
                     const data = {
                         name: this.name,
                         address: this.address,
                         subject: this.subject,
+                        phone: thxis.phone,
                         age: this.age,
                     };
                     // await this.AddTeacher(data);

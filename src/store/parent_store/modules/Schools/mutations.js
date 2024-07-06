@@ -1,5 +1,11 @@
 export const mutations = {
-    SET_CHILDREN(state, children) {
-        state.children = children;
-    }
+    SetAdminstration(state, Adminstrations) {
+        state.Adminstrations = Adminstrations;
+    },
+    SetSchools(state, Schools) {
+        state.Schools = Schools;
+    },
+    SETBestSchools(state, BestSchools) {
+        state.BestSchools = BestSchools;
+    },
 };

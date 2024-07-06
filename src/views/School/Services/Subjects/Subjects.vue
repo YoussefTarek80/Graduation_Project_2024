@@ -8,18 +8,18 @@
         <FilterSubjects @term-selected="handleTermSelected" @level-selected="handlelevelSelected"
             @level-name-selected="handlelevelSelectedName" @Retrived-done="handleRetrived"
             @Retrived-false="handleResetRetrived"></FilterSubjects>
-        <!-- <laoding_INFO3 v-if="!RetrivedDone && termID"></laoding_INFO3> -->
+        <laoding_INFO3 v-if="!RetrivedDone && termID"></laoding_INFO3>
         <div class="subjects bg-customBGCards shadow-2xl rounded-2xl py-10" v-if="RetrivedDone" data-aos="fade-left">
-            <div class="flex  justify-evenly">
-                <div class="flex flex-col gap-10 ">
-                    <div class=" text-3xl text-customDarkPurple">
+            <div class="flex justify-evenly">
+                <div class="sm:pt-0  pr-3 pt-10 flex flex-col gap-10 ">
+                    <div class="text-2xl sm:text-3xl text-customDarkPurple">
                         <span>الصف الدراسي: </span>
                         <span class="underline font-bold">{{ levelName }} </span>
                     </div>
-                    <span class="text-2xl">
+                    <span class="text-xl sm:text-2xl">
                         عدد المواد الاساسية: 12
                     </span>
-                    <span class="text-2xl">
+                    <span class="text-xl sm:text-2xl">
                         عدد المواد الفرعية: 12
                     </span>
                 </div>
@@ -31,7 +31,7 @@
 </template>
 <script>
 import FilterSubjects from '../../../../components/School/Filtration/Filter-Subject.vue'
-import Table from "../../../../UI/Tables/SubjectTable/Table.vue";
+import Table from "../../../../UI/School_Tables/SubjectTable/Table.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {

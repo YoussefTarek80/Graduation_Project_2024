@@ -24,46 +24,42 @@
         <span class="text-2xl">بيانات المناسبة</span>
       </div>
       <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="flex flex-col">
-          <label for="in1">اسم المناسبة
-            <span class="text-red-600">*</span></label>
-          <input type="text" v-model="event.name" placeholder="أكتب إسم المناسبة..." class="outline-customDarkPurple" />
+        <div class="flex flex-col input-group">
+          <input type="text" required v-model="event.name" class="input outline-customDarkPurple" />
+          <label for="" class="user-label">اسم المناسبة<span class="text-red-600">*</span></label>
           <span v-if="event.name == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
-        <div class="flex flex-col">
-          <label for="">وقت المناسبة <span class="text-red-600">*</span></label>
-          <input type="date" v-model="event.date" class="outline-customDarkPurple" />
+        <div class="flex flex-col input-group">
+          <label for="" class="user-slabel">وقت المناسبة <span class="text-red-600">*</span></label>
+          <input type="date" required v-model="event.date" class="input outline-customDarkPurple" />
           <span v-if="event.date == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
-        <div class="flex flex-col">
-          <label for="">تاريخ المناسبة
+        <div class="flex flex-col input-group">
+          <label for="" class="user-slabel">تاريخ المناسبة
             <span class="text-red-600">*</span></label>
-          <input type="time" v-model="event.time" class="outline-customDarkPurple" />
+          <input type="time" required v-model="event.time" class="input outline-customDarkPurple" />
           <span v-if="event.time == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
 
-        <!-- <div class="flex flex-col">
-          <label for="">الحالة <span class="text-red-600">*</span></label>
-          <div class="custom-select relative">
-            <select v-model="event.status"
-              class="w-full appearance-none bg-white border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-customDarkPurple">
-              <option value="مفعل">مفعل</option>
-              <option value="غير مفعل">غير مفعل</option>
-              <option value="تم الحدث">تم الحدث</option>
-            </select>
-            <div class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none">
-              <i class="fa-regular fa-angle-down"></i>
-            </div>
+        <!-- <div class="flex flex-col input-group">
+          <label for="" class="user-slabel">الحالة <span class="text-red-600">*</span></label>
+          <select v-model="event.status" required class="input appearance-none">
+            <option value="" selected class="hover:bg-customPurple">اختار حالة المناسبة</option>
+            <option value="مفعل" class="hover:bg-customPurple">مفعل</option>
+            <option value="غير مفعل" class="hover:bg-customPurple">غير مفعل</option>
+            <option value="تم الحدث" class="hover:bg-customPurple">تم الحدث</option>
+          </select>
+          <div class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none">
+            <i class="fa-regular fa-angle-down"></i>
           </div>
         </div> -->
       </div>
-      <div>
-        <div class="flex flex-col mt-6">
-          <label for="">وصف المناسبة <span class="text-red-600">*</span></label>
-          <textarea placeholder="أكتب وصف الحدث هنا..." v-model="event.description" rows="5"
-            class="resize-none p-5 outline-customDarkPurple rounded-2xl mt-5"></textarea>
-          <span v-if="event.description == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
-        </div>
+      <div class="flex flex-col input-group mt-5">
+        <label for="" class="user-slabel">وصف المناسبة<span class="text-red-600">*</span></label>
+        <textarea required placeholder="أكتب وصف الحدث بالتفصيل من حيث المراحل الدراسية المتعلقة والي اخره..."
+          v-model="event.description" rows="5"
+          class="tx-report input resize-none p-5 outline-none rounded-2xl"></textarea>
+        <span v-if="event.description == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
       </div>
     </div>
     <div class="m-5 mt-10 flex items-center justify-end sm:gap-5">
@@ -102,9 +98,8 @@ export default {
   methods: {
     ...mapActions(["FetchSCEvents", "UpdateSCEvent"]),
     intiData() {
-      const index = this.$route.params.id;
       this.event = this.GetSCEvents.find(
-        (event) => event.id === parseInt(index)
+        (event) => event.id === parseInt(this.id)
       );
     },
     formatTime(time) {

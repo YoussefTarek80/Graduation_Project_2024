@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-center items-center mt-4">
+    <div class="flex justify-center items-center mt-4" v-if="!show">
         <button
             @click="nextPage"
             :disabled="currentPage === totalPages"
@@ -39,6 +39,9 @@ export default {
             type: Function,
             required: true,
         },
+        show:{
+          type:Boolean,
+        }
     },
 };
 </script>

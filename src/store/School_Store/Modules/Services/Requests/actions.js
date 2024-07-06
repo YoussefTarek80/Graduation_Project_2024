@@ -47,7 +47,7 @@ export const actions = {
                 {
                     headers: { Authorization: `Bearer ${token}`, },
                 });
-            // console.log(reponse.data.data);
+            console.log(reponse.data.data);
             dispatch('FetchSCRequests');
         } catch (err) {
             throw err;
@@ -66,6 +66,36 @@ export const actions = {
             dispatch('FetchTRequests');
         } catch (err) {
             throw err;
+        }
+    },
+    async FetchWithdraw({ commit }) {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await axios.get(
+                "http://127.0.0.1:8000/api/school/studentToWithDrawFile",
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
+            const requests = response.data.data;
+            commit("Set_SCWithdraw", requests);
+            console.log(requests);
+        } catch (error) {
+            console.error("Error fetching Requests info:", error);
+        }
+    },
+    async withdrawStudent({ commit }, id) {
+        const token = localStorage.getItem("token");
+        try {
+            console.log(id);
+            await axios.post(
+                `http://127.0.0.1:8000/api/school/withDrawFile/${id}`, {},
+                {
+                    headers: { Authorization: `Bearer ${token}`, },
+                });
+            // console.log(reponse.data.data);
+        } catch (err) {
+            console.error("Error fetching withdraw info:", err);
         }
     },
 };

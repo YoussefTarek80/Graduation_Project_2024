@@ -25,7 +25,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-import table_Component from "../../../../UI/Tables/TeacherTable/Table.vue";
+import table_Component from "../../../../UI/School_Tables/TeacherTable/Table.vue";
 import FilterComponent from "../../../../components/School/Filtration/Filter-school.vue";
 
 export default {

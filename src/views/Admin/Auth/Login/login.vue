@@ -5,11 +5,14 @@
             <div class="sm:w-7/12 w-8/12">
                 <img src="../../../../assets/Logo/Logo.png" alt="" />
             </div>
-            <div class="absolute top-0 left-0 cursor-pointer " @click="this.$router.push('/SelectRole')">
-                <i class="fa-solid fa-user-tie sm:text-6xl text-4xl p-10 rounded-full 
-                    text-customPurple hover:transform hover:scale-110 transition-all"></i>
+            <div class="absolute top-0 left-0 cursor-pointer " v-if="admin" @click="this.$router.push('/darb-system')">
+                <i
+                    class="fa-solid fa-user-tie sm:text-6xl text-4xl p-10 rounded-full text-customPurple hover:transform hover:scale-110 transition-all"></i>
             </div>
-
+            <div class="absolute top-0 left-0 cursor-pointer" v-if="!admin" @click="this.$router.push('/darb-system')">
+                <i
+                    class="fa-sharp fa-light fa-school sm:text-6xl text-4xl p-10 rounded-full text-customPurple hover:transform hover:scale-110 transition-all"></i>
+            </div>
             <form action="" class="w-11/12 space-y-4 flex flex-col" @submit.prevent="onSubmit">
                 <div class="flex flex-col">
                     <label for="email" class="my-2 mx-2">البريد الالكتروني<span class="text-red-600">*</span></label>
@@ -44,8 +47,10 @@
     </div>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 export default {
+    inject: ["array"],
     data() {
         return {
             email: "",
@@ -53,6 +58,7 @@ export default {
             invalid: false,
             login_Failed: false,
             loading: false,
+            admin: false,
         };
     },
     computed: {
@@ -62,13 +68,22 @@ export default {
         currentDate() {
             return this.getDate;
         },
-        ...mapGetters(["GetUser"]),
+        ...mapGetters(["getUser"]),
     },
     mounted() {
         this.Invalid_Data();
+        this.getRole();
     },
     methods: {
         ...mapActions(["login"]),
+        getRole() {
+            const role = localStorage.getItem("role");
+            if (role === "admin") {
+                this.admin = true;
+            } else {
+                this.admin = false;
+            }
+        },
         Invalid_Data() {
             if (this.email.trim() === "" || this.password.trim() === "") {
                 this.invalid = true;
@@ -104,7 +119,7 @@ export default {
                 await this.login({ email, password });
                 this.$router.push("/Admin/Home");
             } catch (error) {
-                console.log("Login error:", error);
+                console.error("Login error:", error);
                 this.Handle_Error();
             }
             this.clear();

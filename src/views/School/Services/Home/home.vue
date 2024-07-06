@@ -86,19 +86,20 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["GetUser2", "GetStudents", "Get_SCRequests", "Get_SCTRequests", "GetSCEvents",
+        ...mapGetters(["GetUser2", "GetScStudents", "Get_SCRequests", "Get_SCTRequests", "GetSCEvents",
             "GetADEvents", "GetTeachers", "GetControllers"]),
     },
-    created() {
+    async created() {
         this.role = localStorage.getItem('role');
-        this.fetchData();
+        await this.fetchData();
         this.DisplayDashboardNumbers();
         console.log(this.GetUser2);
     },
     methods: {
-        ...mapActions(["FetchUser2"]),
+        ...mapActions(["FetchUser2", "FetchScStudents", "FetchControllers", "FetchSCEvents", "FetchADEvents",
+            "FetchSCReports", "FetchSCRequests", "FetchTeachers", "FetchChatQueries"]),
         DisplayDashboardNumbers() {
-            this.data[0].numbers = this.GetStudents.length;
+            this.data[0].numbers = this.GetScStudents.length;
             this.data[1].numbers = this.GetSCEvents.length + this.GetADEvents.length;
             this.data[2].numbers = this.GetControllers.length;
             this.data[3].numbers = this.Get_SCRequests.length + this.Get_SCTRequests.length;
@@ -107,6 +108,12 @@ export default {
         async fetchData() {
             try {
                 await this.FetchUser2(this.role);
+                await this.FetchScStudents();
+                await this.FetchSCEvents();
+                await this.FetchADEvents();
+                await this.FetchSCReports();
+                // await this.FetchTeachers();
+                await this.FetchControllers();
                 console.log(this.GetUser2);
             } catch (error) {
                 throw `Fetching Main Page Data  Error : ${error}`;

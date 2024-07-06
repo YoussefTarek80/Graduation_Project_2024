@@ -8,6 +8,7 @@ export default {
     return {
       requests: [],
       trequests: [],
+      wrequests: [],
     };
   },
   mutations,

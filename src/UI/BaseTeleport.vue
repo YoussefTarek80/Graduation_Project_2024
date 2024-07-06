@@ -19,7 +19,10 @@ export default {
             required: true,
         },
     },
-    created() {
+    methods: {
+        tryClose() {
+
+        }
     }
 };
 </script>
@@ -39,10 +42,9 @@ export default {
 dialog {
     font-family: "Kufam", sans-serif;
     position: fixed;
-    top: 40vh;
+    top: 30vh;
     right: 25%;
-    left: 25%;
-    width: 60%;
+    width: 80%;
     height: auto;
     z-index: 100;
     border-radius: 20px;
@@ -102,7 +104,7 @@ menu {
 @media (min-width: 768px) {
     dialog {
         left: calc(50% - 20rem);
-        width: 50%;
+        width: 40rem;
     }
 }
 </style>

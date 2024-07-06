@@ -5,4 +5,7 @@ export const mutations = {
     Set_SCTRequests(state, requests) {
         state.trequests = requests;
     },
+    Set_SCWithdraw(state, wrequests) {
+        state.wrequests = wrequests;
+    },
 };

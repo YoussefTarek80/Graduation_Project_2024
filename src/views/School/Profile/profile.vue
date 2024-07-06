@@ -33,33 +33,36 @@
                 <span class="text-2xl">بيانات المدير</span>
             </div>
             <form action="" @submit.prevent="updateSchoolProfile">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
                     <div class="flex flex-col input-group">
-                        <input v-model="name" required placeholder=" العنوان " type="text" class="input" />
-                        <label for="" class="user-label">اسم مدير المدرسة<span class="text-red-600">*</span></label>
+                        <input v-model="name" required type="text" class="input" />
+                        <label for="" class="user-label">اسم المدير<span class="text-red-600">*</span></label>
                         <span v-if="!this.v_m_name && name != ''" class="text-red-600">ادخل حروفاً عربية فقط </span>
                         <span v-else-if="name == ''" class="text-red-600">هذا الحقل مطلوب</span>
                     </div>
                     <div class="flex flex-col input-group">
-                        <input v-model="address" required placeholder="العنوان" type="text" class="input" />
+                        <input v-model="address" required type="text" class="input" />
                         <label for="" class="user-label">العنوان<span class="text-red-600">*</span></label>
                         <span v-if="address == ''" class="text-red-600">هذا الحقل مطلوب</span>
                     </div>
                     <div class="flex flex-col input-group">
-                        <input v-model="phone" required placeholder=" رقم الهاتف " type="text" class="input" />
+                        <input v-model="phone" required type="text" class="input" />
                         <label for="" class="user-label">رقم الهاتف<span class="text-red-600">*</span></label>
                         <span v-if="!this.v_m_phone && phone != ''" class="text-red-600 text-xs">رقم الهاتف يجب ان يكون
                             11
                             رقم ويبدء ب 010 او 011 او 012او 015</span>
                         <span v-else-if="phone == ''" class="text-red-600">هذا الحقل مطلوب</span>
                     </div>
-                    <div class="flex flex-col input-group">
-                        <label for="" class="p-2">البريد الالكتروني</label>
-                        <input v-model="email" disabled placeholder=" ايميل الكتروني " type="text" class="input" />
+                </div>
+
+                <div class="mt-5 grid grid-cols-1 sm:grid-cols-4 gap-6">
+                    <div class="flex flex-col">
+                        <label for="" class="">البريد الالكتروني</label>
+                        <input v-model="email" disabled type="text" class="item-data" />
                     </div>
-                    <div class="flex flex-col input-group">
-                        <label for="" class="p-2">الدولة</label>
-                        <input disabled value="مصر" placeholder="العنوان" type="text" class="input" />
+                    <div class="flex flex-col">
+                        <label for="" class="">الدولة</label>
+                        <input disabled value="مصر" type="text" class="item-data" />
                     </div>
                 </div>
                 <div class="m-5 flex items-center justify-end">
@@ -72,23 +75,23 @@
             <div class="my-5">
                 <span class="text-2xl">بيانات المدرسة</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="flex flex-col input-group">
-                    <label for="" class="p-2">اسم المدرسة</label>
-                    <input disabled v-model="school_name" placeholder=" العنوان " type="text" class="input" />
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
+                <div class="flex flex-col">
+                    <label for="" class="">اسم المدرسة</label>
+                    <input disabled v-model="school_name" placeholder=" العنوان " type="text" class="item-data" />
                 </div>
-                <div class="flex flex-col input-group">
-                    <label for="" class="p-2">الدولة</label>
-                    <input disabled value="مصر" placeholder="العنوان" type="text" class="input" />
+                <div class="flex flex-col">
+                    <label for="" class="">الدولة</label>
+                    <input disabled value="مصر" placeholder="العنوان" type="text" class="item-data" />
                 </div>
-                <div class="flex flex-col input-group">
-                    <label for="" class="p-2">المحافظة</label>
-                    <input disabled v-model="adminstartion_state" placeholder="العنوان" type="text" class="input" />
+                <div class="flex flex-col">
+                    <label for="" class="">المحافظة</label>
+                    <input disabled v-model="adminstartion_state" placeholder="العنوان" type="text" class="item-data" />
                 </div>
-                <div class="flex flex-col input-group">
-                    <label for="" class="p-2">العنوان</label>
+                <div class="flex flex-col">
+                    <label for="" class="">العنوان</label>
                     <input disabled v-model="school_address" id="email" placeholder="العنوان" type="text"
-                        class="input" />
+                        class="item-data" />
                 </div>
             </div>
             <hr class="h-1 m-5 bg-gray-700">
@@ -96,30 +99,30 @@
                 <span class="text-2xl">بيانات الإدارة التابعة لها المدرسة</span>
             </div>
             <form action="" @submit.prevent>
-                <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="input_Div grid grid-cols-1 sm:grid-cols-4 gap-6">
                     <div class="flex flex-col">
-                        <label for="" class="p-2">اسم الادارة</label>
+                        <label for="" class="">اسم الادارة</label>
                         <input disabled v-model="adminstartion_name" placeholder=" اسم الادارة " type="text"
-                            class="input" />
+                            class="item-data" />
                     </div>
                     <div class="flex flex-col">
-                        <label for="" class="p-2">الدولة</label>
-                        <input disabled value="مصر" placeholder=" دولة " type="text" class="input" />
+                        <label for="" class="">الدولة</label>
+                        <input disabled value="مصر" placeholder=" دولة " type="text" class="item-data" />
                     </div>
                     <div class="flex flex-col">
-                        <label for="" class="p-2">عنوان الادارة</label>
+                        <label for="" class="">عنوان الادارة</label>
                         <input disabled v-model="adminstartion_address" placeholder=" العنوان " type="text"
-                            class="input" />
+                            class="item-data" />
                     </div>
                     <div class="flex flex-col">
-                        <label for="" class="p-2">المحافظة</label>
+                        <label for="" class="">المحافظة</label>
                         <input disabled v-model="adminstartion_state" placeholder=" العنوان " type="text"
-                            class="input" />
+                            class="item-data" />
                     </div>
                     <div class="flex flex-col">
-                        <label for="" class="p-2">رقم هاتف الادارة</label>
+                        <label for="" class="">رقم هاتف الادارة</label>
                         <input disabled v-model="adminstartion_phone" placeholder=" العنوان " type="text"
-                            class="input" />
+                            class="item-data" />
                     </div>
                 </div>
             </form>

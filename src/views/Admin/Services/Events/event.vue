@@ -1,6 +1,7 @@
 <template>
   <Navbar_Component></Navbar_Component>
   <section class="m-6 sm:m-16" data-aos="fade-up" data-aos-duration="1000">
+    <!-- Title and Add Button Section -->
     <div class="flex items-center justify-between">
       <div class="flex flex-col">
         <span class="sm:text-3xl text-2xl">قائمة المناسبات</span>
@@ -11,13 +12,18 @@
         <i class="fa-solid fa-plus p-1"></i>
       </button>
     </div>
-    <FilterComponent :filteredArray="events" @filter="handleFilter" :MainArray="events" :nationalIDS="false"
-      :Search="false" :status="true"></FilterComponent>
-    <table_Component :items="events" :infoRoute="'/Admin/Event/InfoEvent'" :editRoute="'/Admin/Event/UpdateEvent'"
-      @delete-event="deleteEvent"></table_Component>
+
+    <!-- Filter Component -->
+    <FilterComponent :filteredArray="events" @filter="handleFilter" :status="true"></FilterComponent>
+
+    <!-- Table Component -->
+    <table_Component :items="filteredResults" :infoRoute="'/Admin/Event/InfoEvent'" :editRoute="'/Admin/Event/UpdateEvent'" @delete-event="deleteEvent"></table_Component>
   </section>
+
+  <!-- Footer Component -->
   <Footer_Component></Footer_Component>
 </template>
+
 <script>
 import axios from "axios";
 import table_Component from "../../../../UI/Tables/EventTable/Table.vue";
@@ -29,20 +35,22 @@ export default {
     table_Component,
     FilterComponent
   },
-  data() {
-    return {}
-  },
   computed: {
     ...mapGetters(["events"]),
   },
+  data() {
+    return {
+      filteredResults: [],
+    };
+  },
   async created() {
     await this.FetchEvents();
+    this.filteredResults=this.events
   },
   methods: {
     ...mapActions(["FetchEvents", "RemoveEvent"]),
-
     handleFilter(filteredArray) {
-      this.filtered_Array = filteredArray;
+      this.filteredResults = filteredArray;
     },
     async deleteEvent(id) {
       try {
@@ -55,6 +63,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 @import url("../../../../UI/CustomsCss/Custombutton.css");
 </style>

@@ -1,6 +1,6 @@
 <template>
-    <footer class="text-center text-md md:text-2xl p-6 mt-10">
-        <span> جميع الحقوق محفوظة © ️{{ currentDate }} </span>
+    <footer class="text-center text-2xl p-6 mt-10">
+        <span> جميع الحقوق محفوظة © ️{{currentDate}} </span>
     </footer>
 </template>
 <script>

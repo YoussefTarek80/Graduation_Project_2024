@@ -1,6 +1,6 @@
 <template>
     <div class="bg-customSearch shadow-2xl flex flex-col mb-10 gap-5 items-center justify-around p-5 mt-6 rounded-xl">
-        <div class="flex w-full items-center justify-between gap-5 ">
+        <div class="flex w-full flex-wrap items-center justify-between gap-5">
             <div class="w-full relative">
                 <select v-model="stageID" @change="selectStage"
                     class="w-full relative appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple">
@@ -22,14 +22,17 @@
         </div>
         <div class="w-full relative">
             <select v-model="termID" :disabled="select2" @change="selectTerm"
-                class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple">
-                <option value="" disabled>اختر الترم الدراسي</option>
-                <option v-for="term in GetScTerms" :key="term.id" :value="term.id">{{ term.term_name }}</option>
+                class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple text-base sm:text-sm">
+                <option data-limit='20' value="" disabled>اختر الترم الدراسي</option>
+                <option v-for="term in GetScTerms" :key="term.id" :value="term.id">{{ term.term_name
+                    }}</option>
             </select>
             <i class="fa-solid fa-arrow-down-big-small absolute left-5 top-2 text-2xl"></i>
         </div>
+
+
         <div v-if="termID && levelID && stageID"
-            class="self-end  py-2  border-2 border-black shadow-2xl rounded-full flex items-center justify-evenly w-2/12 cursor-pointer"
+            class="self-end  py-2 border-2 border-black shadow-2xl rounded-md md:rounded-full flex items-center justify-evenly w-6/12 sm:w-2/12 cursor-pointer"
             @click="clear">
             <button>مسح الاختيارات</button>
             <i class="fa-thin fa-trash"></i>
@@ -121,5 +124,11 @@ export default {
 <style scoped>
 select {
     cursor: pointer;
+}
+
+select.appearance-none option {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 </style>

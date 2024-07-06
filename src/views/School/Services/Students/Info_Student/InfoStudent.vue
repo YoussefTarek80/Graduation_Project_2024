@@ -25,12 +25,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="flex flex-col input-group">
                         <input required v-model="student.name" type="text" class="input" />
-                        <label for="" class="user-label">اسم الطالب<span class="text-red-600">*</span></label>
+                        <label class="user-label">اسم الطالب<span class="text-red-600">*</span></label>
                         <span v-if="student.name == ''" class="text-red-600">هذا الحقل مطلوب</span>
                     </div>
                     <div class="flex flex-col input-group">
-                        <input v-model="student.address" type="text" class="input" />
-                        <label for="" class="user-label">العنوان<span class="text-red-600">*</span></label>
+                        <input required v-model="student.address" type="text" class="input" />
+                        <label class="user-label">العنوان<span class="text-red-600">*</span></label>
                         <span v-if="student.address == ''" class="text-red-600">هذا الحقل مطلوب</span>
                     </div>
                     <div class="flex flex-col input-group">
@@ -46,29 +46,28 @@
                             <option value="الصف الثاني الثانوي">الصف الثاني الثانوي</option>
                             <option value="الصف الثالث الثانوي">الصف الثالث الثانوي</option>
                         </select>
-                        <!-- <label for="in1" class="user-label">المستوي الدراسي<span class="text-red-600">*</span></label> -->
-                        <span v-if="student.level == ''" class="text-red-600">هذا الحقل مطلوب</span>
+                        <span v-if="student.grade_name == ''" class="text-red-600">هذا الحقل مطلوب</span>
                     </div>
-                    <div class="flex flex-col input-group">
-                        <label for="" class="p-2">الرقم القومي</label>
-                        <input disabled required v-model="student.national_id" type="text" class="input" />
+                    <div class="flex flex-col">
+                        <label>الرقم القومي</label>
+                        <input disabled type="text" class="item-data" v-model="student.national_id" />
                     </div>
-                    <div class="flex flex-col input-group">
-                        <label for="" class="p-2"> الجنس</label>
-                        <input disabled required v-model="student.gender" type="text" class="input" />
+                    <div class="flex flex-col">
+                        <label> الجنس</label>
+                        <input disabled type="text" class="item-data" v-model="student.gender" />
                     </div>
-                    <div class="flex flex-col input-group">
-                        <label for="" class="p-2">مكان المنشأ/الاقامة</label>
-                        <input disabled required v-model="student.state" type="text" class="input" />
+                    <div class="flex flex-col">
+                        <label>مكان المنشأ/الاقامة</label>
+                        <input disabled type="text" class="item-data" v-model="student.address" />
                     </div>
                 </div>
-                <div class="m-5 flex items-center justify-end">
+                <div class="mt-5 flex items-center justify-end">
                     <button class="w-80 m-1">
                         <router-link :to="this.infoRoute(this.id)">
                             كشف درجات الطالب
                         </router-link>
                     </button>
-                    <button @click="submit" class="w-60 m-1">حفظ</button>
+                    <button @click="submit" class="w-60">حفظ</button>
                 </div>
             </form>
         </div>
@@ -82,25 +81,25 @@
             </div>
             <form action="" @submit.prevent>
                 <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="flex flex-col input-group">
-                        <label for="" class="p-2">الإسم </label>
-                        <input disabled v-model="student.parent_name" id="parentName" type="text" class="input" />
+                    <div class="flex flex-col">
+                        <label>الإسم </label>
+                        <input disabled type="text" class="item-data" v-model="student.parent_name" />
                     </div>
-                    <div class="flex flex-col input-group">
-                        <label for="" class="p-2">الدولة</label>
-                        <input disabled v-model="student.country" id="country" type="text" class="input" />
+                    <div class="flex flex-col">
+                        <label>الدولة</label>
+                        <input disabled type="text" class="item-data" v-model="student.country">
                     </div>
-                    <div class="flex flex-col input-group">
-                        <label for="" class="p-2">الجنسية</label>
-                        <input disabled v-model="student.nationality" id="email" type="text" for="" class="input" />
+                    <div class="flex flex-col">
+                        <label>الجنسية</label>
+                        <input disabled type="text" class="item-data" v-model="student.nationality" />
                     </div>
-                    <div class="flex flex-col input-group" v-if="!this.isAppriate">
-                        <label for="" class="p-2">المحافظة</label>
-                        <input disabled v-model="student.state" id="state" type="text" class="input" />
+                    <div class=" flex flex-col" v-if="!this.isAppriate">
+                        <label>المحافظة</label>
+                        <input disabled type="text" class="item-data" v-model="student.state">
                     </div>
-                    <div class="flex flex-col input-group">
-                        <label for="" class="p-2">المهنة</label>
-                        <input disabled v-model="student.parent_job" id="parentJop" type="text" class="input" />
+                    <div class="flex flex-col">
+                        <label>المهنة</label>
+                        <input disabled type="text" class="item-data" v-model="student.parent_job">
                     </div>
                 </div>
             </form>
@@ -111,7 +110,6 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import axios from "axios";
 export default {
     data() {
         return {
@@ -124,18 +122,20 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["GetStudents"]),
+        ...mapGetters(["GetScStudents"]),
         national() {
             return this.isAppriate;
         },
     },
-    created() {
-        this.FetchData();
+    async created() {
+        await this.FetchData();
+        console.log(this.student);
     },
     methods: {
-        ...mapActions(["FetchStudents", "UpdateStudent"]),
+        ...mapActions(["FetchScStudents", "UpdateScStudent"]),
         initData() {
-            this.student = this.GetStudents[this.id];
+            this.student = this.GetScStudents.find(
+                (item) => item.id == parseInt(this.id));
             console.log(this.student.id);
             if (this.student.nationality != "مصري") {
                 this.isAppriate = true;
@@ -147,7 +147,7 @@ export default {
         },
         async FetchData() {
             try {
-                await this.FetchStudents();
+                await this.FetchScStudents();
                 this.initData();
             } catch (error) {
                 console.error("Error fetching student info:", error);
@@ -156,7 +156,7 @@ export default {
         async update() {
             try {
                 if (this.student.name != '' && this.student.level != '' && this.student.address != '') {
-                    await this.UpdateStudent({
+                    await this.UpdateScStudent({
                         id: this.student.id,
                         name: this.student.name,
                         level: this.student.grade_name,

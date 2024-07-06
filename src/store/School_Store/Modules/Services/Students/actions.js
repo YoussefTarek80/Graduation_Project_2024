@@ -1,6 +1,6 @@
 import axios from "axios";
 export const actions = {
-    async FetchStudents({ commit }) {
+    async FetchScStudents({ commit }) {
         try {
             const token = localStorage.getItem("token");
             const response = await axios.get(
@@ -10,12 +10,17 @@ export const actions = {
                 }
             );
             const studs = response.data.data;
+            // response.data.data.forEach((v) => {
+            //     if (parseInt(v.status) !== 2) {
+            //         studs.push(v);
+            //     }
+            // });
             commit("Set_Students", studs);
         } catch (error) {
             console.error("Error fetching Students info:", error);
         }
     },
-    async UpdateStudent({ commit }, { id, name, grade_name, address }) {
+    async UpdateScStudent({ commit }, { id, name, grade_name, address }) {
         try {
             const token = localStorage.getItem("token");
             const formData = new FormData();
@@ -83,16 +88,22 @@ export const actions = {
     async fetchStdSubjects({ commit }, { studentId, levelId, termId }) {
         try {
             const token = localStorage.getItem("token");
-            console.log(studentId, levelId, termId);
-            const response = await axios.get(`http://127.0.0.1:8000/api/school/getScoresByStudentGradeAndTerm/${studentId}/${levelId}/${termId}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
-            });
-            const subjects = response.data.data[0].terms[0].scores;
-            commit('Set_StdSubjects', subjects)
-            console.log("retreived data :", subjects);
-            console.log("retreived data :", response.data.data);
+            if (levelId == -1) {
+                const subjects = [];
+                commit('Set_StdSubjects', subjects);
+            }
+            else {
+                console.log(studentId, levelId, termId);
+                const response = await axios.get(`http://127.0.0.1:8000/api/school/getScoresByStudentGradeAndTerm/${studentId}/${levelId}/${termId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                });
+                const subjects = response.data.data[0].terms[0].scores;
+                commit('Set_StdSubjects', subjects);
+                console.log("retreived data :", subjects);
+                console.log("retreived data :", response.data.data);
+            }
         } catch (err) {
             console.error(err);
             throw err

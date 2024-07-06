@@ -21,7 +21,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import table_Component from "../../../../UI/Tables/RequestTable/Table.vue";
+import table_Component from "../../../../UI/School_Tables/RequestTable/Table.vue";
 import FilterComponent from "../../../../components/School/Filtration/Filter-school.vue";
 
 export default {
@@ -35,8 +35,8 @@ export default {
     computed: {
         ...mapGetters(['Get_SCTRequests'])
     },
-    created() {
-        this.fetchData();
+    async created() {
+        await this.fetchData();
         console.log(this.Get_SCTRequests);
         this.filtered_Array = this.Get_SCTRequests;
     },
@@ -60,5 +60,5 @@ export default {
 </script>
 
 <style scoped>
-@import url('./requests.css');
+@import url('../../../../UI//CustomsCss/CustomInput.css');
 </style>

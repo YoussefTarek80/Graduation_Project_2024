@@ -13,31 +13,35 @@
       </div>
       <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="flex flex-col">
-          <label for="in1">اسم المناسبة <span class="text-red-600">*</span></label>
-          <input disabled v-model="event.name" class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+          <label for="">اسم المناسبة <span class="text-red-600">*</span></label>
+          <input disabled v-model="event.name"
+            class="item-data border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
         </div>
         <div class="flex flex-col">
-          <label for="in4">تاريخ المناسبة <span class="text-red-600">*</span></label>
-          <input disabled v-model="event.date" class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+          <label for="">تاريخ المناسبة <span class="text-red-600">*</span></label>
+          <input disabled v-model="event.date"
+            class="item-data border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
         </div>
         <div class="flex flex-col">
-          <label for="in5"> وقت الحدث<span class="text-red-600">*</span></label>
-          <input disabled v-model="event.time" class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+          <label for=""> وقت الحدث<span class="text-red-600">*</span></label>
+          <input disabled v-model="event.time"
+            class="item-data border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
         </div>
         <div class="flex flex-col">
-          <label for="in6">عنوان الحدث<span class="text-red-600">*</span></label>
-          <input disabled v-model="event.address" class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+          <label for="">عنوان الحدث<span class="text-red-600">*</span></label>
+          <input disabled v-model="event.address"
+            class="item-data border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
         </div>
-        <div class="flex flex-col">
-          <label for="in7">الحالة <span class="text-red-600">*</span></label>
-          <input disabled v-model="event.state" class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
-        </div>
+        <!-- <div class="flex flex-col">
+          <label for="">الحالة <span class="text-red-600">*</span></label>
+          <input disabled v-model="event.state"
+            class="item-data border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+        </div> -->
       </div>
-      <div class="flex flex-col mt-6">
+      <div class="flex flex-col mt-5">
         <label for="">وصف المناسبة <span class="text-red-600">*</span></label>
-        <textarea disabled placeholder="أكتب وصف الحدث هنا..." v-model="event.description" rows="5"
-          class="tx-report resize-none border-2 border-customPurple p-5 outline-none rounded-2xl mt-5"></textarea>
-        <span v-if="event.description == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+        <textarea disabled v-model="event.description" rows="5" cols="10"
+          class="item-data resize-none p-5 outline-none rounded-2xl"></textarea>
       </div>
       <div class="m-5 flex items-center justify-end sm:gap-5">
         <button class="w-96" @click="this.$router.push('/school/services/sc-events')">الرجوع الي قائمة
@@ -56,24 +60,28 @@ export default {
   components: { Footer_Component },
   data() {
     return {
+      id: this.$route.params.id,
       event: {}
     }
   },
   computed: {
     ...mapGetters(["GetSCEvents"]),
   },
-  created() {
-    this.fetchData();
+  async created() {
+    await this.fetchData();
+    console.log(this.GetSCEvents);
   },
   methods: {
     ...mapActions(["FetchSCEvents"]),
+    initData() {
+      this.event = this.GetSCEvents.find(
+        (v) => v.id == parseInt(this.id),
+      );
+    },
     async fetchData() {
       try {
         await this.FetchSCEvents();
-        const index = this.$route.params.id;
-        this.event = this.GetSCEvents.find(
-          (event) => event.id === parseInt(index)
-        );
+        this.initData();
         console.log(this.event);
       } catch (err) {
         console.error(err);

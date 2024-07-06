@@ -7,7 +7,7 @@ export const actions = {
                 { email, password }
             );
             const data = response.data.data;
-            localStorage.setItem("token", data.token);
+            localStorage.setItem("adtoken", data.token);
             await dispatch("FetchUser");
         } catch (error) {
             throw error;
@@ -15,17 +15,17 @@ export const actions = {
     },
     async logout({ commit }) {
         try {
-            const token = localStorage.getItem("token");
+            const adtoken = localStorage.getItem("adtoken");
             await axios.post(
                 "http://127.0.0.1:8000/api/logout",
                 {},
                 {
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${adtoken}`,
                     },
                 }
             );
-            localStorage.removeItem("token");
+            localStorage.removeItem("adtoken");
             localStorage.removeItem("User");
             commit("LOGOUT");
         } catch (error) {
@@ -34,12 +34,12 @@ export const actions = {
     },
     async FetchUser({ commit }) {
         try {
-            const token = localStorage.getItem("token");
+            const adtoken = localStorage.getItem("adtoken");
             const response = await axios.get(
                 "http://127.0.0.1:8000/api/showProfile",
                 {
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${adtoken}`,
                     },
                 }
             );

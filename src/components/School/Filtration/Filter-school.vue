@@ -39,12 +39,6 @@
                     <option class="font-medium text-gray-400" v-for="(item, index) in levels" :value="selectedLevel"
                         selected> {{ item.level_name }}
                     </option>
-                    <!-- <option class="font-medium" value="الصف الأول الإبتدائي">الصف الأول الإبتدائي</option>
-                    <option class="font-medium" value="الصف الثاني الإبتدائي">الصف الثاني الإبتدائي</option>
-                    <option class="font-medium" value="الصف الثالث الإبتدائي">الصف الثالث الإبتدائي</option>
-                    <option class="font-medium" value="الصف الرابع الإبتدائي">الصف الرابع الإبتدائي</option>
-                    <option class="font-medium" value="الصف الخامس الإبتدائي">الصف الخامس الإبتدائي</option>
-                    <option class="font-medium" value="الصف السادس الإبتدائي">الصف السادس الإبتدائي</option> -->
                 </select>
                 <div class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none">
                     <i class="fa-solid fa-arrow-down-up-across-line"></i>

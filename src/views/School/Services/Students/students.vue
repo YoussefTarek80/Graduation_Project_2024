@@ -7,8 +7,8 @@
                 <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink"></i>
             </div>
         </div>
-        <FilterComponent :disable="GetStudents.length === 0" :filteredArray="filtered_Array" @filter="handleFilter"
-            :MainArray="GetStudents" :nationalId="true" :Search="true"></FilterComponent>
+        <FilterComponent :disable="GetScStudents.length === 0" :filteredArray="filtered_Array" @filter="handleFilter"
+            :MainArray="GetScStudents" :nationalId="true" :Search="true"></FilterComponent>
         <div class="relative">
             <table_Component :items="filtered_Array" :infoRoute="'/school/services/students/student-info'">
             </table_Component>
@@ -17,7 +17,7 @@
     <Footer_Component></Footer_Component>
 </template>
 <script>
-import table_Component from "../../../../UI/Tables/StudentTable/Table.vue";
+import table_Component from "../../../../UI/School_Tables/StudentTable/Table.vue";
 import FilterComponent from "../../../../components/School/Filtration/Filter-school.vue";
 import { mapGetters, mapActions } from 'vuex';
 export default {
@@ -28,18 +28,18 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["GetStudents"])
+        ...mapGetters(["GetScStudents"])
     },
     created() {
         this.fetchData();
         console.log(this.filtered_Array);
     },
     methods: {
-        ...mapActions(["FetchStudents"]),
+        ...mapActions(["FetchScStudents"]),
         async fetchData() {
             try {
-                await this.FetchStudents();
-                this.filtered_Array = this.GetStudents;
+                await this.FetchScStudents();
+                this.filtered_Array = this.GetScStudents;
                 console.log(this.filtered_Array);
             } catch (err) {
                 console.error(err);

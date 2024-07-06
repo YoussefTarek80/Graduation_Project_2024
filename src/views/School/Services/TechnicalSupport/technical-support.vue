@@ -3,7 +3,7 @@
     <section class="m-16 md:mx-16" data-aos="fade-up" data-aos-duration="1000">
         <div class="flex flex-row justify-between">
             <div class="self-center flex flex-col">
-                <span class="sm:text-3xl text-2xl">قائمة الإستفسارات</span>
+                <span class="sm:text-3xl text-2xl">قائمة الإستفسارات - الشكاوي</span>
                 <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink"></i>
             </div>
         </div>
@@ -18,7 +18,7 @@
     <Footer_Component></Footer_Component>
 </template>
 <script>
-import table_Component from "../../../../UI/Tables/SupportTable/Table.vue";
+import table_Component from "../../../../UI/School_Tables/SupportTable/Table.vue";
 import FilterComponent from "../../../../components/School/Filtration/Filter-school.vue";
 import { mapGetters, mapActions } from 'vuex';
 export default {

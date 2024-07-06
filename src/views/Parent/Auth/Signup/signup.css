@@ -1,0 +1,27 @@
+section{
+    background: url("../../../../assets/AdminLogin/BG.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: "Kufam", sans-serif;
+    height: 100vh;
+}
+@keyframes animate {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(10%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+.Logo{
+    animation: animate 3s linear infinite;
+}
+@media (max-width: 1000px){
+    img{
+        display: none;
+    }
+}

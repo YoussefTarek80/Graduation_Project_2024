@@ -17,7 +17,7 @@
     <Footer_Component></Footer_Component>
 </template>
 <script>
-import table_Component from "../../../../UI/Tables/ReportTable/Table.vue";
+import table_Component from "../../../../UI/School_Tables/ReportTable/Table.vue";
 import FilterComponent from "../../../../components/School/Filtration/Filter-school.vue";
 import { mapGetters, mapActions } from 'vuex';
 export default {

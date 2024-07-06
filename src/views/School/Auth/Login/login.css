@@ -21,3 +21,8 @@ label {
   transform: translateX(20px);
   opacity: 0;
 }
+select option {
+  padding: 5px;
+  color: rgb(80, 5, 80);
+  font-weight: bold;
+}

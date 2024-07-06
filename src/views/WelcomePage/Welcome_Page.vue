@@ -29,14 +29,15 @@ export default {
             school: 'school'
         }
     },
+    created() { },
     methods: {
         Admin() {
-            this.$router.push('/admin/login')
-            localStorage.setItem('role', this.admin);
+            this.$router.push('/ad/login');
+            localStorage.setItem('login_role', this.admin);
         },
         School() {
-            this.$router.push('/school/login')
-            localStorage.setItem('role', this.school);
+            this.$router.push('/school/login');
+            localStorage.setItem('login_role', this.school);
         },
     },
 };

@@ -19,37 +19,30 @@
         </div>
         <div class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full mx-auto pt-12">
             <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="flex flex-col">
-                    <label for="">إسم مدير الكنترول<span class="text-red-600">*</span></label>
-                    <input type="text" v-model="controller.staff_name" placeholder="أكتب إسم المدير..."
-                        class="outline-customDarkPurple" />
+                <div class="input-group flex flex-col">
+                    <input type="text" required v-model="controller.staff_name" class="input" />
+                    <label for="" class="user-label">إسم مدير الكنترول<span class="text-red-600">*</span></label>
                     <span v-if="controller.staff_name == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
-                <div class="flex flex-col">
-                    <label for="">الهاتف<span class="text-red-600">*</span></label>
-                    <input type="text" v-model="controller.staff_phone" placeholder="كم عمر المدير..."
-                        class="outline-customDarkPurple" />
+                <div class="input-group flex flex-col">
+                    <input type="text" required v-model="controller.staff_phone" class="input" />
+                    <label for="" class="user-label">الهاتف<span class="text-red-600">*</span></label>
                     <span v-if="controller.staff_phone == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
-                <div class="flex flex-col">
-                    <label for="">العنوان<span class="text-red-600">*</span></label>
-                    <input type="text" v-model="controller.staff_address" placeholder="أكتب العنوان..."
-                        class="outline-customDarkPurple" />
+                <div class="input-group flex flex-col">
+                    <input type="text" required v-model="controller.staff_address" class="input" />
+                    <label for="" class="user-label">العنوان<span class="text-red-600">*</span></label>
                     <span v-if="controller.staff_address == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
-                <div class="flex flex-col">
-                    <label for="">الدور الوظيفي<span class="text-red-600">*</span></label>
-                    <div class="custom-select relative">
-                        <select v-model="controller.staff_role"
-                            class="w-full appearance-none bg-white border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-customDarkPurple">
-                            <option value="مسؤول الملفات">مسؤول الملفات</option>
-                            <option value="مسؤول التصحيح">مسؤول التصحيح</option>
-                            <option value="مسؤول الطلبات">مسؤول الطلبات</option>
-                            <option value="مسؤول الدعم والشكاوي">مسؤول الدعم والشكاوي</option>
-                        </select>
-                        <div class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none">
-                            <i class="fa-regular fa-angle-down"></i>
-                        </div>
+                <div class="input-group flex flex-col">
+                    <label for="" class="user-slabel">الدور الوظيفي<span class="text-red-600">*</span></label>
+                    <select v-model="controller.staff_role" required class="input cursor-pointer appearance-none">
+                        <option value="مسؤول التصحيح">مسؤول التصحيح</option>
+                        <option value="مسؤول الطلبات">مسؤول الطلبات</option>
+                        <option value="مسؤول الدعم والشكاوي">مسؤول الدعم والشكاوي</option>
+                    </select>
+                    <div class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none">
+                        <i class="fa-regular fa-angle-down"></i>
                     </div>
                 </div>
             </div>
@@ -88,9 +81,8 @@ export default {
     methods: {
         ...mapActions(["FetchControllers", "UpdateController"]),
         intiData() {
-            const index = this.id;
             this.controller = this.GetControllers.find(
-                (controller) => controller.id === parseInt(index)
+                (item) => item.id === parseInt(this.id)
             );
         },
         formatTime(time) {
