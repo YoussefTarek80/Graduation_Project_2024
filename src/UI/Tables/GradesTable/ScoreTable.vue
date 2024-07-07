@@ -23,9 +23,7 @@
 
         <table v-if="paginatedItems.length != 0" class="sm:w-full sm:my-20 mt-9 sm:text-lg text-sm">
             <thead class="text-white">
-                <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tr-2xl">
-                    التسلسل
-                </th>
+                <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tr-2xl">التسلسل</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">إسم المادة</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3  rounded-tl-2xl">الدرجة</th>
             </thead>
@@ -45,7 +43,6 @@
         :nextPage="nextPage" :prevPage="prevPage" />
 </template>
 <script>
-import axios from "axios"
 export default {
     props: ["items", "studId"],
     data() {
@@ -95,42 +92,6 @@ export default {
                 this.showInfo = index;
             }
         },
-        editItem(item) {
-            console.log(item.Score);
-            item.is_edit = true;
-            this.updatedStud = item.name;
-        },
-        async saveItem(item) {
-            console.log(item.Score);
-            await this.updateGrade(this.studId, this.id, item.Score);
-            item.is_edit = false;
-        },
-        async updateGrade(student_id, term_subject, score) {
-            try {
-                console.log(student_id, term_subject, score)
-                const form = new FormData();
-                form.append('score', score);
-                const token = localStorage.getItem('token');
-                this.response = await axios.post(`http://127.0.0.1:8000/api/school/addStudentScore/${student_id}/${term_subject}`,
-                    form, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    },
-                });
-                this.success = true;
-                setTimeout(() => {
-                    this.success = false;
-                }, 2500);
-            }
-            catch (err) {
-                console.log(err);
-                this.response = err.response.status;
-                this.failed = true;
-                setTimeout(() => {
-                    this.failed = false;
-                }, 2500);
-            }
-        }
     },
 };
 </script>

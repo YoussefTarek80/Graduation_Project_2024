@@ -19,10 +19,12 @@
     <section class="mt-20 sm:mx-24 mx-6" data-aos="fade-up" data-aos-duration="1000">
         <div class="bg-customBGCards rounded-xl shadow-xl p-6 sm:w-full">
             <div class="my-5">
-                <span class="text-2xl">بيانات الطالب</span>
+                <span
+                    class="text-2xl md:text-3xl text-customDarkPurple px-0 md:px-5 py-3 rounded-2xl flex items-center m-5 md:m-10">
+                    <i class="fa-duotone fa-sparkles"></i>بيانات الطالب</span>
             </div>
             <form action="" @submit.prevent="update">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
                     <div class="flex flex-col input-group">
                         <input required v-model="student.name" type="text" class="input" />
                         <label class="user-label">اسم الطالب<span class="text-red-600">*</span></label>
@@ -48,6 +50,8 @@
                         </select>
                         <span v-if="student.grade_name == ''" class="text-red-600">هذا الحقل مطلوب</span>
                     </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 mt-5">
                     <div class="flex flex-col">
                         <label>الرقم القومي</label>
                         <input disabled type="text" class="item-data" v-model="student.national_id" />
@@ -74,13 +78,17 @@
 
         <div class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full">
             <div v-if="this.isAppriate" class="my-5">
-                <span class="text-2xl"> بيانات الأب ({{ this.appriateNational }})</span>
+                <span
+                    class="text-2xl md:text-3xl text-customDarkPurple px-0 md:px-5 py-3 rounded-2xl flex items-center m-5 md:m-10">
+                    <i class="fa-duotone fa-sparkles"></i> بيانات ولي الأمر ({{ this.appriateNational }})</span>
             </div>
             <div v-else-if="!this.isAppriate" class="my-5">
-                <span class="text-2xl">بيانات الأب/الأم</span>
+                <span
+                    class="text-2xl md:text-3xl text-customDarkPurple px-0 md:px-5 py-3 rounded-2xl flex items-center m-5 md:m-10">
+                    <i class="fa-duotone fa-sparkles"></i>بيانات ولي الأمر</span>
             </div>
             <form action="" @submit.prevent>
-                <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="input_Div grid grid-cols-1 md:grid-cols-4 gap-6">
                     <div class="flex flex-col">
                         <label>الإسم </label>
                         <input disabled type="text" class="item-data" v-model="student.parent_name" />

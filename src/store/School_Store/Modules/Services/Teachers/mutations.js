@@ -5,4 +5,7 @@ export const mutations = {
     Set_TeacherApps(state, teacherApps) {
         state.teacherApps = teacherApps;
     },
+    Set_TeacherSubjects(state, teacherSubjects) {
+        state.teacherSubjects = teacherSubjects;
+    },
 };

@@ -21,17 +21,17 @@
         </button>
         <div class="profileImage">
             <label for="fileInput" data-aos="fade-up" data-aos-duration="1000">
-                <img :src="GetUser2.school_image" alt="My Image" />
-            </label>
+                <img v-if="imageURL" :src="imageURL" alt="My Image" /></label>
             <input v-if="role == 'manager'" id="fileInput" type="file" style="display: none" @change="handleFile" />
         </div>
     </section>
 
     <section class="mt-40 mx-8 md:mx-24" data-aos="fade-up" data-aos-duration="1000">
         <div class="bg-customBGCards rounded-xl shadow-xl p-6 sm:w-full">
-            <div class="mt-5 mb-10">
-                <span class="text-2xl">بيانات المدير</span>
-            </div>
+            <span
+                class="text-2xl md:text-3xl text-customDarkPurple px-0 md:px-5 py-3 rounded-2xl flex items-center m-5 md:m-10">
+                <i class="fa-duotone fa-sparkles"></i>بيانات المدير</span>
+
             <form action="" @submit.prevent="updateSchoolProfile">
                 <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
                     <div class="flex flex-col input-group">
@@ -72,9 +72,9 @@
         </div>
 
         <div class="bg-customBGCards rounded-xl shadow-xl p-6 mt-14 sm:w-full">
-            <div class="my-5">
-                <span class="text-2xl">بيانات المدرسة</span>
-            </div>
+            <span
+                class="text-2xl md:text-3xl text-customDarkPurple px-0 md:px-5 py-3 rounded-2xl flex items-center m-5 md:m-10">
+                <i class="fa-duotone fa-sparkles"></i>بيانات المدرسة</span>
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
                 <div class="flex flex-col">
                     <label for="" class="">اسم المدرسة</label>
@@ -94,10 +94,11 @@
                         class="item-data" />
                 </div>
             </div>
-            <hr class="h-1 m-5 bg-gray-700">
-            <div class="mt-14 mb-5">
-                <span class="text-2xl">بيانات الإدارة التابعة لها المدرسة</span>
-            </div>
+            <hr class="w-9/12 mx-auto rounded-xl h-1 my-10 bg-customPurple">
+            <span
+                class="text-2xl md:text-3xl text-customDarkPurple px-0 md:px-5 py-3 rounded-2xl flex items-center m-5 md:m-10">
+                <i class="fa-duotone fa-sparkles"></i>بيانات الإدارة التابعة لها المدرسة</span>
+
             <form action="" @submit.prevent>
                 <div class="input_Div grid grid-cols-1 sm:grid-cols-4 gap-6">
                     <div class="flex flex-col">
@@ -129,29 +130,24 @@
         </div>
 
         <div class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full">
-            <div class="my-5">
-                <span class="text-2xl">تغيير كلمة المرور</span>
-            </div>
-            <form action="" @submit.prevent="updatePassword">
-                <div class="flex flex-col">
-                    <label for="" class="p-2">
-                        كلمة المرور القديمة<span class="text-red-600">*</span></label>
-                    <input v-model="OldPassword" placeholder="كلمة المرور " type="password"
-                        class="border-2 border-gray-300 px-5 py-2 rounded-xl outline-none " />
+            <span
+                class="text-2xl md:text-3xl text-customDarkPurple px-0 md:px-5 py-3 rounded-2xl flex items-center m-5 md:m-10">
+                <i class="fa-duotone fa-sparkles"></i>تغيير كلمة المرور</span>
+
+            <form action="" @submit.prevent="updatePassword" class="flex flex-col gap-10">
+                <div class="flex flex-col input-group">
+                    <input v-model="OldPassword" required type="password" class="input" />
+                    <label class="user-label">كلمة المرور القديمة<span class="text-red-600">*</span></label>
                     <span v-if="OldPassword == '' && submit" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
-                <div class="flex flex-col">
-                    <label for="" class="p-2">
-                        كلمة المرور الجديدة<span class="text-red-600">*</span></label>
-                    <input v-model="NewPassword" placeholder="كلمة المرور " type="password"
-                        class="border-2 border-gray-300 px-5 py-2 rounded-xl outline-none " />
+                <div class="flex flex-col input-group">
+                    <input v-model="NewPassword" required type="password" class="input" />
+                    <label class="user-label">كلمة المرور الجديدة<span class="text-red-600">*</span></label>
                     <span v-if="NewPassword == '' && submit" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
-                <div class="flex flex-col mt-5">
-                    <label for="" class="p-2">
-                        تاكيد كلمة المرور الجديدة<span class="text-red-600">*</span></label>
-                    <input v-model="NewPasswordConf" placeholder=" تاكيد كلمة المرور" type="password"
-                        class="border-2 border-gray-300 px-5 py-2 rounded-xl outline-none" />
+                <div class="flex flex-col input-group">
+                    <input v-model="NewPasswordConf" required type="password" class="input" />
+                    <label class="user-label">تاكيد كلمة المرور الجديدة<span class="text-red-600">*</span></label>
                     <span v-if="NewPasswordConf == '' && submit" class="text-red-600">هذا الحقل مطلوب</span>
                 </div>
                 <div class="m-5 flex items-center justify-end">

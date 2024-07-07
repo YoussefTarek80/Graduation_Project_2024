@@ -24,12 +24,16 @@
         <div class="bg-customBGCards rounded-xl shadow-xl p-6 sm:w-full">
             <form action="" @submit.prevent="update">
                 <div class="grid grid-cols-1 gap-6">
-                    <div class="flex flex-row items-center w-full">
-                        <label for="" class="pt-5 pl-5 font-bold">إسم التقرير (الموضوع):</label>
+                    <div class="flex flex-col w-4/12">
+                        <span
+                            class="text-xl md:text-2xl text-customDarkPurple px-0 md:px-5 py-3 rounded-2xl flex items-center">
+                            <i class="fa-duotone fa-sparkles"></i>موضوع التقرير (الموضوع):</span>
                         <input disabled v-model="report.subject" type="text" class="item-data " />
                     </div>
                     <div class="flex flex-col">
-                        <label for="">الوصف</label>
+                        <label class="text-xl md:text-2xl text-customDarkPurple px-0 md:px-5 py-3 rounded-2xl flex
+                            items-center">
+                            <i class="fa-duotone fa-sparkles"></i>الوصف</label>
                         <textarea disabled v-model="report.description" rows="5" cols="10"
                             class="item-data resize-none p-5 outline-none rounded-2xl"></textarea>
                     </div>

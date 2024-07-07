@@ -30,21 +30,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-span-1 sm:col-span-1" v-if="this.Subject">
-            <div class="custom-select relative">
-                <select :disabled="this.disable" v-model="selectedLevel" @change="handleLevel"
-                    class="w-full appearance-none bg-white border border-gray-300 rounded-2xl p-3 px-4 focus:outline-none focus:border-customDarkPurple">
-                    <option class="font-medium text-gray-400" :value="selectedLevel" selected> إختيار الصف...
-                    </option>
-                    <option class="font-medium text-gray-400" v-for="(item, index) in levels" :value="selectedLevel"
-                        selected> {{ item.level_name }}
-                    </option>
-                </select>
-                <div class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none">
-                    <i class="fa-solid fa-arrow-down-up-across-line"></i>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 

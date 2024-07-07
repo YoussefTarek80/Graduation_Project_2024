@@ -22,17 +22,24 @@
                     <h3 class="text-customPurple font-bold text-sm md:text-xl"> الإستفسار:</h3>
                     <p class="pr-4 text-customPurple text-sm md:text-xl">{{ query.description }}</p>
                 </div>
-                <div class="w-full pr-4 flex items-center ">
+                <div class="w-full pr-4 flex items-center" v-if="state">
+                    <p class="font-bold text-customPurple text-sm md:text-xl">الرد</p>
+                    <i class="border-2 border-customPurple rounded-3xl p-1 mr-2 fa-duotone fa-arrow-down"></i>
+                </div>
+                <div class="w-full pr-4 flex items-center" v-else>
                     <p class="font-bold text-customPurple text-sm md:text-xl">ضع ردك هنا </p>
                     <i class="border-2 border-customPurple rounded-3xl p-1 mr-2 fa-duotone fa-arrow-down"></i>
                 </div>
-                <div class="w-full">
-                    <textarea type="text" :disabeld="state" autofocus placeholder="أكتب ردك هنا..."
-                        v-model="query.answer"
+                <div class="w-full" v-if="!state">
+                    <textarea type="text" autofocus placeholder="أكتب ردك هنا..." v-model="query.answer"
                         class="resize-none w-full h-32 mt-4 p-4 border-2 border-customPurple text-sm md:text-1/2xl rounded-xl focus:border-2 focus:border-customPurple"></textarea>
                 </div>
+                <div class="w-full" v-else>
+                    <textarea type="text" disabled v-model="query.answer"
+                        class="item-data resize-none w-full h-32 mt-4 p-4 border-2 border-customPurple text-sm md:text-1/2xl rounded-xl focus:border-2 focus:border-customPurple"></textarea>
+                </div>
             </div>
-            <div class="text-left" v-if="this.state === false">
+            <div class="text-left" v-if="!state">
                 <button @click="confirm = true"
                     class="flex items-center border-2 border-customPurple m-5 p-2 md:p-3 rounded-3xl bg-customPurple 
                             text-white font-bold hover:bg-white hover:text-customPurple transition-colors duration-200">
@@ -92,7 +99,7 @@ export default {
                 await this.FetchChatQueries();
                 this.initData();
             } catch (error) {
-                console.error("Error fetching student info:", error);
+                console.error("Error fetching chat bot queries info:", error);
             }
         },
         async handleAnswer() {
@@ -101,6 +108,7 @@ export default {
                 await this.AnswerQuery({ id: this.query.id, answer: this.query.answer });
                 this.confirm = false;
                 this.state = true;
+                await this.fetchData();
                 this.success = true;
                 setTimeout(() => { this.success = false }, 1000);
             }

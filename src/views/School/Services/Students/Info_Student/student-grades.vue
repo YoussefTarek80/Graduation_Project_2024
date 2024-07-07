@@ -1,19 +1,5 @@
 <template>
     <sc-navbar-comp></sc-navbar-comp>
-    <section class="m-10" data-aos="fade-up" data-aos-duration="1000">
-        <BaseTeleport :show="success">
-            <div class="flex flex-col">
-                <span class="text-green-700 text-4xl"> تم التعديل بنجاح </span>
-                <i class="fa-sharp fa-solid fa-badge-check text-green-700 text-7xl m-3"></i>
-            </div>
-        </BaseTeleport>
-        <BaseTeleport :show="failed">
-            <div class="flex flex-col">
-                <span class="text-red-700 text-4xl"> فشل التعديل</span>
-                <i class="fa-sharp fa-solid fa-badge-check text-red-700 text-7xl m-3"></i>
-            </div>
-        </BaseTeleport>
-    </section>
 
     <section v-if="this.student" data-v-5f1c1d65="" class="m-16 md:mx-16 aos-init aos-animate" data-aos="fade-up"
         data-aos-duration="1000">
@@ -42,8 +28,6 @@ export default {
         return {
             id: this.$route.params.id,
             student: null,
-            success: false,
-            failed: false,
         };
     },
     computed: {

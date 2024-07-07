@@ -1,6 +1,20 @@
 <template>
     <div>
         <sc-navbar-comp></sc-navbar-Comp>
+
+        <BaseTeleport :show="success">
+            <div class="flex flex-col">
+                <span class="text-green-700 text-4xl">تم الحذف بنجاح </span>
+                <i class="fa-sharp fa-solid fa-badge-check text-green-700 text-7xl m-3"></i>
+            </div>
+        </BaseTeleport>
+        <BaseTeleport :show="failed">
+            <div class="flex flex-col">
+                <span class="text-red-700 text-4xl"> فشل الحذف</span>
+                <i class="fa-sharp fa-solid fa-badge-check text-red-700 text-7xl m-3"></i>
+            </div>
+        </BaseTeleport>
+
         <section class="m-16 md:mx-16" data-aos="fade-up" data-aos-duration="1000">
             <div class="flex items-center justify-between">
                 <div class="flex flex-col">
@@ -13,7 +27,6 @@
                     <i class="fa-solid fa-plus p-1"></i>
                 </button>
             </div>
-            <!-- <FilterComponent :disable="GetTeachers.length === 0" :filteredArray="filtered_Array" @filter="handleFilter" -->
             <FilterComponent :filteredArray="filtered_Array" @filter="handleFilter" :MainArray="GetTeachers"
                 :teacher="true" :Search="true"></FilterComponent>
             <table_Component :items="filtered_Array" :infoRoute="'/school/teachers/teacher-info'"
@@ -36,6 +49,8 @@ export default {
     data() {
         return {
             filtered_Array: [],
+            success: false,
+            failed: false,
         }
     },
     computed: {
@@ -63,10 +78,15 @@ export default {
         },
         async deleteTeacher(id) {
             try {
-                await this.RemoveTeacher(id, this.GetTeachers);
-                console.log("Teacher Deleted Done");
+                await this.RemoveTeacher(id);
+                await this.fetchData();
+                console.log("Teacher Deleted Successfully");
+                this.success = true;
+                setTimeout(() => { this.success = false }, 1500)
             } catch (error) {
                 console.error(error);
+                this.failed = true;
+                setTimeout(() => { this.failed = false }, 1500)
             }
         },
     },

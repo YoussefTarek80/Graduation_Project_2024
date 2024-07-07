@@ -5,7 +5,7 @@ export const actions = {
         try {
             const token = localStorage.getItem("token");
             const response = await axios.get(
-                "http://127.0.0.1:8000/api/school/showTeachers",
+                "http://127.0.0.1:8000/api/school/getTeacher",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -40,77 +40,88 @@ export const actions = {
     async AcceptRejectTeachApp({ commit, dispatch }, { id, status }) {
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.get(
-                "http://127.0.0.1:8000/api/school/getApplication",
+            console.log(id, status);
+            await axios.post(
+                `http://127.0.0.1:8000/api/school/sendAcceptOrReject/${id}`,
+                { status },
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 }
             );
-            dispatch("FetchTeacherApps");
-            console(response.data.data);
-        } catch (error) {
-            console.error("Error fetching teachapp info:", error);
+            await dispatch('FetchTeachers');
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async AddTeacher({ dispatch }, { name, email, address, subject_id, phone }) {
+        try {
+            const token = localStorage.getItem("token");
+            const form = new FormData();
+            form.append("name", name);
+            form.append("email", email);
+            form.append("phone", phone);
+            form.append("subject_id", subject_id);
+            form.append("address", address);
+            const response = await axios.post(
+                "http://127.0.0.1:8000/api/school/addTeacher",
+                form, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+            );
+            console.log(response.data.data);
+            await dispatch("FetchTeachers");
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    },
+    async subjectList({ commit }) {
+        try {
+            const response = await axios.get(
+                `http://127.0.0.1:8000/api/Subjects`
+            );
+            commit("Set_TeacherSubjects", response.data.data);
+        } catch (err) {
+            console.log(err);
         }
     },
     async RemoveTeacher({ commit, dispatch }, id) {
         try {
             const token = localStorage.getItem("token");
             console.log(id);
-            // await axios.post(
-            //     `http://127.0.0.1:8000/api/deleteEvent/${id}`,
-            //     {},
-            //     {
-            //         headers: {
-            //             Authorization: `Bearer ${token}`,
-            //         },
-            //     }
-            // );
-            // const evns = events;
-            console.log(teachers);
-            teachers.splice(events.indexOf(id), 1);
-            commit('Set_Teachers', teachers);
+            await axios.get(
+                `http://127.0.0.1:8000/api/school/deleteTeacher/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
             await dispatch('FetchTeachers');
         } catch (err) {
             console.log(err);
         }
     },
-    async UpdateTeacher({ commit }, { id, name, age, address, subject }) {
+    async UpdateTeacher({ commit }, { id, address, phone, email }) {
         try {
             const token = localStorage.getItem("token");
-            // await axios.post(
-            //     `http://127.0.0.1:8000/api/updateEvent/${id}`,
-            //     updateData,
-            //     {
-            //         headers: {
-            //             Authorization: `Bearer ${token}`,
-            //         },
-            //     }
-            // );
+            await axios.post(
+                `http://127.0.0.1:8000/api/school/updateTeacher/${id}`,
+                { address, phone, email },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
             console.log("Teacher Info Updated Successfully")
         }
         catch (err) {
             console.log(err)
-        }
-    },
-    async AddTeacher({ dispatch }, teacherData) {
-        try {
-            const token = localStorage.getItem("token");
-            // const response = await axios.post(
-            //     "http://127.0.0.1:8000/api/addEvent",
-            //     eventData,
-            //     {
-            //         headers: {
-            //             Authorization: `Bearer ${token}`,
-            //         },
-            //     }
-            // );
-            await dispatch("FetchTeachers");
-            console.log("Teacher Added Successfully");
-        } catch (err) {
-            console.log(err);
-            throw err;
         }
     },
 };

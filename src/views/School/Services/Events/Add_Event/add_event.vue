@@ -9,7 +9,7 @@
   </BaseTeleport>
   <BaseTeleport :show="failed">
     <div class="flex flex-col">
-      <span class="text-red-700 text-4xl"> فشل الإضافة</span>
+      <span class="text-red-700 text-4xl">فشل الإضافة</span>
       <i class="fa-sharp fa-solid fa-badge-check text-red-700 text-7xl m-3"></i>
     </div>
   </BaseTeleport>
@@ -20,9 +20,8 @@
       <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink mt-2"></i>
     </div>
     <div class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full mx-auto school">
-      <div class="my-5">
-        <span class="text-2xl">بيانات المناسبة</span>
-      </div>
+      <span class="text-2xl md:text-3xl text-customDarkPurple px-0 md:px-5 py-3 rounded-2xl flex items-center m-5">
+        <i class="fa-duotone fa-sparkles"></i>بيانات المناسبة</span>
       <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="flex flex-col input-group">
           <input type="text" required v-model="name" class="input" />
@@ -32,27 +31,18 @@
         <div class="flex flex-col input-group">
           <label for="" class="user-slabel">تاريخ المناسبة <span class="text-red-600">*</span></label>
           <input type="date" v-model="date" required class="input" />
-          <span v-if="date == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+          <span v-if="date == '' && empty" class="text-red-600">يجب إختيار تاريخ صالح</span>
         </div>
         <div class="flex flex-col input-group">
           <input type="time" required v-model="time" class="input" />
           <label for="" class="user-slabel">وقت المناسبة<span class="text-red-600">*</span></label>
-          <span v-if="time == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+          <span class="text-slate-500 text-sm">يجب إختيار وقت من بين الساعة 7 صباحا إلي الساعة 11
+            مساءا *</span>
         </div>
         <div class="flex flex-col input-group">
           <input type="text" required v-model="address" class="input" />
           <label for="" class="user-label">مكان المناسبة<span class="text-red-600">*</span></label>
           <span v-if="address == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
-        </div>
-        <div class="flex flex-col input-group">
-          <label for="" class="user-slabel">حالة المناسبة<span class="text-red-600">*</span></label>
-          <select v-model="status" required class="input">
-            <option :value="status" disabled selected>إختار حالة الحدث...</option>
-            <option value="مفعل">مفعل</option>
-            <option value="غير مفعل">غير مفعل</option>
-            <option value="تم الحدث">تم الحدث</option>
-          </select>
-          <span v-if="status == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
       </div>
       <div>
@@ -118,12 +108,12 @@ export default {
             address: this.address,
           });
           this.success = true;
-          setTimeout(() => { this.success = false }, 1000);
+          setTimeout(() => { this.success = false, this.clear() }, 1000);
         }
         else {
           this.empty = true;
           this.failed = true;
-          setTimeout(() => { this.failed = false }, 1000);
+          setTimeout(() => { this.failed = false, this.clear() }, 1000);
         }
       } catch (err) {
         console.log(err);
@@ -131,6 +121,15 @@ export default {
         setTimeout(() => { this.failed = false }, 1000);
       }
     },
+    clear() {
+      this.name = "";
+      this.date = "";
+      this.time = "";
+      this.address = "";
+      this.description = "";
+      this.status = "";
+      this.empty = false;
+    }
   },
 };
 </script>

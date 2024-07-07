@@ -21,7 +21,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import table_Component from "../../../../UI/School_Tables/RequestTable/withdrawTable.vue";
+import table_Component from "../../../../UI/School_Tables/RequestTable/teachappsTable.vue";
 import FilterComponent from "../../../../components/School/Filtration/Filter-school.vue";
 
 export default {

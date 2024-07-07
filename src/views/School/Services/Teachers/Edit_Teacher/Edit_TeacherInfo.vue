@@ -23,57 +23,36 @@
 
     <div class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full mx-auto">
       <div class="my-5">
-        <span class="text-2xl">بيانات المُعلم</span>
+        <span class="text-2xl md:text-3xl text-customDarkPurple px-0 md:px-5 py-3 rounded-2xl flex items-center m-5">
+          <i class="fa-duotone fa-sparkles"></i>بيانات المُعلم</span>
       </div>
-
-      <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div class="flex flex-col">
-          <label>اسم المُعلم
-            <span class="text-red-600">*</span></label>
-          <input type="text" v-model="name" class="outline-customDarkPurple" />
-          <span v-if="name == ''" class="text-red-600">هذا الحقل مطلوب</span>
+          <label>الإسم<span class="text-red-600">*</span></label>
+          <input disabled type="text" v-model="teacher.address" class="item-data" />
+          <span v-if="teacher.address == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
         <div class="flex flex-col">
-          <label>عمر المُعلم <span class="text-red-600">*</span></label>
-          <input type="number" v-model="age" class="outline-customDarkPurple" />
-          <span v-if="age == ''" class="text-red-600">هذا الحقل مطلوب</span>
+          <label>المادة<span class="text-red-600">*</span></label>
+          <input disabled type="text" v-model="teacher.subject.subject_name" class="item-data" />
+          <span v-if="teacher.subject.subject_name == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
-        <div class="flex flex-col">
-          <label>المادة <span class="text-red-600">*</span></label>
-          <select v-model="subject" class="item-data outline-customDarkPurple">
-            <option disabled class="bg-customDarkPurple text-[#fff] font-bold">مواد اللغات</option>
-            <option value="اللغة العربية"> اللغة العربية</option>
-            <option value="اللغة الإنجليزية"> اللغة الإنجليزية</option>
-            <option value="اللغة الفرنسية"> اللغة الفرنسية</option>
-            <option value="اللغة الألمانية"> اللغة الألمانية</option>
-            <option value="اللغة الإيطالية"> اللغة الإيطالية</option>
-            <option disabled class="bg-customDarkPurple text-[#fff] font-bold">المواد العلمية (علمي)</option>
-            <option value="الكيمياء"> الكيمياء</option>
-            <option value="العلوم">العلوم</option>
-            <option disabled class="bg-customDarkPurple text-[#fff] font-bold">المواد العلمية (رياضة)</option>
-            <option value="الفيزياء">الفيزياء</option>
-            <option value="الرياضة">الرياضة</option>
-            <option value="الرياضة البحتة">الرياضة البحتة</option>
-            <option value="الهندسة الفراغية">الهندسة الفراغية</option>
-            <option disabled class="bg-customDarkPurple text-[#fff] font-bold">المواد الأدبية</option>
-            <option value="الدين الإسلامي">الدين الإسلامي</option>
-            <option value="الدراسات">الدراسات</option>
-            <option value="الجغرافية">الجغرافية</option>
-            <option value="التاريخ">التاريخ</option>
-            <option value="علم النفس">علم النفس</option>
-            <option value="الفلسفة">الفلسفة</option>
-          </select>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-10">
+        <div class="flex flex-col input-group">
+          <input required type="text" v-model="teacher.address" class="input" />
+          <label class="user-label">العنوان<span class="text-red-600">*</span></label>
+          <span v-if="teacher.address == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
-        <div class="flex flex-col">
-          <label>العنوان
-            <span class="text-red-600">*</span></label>
-          <input type="text" v-model="address" class="outline-customDarkPurple" />
-          <span v-if="address == ''" class="text-red-600">هذا الحقل مطلوب</span>
+        <div class="flex flex-col input-group">
+          <input required type="text" v-model="teacher.phone" class="input" />
+          <label class="user-label">الهاتف<span class="text-red-600">*</span></label>
+          <span v-if="teacher.phone == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
-        <div class="flex flex-col">
-          <label>الهاتف<span class="text-red-600">*</span></label>
-          <input type="text" v-model="phone" class="outline-customDarkPurple" />
-          <span v-if="phone == ''" class="text-red-600">هذا الحقل مطلوب</span>
+        <div class="flex flex-col input-group">
+          <input required type="text" v-model="teacher.email" class="input" />
+          <label class="user-label">البريد الإلكتروني<span class="text-red-600">*</span></label>
+          <span v-if="teacher.email == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
         </div>
       </div>
     </div>
@@ -96,23 +75,22 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      name: "",
-      age: "",
-      address: "",
-      subject: "",
+      id: this.$route.params.id,
       teacher: {},
       success: false,
-      show: false
+      show: false,
+      empty: false,
     }
   },
   computed: {
-    ...mapGetters(["GetTeachers"]),
+    ...mapGetters(["GetTeachers", "GetTeacherSubjects"]),
   },
-  async mounted() {
-    await this.FetchTeacher();
+  async created() {
+    await this.fetchData();
+    console.log(this.teacher);
   },
   methods: {
-    ...mapActions(["FetchTeachers", "UpdateTeacher"]),
+    ...mapActions(["FetchTeachers", "subjectList", "UpdateTeacher"]),
     formatTime(time) {
       const [hours, minutes, seconds] = time.split(":");
       const formattedHours = ("0" + hours).slice(-2);
@@ -120,18 +98,12 @@ export default {
       return `${formattedHours}:${formattedMinutes} `;
     },
     intiData() {
-      this.name = this.teacher.name;
-      this.address = this.teacher.address;
-      this.age = this.teacher.age;
-      this.subject = this.teacher.subject;
+      this.teacher = this.GetTeachers.find((v) => v.id === parseInt(this.id));
     },
-    async FetchTeacher() {
+    async fetchData() {
       try {
+        await this.subjectList();
         await this.FetchTeachers();
-        const index = this.$route.params.id;
-        this.teacher = this.GetTeachers.find(
-          (teacher) => teacher.id === parseInt(index)
-        );
         this.intiData();
       } catch (err) {
         console.error(err);
@@ -139,13 +111,12 @@ export default {
     },
     async handleUpdateTeacher() {
       try {
-        if (this.name != '' && this.address != '' && this.age != '') {
+        if (this.teacher.address != '' && this.teacher.phone != '' && this.teacher.email != '') {
           await this.UpdateTeacher({
             id: this.teacher.id,
-            name: this.name,
-            age: this.age,
-            address: this.address,
-            subject: this.subject,
+            address: this.teacher.address,
+            phone: this.teacher.phone,
+            email: this.teacher.email,
           });
           this.success = true;
           setTimeout(() => {
@@ -153,12 +124,14 @@ export default {
           }, 1000);
         }
         else {
+          this.empty = true;
           this.failed = true;
           setTimeout(() => {
             this.failed = false;
           }, 1000);
         }
       } catch (err) {
+        this.empty = true;
         this.failed = true;
         setTimeout(() => {
           this.failed = false;
@@ -173,5 +146,4 @@ export default {
 <style scoped>
 @import url("../../../../../UI/CustomsCss/CustomInput.css");
 @import url("../../../../../UI/CustomsCss/Custombutton.css");
-@import url("../../Events/Update_Event/updateEvent.css");
 </style>

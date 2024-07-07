@@ -10,34 +10,35 @@
             </div>
             <div class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full mx-auto">
                 <div class="my-5">
-                    <span class="text-2xl block">بيانات المُعلم</span>
-                    <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink"></i>
+                    <span
+                        class="text-2xl md:text-3xl text-customDarkPurple px-0 md:px-5 py-3 rounded-2xl flex items-center m-5 md:m-10">
+                        <i class="fa-duotone fa-sparkles"></i>بيانات المُعلم</span>
                 </div>
-                <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                     <div class="flex flex-col">
-                        <label for="in1">اسم المُعلم </label>
+                        <label>اسم المُعلم </label>
                         <input disabled v-model="teacher.name"
-                            class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+                            class="item-data border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
                     </div>
                     <div class="flex flex-col">
-                        <label for="in4">المادة </label>
-                        <input disabled v-model="teacher.subject"
-                            class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+                        <label>المادة </label>
+                        <input disabled v-model="teacher.subject.subject_name"
+                            class="item-data border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
                     </div>
                     <div class="flex flex-col">
-                        <label for="in5">العمر </label>
-                        <input disabled v-model="teacher.age"
-                            class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="in6">العنوان </label>
+                        <label>العنوان </label>
                         <input disabled v-model="teacher.address"
-                            class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+                            class="item-data border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
                     </div>
                     <div class="flex flex-col">
-                        <label for="in6">الهاتف </label>
+                        <label>الهاتف </label>
                         <input disabled v-model="teacher.phone"
-                            class="border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+                            class="item-data border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
+                    </div>
+                    <div class="flex flex-col">
+                        <label>البريد الإلكتروني </label>
+                        <input disabled v-model="teacher.email"
+                            class="item-data border-2 border-gray-300 px-5 py-2 rounded-3xl outline-none">
                     </div>
                 </div>
                 <div class="m-5 flex items-center justify-end sm:gap-5">
@@ -83,10 +84,6 @@ export default {
 }
 </script>
 <style scoped>
-input[disabled] {
-    background: linear-gradient(to left, #d9d9d9, #f3f3f3);
-}
-
 @import url("../../../../../UI/CustomsCss/Custombutton.css");
 @import url("../../../../../UI/CustomsCss/CustomInput.css");
 </style>

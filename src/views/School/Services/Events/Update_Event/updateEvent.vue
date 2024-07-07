@@ -19,10 +19,8 @@
       <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink mt-2"></i>
     </div>
     <div class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full mx-auto">
-
-      <div class="my-5">
-        <span class="text-2xl">بيانات المناسبة</span>
-      </div>
+      <span class="text-2xl md:text-3xl text-customDarkPurple px-0 md:px-5 py-3 rounded-2xl flex items-center m-5">
+        <i class="fa-duotone fa-sparkles"></i>بيانات المناسبة</span>
       <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="flex flex-col input-group">
           <input type="text" required v-model="event.name" class="input outline-customDarkPurple" />
@@ -38,21 +36,21 @@
           <label for="" class="user-slabel">تاريخ المناسبة
             <span class="text-red-600">*</span></label>
           <input type="time" required v-model="event.time" class="input outline-customDarkPurple" />
-          <span v-if="event.time == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+          <span class="text-slate-500 text-sm">يجب إختيار وقت من بين الساعة 7 صباحا إلي الساعة 11
+            مساءا *</span>
         </div>
 
-        <!-- <div class="flex flex-col input-group">
+        <div class="flex flex-col input-group">
           <label for="" class="user-slabel">الحالة <span class="text-red-600">*</span></label>
           <select v-model="event.status" required class="input appearance-none">
             <option value="" selected class="hover:bg-customPurple">اختار حالة المناسبة</option>
             <option value="مفعل" class="hover:bg-customPurple">مفعل</option>
             <option value="غير مفعل" class="hover:bg-customPurple">غير مفعل</option>
-            <option value="تم الحدث" class="hover:bg-customPurple">تم الحدث</option>
           </select>
           <div class="arrow absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none">
             <i class="fa-regular fa-angle-down"></i>
           </div>
-        </div> -->
+        </div>
       </div>
       <div class="flex flex-col input-group mt-5">
         <label for="" class="user-slabel">وصف المناسبة<span class="text-red-600">*</span></label>
@@ -63,7 +61,7 @@
       </div>
     </div>
     <div class="m-5 mt-10 flex items-center justify-end sm:gap-5">
-      <button class="w-60" @click="handleUpdateEvent" :class="{ disabledBtn: close }" :disabled="close">
+      <button class="w-60" @click="handleUpdateEvent">
         حفظ
       </button>
       <button class="w-48" @click="this.$router.replace('/school/services/sc-events')">
@@ -90,8 +88,8 @@ export default {
   computed: {
     ...mapGetters(["GetSCEvents"]),
   },
-  created() {
-    this.fetchData();
+  async created() {
+    await this.fetchData();
     console.log(this.GetSCEvents);
     console.log(this.event);
   },
@@ -128,12 +126,16 @@ export default {
               description: this.event.description,
             });
           this.success = true;
-          setTimeout(() => { this.success = false }, 1000);
+          setTimeout(() => {
+            this.success = false
+          }, 1000);
         }
         else {
           this.empty = true;
           this.failed = true;
-          setTimeout(() => { this.failed = false }, 1000);
+          setTimeout(() => {
+            this.failed = false
+          }, 1000);
         }
       } catch (err) {
         console.log(err);

@@ -7,7 +7,6 @@
                     <input disabled type="text" class="item-data" v-model="form.parent_name" />
                 </div>
                 <div class="flex flex-col">
-                    <!-- <input id="type" type="text" autocomplete="off" readonly v-model="form.type" /> -->
                     <label>نوع الطلب </label>
                     <input disabled type="text" class="item-data" value="سحب ملف الطالب" />
                 </div>
@@ -20,6 +19,8 @@
                     <input disabled type="text" class="item-data" v-model="form.national_id
                         ">
                 </div>
+            </div>
+            <div class="p-5 pt-0">
                 <div class="flex flex-col">
                     <label>الجنسية</label>
                     <input disabled type="text" class="item-data" v-model="form.nationality">
@@ -28,8 +29,6 @@
                     <label>النوع</label>
                     <input disabled type="text" class="item-data" v-model="form.gender">
                 </div>
-            </div>
-            <div class="p-5 pt-0">
                 <div class="flex flex-col">
                     <label>العنوان</label>
                     <input disabled type="text" class="item-data" v-model="form.address">

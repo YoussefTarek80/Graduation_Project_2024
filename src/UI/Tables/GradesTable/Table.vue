@@ -10,7 +10,7 @@
             </BaseTeleport>
             <BaseTeleport :show="failed">
                 <div class="flex flex-col">
-                    <span class="text-red-700 text-4xl" v-if="this.response">
+                    <span class="text-red-700 text-4xl" v-if="this.response == 400">
                         فشل التعديل: الطالب لم يجتاز مواد الترم الأول
                     </span>
                     <i class="fa-sharp fa-solid fa-badge-check text-red-700 text-7xl m-3"></i>

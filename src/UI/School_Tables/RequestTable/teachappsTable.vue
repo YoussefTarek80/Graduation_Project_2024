@@ -1,34 +1,34 @@
 <template>
     <div class="sm:overflow-hidden overflow-auto">
         <div v-if="paginatedItems.length === 0" class="inline-block m-auto w-full">
-            <p class="text-center m-5 mt-10 p-5 text-customPurple font-bold text-2xl">لا يوجد مناسبات من أي إدارة
-                حتي الأن... </p>
+            <p class="text-center m-5 mt-10 p-5 text-customPurple font-bold text-2xl">
+                لا يوجد طلبات حتي الأن... </p>
         </div>
         <table v-else class="sm:w-full sm:my-20 mt-9 sm:text-lg text-sm">
             <thead class="text-white">
                 <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tr-2xl">
-                    التسلسل
+                    رقم الطلب
                 </th>
-                <th class="sm:py-5 sm:px-4 px-7 py-3">اسم المناسبة</th>
-                <th class="sm:py-5 sm:px-4 px-7 py-3">وقت المناسبة</th>
-                <th class="sm:py-5 sm:px-4 px-7 py-3">تاريخ المناسبة</th>
-                <th class="sm:py-5 sm:px-4 px-7 py-3">الحالة</th>
+                <th class="sm:py-5 sm:px-4 px-7 py-3">إسم الطالب</th>
+                <th class="sm:py-5 sm:px-4 px-7 py-3">نوع الطلب</th>
+                <th class="sm:py-5 sm:px-4 px-7 py-3">حالة الطلب</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tl-2xl">
                     الاجراء
                 </th>
             </thead>
             <tbody class="text-center relative" ref="tableBody">
                 <tr v-for="(item, index) in paginatedItems" :key="index" class="h-20 odd:bg-white even:bg-gray-100">
-                    <td class="py-2 px-4">{{ (currentPage - 1) * pageSize + index + 1 }}</td>
+                    <td class="py-2 px-4">
+                        {{ (currentPage - 1) * pageSize + index + 1 }}
+                    </td>
                     <td class="py-2 px-4">{{ item.name }}</td>
-                    <td class="py-2 px-4">{{ item.time }}</td>
-                    <td class="py-2 px-4">{{ item.date }}</td>
-                    <td class="py-2 px-4" v-if="item.status == 0">جاري</td>
-                    <td class="py-2 px-4" v-else-if="item.status == 1">تم الحدث</td>
+                    <td class="py-2 px-4">توظيف</td>
+                    <td class="py-2 px-4 text-slate-400" v-if="item.status === 0">قيد الإنتظار...</td>
+                    <td class="py-2 px-4 text-green-500" v-else-if="item.status === 1">تمت الموافقة</td>
+                    <td class="py-2 px-4 text-red-400" v-else>مرفوض</td>
                     <td class="py-2 px-4 relative">
                         <router-link :to="infoRoute(item.id)"
-                            class="bg-[#4d394d] text-white px-5 py-3 rounded-md font-bold">التفاصيل
-                        </router-link>
+                            class="bg-[#4d394d] text-white px-5 py-3 rounded-md font-bold">التفاصيل</router-link>
                     </td>
                 </tr>
             </tbody>
@@ -38,7 +38,7 @@
 </template>
 <script>
 export default {
-    props: ["items", "editRoute", "infoRoute"],
+    props: ["items", "infoRoute"],
     data() {
         return {
             showInfo: null,
@@ -60,9 +60,6 @@ export default {
         infoRoute(index) {
             return `${this.infoRoute}/${index}`;
         },
-        editRoute(index) {
-            return `${this.editRoute}/${index}`;
-        },
         prevPage() {
             if (this.currentPage > 1) {
                 this.currentPage--;
@@ -80,17 +77,6 @@ export default {
                 this.showInfo = index;
             }
         },
-        closeActionWindow(event) {
-            if (!this.$refs.tableBody.contains(event.target)) {
-                this.showInfo = null;
-            }
-        },
-    },
-    mounted() {
-        document.body.addEventListener("click", this.closeActionWindow);
-    },
-    beforeDestroy() {
-        document.body.removeEventListener("click", this.closeActionWindow);
     },
 };
 </script>

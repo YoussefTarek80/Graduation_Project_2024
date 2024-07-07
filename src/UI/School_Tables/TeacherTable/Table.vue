@@ -7,16 +7,16 @@
             <thead class="text-white">
                 <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tr-2xl"> التسلسل</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">إسم المُعلم</th>
+                <th class="sm:py-5 sm:px-4 px-7 py-3">العنوان</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">المادة</th>
-                <th class="sm:py-5 sm:px-4 px-7 py-3">العمر</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tl-2xl"> التفاصيل</th>
             </thead>
             <tbody class="text-center relative" ref="tableBody">
                 <tr v-for="(item, index) in paginatedItems" :key="index" class="h-20 odd:bg-white even:bg-gray-100">
                     <td class="py-2 px-4">{{ (currentPage - 1) * pageSize + index + 1 }}</td>
                     <td class="py-2 px-4">{{ item.name }}</td>
-                    <td class="py-2 px-4">{{ item.subject }}</td>
-                    <td class="py-2 px-4">{{ item.age }}</td>
+                    <td class="py-2 px-4">{{ item.address }}</td>
+                    <td class="py-2 px-4">{{ item.subject.subject_name }}</td>
                     <td class="py-2 px-4 relative">
                         <img class="block m-auto w-9 cursor-pointer" :class="{ active: showInfo === index }"
                             src="../../../assets/Logo/Info.png" alt="" @click="toggleShowInfo(index)" />
@@ -44,7 +44,7 @@
                                         تاكيد الحذف
                                     </span>
                                     <div class="flex items-center justify-around mt-10">
-                                        <button class="w-96" @click="handleDeleteSchool(item.id)">
+                                        <button class="w-96" @click="handleDeleteTeacher(item.id)">
                                             تاكيد
                                         </button>
                                         <button class="w-52" @click="confirm = false">
@@ -62,9 +62,6 @@
     <Pagination :currentPage="currentPage" :totalPages="totalPages" :nextPage="nextPage" :prevPage="prevPage" />
 </template>
 <script>
-import axios from "axios";
-import { mapActions } from "vuex";
-
 export default {
     props: ["items", "editRoute", "infoRoute"],
     data() {

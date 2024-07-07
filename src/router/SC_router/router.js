@@ -104,6 +104,15 @@ const router = createRouter({
             },
         },
         {
+            path: "/school/teachers/application-teacher/:id",
+            component: () => import("../../views/School/Services/Teachers/Add_Teacher/application.vue"),
+            meta: {
+                title: "توظيف مُعلم | نظام درب التعليمي",
+                requiresAuth2: true,
+                roles: ["enroll-teacher"],
+            },
+        },
+        {
             path: "/school/teachers/teacher-info/:id",
             component: () => import("../../views/School/Services/Teachers/Info_Teacher/TeacherInfo.vue"),
             meta: {

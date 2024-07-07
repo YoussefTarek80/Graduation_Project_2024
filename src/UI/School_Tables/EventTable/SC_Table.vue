@@ -12,7 +12,7 @@
                 <th class="sm:py-5 sm:px-4 px-7 py-3">اسم المناسبة</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">وقت المناسبة</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3">تاريخ المناسبة</th>
-                <!-- <th class="sm:py-5 sm:px-4 px-7 py-3">الحالة</th> -->
+                <th class="sm:py-5 sm:px-4 px-7 py-3">الحالة</th>
                 <th class="sm:py-5 sm:px-4 px-7 py-3 rounded-tl-2xl">
                     الاجراء
                 </th>
@@ -23,7 +23,8 @@
                     <td class="py-2 px-4">{{ item.name }}</td>
                     <td class="py-2 px-4">{{ item.time }}</td>
                     <td class="py-2 px-4">{{ item.date }}</td>
-                    <!-- <td class="py-2 px-4">{{ item.state }}</td> -->
+                    <td class="py-2 px-4" v-if="item.status == 0">جاري</td>
+                    <td class="py-2 px-4" v-else-if="item.status == 1">تم الحدث</td>
                     <td class="py-2 px-4 relative">
                         <img class="block m-auto w-9 cursor-pointer" :class="{ active: showInfo === index }"
                             src="../../../assets/Logo/Info.png" alt="" @click="toggleShowInfo(index)" />

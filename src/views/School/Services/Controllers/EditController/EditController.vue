@@ -17,17 +17,26 @@
             <span class="text-3xl sm:text-4xl">تعديل بيانات مدير الكنترول </span>
             <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink mt-2"></i>
         </div>
-        <div class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full mx-auto pt-12">
+        <div class="bg-customBGCards rounded-xl shadow-xl p-6 mt-10 sm:w-full mx-auto pt-5">
+
+            <span
+                class="text-2xl md:text-3xl text-customDarkPurple px-0 md:px-5 py-3 rounded-2xl flex items-center m-5">
+                <i class="fa-duotone fa-sparkles"></i>بيانات المسؤول</span>
             <div class="input_Div grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="input-group flex flex-col">
                     <input type="text" required v-model="controller.staff_name" class="input" />
                     <label for="" class="user-label">إسم مدير الكنترول<span class="text-red-600">*</span></label>
-                    <span v-if="controller.staff_name == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+                    <span v-if="name == '' && empty" class="text-red-600"> هذا الحقل مطلوب</span>
+                    <span v-else-if="!this.valid_input1(name) && name != '' && empty" class="text-red-600">
+                        لا يصلح غير الحروف العربية فقط
+                    </span>
                 </div>
                 <div class="input-group flex flex-col">
                     <input type="text" required v-model="controller.staff_phone" class="input" />
                     <label for="" class="user-label">الهاتف<span class="text-red-600">*</span></label>
-                    <span v-if="controller.staff_phone == '' && empty" class="text-red-600">هذا الحقل مطلوب</span>
+                    <span v-if="!this.valid_input2(phone) && phone != '' && empty" class="text-red-600 text-xs">رقم
+                        الهاتف يجب ان يكون
+                        رقم ويبدء ب 010 او 011 او 012او 015</span>
                 </div>
                 <div class="input-group flex flex-col">
                     <input type="text" required v-model="controller.staff_address" class="input" />
@@ -127,6 +136,14 @@ export default {
                 setTimeout(() => { this.failed = false; }, 1000);
             }
         },
+        valid_input1(v) {
+            var arabicPattern = /^[\u0600-\u06FF\s]+$/;
+            return arabicPattern.test(v);
+        },
+        valid_input2(v) {
+            var phonePattern = /^(010|011|012|015)[0-9]{8}$/;
+            return phonePattern.test(v) && v.length == 11;
+        }
     }
 }
 </script>

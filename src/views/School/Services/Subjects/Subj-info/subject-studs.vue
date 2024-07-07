@@ -16,8 +16,8 @@
     </section>
     <section class="mt-20 sm:mx-24 mx-6" data-aos="fade-up" data-aos-duration="1000">
         <div class="flex flex-col">
-            <span class="sm:text-3xl text-2xl font-bold">درجات طلاب المادة </span>
-            <span class="w-2/12 h-1 bg-black m-1 rounded-2xl"></span>
+            <span class="sm:text-3xl text-2xl">قائمة درجات طلاب المادة </span>
+            <i class="fa-regular fa-horizontal-rule fa-2xl text-customPink"></i>
         </div>
         <FilterComponent :levelID="this.id" :disable="GetStudSubject.length === 0" :items="GetStudSubject"
             :Subject="true">
