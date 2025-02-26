@@ -34,6 +34,8 @@ The **Darb Educational Management System** is designed to streamline communicati
     - Navigate to the Enrollment section and follow the chatbot instructions.
 4. **Student Monitoring:**
     - Parents can view their child's academic performance and behavior reports.
+5. **Chatbot:**
+    - Chatbot was created to help parents deal with the Darb educational system.
 
 ## Usage Guide For Administration and School Managers
 1. **Access the System:**
